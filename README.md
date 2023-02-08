@@ -6,7 +6,7 @@ An online E-store system built in Java 11=> and ___ _replace with other platform
 ## Team
 
 - Jacob Karvelis
-- MEMBER2
+- Zach Brown
 - MEMBER3
 - MEMBER4
 
