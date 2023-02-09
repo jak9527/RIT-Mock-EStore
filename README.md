@@ -9,7 +9,7 @@ An online E-store system built in Java 11=> and ___ _replace with other platform
 - Zach Brown
 - Kelly Showers
 - Ethan Meyers
-- MEMBER5
+- Andrew Bush
 
 
 ## Prerequisites
