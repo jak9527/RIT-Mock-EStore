@@ -79,5 +79,5 @@ public interface ProductDAO {
      * 
      * @throws IOException if underlying storage cannot be accessed
      */
-    boolean deleteHero(int id) throws IOException;
+    boolean deleteProduct(int id) throws IOException;
 }

@@ -32,7 +32,7 @@ import java.util.logging.Logger;
 @RequestMapping("heroes")
 public class EstoreController {
     private static final Logger LOG = Logger.getLogger(EstoreController.class.getName());
-    private ProductDAO heroDao;
+    private ProductDAO Dao;
 
     /**
      * Creates a REST API controller to reponds to requests
@@ -168,20 +168,20 @@ public class EstoreController {
     }
 
     /**
-     * Deletes a {@linkplain Product hero} with the given id
+     * Deletes a {@linkplain Product product} with the given id
      * 
-     * @param id The id of the {@link Product hero} to deleted
+     * @param id The id of the {@link Product product} to deleted
      * 
      * @return ResponseEntity HTTP status of OK if deleted<br>
      * ResponseEntity with HTTP status of NOT_FOUND if not found<br>
      * ResponseEntity with HTTP status of INTERNAL_SERVER_ERROR otherwise
      */
     @DeleteMapping("/{id}")
-    public ResponseEntity<Product> deleteHero(@PathVariable int id) {
-        LOG.info("DELETE /heroes/" + id);
+    public ResponseEntity<Product> deleteProduct(@PathVariable int id) {
+        LOG.info("DELETE /products/" + id);
 
         try {
-            boolean delete = heroDao.deleteHero(id);
+            boolean delete = productDao.deleteProduct(id);
             if( !delete ) {
                 return new ResponseEntity<>(HttpStatus.NOT_FOUND);
             }
