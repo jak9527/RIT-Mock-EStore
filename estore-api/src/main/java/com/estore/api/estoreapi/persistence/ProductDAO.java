@@ -17,7 +17,7 @@ public interface ProductDAO {
      * 
      * @throws IOException if an issue with underlying storage
      */
-    Product[] getHeroes() throws IOException;
+    Product[] getProducts() throws IOException;
 
     /**
      * Finds all {@linkplain Product heroes} whose name contains the given text

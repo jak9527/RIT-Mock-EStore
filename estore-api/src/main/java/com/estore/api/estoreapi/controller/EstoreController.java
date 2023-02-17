@@ -78,11 +78,11 @@ public class EstoreController {
      * ResponseEntity with HTTP status of INTERNAL_SERVER_ERROR otherwise
      */
     @GetMapping("")
-    public ResponseEntity<Product[]> getHeroes() {
+    public ResponseEntity<Product[]> getProducts() {
         LOG.info("GET /heroes");
         try {
-            Product[] heroes = heroDao.getHeroes();
-            return new ResponseEntity<Product[]>(heroes, HttpStatus.OK);
+            Product[] products = heroDao.getProducts();
+            return new ResponseEntity<Product[]>(products, HttpStatus.OK);
         }
         catch(IOException e) {
             LOG.log(Level.SEVERE,e.getLocalizedMessage());

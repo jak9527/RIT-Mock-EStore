@@ -140,7 +140,7 @@ public class ProductFileDAO implements ProductDAO {
     ** {@inheritDoc}
      */
     @Override
-    public Product[] getHeroes() {
+    public Product[] getProducts() {
         synchronized(heroes) {
             return getHeroesArray();
         }

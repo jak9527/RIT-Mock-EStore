@@ -186,10 +186,10 @@ public class EstoreControllerTest {
         heroes[0] = new Product(99,"Bolt");
         heroes[1] = new Product(100,"The Great Iguana");
         // When getHeroes is called return the heroes created above
-        when(mockHeroDAO.getHeroes()).thenReturn(heroes);
+        when(mockHeroDAO.getProducts()).thenReturn(heroes);
 
         // Invoke
-        ResponseEntity<Product[]> response = heroController.getHeroes();
+        ResponseEntity<Product[]> response = heroController.getProducts();
 
         // Analyze
         assertEquals(HttpStatus.OK,response.getStatusCode());
@@ -200,10 +200,10 @@ public class EstoreControllerTest {
     public void testGetHeroesHandleException() throws IOException { // getHeroes may throw IOException
         // Setup
         // When getHeroes is called on the Mock Hero DAO, throw an IOException
-        doThrow(new IOException()).when(mockHeroDAO).getHeroes();
+        doThrow(new IOException()).when(mockHeroDAO).getProducts();
 
         // Invoke
-        ResponseEntity<Product[]> response = heroController.getHeroes();
+        ResponseEntity<Product[]> response = heroController.getProducts();
 
         // Analyze
         assertEquals(HttpStatus.INTERNAL_SERVER_ERROR,response.getStatusCode());

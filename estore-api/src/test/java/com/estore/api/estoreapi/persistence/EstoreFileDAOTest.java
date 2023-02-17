@@ -56,7 +56,7 @@ public class EstoreFileDAOTest {
     @Test
     public void testGetHeroes() {
         // Invoke
-        Product[] heroes = heroFileDAO.getHeroes();
+        Product[] heroes = heroFileDAO.getProducts();
 
         // Analyze
         assertEquals(heroes.length,testHeroes.length);
