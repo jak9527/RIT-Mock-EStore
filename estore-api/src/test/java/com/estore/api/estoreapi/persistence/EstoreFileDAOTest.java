@@ -96,7 +96,7 @@ public class EstoreFileDAOTest {
         // of the test heroes array - 1 (because of the delete)
         // Because heroes attribute of HeroFileDAO is package private
         // we can access it directly
-        assertEquals(heroFileDAO.heroes.size(),testHeroes.length-1);
+        assertEquals(heroFileDAO.products.size(),testHeroes.length-1);
     }
 
     @Test
@@ -160,7 +160,7 @@ public class EstoreFileDAOTest {
 
         // Analyze
         assertEquals(result,false);
-        assertEquals(heroFileDAO.heroes.size(),testHeroes.length);
+        assertEquals(heroFileDAO.products.size(),testHeroes.length);
     }
 
     @Test

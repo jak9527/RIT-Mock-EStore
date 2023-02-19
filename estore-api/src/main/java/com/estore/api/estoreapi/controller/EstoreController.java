@@ -32,17 +32,17 @@ import java.util.logging.Logger;
 @RequestMapping("heroes")
 public class EstoreController {
     private static final Logger LOG = Logger.getLogger(EstoreController.class.getName());
-    private ProductDAO heroDao;
+    private ProductDAO productDAO;
 
     /**
      * Creates a REST API controller to reponds to requests
      * 
-     * @param heroDao The {@link ProductDAO Hero Data Access Object} to perform CRUD operations
+     * @param productDAO The {@link ProductDAO Hero Data Access Object} to perform CRUD operations
      * <br>
      * This dependency is injected by the Spring Framework
      */
-    public EstoreController(ProductDAO heroDao) {
-        this.heroDao = heroDao;
+    public EstoreController(ProductDAO productDAO) {
+        this.productDAO = productDAO;
     }
 
     /**
@@ -58,7 +58,7 @@ public class EstoreController {
     public ResponseEntity<Product> getHero(@PathVariable int id) {
         LOG.info("GET /heroes/" + id);
         try {
-            Product hero = heroDao.getHero(id);
+            Product hero = productDAO.getHero(id);
             if (hero != null)
                 return new ResponseEntity<Product>(hero,HttpStatus.OK);
             else
@@ -71,17 +71,17 @@ public class EstoreController {
     }
 
     /**
-     * Responds to the GET request for all {@linkplain Product heroes}
+     * Responds to the GET request for all {@linkplain Product products}
      * 
-     * @return ResponseEntity with array of {@link Product hero} objects (may be empty) and
+     * @return ResponseEntity with array of {@link Product product} objects (may be empty) and
      * HTTP status of OK<br>
      * ResponseEntity with HTTP status of INTERNAL_SERVER_ERROR otherwise
      */
     @GetMapping("")
     public ResponseEntity<Product[]> getProducts() {
-        LOG.info("GET /heroes");
+        LOG.info("GET /products");
         try {
-            Product[] products = heroDao.getProducts();
+            Product[] products = productDAO.getProducts();
             return new ResponseEntity<Product[]>(products, HttpStatus.OK);
         }
         catch(IOException e) {
@@ -107,7 +107,7 @@ public class EstoreController {
     public ResponseEntity<Product[]> searchHeroes(@RequestParam String name) {
         LOG.info("GET /heroes/?name="+name);
         try {
-            Product[] heroes = heroDao.findHeroes(name);
+            Product[] heroes = productDAO.findHeroes(name);
             return new ResponseEntity<Product[]>(heroes, HttpStatus.OK);
         }
         catch(IOException e) {
@@ -129,7 +129,7 @@ public class EstoreController {
     public ResponseEntity<Product> createHero(@RequestBody Product hero) {
         LOG.info("POST /heroes " + hero);
         try {
-            Product newHero = heroDao.createHero(hero);
+            Product newHero = productDAO.createHero(hero);
             if( newHero == null) {
                 return new ResponseEntity<>(HttpStatus.CONFLICT);
             }
@@ -155,7 +155,7 @@ public class EstoreController {
     public ResponseEntity<Product> updateHero(@RequestBody Product hero) {
         LOG.info("PUT /heroes " + hero);
         try {
-            Product updateHero = heroDao.updateHero(hero);
+            Product updateHero = productDAO.updateHero(hero);
             if( updateHero == null) {
                 return new ResponseEntity<Product>(HttpStatus.NOT_FOUND);
             }
@@ -181,7 +181,7 @@ public class EstoreController {
         LOG.info("DELETE /heroes/" + id);
 
         try {
-            boolean delete = heroDao.deleteHero(id);
+            boolean delete = productDAO.deleteHero(id);
             if( !delete ) {
                 return new ResponseEntity<>(HttpStatus.NOT_FOUND);
             }
