@@ -32,17 +32,17 @@ import java.util.logging.Logger;
 @RequestMapping("heroes")
 public class EstoreController {
     private static final Logger LOG = Logger.getLogger(EstoreController.class.getName());
-    private ProductDAO heroDao;
+    private ProductDAO productDao;
 
     /**
      * Creates a REST API controller to reponds to requests
      * 
-     * @param heroDao The {@link ProductDAO Hero Data Access Object} to perform CRUD operations
+     * @param productDao The {@link ProductDAO Product Data Access Object} to perform CRUD operations
      * <br>
      * This dependency is injected by the Spring Framework
      */
-    public EstoreController(ProductDAO heroDao) {
-        this.heroDao = heroDao;
+    public EstoreController(ProductDAO productDao) {
+        this.productDao = productDao;
     }
 
     /**
@@ -58,7 +58,7 @@ public class EstoreController {
     public ResponseEntity<Product> getHero(@PathVariable int id) {
         LOG.info("GET /heroes/" + id);
         try {
-            Product hero = heroDao.getHero(id);
+            Product hero = productDao.getProduct(id);
             if (hero != null)
                 return new ResponseEntity<Product>(hero,HttpStatus.OK);
             else
@@ -81,7 +81,7 @@ public class EstoreController {
     public ResponseEntity<Product[]> getHeroes() {
         LOG.info("GET /heroes");
         try {
-            Product[] heroes = heroDao.getHeroes();
+            Product[] heroes = productDao.getProducts();
             return new ResponseEntity<Product[]>(heroes, HttpStatus.OK);
         }
         catch(IOException e) {
@@ -91,24 +91,24 @@ public class EstoreController {
     }
 
     /**
-     * Responds to the GET request for all {@linkplain Product heroes} whose name contains
+     * Responds to the GET request for all {@linkplain Product products} whose name contains
      * the text in name
      * 
-     * @param name The name parameter which contains the text used to find the {@link Product heroes}
+     * @param name The name parameter which contains the text used to find the {@link Product products}
      * 
-     * @return ResponseEntity with array of {@link Product hero} objects (may be empty) and
+     * @return ResponseEntity with array of {@link Product product} objects (may be empty) and
      * HTTP status of OK<br>
      * ResponseEntity with HTTP status of INTERNAL_SERVER_ERROR otherwise
      * <p>
-     * Example: Find all heroes that contain the text "ma"
+     * Example: Find all products that contain the text "ma"
      * GET http://localhost:8080/heroes/?name=ma
      */
     @GetMapping("/")
-    public ResponseEntity<Product[]> searchHeroes(@RequestParam String name) {
+    public ResponseEntity<Product[]> searchProducts(@RequestParam String name) {
         LOG.info("GET /heroes/?name="+name);
         try {
-            Product[] heroes = heroDao.findHeroes(name);
-            return new ResponseEntity<Product[]>(heroes, HttpStatus.OK);
+            Product[] products = productDao.findProducts(name);
+            return new ResponseEntity<Product[]>(products, HttpStatus.OK);
         }
         catch(IOException e) {
             LOG.log(Level.SEVERE,e.getLocalizedMessage());
@@ -129,7 +129,7 @@ public class EstoreController {
     public ResponseEntity<Product> createHero(@RequestBody Product hero) {
         LOG.info("POST /heroes " + hero);
         try {
-            Product newHero = heroDao.createHero(hero);
+            Product newHero = productDao.createHero(hero);
             if( newHero == null) {
                 return new ResponseEntity<>(HttpStatus.CONFLICT);
             }
@@ -143,23 +143,23 @@ public class EstoreController {
     }
 
     /**
-     * Updates the {@linkplain Product hero} with the provided {@linkplain Product hero} object, if it exists
+     * Updates the {@linkplain Product product} with the provided {@linkplain Product product} object, if it exists
      * 
-     * @param hero The {@link Product hero} to update
+     * @param product The {@link Product product} to update
      * 
-     * @return ResponseEntity with updated {@link Product hero} object and HTTP status of OK if updated<br>
+     * @return ResponseEntity with updated {@link Product product} object and HTTP status of OK if updated<br>
      * ResponseEntity with HTTP status of NOT_FOUND if not found<br>
      * ResponseEntity with HTTP status of INTERNAL_SERVER_ERROR otherwise
      */
     @PutMapping("")
-    public ResponseEntity<Product> updateHero(@RequestBody Product hero) {
-        LOG.info("PUT /heroes " + hero);
+    public ResponseEntity<Product> updateProduct(@RequestBody Product product) {
+        LOG.info("PUT /heroes " + product);
         try {
-            Product updateHero = heroDao.updateHero(hero);
-            if( updateHero == null) {
+            Product updateProduct = productDao.updateProduct(product);
+            if( updateProduct == null) {
                 return new ResponseEntity<Product>(HttpStatus.NOT_FOUND);
             }
-            return new ResponseEntity<Product>(updateHero, HttpStatus.OK);
+            return new ResponseEntity<Product>(updateProduct, HttpStatus.OK);
         }
         catch(IOException e) {
             LOG.log(Level.SEVERE,e.getLocalizedMessage());
@@ -181,7 +181,7 @@ public class EstoreController {
         LOG.info("DELETE /heroes/" + id);
 
         try {
-            boolean delete = heroDao.deleteHero(id);
+            boolean delete = productDao.deleteHero(id);
             if( !delete ) {
                 return new ResponseEntity<>(HttpStatus.NOT_FOUND);
             }

@@ -42,7 +42,7 @@ public class EstoreControllerTest {
         // Setup
         Product hero = new Product(99,"Galactic Agent");
         // When the same id is passed in, our mock Hero DAO will return the Hero object
-        when(mockHeroDAO.getHero(hero.getId())).thenReturn(hero);
+        when(mockHeroDAO.getProduct(hero.getId())).thenReturn(hero);
 
         // Invoke
         ResponseEntity<Product> response = heroController.getHero(hero.getId());
@@ -58,7 +58,7 @@ public class EstoreControllerTest {
         int heroId = 99;
         // When the same id is passed in, our mock Hero DAO will return null, simulating
         // no hero found
-        when(mockHeroDAO.getHero(heroId)).thenReturn(null);
+        when(mockHeroDAO.getProduct(heroId)).thenReturn(null);
 
         // Invoke
         ResponseEntity<Product> response = heroController.getHero(heroId);
@@ -72,7 +72,7 @@ public class EstoreControllerTest {
         // Setup
         int heroId = 99;
         // When getHero is called on the Mock Hero DAO, throw an IOException
-        doThrow(new IOException()).when(mockHeroDAO).getHero(heroId);
+        doThrow(new IOException()).when(mockHeroDAO).getProduct(heroId);
 
         // Invoke
         ResponseEntity<Product> response = heroController.getHero(heroId);
@@ -138,12 +138,12 @@ public class EstoreControllerTest {
         Product hero = new Product(99,"Wi-Fire");
         // when updateHero is called, return true simulating successful
         // update and save
-        when(mockHeroDAO.updateHero(hero)).thenReturn(hero);
-        ResponseEntity<Product> response = heroController.updateHero(hero);
+        when(mockHeroDAO.updateProduct(hero)).thenReturn(hero);
+        ResponseEntity<Product> response = heroController.updateProduct(hero);
         hero.setName("Bolt");
 
         // Invoke
-        response = heroController.updateHero(hero);
+        response = heroController.updateProduct(hero);
 
         // Analyze
         assertEquals(HttpStatus.OK,response.getStatusCode());
@@ -156,10 +156,10 @@ public class EstoreControllerTest {
         Product hero = new Product(99,"Galactic Agent");
         // when updateHero is called, return true simulating successful
         // update and save
-        when(mockHeroDAO.updateHero(hero)).thenReturn(null);
+        when(mockHeroDAO.updateProduct(hero)).thenReturn(null);
 
         // Invoke
-        ResponseEntity<Product> response = heroController.updateHero(hero);
+        ResponseEntity<Product> response = heroController.updateProduct(hero);
 
         // Analyze
         assertEquals(HttpStatus.NOT_FOUND,response.getStatusCode());
@@ -170,10 +170,10 @@ public class EstoreControllerTest {
         // Setup
         Product hero = new Product(99,"Galactic Agent");
         // When updateHero is called on the Mock Hero DAO, throw an IOException
-        doThrow(new IOException()).when(mockHeroDAO).updateHero(hero);
+        doThrow(new IOException()).when(mockHeroDAO).updateProduct(hero);
 
         // Invoke
-        ResponseEntity<Product> response = heroController.updateHero(hero);
+        ResponseEntity<Product> response = heroController.updateProduct(hero);
 
         // Analyze
         assertEquals(HttpStatus.INTERNAL_SERVER_ERROR,response.getStatusCode());
@@ -186,7 +186,7 @@ public class EstoreControllerTest {
         heroes[0] = new Product(99,"Bolt");
         heroes[1] = new Product(100,"The Great Iguana");
         // When getHeroes is called return the heroes created above
-        when(mockHeroDAO.getHeroes()).thenReturn(heroes);
+        when(mockHeroDAO.getProducts()).thenReturn(heroes);
 
         // Invoke
         ResponseEntity<Product[]> response = heroController.getHeroes();
@@ -200,7 +200,7 @@ public class EstoreControllerTest {
     public void testGetHeroesHandleException() throws IOException { // getHeroes may throw IOException
         // Setup
         // When getHeroes is called on the Mock Hero DAO, throw an IOException
-        doThrow(new IOException()).when(mockHeroDAO).getHeroes();
+        doThrow(new IOException()).when(mockHeroDAO).getProducts();
 
         // Invoke
         ResponseEntity<Product[]> response = heroController.getHeroes();
@@ -218,10 +218,10 @@ public class EstoreControllerTest {
         heroes[1] = new Product(100,"Ice Gladiator");
         // When findHeroes is called with the search string, return the two
         /// heroes above
-        when(mockHeroDAO.findHeroes(searchString)).thenReturn(heroes);
+        when(mockHeroDAO.findProducts(searchString)).thenReturn(heroes);
 
         // Invoke
-        ResponseEntity<Product[]> response = heroController.searchHeroes(searchString);
+        ResponseEntity<Product[]> response = heroController.searchProducts(searchString);
 
         // Analyze
         assertEquals(HttpStatus.OK,response.getStatusCode());
@@ -233,10 +233,10 @@ public class EstoreControllerTest {
         // Setup
         String searchString = "an";
         // When createHero is called on the Mock Hero DAO, throw an IOException
-        doThrow(new IOException()).when(mockHeroDAO).findHeroes(searchString);
+        doThrow(new IOException()).when(mockHeroDAO).findProducts(searchString);
 
         // Invoke
-        ResponseEntity<Product[]> response = heroController.searchHeroes(searchString);
+        ResponseEntity<Product[]> response = heroController.searchProducts(searchString);
 
         // Analyze
         assertEquals(HttpStatus.INTERNAL_SERVER_ERROR,response.getStatusCode());
