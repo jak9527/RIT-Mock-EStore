@@ -186,7 +186,7 @@ public class EstoreControllerTest {
         heroes[0] = new Product(99,"Bolt");
         heroes[1] = new Product(100,"The Great Iguana");
         // When getHeroes is called return the heroes created above
-        when(mockHeroDAO.getProducts()).thenReturn(heroes);
+        when(mockHeroDAO.getHeroes()).thenReturn(heroes);
 
         // Invoke
         ResponseEntity<Product[]> response = heroController.getHeroes();
@@ -200,7 +200,7 @@ public class EstoreControllerTest {
     public void testGetHeroesHandleException() throws IOException { // getHeroes may throw IOException
         // Setup
         // When getHeroes is called on the Mock Hero DAO, throw an IOException
-        doThrow(new IOException()).when(mockHeroDAO).getProducts();
+        doThrow(new IOException()).when(mockHeroDAO).getHeroes();
 
         // Invoke
         ResponseEntity<Product[]> response = heroController.getHeroes();
@@ -247,10 +247,10 @@ public class EstoreControllerTest {
         // Setup
         int heroId = 99;
         // when deleteHero is called return true, simulating successful deletion
-        when(mockHeroDAO.deleteHero(heroId)).thenReturn(true);
+        when(mockHeroDAO.deleteProduct(heroId)).thenReturn(true);
 
         // Invoke
-        ResponseEntity<Product> response = heroController.deleteHero(heroId);
+        ResponseEntity<Product> response = heroController.deleteProduct(heroId);
 
         // Analyze
         assertEquals(HttpStatus.OK,response.getStatusCode());
@@ -261,10 +261,10 @@ public class EstoreControllerTest {
         // Setup
         int heroId = 99;
         // when deleteHero is called return false, simulating failed deletion
-        when(mockHeroDAO.deleteHero(heroId)).thenReturn(false);
+        when(mockHeroDAO.deleteProduct(heroId)).thenReturn(false);
 
         // Invoke
-        ResponseEntity<Product> response = heroController.deleteHero(heroId);
+        ResponseEntity<Product> response = heroController.deleteProduct(heroId);
 
         // Analyze
         assertEquals(HttpStatus.NOT_FOUND,response.getStatusCode());
@@ -275,10 +275,10 @@ public class EstoreControllerTest {
         // Setup
         int heroId = 99;
         // When deleteHero is called on the Mock Hero DAO, throw an IOException
-        doThrow(new IOException()).when(mockHeroDAO).deleteHero(heroId);
+        doThrow(new IOException()).when(mockHeroDAO).deleteProduct(heroId);
 
         // Invoke
-        ResponseEntity<Product> response = heroController.deleteHero(heroId);
+        ResponseEntity<Product> response = heroController.deleteProduct(heroId);
 
         // Analyze
         assertEquals(HttpStatus.INTERNAL_SERVER_ERROR,response.getStatusCode());
