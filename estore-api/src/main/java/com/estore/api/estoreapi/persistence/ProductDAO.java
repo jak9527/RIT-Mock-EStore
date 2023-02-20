@@ -44,13 +44,13 @@ public interface ProductDAO {
     Product getHero(int id) throws IOException;
 
     /**
-     * Creates and saves a {@linkplain Product hero}
+     * Creates and saves a {@linkplain Product item}
      * 
-     * @param hero {@linkplain Product hero} object to be created and saved
+     * @param item {@linkplain Product item} object to be created and saved
      * <br>
      * The id of the hero object is ignored and a new uniqe id is assigned
      *
-     * @return new {@link Product hero} if successful, false otherwise 
+     * @return new {@link Product item} if successful, false otherwise 
      * 
      * @throws IOException if an issue with underlying storage
      */

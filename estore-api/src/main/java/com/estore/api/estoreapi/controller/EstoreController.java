@@ -119,7 +119,7 @@ public class EstoreController {
     /**
      * Creates a {@linkplain Product item} with the provided item object
      * 
-     * @param hero - The {@link Product item} to create
+     * @param item - The {@link Product item} to create
      * 
      * @return ResponseEntity with created {@link Product item} object and HTTP status of CREATED<br>
      * ResponseEntity with HTTP status of CONFLICT if {@link Product item} object already exists<br>
