@@ -78,7 +78,7 @@ public class EstoreFileDAOTest {
     @Test
     public void testGetHero() {
         // Invoke
-        Product hero = heroFileDAO.getHero(99);
+        Product hero = heroFileDAO.getProduct(99);
 
         // Analzye
         assertEquals(hero,testHeroes[0]);
@@ -96,7 +96,7 @@ public class EstoreFileDAOTest {
         // of the test heroes array - 1 (because of the delete)
         // Because heroes attribute of HeroFileDAO is package private
         // we can access it directly
-        assertEquals(heroFileDAO.heroes.size(),testHeroes.length-1);
+        assertEquals(heroFileDAO.products.size(),testHeroes.length-1);
     }
 
     @Test
@@ -110,7 +110,7 @@ public class EstoreFileDAOTest {
 
         // Analyze
         assertNotNull(result);
-        Product actual = heroFileDAO.getHero(hero.getId());
+        Product actual = heroFileDAO.getProduct(hero.getId());
         assertEquals(actual.getId(),hero.getId());
         assertEquals(actual.getName(),hero.getName());
     }
@@ -126,7 +126,7 @@ public class EstoreFileDAOTest {
 
         // Analyze
         assertNotNull(result);
-        Product actual = heroFileDAO.getHero(hero.getId());
+        Product actual = heroFileDAO.getProduct(hero.getId());
         assertEquals(actual,hero);
     }
 
@@ -146,7 +146,7 @@ public class EstoreFileDAOTest {
     @Test
     public void testGetHeroNotFound() {
         // Invoke
-        Product hero = heroFileDAO.getHero(98);
+        Product hero = heroFileDAO.getProduct(98);
 
         // Analyze
         assertEquals(hero,null);
@@ -160,7 +160,7 @@ public class EstoreFileDAOTest {
 
         // Analyze
         assertEquals(result,false);
-        assertEquals(heroFileDAO.heroes.size(),testHeroes.length);
+        assertEquals(heroFileDAO.products.size(),testHeroes.length);
     }
 
     @Test

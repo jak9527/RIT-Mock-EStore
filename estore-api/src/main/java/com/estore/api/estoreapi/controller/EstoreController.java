@@ -46,21 +46,21 @@ public class EstoreController {
     }
 
     /**
-     * Responds to the GET request for a {@linkplain Product hero} for the given id
+     * Responds to the GET request for a {@linkplain Product product} for the given id
      * 
-     * @param id The id used to locate the {@link Product hero}
+     * @param id The id used to locate the {@link Product product}
      * 
-     * @return ResponseEntity with {@link Product hero} object and HTTP status of OK if found<br>
+     * @return ResponseEntity with {@link Product product} object and HTTP status of OK if found<br>
      * ResponseEntity with HTTP status of NOT_FOUND if not found<br>
      * ResponseEntity with HTTP status of INTERNAL_SERVER_ERROR otherwise
      */
     @GetMapping("/{id}")
-    public ResponseEntity<Product> getHero(@PathVariable int id) {
+    public ResponseEntity<Product> getProduct(@PathVariable int id) {
         LOG.info("GET /heroes/" + id);
         try {
-            Product hero = heroDao.getHero(id);
-            if (hero != null)
-                return new ResponseEntity<Product>(hero,HttpStatus.OK);
+            Product product = heroDao.getProduct(id);
+            if (product != null)
+                return new ResponseEntity<Product>(product, HttpStatus.OK);
             else
                 return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
