@@ -81,7 +81,7 @@ public class EstoreController {
     public ResponseEntity<Product[]> getHeroes() {
         LOG.info("GET /heroes");
         try {
-            Product[] heroes = heroDao.getHeroes();
+            Product[] heroes = heroDao.getProducts();
             return new ResponseEntity<Product[]>(heroes, HttpStatus.OK);
         }
         catch(IOException e) {
