@@ -56,7 +56,7 @@ public class EstoreFileDAOTest {
     @Test
     public void testGetHeroes() {
         // Invoke
-        Product[] heroes = heroFileDAO.getHeroes();
+        Product[] heroes = heroFileDAO.getProduct();
 
         // Analyze
         assertEquals(heroes.length,testHeroes.length);
@@ -96,23 +96,23 @@ public class EstoreFileDAOTest {
         // of the test heroes array - 1 (because of the delete)
         // Because heroes attribute of HeroFileDAO is package private
         // we can access it directly
-        assertEquals(heroFileDAO.heroes.size(),testHeroes.length-1);
+        assertEquals(heroFileDAO.product.size(),testHeroes.length-1);
     }
 
     @Test
     public void testCreateHero() {
         // Setup
-        Product hero = new Product(102,"Wonder-Person");
+        Product item = new Product(102,"Wonder-Person");
 
         // Invoke
-        Product result = assertDoesNotThrow(() -> heroFileDAO.createHero(hero),
+        Product result = assertDoesNotThrow(() -> heroFileDAO.createProduct(item),
                                 "Unexpected exception thrown");
 
         // Analyze
         assertNotNull(result);
-        Product actual = heroFileDAO.getHero(hero.getId());
-        assertEquals(actual.getId(),hero.getId());
-        assertEquals(actual.getName(),hero.getName());
+        Product actual = heroFileDAO.getHero(item.getId());
+        assertEquals(actual.getId(),item.getId());
+        assertEquals(actual.getName(),item.getName());
     }
 
     @Test
@@ -139,7 +139,7 @@ public class EstoreFileDAOTest {
         Product hero = new Product(102,"Wi-Fire");
 
         assertThrows(IOException.class,
-                        () -> heroFileDAO.createHero(hero),
+                        () -> heroFileDAO.createProduct(hero),
                         "IOException not thrown");
     }
 
@@ -160,7 +160,7 @@ public class EstoreFileDAOTest {
 
         // Analyze
         assertEquals(result,false);
-        assertEquals(heroFileDAO.heroes.size(),testHeroes.length);
+        assertEquals(heroFileDAO.product.size(),testHeroes.length);
     }
 
     @Test

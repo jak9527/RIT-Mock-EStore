@@ -24,7 +24,7 @@ import org.springframework.stereotype.Component;
 @Component
 public class ProductFileDAO implements ProductDAO {
     private static final Logger LOG = Logger.getLogger(ProductFileDAO.class.getName());
-    Map<Integer,Product> heroes;   // Provides a local cache of the hero objects
+    Map<Integer,Product> product;   // Provides a local cache of the hero objects
                                 // so that we don't need to read from the file
                                 // each time
     private ObjectMapper objectMapper;  // Provides conversion between Hero
@@ -79,7 +79,7 @@ public class ProductFileDAO implements ProductDAO {
     private Product[] getHeroesArray(String containsText) { // if containsText == null, no filter
         ArrayList<Product> heroArrayList = new ArrayList<>();
 
-        for (Product hero : heroes.values()) {
+        for (Product hero : product.values()) {
             if (containsText == null || hero.getName().contains(containsText)) {
                 heroArrayList.add(hero);
             }
@@ -117,7 +117,7 @@ public class ProductFileDAO implements ProductDAO {
      * @throws IOException when file cannot be accessed or read from
      */
     private boolean load() throws IOException {
-        heroes = new TreeMap<>();
+        product = new TreeMap<>();
         nextId = 0;
 
         // Deserializes the JSON objects from the file into an array of heroes
@@ -127,7 +127,7 @@ public class ProductFileDAO implements ProductDAO {
 
         // Add each hero to the tree map and keep track of the greatest id
         for (Product hero : heroArray) {
-            heroes.put(hero.getId(),hero);
+            product.put(hero.getId(),hero);
             if (hero.getId() > nextId)
                 nextId = hero.getId();
         }
@@ -141,7 +141,7 @@ public class ProductFileDAO implements ProductDAO {
      */
     @Override
     public Product[] getHeroes() {
-        synchronized(heroes) {
+        synchronized(product) {
             return getHeroesArray();
         }
     }
@@ -151,7 +151,7 @@ public class ProductFileDAO implements ProductDAO {
      */
     @Override
     public Product[] findHeroes(String containsText) {
-        synchronized(heroes) {
+        synchronized(product) {
             return getHeroesArray(containsText);
         }
     }
@@ -161,9 +161,9 @@ public class ProductFileDAO implements ProductDAO {
      */
     @Override
     public Product getHero(int id) {
-        synchronized(heroes) {
-            if (heroes.containsKey(id))
-                return heroes.get(id);
+        synchronized(product) {
+            if (product.containsKey(id))
+                return product.get(id);
             else
                 return null;
         }
@@ -173,14 +173,14 @@ public class ProductFileDAO implements ProductDAO {
     ** {@inheritDoc}
      */
     @Override
-    public Product createHero(Product hero) throws IOException {
-        synchronized(heroes) {
-            // We create a new hero object because the id field is immutable
+    public Product createProduct(Product item) throws IOException {
+        synchronized(product) {
+            // We create a new item object because the id field is immutable
             // and we need to assign the next unique id
-            Product newHero = new Product(nextId(),hero.getName());
-            heroes.put(newHero.getId(),newHero);
+            Product newProduct = new Product(nextId(),item.getName());
+            product.put(newProduct.getId(),newProduct);
             save(); // may throw an IOException
-            return newHero;
+            return newProduct;
         }
     }
 
@@ -189,11 +189,11 @@ public class ProductFileDAO implements ProductDAO {
      */
     @Override
     public Product updateHero(Product hero) throws IOException {
-        synchronized(heroes) {
-            if (heroes.containsKey(hero.getId()) == false)
+        synchronized(product) {
+            if (product.containsKey(hero.getId()) == false)
                 return null;  // hero does not exist
 
-            heroes.put(hero.getId(),hero);
+            product.put(hero.getId(),hero);
             save(); // may throw an IOException
             return hero;
         }
@@ -204,9 +204,9 @@ public class ProductFileDAO implements ProductDAO {
      */
     @Override
     public boolean deleteHero(int id) throws IOException {
-        synchronized(heroes) {
-            if (heroes.containsKey(id)) {
-                heroes.remove(id);
+        synchronized(product) {
+            if (product.containsKey(id)) {
+                product.remove(id);
                 return save();
             }
             else

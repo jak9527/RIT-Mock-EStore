@@ -18,9 +18,9 @@ public class Product {
     @JsonProperty("name") private String name;
 
     /**
-     * Create a hero with the given id and name
-     * @param id The id of the hero
-     * @param name The name of the hero
+     * Create a product with the given id and name
+     * @param id The id of the product
+     * @param name The name of the product
      * 
      * {@literal @}JsonProperty is used in serialization and deserialization
      * of the JSON object to the Java object in mapping the fields.  If a field

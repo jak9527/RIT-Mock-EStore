@@ -54,15 +54,15 @@ public interface ProductDAO {
      * 
      * @throws IOException if an issue with underlying storage
      */
-    Product createHero(Product hero) throws IOException;
+    Product createProduct(Product item) throws IOException;
 
     /**
-     * Updates and saves a {@linkplain Product hero}
+     * Updates and saves a {@linkplain Product item}
      * 
-     * @param {@link Product hero} object to be updated and saved
+     * @param {@link Product item} object to be updated and saved
      * 
-     * @return updated {@link Product hero} if successful, null if
-     * {@link Product hero} could not be found
+     * @return updated {@link Product item} if successful, null if
+     * {@link Product item} could not be found
      * 
      * @throws IOException if underlying storage cannot be accessed
      */

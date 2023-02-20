@@ -92,10 +92,10 @@ public class EstoreControllerTest {
         Product hero = new Product(99,"Wi-Fire");
         // when createHero is called, return true simulating successful
         // creation and save
-        when(mockHeroDAO.createHero(hero)).thenReturn(hero);
+        when(mockHeroDAO.createProduct(hero)).thenReturn(hero);
 
         // Invoke
-        ResponseEntity<Product> response = heroController.createHero(hero);
+        ResponseEntity<Product> response = heroController.createProduct(hero);
 
         // Analyze
         assertEquals(HttpStatus.CREATED,response.getStatusCode());
@@ -108,10 +108,10 @@ public class EstoreControllerTest {
         Product hero = new Product(99,"Bolt");
         // when createHero is called, return false simulating failed
         // creation and save
-        when(mockHeroDAO.createHero(hero)).thenReturn(null);
+        when(mockHeroDAO.createProduct(hero)).thenReturn(null);
 
         // Invoke
-        ResponseEntity<Product> response = heroController.createHero(hero);
+        ResponseEntity<Product> response = heroController.createProduct(hero);
 
         // Analyze
         assertEquals(HttpStatus.CONFLICT,response.getStatusCode());
@@ -123,10 +123,10 @@ public class EstoreControllerTest {
         Product hero = new Product(99,"Ice Gladiator");
 
         // When createHero is called on the Mock Hero DAO, throw an IOException
-        doThrow(new IOException()).when(mockHeroDAO).createHero(hero);
+        doThrow(new IOException()).when(mockHeroDAO).createProduct(hero);
 
         // Invoke
-        ResponseEntity<Product> response = heroController.createHero(hero);
+        ResponseEntity<Product> response = heroController.createProduct(hero);
 
         // Analyze
         assertEquals(HttpStatus.INTERNAL_SERVER_ERROR,response.getStatusCode());
@@ -186,7 +186,7 @@ public class EstoreControllerTest {
         heroes[0] = new Product(99,"Bolt");
         heroes[1] = new Product(100,"The Great Iguana");
         // When getHeroes is called return the heroes created above
-        when(mockHeroDAO.getHeroes()).thenReturn(heroes);
+        when(mockHeroDAO.getProduct()).thenReturn(heroes);
 
         // Invoke
         ResponseEntity<Product[]> response = heroController.getHeroes();
@@ -200,7 +200,7 @@ public class EstoreControllerTest {
     public void testGetHeroesHandleException() throws IOException { // getHeroes may throw IOException
         // Setup
         // When getHeroes is called on the Mock Hero DAO, throw an IOException
-        doThrow(new IOException()).when(mockHeroDAO).getHeroes();
+        doThrow(new IOException()).when(mockHeroDAO).getProduct();
 
         // Invoke
         ResponseEntity<Product[]> response = heroController.getHeroes();

@@ -32,7 +32,7 @@ import java.util.logging.Logger;
 @RequestMapping("heroes")
 public class EstoreController {
     private static final Logger LOG = Logger.getLogger(EstoreController.class.getName());
-    private ProductDAO heroDao;
+    private ProductDAO productDao;
 
     /**
      * Creates a REST API controller to reponds to requests
@@ -42,7 +42,7 @@ public class EstoreController {
      * This dependency is injected by the Spring Framework
      */
     public EstoreController(ProductDAO heroDao) {
-        this.heroDao = heroDao;
+        this.productDao = heroDao;
     }
 
     /**
@@ -58,7 +58,7 @@ public class EstoreController {
     public ResponseEntity<Product> getHero(@PathVariable int id) {
         LOG.info("GET /heroes/" + id);
         try {
-            Product hero = heroDao.getHero(id);
+            Product hero = productDao.getHero(id);
             if (hero != null)
                 return new ResponseEntity<Product>(hero,HttpStatus.OK);
             else
@@ -81,7 +81,7 @@ public class EstoreController {
     public ResponseEntity<Product[]> getHeroes() {
         LOG.info("GET /heroes");
         try {
-            Product[] heroes = heroDao.getHeroes();
+            Product[] heroes = productDao.getHeroes();
             return new ResponseEntity<Product[]>(heroes, HttpStatus.OK);
         }
         catch(IOException e) {
@@ -107,7 +107,7 @@ public class EstoreController {
     public ResponseEntity<Product[]> searchHeroes(@RequestParam String name) {
         LOG.info("GET /heroes/?name="+name);
         try {
-            Product[] heroes = heroDao.findHeroes(name);
+            Product[] heroes = productDao.findHeroes(name);
             return new ResponseEntity<Product[]>(heroes, HttpStatus.OK);
         }
         catch(IOException e) {
@@ -117,23 +117,23 @@ public class EstoreController {
     }
 
     /**
-     * Creates a {@linkplain Product hero} with the provided hero object
+     * Creates a {@linkplain Product item} with the provided item object
      * 
-     * @param hero - The {@link Product hero} to create
+     * @param hero - The {@link Product item} to create
      * 
-     * @return ResponseEntity with created {@link Product hero} object and HTTP status of CREATED<br>
-     * ResponseEntity with HTTP status of CONFLICT if {@link Product hero} object already exists<br>
+     * @return ResponseEntity with created {@link Product item} object and HTTP status of CREATED<br>
+     * ResponseEntity with HTTP status of CONFLICT if {@link Product item} object already exists<br>
      * ResponseEntity with HTTP status of INTERNAL_SERVER_ERROR otherwise
      */
     @PostMapping("")
-    public ResponseEntity<Product> createHero(@RequestBody Product hero) {
-        LOG.info("POST /heroes " + hero);
+    public ResponseEntity<Product> createProduct(@RequestBody Product item) {
+        LOG.info("POST /heroes " + item);
         try {
-            Product newHero = heroDao.createHero(hero);
-            if( newHero == null) {
+            Product newProduct = productDao.createProduct(item);
+            if( newProduct == null ) {
                 return new ResponseEntity<>(HttpStatus.CONFLICT);
             }
-            return new ResponseEntity<Product>(newHero,
+            return new ResponseEntity<Product>(newProduct,
                          HttpStatus.CREATED);
         }
         catch(IOException e) {
@@ -155,7 +155,7 @@ public class EstoreController {
     public ResponseEntity<Product> updateHero(@RequestBody Product hero) {
         LOG.info("PUT /heroes " + hero);
         try {
-            Product updateHero = heroDao.updateHero(hero);
+            Product updateHero = productDao.updateHero(hero);
             if( updateHero == null) {
                 return new ResponseEntity<Product>(HttpStatus.NOT_FOUND);
             }
@@ -181,7 +181,7 @@ public class EstoreController {
         LOG.info("DELETE /heroes/" + id);
 
         try {
-            boolean delete = heroDao.deleteHero(id);
+            boolean delete = productDao.deleteHero(id);
             if( !delete ) {
                 return new ResponseEntity<>(HttpStatus.NOT_FOUND);
             }
