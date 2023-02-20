@@ -29,7 +29,7 @@ import java.util.logging.Logger;
  */
 
 @RestController
-@RequestMapping("heroes")
+@RequestMapping("inventory")
 public class EstoreController {
     private static final Logger LOG = Logger.getLogger(EstoreController.class.getName());
     private ProductDAO productDao;
@@ -56,7 +56,7 @@ public class EstoreController {
      */
     @GetMapping("/{id}")
     public ResponseEntity<Product> getHero(@PathVariable int id) {
-        LOG.info("GET /heroes/" + id);
+        LOG.info("GET /inventory/" + id);
         try {
             Product hero = productDao.getProduct(id);
             if (hero != null)
@@ -79,7 +79,7 @@ public class EstoreController {
      */
     @GetMapping("")
     public ResponseEntity<Product[]> getHeroes() {
-        LOG.info("GET /heroes");
+        LOG.info("GET /inventory");
         try {
             Product[] heroes = productDao.getProducts();
             return new ResponseEntity<Product[]>(heroes, HttpStatus.OK);
@@ -105,7 +105,7 @@ public class EstoreController {
      */
     @GetMapping("/")
     public ResponseEntity<Product[]> searchProducts(@RequestParam String name) {
-        LOG.info("GET /heroes/?name="+name);
+        LOG.info("GET /inventory/?name="+name);
         try {
             Product[] products = productDao.findProducts(name);
             return new ResponseEntity<Product[]>(products, HttpStatus.OK);
@@ -127,7 +127,7 @@ public class EstoreController {
      */
     @PostMapping("")
     public ResponseEntity<Product> createHero(@RequestBody Product hero) {
-        LOG.info("POST /heroes " + hero);
+        LOG.info("POST /inventory " + hero);
         try {
             Product newHero = productDao.createHero(hero);
             if( newHero == null) {
@@ -153,7 +153,7 @@ public class EstoreController {
      */
     @PutMapping("")
     public ResponseEntity<Product> updateProduct(@RequestBody Product product) {
-        LOG.info("PUT /heroes " + product);
+        LOG.info("PUT /inventory " + product);
         try {
             Product updateProduct = productDao.updateProduct(product);
             if( updateProduct == null) {
@@ -178,7 +178,7 @@ public class EstoreController {
      */
     @DeleteMapping("/{id}")
     public ResponseEntity<Product> deleteHero(@PathVariable int id) {
-        LOG.info("DELETE /heroes/" + id);
+        LOG.info("DELETE /inventory/" + id);
 
         try {
             boolean delete = productDao.deleteHero(id);
