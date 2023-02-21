@@ -56,7 +56,7 @@ public class EstoreFileDAOTest {
     @Test
     public void testGetHeroes() {
         // Invoke
-        Product[] heroes = productFileDAO.getHeroes();
+        Product[] heroes = productFileDAO.getProducts();
 
         // Analyze
         assertEquals(heroes.length,testHeroes.length);
@@ -67,7 +67,7 @@ public class EstoreFileDAOTest {
     @Test
     public void testFindHeroes() {
         // Invoke
-        Product[] heroes = productFileDAO.findHeroes("la");
+        Product[] heroes = productFileDAO.findProducts("la");
 
         // Analyze
         assertEquals(heroes.length,2);
@@ -78,7 +78,7 @@ public class EstoreFileDAOTest {
     @Test
     public void testGetHero() {
         // Invoke
-        Product hero = productFileDAO.getHero(99);
+        Product hero = productFileDAO.getProduct(99);
 
         // Analzye
         assertEquals(hero,testHeroes[0]);
@@ -110,7 +110,7 @@ public class EstoreFileDAOTest {
 
         // Analyze
         assertNotNull(result);
-        Product actual = productFileDAO.getHero(hero.getId());
+        Product actual = productFileDAO.getProduct(hero.getId());
         assertEquals(actual.getId(),hero.getId());
         assertEquals(actual.getName(),hero.getName());
     }
@@ -121,12 +121,12 @@ public class EstoreFileDAOTest {
         Product hero = new Product(99,"Galactic Agent");
 
         // Invoke
-        Product result = assertDoesNotThrow(() -> productFileDAO.updateHero(hero),
+        Product result = assertDoesNotThrow(() -> productFileDAO.updateProduct(hero),
                                 "Unexpected exception thrown");
 
         // Analyze
         assertNotNull(result);
-        Product actual = productFileDAO.getHero(hero.getId());
+        Product actual = productFileDAO.getProduct(hero.getId());
         assertEquals(actual,hero);
     }
 
@@ -146,7 +146,7 @@ public class EstoreFileDAOTest {
     @Test
     public void testGetHeroNotFound() {
         // Invoke
-        Product hero = productFileDAO.getHero(98);
+        Product hero = productFileDAO.getProduct(98);
 
         // Analyze
         assertEquals(hero,null);
@@ -169,7 +169,7 @@ public class EstoreFileDAOTest {
         Product hero = new Product(98,"Bolt");
 
         // Invoke
-        Product result = assertDoesNotThrow(() -> productFileDAO.updateHero(hero),
+        Product result = assertDoesNotThrow(() -> productFileDAO.updateProduct(hero),
                                                 "Unexpected exception thrown");
 
         // Analyze
