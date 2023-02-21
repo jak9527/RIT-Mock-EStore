@@ -29,7 +29,7 @@ import java.util.logging.Logger;
  */
 
 @RestController
-@RequestMapping("heroes")
+@RequestMapping("inventory")
 public class EstoreController {
     private static final Logger LOG = Logger.getLogger(EstoreController.class.getName());
     private ProductDAO productDao;
@@ -37,7 +37,7 @@ public class EstoreController {
     /**
      * Creates a REST API controller to reponds to requests
      * 
-     * @param productDao The {@link ProductDAO Hero Data Access Object} to perform CRUD operations
+     * @param productDao The {@link ProductDAO Product Data Access Object} to perform CRUD operations
      * <br>
      * This dependency is injected by the Spring Framework
      */
@@ -46,21 +46,21 @@ public class EstoreController {
     }
 
     /**
-     * Responds to the GET request for a {@linkplain Product hero} for the given id
+     * Responds to the GET request for a {@linkplain Product product} for the given id
      * 
-     * @param id The id used to locate the {@link Product hero}
+     * @param id The id used to locate the {@link Product product}
      * 
-     * @return ResponseEntity with {@link Product hero} object and HTTP status of OK if found<br>
+     * @return ResponseEntity with {@link Product product} object and HTTP status of OK if found<br>
      * ResponseEntity with HTTP status of NOT_FOUND if not found<br>
      * ResponseEntity with HTTP status of INTERNAL_SERVER_ERROR otherwise
      */
     @GetMapping("/{id}")
-    public ResponseEntity<Product> getHero(@PathVariable int id) {
-        LOG.info("GET /heroes/" + id);
+    public ResponseEntity<Product> getProduct(@PathVariable int id) {
+        LOG.info("GET /inventory/" + id);
         try {
-            Product hero = productDao.getHero(id);
-            if (hero != null)
-                return new ResponseEntity<Product>(hero,HttpStatus.OK);
+            Product product = productDao.getProduct(id);
+            if (product != null)
+                return new ResponseEntity<Product>(product, HttpStatus.OK);
             else
                 return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
@@ -91,24 +91,24 @@ public class EstoreController {
     }
 
     /**
-     * Responds to the GET request for all {@linkplain Product heroes} whose name contains
+     * Responds to the GET request for all {@linkplain Product products} whose name contains
      * the text in name
      * 
-     * @param name The name parameter which contains the text used to find the {@link Product heroes}
+     * @param name The name parameter which contains the text used to find the {@link Product products}
      * 
-     * @return ResponseEntity with array of {@link Product hero} objects (may be empty) and
+     * @return ResponseEntity with array of {@link Product product} objects (may be empty) and
      * HTTP status of OK<br>
      * ResponseEntity with HTTP status of INTERNAL_SERVER_ERROR otherwise
      * <p>
-     * Example: Find all heroes that contain the text "ma"
+     * Example: Find all products that contain the text "ma"
      * GET http://localhost:8080/heroes/?name=ma
      */
     @GetMapping("/")
-    public ResponseEntity<Product[]> searchHeroes(@RequestParam String name) {
-        LOG.info("GET /heroes/?name="+name);
+    public ResponseEntity<Product[]> searchProducts(@RequestParam String name) {
+        LOG.info("GET /inventory/?name="+name);
         try {
-            Product[] heroes = productDao.findHeroes(name);
-            return new ResponseEntity<Product[]>(heroes, HttpStatus.OK);
+            Product[] products = productDao.findProducts(name);
+            return new ResponseEntity<Product[]>(products, HttpStatus.OK);
         }
         catch(IOException e) {
             LOG.log(Level.SEVERE,e.getLocalizedMessage());
@@ -127,7 +127,7 @@ public class EstoreController {
      */
     @PostMapping("")
     public ResponseEntity<Product> createHero(@RequestBody Product hero) {
-        LOG.info("POST /heroes " + hero);
+        LOG.info("POST /inventory " + hero);
         try {
             Product newHero = productDao.createHero(hero);
             if( newHero == null) {
@@ -143,23 +143,23 @@ public class EstoreController {
     }
 
     /**
-     * Updates the {@linkplain Product hero} with the provided {@linkplain Product hero} object, if it exists
+     * Updates the {@linkplain Product product} with the provided {@linkplain Product product} object, if it exists
      * 
-     * @param hero The {@link Product hero} to update
+     * @param product The {@link Product product} to update
      * 
-     * @return ResponseEntity with updated {@link Product hero} object and HTTP status of OK if updated<br>
+     * @return ResponseEntity with updated {@link Product product} object and HTTP status of OK if updated<br>
      * ResponseEntity with HTTP status of NOT_FOUND if not found<br>
      * ResponseEntity with HTTP status of INTERNAL_SERVER_ERROR otherwise
      */
     @PutMapping("")
-    public ResponseEntity<Product> updateHero(@RequestBody Product hero) {
-        LOG.info("PUT /heroes " + hero);
+    public ResponseEntity<Product> updateProduct(@RequestBody Product product) {
+        LOG.info("PUT /inventory " + product);
         try {
-            Product updateHero = productDao.updateHero(hero);
-            if( updateHero == null) {
+            Product updateProduct = productDao.updateProduct(product);
+            if( updateProduct == null) {
                 return new ResponseEntity<Product>(HttpStatus.NOT_FOUND);
             }
-            return new ResponseEntity<Product>(updateHero, HttpStatus.OK);
+            return new ResponseEntity<Product>(updateProduct, HttpStatus.OK);
         }
         catch(IOException e) {
             LOG.log(Level.SEVERE,e.getLocalizedMessage());
@@ -168,20 +168,20 @@ public class EstoreController {
     }
 
     /**
-     * Deletes a {@linkplain Product hero} with the given id
+     * Deletes a {@linkplain Product product} with the given id
      * 
-     * @param id The id of the {@link Product hero} to deleted
+     * @param id The id of the {@link Product product} to deleted
      * 
      * @return ResponseEntity HTTP status of OK if deleted<br>
      * ResponseEntity with HTTP status of NOT_FOUND if not found<br>
      * ResponseEntity with HTTP status of INTERNAL_SERVER_ERROR otherwise
      */
     @DeleteMapping("/{id}")
-    public ResponseEntity<Product> deleteHero(@PathVariable int id) {
-        LOG.info("DELETE /heroes/" + id);
+    public ResponseEntity<Product> deleteProduct(@PathVariable int id) {
+        LOG.info("DELETE /products/" + id);
 
         try {
-            boolean delete = productDao.deleteHero(id);
+            boolean delete = productDao.deleteProduct(id);
             if( !delete ) {
                 return new ResponseEntity<>(HttpStatus.NOT_FOUND);
             }

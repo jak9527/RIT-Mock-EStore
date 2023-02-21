@@ -68,13 +68,13 @@ public class ProductFileDAO implements ProductDAO {
     }
 
     /**
-     * Generates an array of {@linkplain Product heroes} from the tree map for any
-     * {@linkplain Product heroes} that contains the text specified by containsText
+     * Generates an array of {@linkplain Product products} from the tree map for any
+     * {@linkplain Product products} that contains the text specified by containsText
      * <br>
-     * If containsText is null, the array contains all of the {@linkplain Product heroes}
+     * If containsText is null, the array contains all of the {@linkplain Product products}
      * in the tree map
      * 
-     * @return  The array of {@link Product heroes}, may be empty
+     * @return  The array of {@link Product products}, may be empty
      */
     private Product[] getProductsArray(String containsText) { // if containsText == null, no filter
         ArrayList<Product> productArrayList = new ArrayList<>();
@@ -150,7 +150,7 @@ public class ProductFileDAO implements ProductDAO {
     ** {@inheritDoc}
      */
     @Override
-    public Product[] findHeroes(String containsText) {
+    public Product[] findProducts(String containsText) {
         synchronized(products) {
             return getProductsArray(containsText);
         }
@@ -160,7 +160,7 @@ public class ProductFileDAO implements ProductDAO {
     ** {@inheritDoc}
      */
     @Override
-    public Product getHero(int id) {
+    public Product getProduct(int id) {
         synchronized(products) {
             if (products.containsKey(id))
                 return products.get(id);
@@ -188,7 +188,7 @@ public class ProductFileDAO implements ProductDAO {
     ** {@inheritDoc}
      */
     @Override
-    public Product updateHero(Product hero) throws IOException {
+    public Product updateProduct(Product hero) throws IOException {
         synchronized(products) {
             if (products.containsKey(hero.getId()) == false)
                 return null;  // hero does not exist
@@ -203,7 +203,7 @@ public class ProductFileDAO implements ProductDAO {
     ** {@inheritDoc}
      */
     @Override
-    public boolean deleteHero(int id) throws IOException {
+    public boolean deleteProduct(int id) throws IOException {
         synchronized(products) {
             if (products.containsKey(id)) {
                 products.remove(id);
