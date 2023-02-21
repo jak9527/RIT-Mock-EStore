@@ -11,62 +11,62 @@ import com.estore.api.estoreapi.model.Product;
  */
 public interface ProductDAO {
     /**
-     * Retrieves all {@linkplain Product heroes}
+     * Retrieves all {@linkplain Product products}
      * 
-     * @return An array of {@link Product hero} objects, may be empty
+     * @return An array of {@link Product product} objects, may be empty
      * 
      * @throws IOException if an issue with underlying storage
      */
-    Product[] getHeroes() throws IOException;
+    Product[] getProducts() throws IOException;
 
     /**
-     * Finds all {@linkplain Product heroes} whose name contains the given text
+     * Finds all {@linkplain Product products} whose name contains the given text
      * 
      * @param containsText The text to match against
      * 
-     * @return An array of {@link Product heroes} whose nemes contains the given text, may be empty
+     * @return An array of {@link Product products} whose nemes contains the given text, may be empty
      * 
      * @throws IOException if an issue with underlying storage
      */
-    Product[] findHeroes(String containsText) throws IOException;
+    Product[] findProducts(String containsText) throws IOException;
 
     /**
-     * Retrieves a {@linkplain Product hero} with the given id
+     * Retrieves a {@linkplain Product product} with the given id
      * 
-     * @param id The id of the {@link Product hero} to get
+     * @param id The id of the {@link Product product} to get
      * 
-     * @return a {@link Product hero} object with the matching id
+     * @return a {@link Product product} object with the matching id
      * <br>
-     * null if no {@link Product hero} with a matching id is found
+     * null if no {@link Product product} with a matching id is found
      * 
      * @throws IOException if an issue with underlying storage
      */
-    Product getHero(int id) throws IOException;
+    Product getProduct(int id) throws IOException;
 
     /**
-     * Creates and saves a {@linkplain Product item}
+     * Creates and saves a {@linkplain Product product}
      * 
-     * @param item {@linkplain Product item} object to be created and saved
+     * @param product {@linkplain Product product} object to be created and saved
      * <br>
      * The id of the hero object is ignored and a new uniqe id is assigned
      *
-     * @return new {@link Product item} if successful, false otherwise 
+     * @return new {@link Product product} if successful, false otherwise 
      * 
      * @throws IOException if an issue with underlying storage
      */
-    Product createProduct(Product item) throws IOException;
+    Product createProduct(Product product) throws IOException;
 
     /**
-     * Updates and saves a {@linkplain Product item}
+     * Updates and saves a {@linkplain Product product}
      * 
-     * @param {@link Product item} object to be updated and saved
+     * @param {@link Product product} object to be updated and saved
      * 
-     * @return updated {@link Product item} if successful, null if
-     * {@link Product item} could not be found
+     * @return updated {@link Product product} if successful, null if
+     * {@link Product product} could not be found
      * 
      * @throws IOException if underlying storage cannot be accessed
      */
-    Product updateHero(Product hero) throws IOException;
+    Product updateProduct(Product product) throws IOException;
 
     /**
      * Deletes a {@linkplain Product hero} with the given id
@@ -79,5 +79,5 @@ public interface ProductDAO {
      * 
      * @throws IOException if underlying storage cannot be accessed
      */
-    boolean deleteHero(int id) throws IOException;
+    boolean deleteProduct(int id) throws IOException;
 }
