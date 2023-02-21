@@ -45,7 +45,7 @@ public class EstoreControllerTest {
         when(mockHeroDAO.getProduct(hero.getId())).thenReturn(hero);
 
         // Invoke
-        ResponseEntity<Product> response = heroController.getHero(hero.getId());
+        ResponseEntity<Product> response = heroController.getProduct(hero.getId());
 
         // Analyze
         assertEquals(HttpStatus.OK,response.getStatusCode());
@@ -61,7 +61,7 @@ public class EstoreControllerTest {
         when(mockHeroDAO.getProduct(heroId)).thenReturn(null);
 
         // Invoke
-        ResponseEntity<Product> response = heroController.getHero(heroId);
+        ResponseEntity<Product> response = heroController.getProduct(heroId);
 
         // Analyze
         assertEquals(HttpStatus.NOT_FOUND,response.getStatusCode());
@@ -75,7 +75,7 @@ public class EstoreControllerTest {
         doThrow(new IOException()).when(mockHeroDAO).getProduct(heroId);
 
         // Invoke
-        ResponseEntity<Product> response = heroController.getHero(heroId);
+        ResponseEntity<Product> response = heroController.getProduct(heroId);
 
         // Analyze
         assertEquals(HttpStatus.INTERNAL_SERVER_ERROR,response.getStatusCode());
@@ -189,7 +189,7 @@ public class EstoreControllerTest {
         when(mockHeroDAO.getProducts()).thenReturn(heroes);
 
         // Invoke
-        ResponseEntity<Product[]> response = heroController.getHeroes();
+        ResponseEntity<Product[]> response = heroController.getProducts();
 
         // Analyze
         assertEquals(HttpStatus.OK,response.getStatusCode());
@@ -203,7 +203,7 @@ public class EstoreControllerTest {
         doThrow(new IOException()).when(mockHeroDAO).getProducts();
 
         // Invoke
-        ResponseEntity<Product[]> response = heroController.getHeroes();
+        ResponseEntity<Product[]> response = heroController.getProducts();
 
         // Analyze
         assertEquals(HttpStatus.INTERNAL_SERVER_ERROR,response.getStatusCode());
