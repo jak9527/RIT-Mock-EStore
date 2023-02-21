@@ -28,7 +28,7 @@ import org.junit.jupiter.api.Test;
  */
 @Tag("Persistence-tier")
 public class EstoreFileDAOTest {
-    ProductFileDAO heroFileDAO;
+    ProductFileDAO productFileDAO;
     Product[] testHeroes;
     ObjectMapper mockObjectMapper;
 
@@ -50,13 +50,13 @@ public class EstoreFileDAOTest {
         when(mockObjectMapper
             .readValue(new File("doesnt_matter.txt"),Product[].class))
                 .thenReturn(testHeroes);
-        heroFileDAO = new ProductFileDAO("doesnt_matter.txt",mockObjectMapper);
+        productFileDAO = new ProductFileDAO("doesnt_matter.txt",mockObjectMapper);
     }
 
     @Test
     public void testGetHeroes() {
         // Invoke
-        Product[] heroes = heroFileDAO.getHeroes();
+        Product[] heroes = productFileDAO.getProducts();
 
         // Analyze
         assertEquals(heroes.length,testHeroes.length);
@@ -67,7 +67,7 @@ public class EstoreFileDAOTest {
     @Test
     public void testFindHeroes() {
         // Invoke
-        Product[] heroes = heroFileDAO.findHeroes("la");
+        Product[] heroes = productFileDAO.findProducts("la");
 
         // Analyze
         assertEquals(heroes.length,2);
@@ -78,7 +78,7 @@ public class EstoreFileDAOTest {
     @Test
     public void testGetHero() {
         // Invoke
-        Product hero = heroFileDAO.getProduct(99);
+        Product hero = productFileDAO.getProduct(99);
 
         // Analzye
         assertEquals(hero,testHeroes[0]);
@@ -87,7 +87,7 @@ public class EstoreFileDAOTest {
     @Test
     public void testDeleteHero() {
         // Invoke
-        boolean result = assertDoesNotThrow(() -> heroFileDAO.deleteHero(99),
+        boolean result = assertDoesNotThrow(() -> productFileDAO.deleteProduct(99),
                             "Unexpected exception thrown");
 
         // Analzye
@@ -96,7 +96,7 @@ public class EstoreFileDAOTest {
         // of the test heroes array - 1 (because of the delete)
         // Because heroes attribute of HeroFileDAO is package private
         // we can access it directly
-        assertEquals(heroFileDAO.products.size(),testHeroes.length-1);
+        assertEquals(productFileDAO.products.size(),testHeroes.length-1);
     }
 
     @Test
@@ -105,12 +105,12 @@ public class EstoreFileDAOTest {
         Product hero = new Product(102,"Wonder-Person");
 
         // Invoke
-        Product result = assertDoesNotThrow(() -> heroFileDAO.createHero(hero),
+        Product result = assertDoesNotThrow(() -> productFileDAO.createHero(hero),
                                 "Unexpected exception thrown");
 
         // Analyze
         assertNotNull(result);
-        Product actual = heroFileDAO.getProduct(hero.getId());
+        Product actual = productFileDAO.getProduct(hero.getId());
         assertEquals(actual.getId(),hero.getId());
         assertEquals(actual.getName(),hero.getName());
     }
@@ -121,12 +121,12 @@ public class EstoreFileDAOTest {
         Product hero = new Product(99,"Galactic Agent");
 
         // Invoke
-        Product result = assertDoesNotThrow(() -> heroFileDAO.updateHero(hero),
+        Product result = assertDoesNotThrow(() -> productFileDAO.updateProduct(hero),
                                 "Unexpected exception thrown");
 
         // Analyze
         assertNotNull(result);
-        Product actual = heroFileDAO.getProduct(hero.getId());
+        Product actual = productFileDAO.getProduct(hero.getId());
         assertEquals(actual,hero);
     }
 
@@ -139,14 +139,14 @@ public class EstoreFileDAOTest {
         Product hero = new Product(102,"Wi-Fire");
 
         assertThrows(IOException.class,
-                        () -> heroFileDAO.createHero(hero),
+                        () -> productFileDAO.createHero(hero),
                         "IOException not thrown");
     }
 
     @Test
     public void testGetHeroNotFound() {
         // Invoke
-        Product hero = heroFileDAO.getProduct(98);
+        Product hero = productFileDAO.getProduct(98);
 
         // Analyze
         assertEquals(hero,null);
@@ -155,12 +155,12 @@ public class EstoreFileDAOTest {
     @Test
     public void testDeleteHeroNotFound() {
         // Invoke
-        boolean result = assertDoesNotThrow(() -> heroFileDAO.deleteHero(98),
+        boolean result = assertDoesNotThrow(() -> productFileDAO.deleteProduct(98),
                                                 "Unexpected exception thrown");
 
         // Analyze
         assertEquals(result,false);
-        assertEquals(heroFileDAO.products.size(),testHeroes.length);
+        assertEquals(productFileDAO.products.size(),testHeroes.length);
     }
 
     @Test
@@ -169,7 +169,7 @@ public class EstoreFileDAOTest {
         Product hero = new Product(98,"Bolt");
 
         // Invoke
-        Product result = assertDoesNotThrow(() -> heroFileDAO.updateHero(hero),
+        Product result = assertDoesNotThrow(() -> productFileDAO.updateProduct(hero),
                                                 "Unexpected exception thrown");
 
         // Analyze

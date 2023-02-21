@@ -63,31 +63,31 @@ public class ProductFileDAO implements ProductDAO {
      * 
      * @return  The array of {@link Product heroes}, may be empty
      */
-    private Product[] getHeroesArray() {
-        return getHeroesArray(null);
+    private Product[] getProductsArray() {
+        return getProductsArray(null);
     }
 
     /**
-     * Generates an array of {@linkplain Product heroes} from the tree map for any
-     * {@linkplain Product heroes} that contains the text specified by containsText
+     * Generates an array of {@linkplain Product products} from the tree map for any
+     * {@linkplain Product products} that contains the text specified by containsText
      * <br>
-     * If containsText is null, the array contains all of the {@linkplain Product heroes}
+     * If containsText is null, the array contains all of the {@linkplain Product products}
      * in the tree map
      * 
-     * @return  The array of {@link Product heroes}, may be empty
+     * @return  The array of {@link Product products}, may be empty
      */
-    private Product[] getHeroesArray(String containsText) { // if containsText == null, no filter
-        ArrayList<Product> heroArrayList = new ArrayList<>();
+    private Product[] getProductsArray(String containsText) { // if containsText == null, no filter
+        ArrayList<Product> productArrayList = new ArrayList<>();
 
-        for (Product hero : products.values()) {
-            if (containsText == null || hero.getName().contains(containsText)) {
-                heroArrayList.add(hero);
+        for (Product product : products.values()) {
+            if (containsText == null || product.getName().contains(containsText)) {
+                productArrayList.add(product);
             }
         }
 
-        Product[] heroArray = new Product[heroArrayList.size()];
-        heroArrayList.toArray(heroArray);
-        return heroArray;
+        Product[] productArray = new Product[productArrayList.size()];
+        productArrayList.toArray(productArray);
+        return productArray;
     }
 
     /**
@@ -98,7 +98,7 @@ public class ProductFileDAO implements ProductDAO {
      * @throws IOException when file cannot be accessed or written to
      */
     private boolean save() throws IOException {
-        Product[] heroArray = getHeroesArray();
+        Product[] heroArray = getProductsArray();
 
         // Serializes the Java Objects to JSON objects into the file
         // writeValue will thrown an IOException if there is an issue
@@ -140,9 +140,9 @@ public class ProductFileDAO implements ProductDAO {
     ** {@inheritDoc}
      */
     @Override
-    public Product[] getHeroes() {
+    public Product[] getProducts() {
         synchronized(products) {
-            return getHeroesArray();
+            return getProductsArray();
         }
     }
 
@@ -150,9 +150,9 @@ public class ProductFileDAO implements ProductDAO {
     ** {@inheritDoc}
      */
     @Override
-    public Product[] findHeroes(String containsText) {
+    public Product[] findProducts(String containsText) {
         synchronized(products) {
-            return getHeroesArray(containsText);
+            return getProductsArray(containsText);
         }
     }
 
@@ -188,7 +188,7 @@ public class ProductFileDAO implements ProductDAO {
     ** {@inheritDoc}
      */
     @Override
-    public Product updateHero(Product hero) throws IOException {
+    public Product updateProduct(Product hero) throws IOException {
         synchronized(products) {
             if (products.containsKey(hero.getId()) == false)
                 return null;  // hero does not exist
@@ -203,7 +203,7 @@ public class ProductFileDAO implements ProductDAO {
     ** {@inheritDoc}
      */
     @Override
-    public boolean deleteHero(int id) throws IOException {
+    public boolean deleteProduct(int id) throws IOException {
         synchronized(products) {
             if (products.containsKey(id)) {
                 products.remove(id);
