@@ -79,7 +79,7 @@ public class EstoreController {
      */
     @GetMapping("")
     public ResponseEntity<Product[]> getProducts() {
-        LOG.info("GET /products");
+        LOG.info("GET /inventory");
         try {
             Product[] products = productDao.getProducts();
             return new ResponseEntity<Product[]>(products, HttpStatus.OK);
@@ -127,7 +127,7 @@ public class EstoreController {
      */
     @PostMapping("")
     public ResponseEntity<Product> createProduct(@RequestBody Product product) {
-        LOG.info("POST /heroes " + product);
+        LOG.info("POST /inventory " + product);
         try {
             Product newProduct = productDao.createProduct(product);
             if( newProduct == null ) {
@@ -178,7 +178,7 @@ public class EstoreController {
      */
     @DeleteMapping("/{id}")
     public ResponseEntity<Product> deleteProduct(@PathVariable int id) {
-        LOG.info("DELETE /products/" + id);
+        LOG.info("DELETE /inventory/" + id);
 
         try {
             boolean delete = productDao.deleteProduct(id);

@@ -41,9 +41,9 @@ public class EstoreFileDAOTest {
     public void setupHeroFileDAO() throws IOException {
         mockObjectMapper = mock(ObjectMapper.class);
         testHeroes = new Product[3];
-        testHeroes[0] = new Product(99,"Wi-Fire");
-        testHeroes[1] = new Product(100,"Galactic Agent");
-        testHeroes[2] = new Product(101,"Ice Gladiator");
+        testHeroes[0] = new Product(99,"Wi-Fire", 1, 1);
+        testHeroes[1] = new Product(100,"Galactic Agent", 2, 2);
+        testHeroes[2] = new Product(101,"Ice Gladiator", 3, 3);
 
         // When the object mapper is supposed to read from the file
         // the mock object mapper will return the hero array above
@@ -102,7 +102,7 @@ public class EstoreFileDAOTest {
     @Test
     public void testCreateHero() {
         // Setup
-        Product item = new Product(102,"Wonder-Person");
+        Product item = new Product(102,"Wonder-Person", 4, 4);
 
         // Invoke
         Product result = assertDoesNotThrow(() -> productFileDAO.createProduct(item),
@@ -118,7 +118,7 @@ public class EstoreFileDAOTest {
     @Test
     public void testUpdateHero() {
         // Setup
-        Product hero = new Product(99,"Galactic Agent");
+        Product hero = new Product(99,"Galactic Agent", 5, 5);
 
         // Invoke
         Product result = assertDoesNotThrow(() -> productFileDAO.updateProduct(hero),
@@ -136,7 +136,7 @@ public class EstoreFileDAOTest {
             .when(mockObjectMapper)
                 .writeValue(any(File.class),any(Product[].class));
 
-        Product item = new Product(102,"Wi-Fire");
+        Product item = new Product(102,"Wi-Fire", 6, 6);
 
         assertThrows(IOException.class,
                         () -> productFileDAO.createProduct(item),
@@ -166,7 +166,7 @@ public class EstoreFileDAOTest {
     @Test
     public void testUpdateHeroNotFound() {
         // Setup
-        Product hero = new Product(98,"Bolt");
+        Product hero = new Product(98,"Bolt", 10, 10);
 
         // Invoke
         Product result = assertDoesNotThrow(() -> productFileDAO.updateProduct(hero),

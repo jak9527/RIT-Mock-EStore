@@ -40,7 +40,7 @@ public class EstoreControllerTest {
     @Test
     public void testGetHero() throws IOException {  // getHero may throw IOException
         // Setup
-        Product hero = new Product(99,"Galactic Agent");
+        Product hero = new Product(99,"Galactic Agent", 1, 1);
         // When the same id is passed in, our mock Hero DAO will return the Hero object
         when(mockHeroDAO.getProduct(hero.getId())).thenReturn(hero);
 
@@ -89,7 +89,7 @@ public class EstoreControllerTest {
     @Test
     public void testCreateHero() throws IOException {  // createHero may throw IOException
         // Setup
-        Product hero = new Product(99,"Wi-Fire");
+        Product hero = new Product(99,"Wi-Fire", 2, 2);
         // when createHero is called, return true simulating successful
         // creation and save
         when(mockHeroDAO.createProduct(hero)).thenReturn(hero);
@@ -105,7 +105,7 @@ public class EstoreControllerTest {
     @Test
     public void testCreateHeroFailed() throws IOException {  // createHero may throw IOException
         // Setup
-        Product hero = new Product(99,"Bolt");
+        Product hero = new Product(99,"Bolt", 3, 3);
         // when createHero is called, return false simulating failed
         // creation and save
         when(mockHeroDAO.createProduct(hero)).thenReturn(null);
@@ -120,7 +120,7 @@ public class EstoreControllerTest {
     @Test
     public void testCreateHeroHandleException() throws IOException {  // createHero may throw IOException
         // Setup
-        Product hero = new Product(99,"Ice Gladiator");
+        Product hero = new Product(99,"Ice Gladiator", 4, 4);
 
         // When createHero is called on the Mock Hero DAO, throw an IOException
         doThrow(new IOException()).when(mockHeroDAO).createProduct(hero);
@@ -135,7 +135,7 @@ public class EstoreControllerTest {
     @Test
     public void testUpdateHero() throws IOException { // updateHero may throw IOException
         // Setup
-        Product hero = new Product(99,"Wi-Fire");
+        Product hero = new Product(99,"Wi-Fire", 5, 5);
         // when updateHero is called, return true simulating successful
         // update and save
         when(mockHeroDAO.updateProduct(hero)).thenReturn(hero);
@@ -153,7 +153,7 @@ public class EstoreControllerTest {
     @Test
     public void testUpdateHeroFailed() throws IOException { // updateHero may throw IOException
         // Setup
-        Product hero = new Product(99,"Galactic Agent");
+        Product hero = new Product(99,"Galactic Agent", 6, 6);
         // when updateHero is called, return true simulating successful
         // update and save
         when(mockHeroDAO.updateProduct(hero)).thenReturn(null);
@@ -168,7 +168,7 @@ public class EstoreControllerTest {
     @Test
     public void testUpdateHeroHandleException() throws IOException { // updateHero may throw IOException
         // Setup
-        Product hero = new Product(99,"Galactic Agent");
+        Product hero = new Product(99,"Galactic Agent", 7, 7);
         // When updateHero is called on the Mock Hero DAO, throw an IOException
         doThrow(new IOException()).when(mockHeroDAO).updateProduct(hero);
 
@@ -183,8 +183,8 @@ public class EstoreControllerTest {
     public void testGetHeroes() throws IOException { // getHeroes may throw IOException
         // Setup
         Product[] heroes = new Product[2];
-        heroes[0] = new Product(99,"Bolt");
-        heroes[1] = new Product(100,"The Great Iguana");
+        heroes[0] = new Product(99,"Bolt", 8, 8);
+        heroes[1] = new Product(100,"The Great Iguana", 9, 9);
         // When getHeroes is called return the heroes created above
         when(mockHeroDAO.getProducts()).thenReturn(heroes);
 
@@ -214,8 +214,8 @@ public class EstoreControllerTest {
         // Setup
         String searchString = "la";
         Product[] heroes = new Product[2];
-        heroes[0] = new Product(99,"Galactic Agent");
-        heroes[1] = new Product(100,"Ice Gladiator");
+        heroes[0] = new Product(99,"Galactic Agent", 10, 10);
+        heroes[1] = new Product(100,"Ice Gladiator", 10, 10);
         // When findHeroes is called with the search string, return the two
         /// heroes above
         when(mockHeroDAO.findProducts(searchString)).thenReturn(heroes);
