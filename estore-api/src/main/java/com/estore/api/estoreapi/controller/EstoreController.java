@@ -20,7 +20,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 /**
- * Handles the REST API requests for the Hero resource
+ * Handles the REST API requests for the Product resource
  * <p>
  * {@literal @}RestController Spring annotation identifies this class as a REST API
  * method handler to the Spring framework
@@ -79,7 +79,7 @@ public class EstoreController {
      */
     @GetMapping("")
     public ResponseEntity<Product[]> getProducts() {
-        LOG.info("GET /products");
+        LOG.info("GET /inventory");
         try {
             Product[] products = productDao.getProducts();
             return new ResponseEntity<Product[]>(products, HttpStatus.OK);
@@ -101,7 +101,7 @@ public class EstoreController {
      * ResponseEntity with HTTP status of INTERNAL_SERVER_ERROR otherwise
      * <p>
      * Example: Find all products that contain the text "ma"
-     * GET http://localhost:8080/heroes/?name=ma
+     * GET http://localhost:8080/inventory/?name=ma
      */
     @GetMapping("/")
     public ResponseEntity<Product[]> searchProducts(@RequestParam String name) {
@@ -127,7 +127,7 @@ public class EstoreController {
      */
     @PostMapping("")
     public ResponseEntity<Product> createProduct(@RequestBody Product product) {
-        LOG.info("POST /heroes " + product);
+        LOG.info("POST /inventory " + product);
         try {
             Product newProduct = productDao.createProduct(product);
             if( newProduct == null ) {
@@ -178,7 +178,7 @@ public class EstoreController {
      */
     @DeleteMapping("/{id}")
     public ResponseEntity<Product> deleteProduct(@PathVariable int id) {
-        LOG.info("DELETE /products/" + id);
+        LOG.info("DELETE /inventory/" + id);
 
         try {
             boolean delete = productDao.deleteProduct(id);
