@@ -4,7 +4,7 @@ import java.util.logging.Logger;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 /**
- * Represents a Hero entity
+ * Represents a Product entity
  * 
  * @author SWEN Faculty
  */
@@ -37,20 +37,20 @@ public class Product {
     }
 
     /**
-     * Retrieves the id of the hero
-     * @return The id of the hero
+     * Retrieves the id of the product
+     * @return The id of the product
      */
     public int getId() {return id;}
 
     /**
-     * Sets the name of the hero - necessary for JSON object to Java object deserialization
-     * @param name The name of the hero
+     * Sets the name of the product - necessary for JSON object to Java object deserialization
+     * @param name The name of the product
      */
     public void setName(String name) {this.name = name;}
 
     /**
-     * Retrieves the name of the hero
-     * @return The name of the hero
+     * Retrieves the name of the product
+     * @return The name of the product
      */
     public String getName() {return name;}
 
