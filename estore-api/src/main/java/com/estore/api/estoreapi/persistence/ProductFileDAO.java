@@ -14,7 +14,7 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
 /**
- * Implements the functionality for JSON file-based peristance for Heroes
+ * Implements the functionality for JSON file-based peristance for Products
  * 
  * {@literal @}Component Spring annotation instantiates a single instance of this
  * class and injects the instance into other classes as needed
@@ -27,28 +27,28 @@ public class ProductFileDAO implements ProductDAO {
     Map<Integer,Product> products;   // Provides a local cache of the product objects
                                 // so that we don't need to read from the file
                                 // each time
-    private ObjectMapper objectMapper;  // Provides conversion between Hero
+    private ObjectMapper objectMapper;  // Provides conversion between Product
                                         // objects and JSON text format written
                                         // to the file
-    private static int nextId;  // The next Id to assign to a new hero
+    private static int nextId;  // The next Id to assign to a new product
     private String filename;    // Filename to read from and write to
 
     /**
-     * Creates a Hero File Data Access Object
+     * Creates a Product File Data Access Object
      * 
      * @param filename Filename to read from and write to
      * @param objectMapper Provides JSON Object to/from Java Object serialization and deserialization
      * 
      * @throws IOException when file cannot be accessed or read from
      */
-    public ProductFileDAO(@Value("${heroes.file}") String filename,ObjectMapper objectMapper) throws IOException {
+    public ProductFileDAO(@Value("${products.file}") String filename,ObjectMapper objectMapper) throws IOException {
         this.filename = filename;
         this.objectMapper = objectMapper;
-        load();  // load the heroes from the file
+        load();  // load the products from the file
     }
 
     /**
-     * Generates the next id for a new {@linkplain Product hero}
+     * Generates the next id for a new {@linkplain Product product}
      * 
      * @return The next id
      */
@@ -59,9 +59,9 @@ public class ProductFileDAO implements ProductDAO {
     }
 
     /**
-     * Generates an array of {@linkplain Product heroes} from the tree map
+     * Generates an array of {@linkplain Product product} from the tree map
      * 
-     * @return  The array of {@link Product heroes}, may be empty
+     * @return  The array of {@link Product product}, may be empty
      */
     private Product[] getProductsArray() {
         return getProductsArray(null);
@@ -91,24 +91,24 @@ public class ProductFileDAO implements ProductDAO {
     }
 
     /**
-     * Saves the {@linkplain Product heroes} from the map into the file as an array of JSON objects
+     * Saves the {@linkplain Product products} from the map into the file as an array of JSON objects
      * 
-     * @return true if the {@link Product heroes} were written successfully
+     * @return true if the {@link Product products} were written successfully
      * 
      * @throws IOException when file cannot be accessed or written to
      */
     private boolean save() throws IOException {
-        Product[] heroArray = getProductsArray();
+        Product[] productArray = getProductsArray();
 
         // Serializes the Java Objects to JSON objects into the file
         // writeValue will thrown an IOException if there is an issue
         // with the file or reading from the file
-        objectMapper.writeValue(new File(filename),heroArray);
+        objectMapper.writeValue(new File(filename),productArray);
         return true;
     }
 
     /**
-     * Loads {@linkplain Product heroes} from the JSON file into the map
+     * Loads {@linkplain Product products} from the JSON file into the map
      * <br>
      * Also sets next id to one more than the greatest id found in the file
      * 
@@ -120,16 +120,16 @@ public class ProductFileDAO implements ProductDAO {
         products = new TreeMap<>();
         nextId = 0;
 
-        // Deserializes the JSON objects from the file into an array of heroes
+        // Deserializes the JSON objects from the file into an array of products
         // readValue will throw an IOException if there's an issue with the file
         // or reading from the file
-        Product[] heroArray = objectMapper.readValue(new File(filename),Product[].class);
+        Product[] productArray = objectMapper.readValue(new File(filename),Product[].class);
 
-        // Add each hero to the tree map and keep track of the greatest id
-        for (Product hero : heroArray) {
-            products.put(hero.getId(),hero);
-            if (hero.getId() > nextId)
-                nextId = hero.getId();
+        // Add each product to the tree map and keep track of the greatest id
+        for (Product product : productArray) {
+            products.put(product.getId(),product);
+            if (product.getId() > nextId)
+                nextId = product.getId();
         }
         // Make the next id one greater than the maximum from the file
         ++nextId;
@@ -188,14 +188,14 @@ public class ProductFileDAO implements ProductDAO {
     ** {@inheritDoc}
      */
     @Override
-    public Product updateProduct(Product hero) throws IOException {
+    public Product updateProduct(Product product) throws IOException {
         synchronized(products) {
-            if (products.containsKey(hero.getId()) == false)
-                return null;  // hero does not exist
+            if (products.containsKey(product.getId()) == false)
+                return null;  // product does not exist
 
-            products.put(hero.getId(),hero);
+            products.put(product.getId(),product);
             save(); // may throw an IOException
-            return hero;
+            return product;
         }
     }
 
