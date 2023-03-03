@@ -34,7 +34,7 @@ import java.util.logging.Logger;
 @RequestMapping("carts")
 public class CartController {
     private static final Logger LOG = Logger.getLogger(EstoreController.class.getName());
-    private CartDAO CartDao;
+    private CartDAO cartDao;
     private ProductDAO productDao;
 
     /**
@@ -46,7 +46,7 @@ public class CartController {
      */
     public CartController(ProductDAO productDao, CartDAO cartDao) {
         this.productDao = productDao;
-        this.CartDao= cartDao;
+        this.cartDao= cartDao;
     }
 
     /**
@@ -59,60 +59,14 @@ public class CartController {
      * ResponseEntity with HTTP status of INTERNAL_SERVER_ERROR otherwise
      */
     @GetMapping("/{id}")
-    public ResponseEntity<Product> getCart(@PathVariable int id) {
+    public ResponseEntity<Cart> getCart(@PathVariable int id) {
         LOG.info("GET /carts/" + id);
         try {
-            Product product = productDao.getProduct(id);
-            if (product != null)
-                return new ResponseEntity<Product>(product, HttpStatus.OK);
+            Cart cart = cartDao.getCart(id);
+            if (cart != null)
+                return new ResponseEntity<Cart>(cart, HttpStatus.OK);
             else
                 return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-        }
-        catch(IOException e) {
-            LOG.log(Level.SEVERE,e.getLocalizedMessage());
-            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
-        }
-    }
-
-    /**
-     * Responds to the GET request for all {@linkplain Product products}
-     * 
-     * @return ResponseEntity with array of {@link Product product} objects (may be empty) and
-     * HTTP status of OK<br>
-     * ResponseEntity with HTTP status of INTERNAL_SERVER_ERROR otherwise
-     */
-    @GetMapping("")
-    public ResponseEntity<Product[]> getProducts() {
-        LOG.info("GET /inventory");
-        try {
-            Product[] products = productDao.getProducts();
-            return new ResponseEntity<Product[]>(products, HttpStatus.OK);
-        }
-        catch(IOException e) {
-            LOG.log(Level.SEVERE,e.getLocalizedMessage());
-            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
-        }
-    }
-
-    /**
-     * Responds to the GET request for all {@linkplain Product products} whose name contains
-     * the text in name
-     * 
-     * @param name The name parameter which contains the text used to find the {@link Product products}
-     * 
-     * @return ResponseEntity with array of {@link Product product} objects (may be empty) and
-     * HTTP status of OK<br>
-     * ResponseEntity with HTTP status of INTERNAL_SERVER_ERROR otherwise
-     * <p>
-     * Example: Find all products that contain the text "ma"
-     * GET http://localhost:8080/inventory/?name=ma
-     */
-    @GetMapping("/")
-    public ResponseEntity<Product[]> searchProducts(@RequestParam String name) {
-        LOG.info("GET /inventory/?name="+name);
-        try {
-            Product[] products = productDao.findProducts(name);
-            return new ResponseEntity<Product[]>(products, HttpStatus.OK);
         }
         catch(IOException e) {
             LOG.log(Level.SEVERE,e.getLocalizedMessage());
@@ -130,14 +84,14 @@ public class CartController {
      * ResponseEntity with HTTP status of INTERNAL_SERVER_ERROR otherwise
      */
     @PostMapping("")
-    public ResponseEntity<Product> createProduct(@RequestBody Product product) {
-        LOG.info("POST /inventory " + product);
+    public ResponseEntity<Cart> createCart(@RequestBody Cart cart) {
+        LOG.info("POST /cart " + cart);
         try {
-            Product newProduct = productDao.createProduct(product);
-            if( newProduct == null ) {
+            Cart newCart = cartDao.addCart(cart);
+            if( newCart == null ) {
                 return new ResponseEntity<>(HttpStatus.CONFLICT);
             }
-            return new ResponseEntity<Product>(newProduct,
+            return new ResponseEntity<Cart>(newCart,
                          HttpStatus.CREATED);
         }
         catch(IOException e) {
@@ -155,13 +109,41 @@ public class CartController {
      * ResponseEntity with HTTP status of NOT_FOUND if not found<br>
      * ResponseEntity with HTTP status of INTERNAL_SERVER_ERROR otherwise
      */
-    @PutMapping("")
-    public ResponseEntity<Product> updateProduct(@RequestBody Product product) {
-        LOG.info("PUT /inventory " + product);
+    @PutMapping("/{cId}")
+    public ResponseEntity<Product> addProductToCart(@RequestBody Product product, @PathVariable int cId) {
+        LOG.info("PUT /cart " + product);
         try {
-            Product updateProduct = productDao.updateProduct(product);
+            Product addProduct = cartDao.addProduct(cId, product);
+            if( addProduct == null) {
+                return new ResponseEntity<Product>(HttpStatus.NOT_FOUND);
+            }
+            return new ResponseEntity<Product>(addProduct, HttpStatus.OK);
+        }
+        catch(IOException e) {
+            LOG.log(Level.SEVERE,e.getLocalizedMessage());
+            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+
+    /**
+     * Updates the {@linkplain Product product} with the provided {@linkplain Product product} object, if it exists
+     * 
+     * @param product The {@link Product product} to update
+     * 
+     * @return ResponseEntity with updated {@link Product product} object and HTTP status of OK if updated<br>
+     * ResponseEntity with HTTP status of NOT_FOUND if not found<br>
+     * ResponseEntity with HTTP status of INTERNAL_SERVER_ERROR otherwise
+     */
+    @PutMapping("/{cId}/{pId}/{count}")
+    public ResponseEntity<Product> updateProductCount(@PathVariable int cId, @PathVariable int pId, @PathVariable int count) {
+        LOG.info("PUT /cart/product/count " + count);
+        try {
+            Product updateProduct = cartDao.updateProductCount(cId, pId, count);
             if( updateProduct == null) {
                 return new ResponseEntity<Product>(HttpStatus.NOT_FOUND);
+            }
+            if(updateProduct.getQuantity()==0){
+                removeProduct(cId, pId);
             }
             return new ResponseEntity<Product>(updateProduct, HttpStatus.OK);
         }
@@ -180,12 +162,12 @@ public class CartController {
      * ResponseEntity with HTTP status of NOT_FOUND if not found<br>
      * ResponseEntity with HTTP status of INTERNAL_SERVER_ERROR otherwise
      */
-    @DeleteMapping("/{id}")
-    public ResponseEntity<Product> deleteProduct(@PathVariable int id) {
-        LOG.info("DELETE /inventory/" + id);
+    @DeleteMapping("/{cId}/{pId}")
+    public ResponseEntity<Product> removeProduct(@PathVariable int cId, @PathVariable int pId) {
+        LOG.info("DELETE /cart/" + pId);
 
         try {
-            boolean delete = productDao.deleteProduct(id);
+            boolean delete = cartDao.removeProduct(cId, pId);
             if( !delete ) {
                 return new ResponseEntity<>(HttpStatus.NOT_FOUND);
             }
