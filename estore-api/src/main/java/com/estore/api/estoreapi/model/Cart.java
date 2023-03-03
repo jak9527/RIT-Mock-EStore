@@ -33,6 +33,11 @@ public class Cart {
         this.products = new HashMap<>();
     }
 
+    public Cart(@JsonProperty("id") int id, @JsonProperty("products") HashMap<Integer, Product> products) {
+        this.id = id;
+        this.products = products;
+    }
+
     /**
      * Retrieves the id of the product
      * @return The id of the product

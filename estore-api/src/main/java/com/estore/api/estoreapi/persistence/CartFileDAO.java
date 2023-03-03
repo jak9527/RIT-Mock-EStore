@@ -198,6 +198,21 @@ public class CartFileDAO implements CartDAO {
             return item;
         }
     }
+    
+    /**
+    ** {@inheritDoc}
+     */
+    @Override
+    public Cart addCart(Cart cart) throws IOException{
+        synchronized(carts){
+            // We create a new cart object because the id field is immutable
+            // and we need to assign the next unique id
+            Cart newCart = new Cart(nextId(), cart.getProducts());
+            carts.put(newCart.getId(), newCart);
+            save(); // may throw an IOException
+            return newCart;
+        }
+    }
 
     /**
     ** {@inheritDoc}

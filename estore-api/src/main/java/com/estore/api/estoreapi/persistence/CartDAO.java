@@ -3,6 +3,7 @@ package com.estore.api.estoreapi.persistence;
 import java.io.IOException;
 
 import com.estore.api.estoreapi.model.Product;
+import com.estore.api.estoreapi.model.Cart;
 
 /**
  * Defines the interface for Cart object persistence
@@ -47,6 +48,17 @@ public interface CartDAO {
      */
     Product addProduct(int cId, Product product) throws IOException;
 
+    /**
+     * Adds and saves a {@linkplain Cart cart}
+     * 
+     * @param cart
+     *
+     * @return new {@link Cart cart} if successful, false otherwise 
+     * 
+     * @throws IOException if an issue with underlying storage
+     */
+    Cart addCart(Cart cart) throws IOException;
+    
     /**
      * Increments the count of and saves a {@linkplain Product product}
      * 
