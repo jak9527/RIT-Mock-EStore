@@ -20,7 +20,7 @@ public interface CartDAO {
     Product[] getCartProducts() throws IOException;
 
     /**
-     * Retrieves a {@linkplain Product product} with the given id
+     * Retrieves a {@linkplain Product product} with the given id from the cart
      * 
      * @param id The id of the {@link Product product} to get
      * 
@@ -33,7 +33,7 @@ public interface CartDAO {
     Product getProduct(int id) throws IOException;
 
     /**
-     * Creates and saves a {@linkplain Product product}
+     * Adds a product to cart and saves a {@linkplain Product product}
      * 
      * @param product {@linkplain Product product} object to be created and saved
      * <br>
@@ -43,30 +43,30 @@ public interface CartDAO {
      * 
      * @throws IOException if an issue with underlying storage
      */
-    Product createProduct(Product product) throws IOException;
+    Product addProduct(Product product) throws IOException;
 
     /**
-     * Updates and saves a {@linkplain Product product}
+     * Increments the count of and saves a {@linkplain Product product}
      * 
-     * @param {@link Product product} object to be updated and saved
+     * @param int id id of product to update
      * 
      * @return updated {@link Product product} if successful, null if
      * {@link Product product} could not be found
      * 
      * @throws IOException if underlying storage cannot be accessed
      */
-    Product updateProduct(Product product) throws IOException;
+    Product updateProductCount(int id, int count) throws IOException;
 
     /**
-     * Deletes a {@linkplain Product product} with the given id
+     * Removes a {@linkplain Product product} with the given id from the cart
      * 
      * @param id The id of the {@link Product product}
      * 
-     * @return true if the {@link Product product} was deleted
+     * @return true if the {@link Product product} was removed
      * <br>
      * false if product with the given id does not exist
      * 
      * @throws IOException if underlying storage cannot be accessed
      */
-    boolean deleteProduct(int id) throws IOException;
+    boolean removeProduct(int id) throws IOException;
 }
