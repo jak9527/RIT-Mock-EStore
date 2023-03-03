@@ -37,6 +37,19 @@ public interface CartDAO {
     Product getProduct(int cId, int pId) throws IOException;
 
     /**
+     * Retrieves a {@linkplain Cart cart} with the given id
+     * 
+     * @param cId the id of the {@link Cart cart} to get
+     * 
+     * @return a {@link Cart cart} object with the matching id
+     * <br>
+     * null if no {@link Cart cart} with a matching id is found
+     * 
+     * @throws IOException if an issue with underlying storage
+     */
+    Cart getCart(int cId) throws IOException;
+
+    /**
      * Adds a product to cart and saves a {@linkplain Product product}
      * 
      * @param product {@linkplain Product product} object to be created and saved

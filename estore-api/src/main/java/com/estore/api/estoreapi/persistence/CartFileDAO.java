@@ -187,6 +187,19 @@ public class CartFileDAO implements CartDAO {
     ** {@inheritDoc}
      */
     @Override
+    public Cart getCart(int cId) {
+        synchronized(carts) {
+            if (carts.containsKey(cId))
+                return carts.get(cId);
+            else
+                return null;
+        }
+    }
+
+    /**
+    ** {@inheritDoc}
+     */
+    @Override
     public Product addProduct(int cId, Product item) throws IOException {
         synchronized(carts) {
             if(carts.containsKey(cId)==false){

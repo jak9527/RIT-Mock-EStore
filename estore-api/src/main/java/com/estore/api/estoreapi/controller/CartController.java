@@ -59,8 +59,8 @@ public class CartController {
      * ResponseEntity with HTTP status of INTERNAL_SERVER_ERROR otherwise
      */
     @GetMapping("/{id}")
-    public ResponseEntity<Product> getProduct(@PathVariable int id) {
-        LOG.info("GET /inventory/" + id);
+    public ResponseEntity<Product> getCart(@PathVariable int id) {
+        LOG.info("GET /carts/" + id);
         try {
             Product product = productDao.getProduct(id);
             if (product != null)
