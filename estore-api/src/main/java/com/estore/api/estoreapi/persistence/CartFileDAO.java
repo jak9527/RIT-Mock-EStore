@@ -83,7 +83,7 @@ public class CartFileDAO implements CartDAO {
     private Product[] getProductsArray(String containsText, int cId) { // if containsText == null, no filter
         ArrayList<Product> productArrayList = new ArrayList<>();
 
-        for (Product product : products.values()) {
+        for (Product product : carts.get(cId).getProducts().values()) {
             if (containsText == null || product.getName().contains(containsText)) {
                 productArrayList.add(product);
             }
@@ -102,13 +102,13 @@ public class CartFileDAO implements CartDAO {
     private Cart[] getCartsArray(){
         ArrayList<Cart> cartArrayList = new ArrayList<>();
 
-        for (Map<Integer, Product> cart : carts.values()) {
-            cartArrayList.add(new Cart); 
+        for (Cart cart : carts.values()) {
+            cartArrayList.add(cart); 
         }
 
-        Product[] productArray = new Product[productArrayList.size()];
-        productArrayList.toArray(productArray);
-        return productArray;
+        Cart[] cartArray = new Cart[cartArrayList.size()];
+        cartArrayList.toArray(cartArray);
+        return cartArray;
     }
 
     /**
@@ -119,12 +119,12 @@ public class CartFileDAO implements CartDAO {
      * @throws IOException when file cannot be accessed or written to
      */
     private boolean save() throws IOException {
-        Product[] productArray = getProductsArray();
+        Cart[] cartArray = getCartsArray();
 
         // Serializes the Java Objects to JSON objects into the file
         // writeValue will thrown an IOException if there is an issue
         // with the file or reading from the file
-        objectMapper.writeValue(new File(filename),productArray);
+        objectMapper.writeValue(new File(filename),cartArray);
         return true;
     }
 
@@ -148,7 +148,7 @@ public class CartFileDAO implements CartDAO {
 
         // Add each product to the tree map and keep track of the greatest id
         for (Cart cart : cartArray) {
-            carts.put(cart.getId(), cart.getProducts());
+            carts.put(cart.getId(), cart);
             if (cart.getId() > nextId)
                 nextId = cart.getId();
         }
@@ -174,8 +174,8 @@ public class CartFileDAO implements CartDAO {
     public Product getProduct(int cId, int pId) {
         synchronized(carts) {
             if (carts.containsKey(cId))
-                if(carts.get(cId).containsKey(pId))
-                    return carts.get(cId).get(pId);
+                if(carts.get(cId).getProducts().containsKey(pId))
+                    return carts.get(cId).getProducts().get(pId);
                 else
                     return null;
             else
@@ -192,7 +192,7 @@ public class CartFileDAO implements CartDAO {
             if(carts.containsKey(cId)==false){
                 return null; //cart does not exist
             }
-            carts.get(cId).put(item.getId(), item);
+            carts.get(cId).getProducts().put(item.getId(), item);
             //add the new item to the given cart
             save(); // may throw an IOException
             return item;
@@ -208,15 +208,15 @@ public class CartFileDAO implements CartDAO {
             if (carts.containsKey(cId) == false) {
                 return null;  // cart does not exist
             }
-            if (carts.get(cId).containsKey(pId) == false){
+            if (carts.get(cId).getProducts().containsKey(pId) == false){
                 return null; //product not in cart
             }
             
-            carts.get(cId).get(pId).setQuantity(carts.get(cId).get(pId).getQuantity()+count);
+            carts.get(cId).getProducts().get(pId).setQuantity(carts.get(cId).getProducts().get(pId).getQuantity()+count);
             // Change the quantity of the product in cart by count amount.
             // Its ugly but I don't know how to make it prettier
             save(); // may throw an IOException
-            return carts.get(cId).get(pId);
+            return carts.get(cId).getProducts().get(pId);
         }
     }
 
@@ -227,8 +227,8 @@ public class CartFileDAO implements CartDAO {
     public boolean removeProduct(int cId, int pId) throws IOException {
         synchronized(carts) {
             if (carts.containsKey(cId)) {
-                if(carts.get(cId).containsKey(pId)){
-                    carts.get(cId).remove(pId);
+                if(carts.get(cId).getProducts().containsKey(pId)){
+                    carts.get(cId).getProducts().remove(pId);
                     return save();
                 }
                 return false;
