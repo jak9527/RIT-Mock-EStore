@@ -48,7 +48,7 @@ public interface CartDAO {
     /**
      * Increments the count of and saves a {@linkplain Product product}
      * 
-     * @param int id id of product to update
+     * @param int id of product to update
      * 
      * @return updated {@link Product product} if successful, null if
      * {@link Product product} could not be found
