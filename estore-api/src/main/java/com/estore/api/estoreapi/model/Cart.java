@@ -40,6 +40,14 @@ public class Cart {
     public int getId() {return id;}
 
     /**
+     * Retrieves the map of products
+     * @return the map of products
+     */
+    public HashMap<Integer, Product> getProducts(){
+        return products;
+    }
+
+    /**
      * {@inheritDoc}
      */
     @Override
