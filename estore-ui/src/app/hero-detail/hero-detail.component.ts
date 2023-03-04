@@ -1,5 +1,5 @@
 import { Component, Input } from '@angular/core';
-import { Hero } from '../hero';
+import { Product } from '../product';
 import { ActivatedRoute } from '@angular/router';
 import { Location } from '@angular/common';
 import { HeroService } from '../hero.service';
@@ -10,7 +10,7 @@ import { HeroService } from '../hero.service';
   styleUrls: ['./hero-detail.component.css']
 })
 export class HeroDetailComponent {
-    @Input() hero?: Hero;
+    @Input() hero?: Product;
 
     constructor(
         private route: ActivatedRoute,
