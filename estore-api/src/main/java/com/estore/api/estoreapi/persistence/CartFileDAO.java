@@ -225,7 +225,8 @@ public class CartFileDAO implements CartDAO {
                 return null; //product not in cart
             }
             
-            carts.get(cId).getProducts().get(pId).setQuantity(carts.get(cId).getProducts().get(pId).getQuantity()+count);
+            Product currentProduct = carts.get(cId).getProducts().get(pId);
+            currentProduct.setQuantity(currentProduct.getQuantity()+count);
             // Change the quantity of the product in cart by count amount.
             // Its ugly but I don't know how to make it prettier
             save(); // may throw an IOException
