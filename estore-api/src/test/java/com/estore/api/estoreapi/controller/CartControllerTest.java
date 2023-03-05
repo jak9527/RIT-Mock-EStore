@@ -17,7 +17,6 @@ import com.estore.api.estoreapi.controller.CartController;
 import com.estore.api.estoreapi.model.Cart;
 import com.estore.api.estoreapi.persistence.CartDAO;
 import com.estore.api.estoreapi.model.Product;
-import com.estore.api.estoreapi.persistence.ProductDAO;
 
 import java.util.HashMap;
 
@@ -30,7 +29,6 @@ import java.util.HashMap;
 public class CartControllerTest {
     private CartController cartController;
     private CartDAO mockCartDAO;
-    private ProductDAO mockProductDAO;
 
     /**
      * Before each test, create a new ProductController object and inject
@@ -39,8 +37,7 @@ public class CartControllerTest {
     @BeforeEach
     public void setupCartController() {
         mockCartDAO = mock(CartDAO.class);
-        mockProductDAO = mock(ProductDAO.class);
-        cartController = new CartController(mockProductDAO, mockCartDAO);
+        cartController = new CartController(mockCartDAO);
 
     }
 
@@ -110,7 +107,7 @@ public class CartControllerTest {
         when(mockCartDAO.addCart(cart)).thenReturn(cart);
 
         // Invoke
-        ResponseEntity<Cart> response = cartController.createCart(cart);
+        ResponseEntity<Cart> response = cartController.addCart(cart);
 
         // Analyze
         assertEquals(HttpStatus.CREATED,response.getStatusCode());
@@ -130,7 +127,7 @@ public class CartControllerTest {
         when(mockCartDAO.addCart(cart)).thenReturn(null);
 
         // Invoke
-        ResponseEntity<Cart> response = cartController.createCart(cart);
+        ResponseEntity<Cart> response = cartController.addCart(cart);
 
         // Analyze
         assertEquals(HttpStatus.CONFLICT,response.getStatusCode());
@@ -149,7 +146,7 @@ public class CartControllerTest {
         doThrow(new IOException()).when(mockCartDAO).addCart(cart);
 
         // Invoke
-        ResponseEntity<Cart> response = cartController.createCart(cart);
+        ResponseEntity<Cart> response = cartController.addCart(cart);
 
         // Analyze
         assertEquals(HttpStatus.INTERNAL_SERVER_ERROR,response.getStatusCode());
@@ -167,10 +164,10 @@ public class CartControllerTest {
         // when updateProduct is called, return true simulating successful
         // update and save
         when(mockCartDAO.addProduct(cart.getId(), newProduct)).thenReturn(newProduct);
-        ResponseEntity<Product> response = cartController.addProductToCart(newProduct, cart.getId());
+        ResponseEntity<Product> response = cartController.addProductToCart(cart.getId(), newProduct);
 
         // Invoke
-        response = cartController.addProductToCart(newProduct, cart.getId());
+        response = cartController.addProductToCart(cart.getId(), newProduct);
 
         // Analyze
         assertEquals(HttpStatus.OK,response.getStatusCode());
@@ -191,7 +188,7 @@ public class CartControllerTest {
         when(mockCartDAO.addProduct(cart.getId(), newProduct)).thenReturn(null);
 
         // Invoke
-        ResponseEntity<Product> response = cartController.addProductToCart(newProduct, cart.getId());
+        ResponseEntity<Product> response = cartController.addProductToCart(cart.getId(), newProduct);
 
         // Analyze
         assertEquals(HttpStatus.NOT_FOUND,response.getStatusCode());
@@ -210,7 +207,7 @@ public class CartControllerTest {
         doThrow(new IOException()).when(mockCartDAO).addProduct(cart.getId(), newProduct);
 
         // Invoke
-        ResponseEntity<Product> response = cartController.addProductToCart(newProduct, cart.getId());
+        ResponseEntity<Product> response = cartController.addProductToCart(cart.getId(), newProduct);
 
         // Analyze
         assertEquals(HttpStatus.INTERNAL_SERVER_ERROR,response.getStatusCode());
