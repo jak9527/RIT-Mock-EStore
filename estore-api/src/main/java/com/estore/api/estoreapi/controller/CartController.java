@@ -84,7 +84,7 @@ public class CartController {
      * ResponseEntity with HTTP status of INTERNAL_SERVER_ERROR otherwise
      */
     @PostMapping("")
-    public ResponseEntity<Cart> createCart(@RequestBody Cart cart) {
+    public ResponseEntity<Cart> addCart(@RequestBody Cart cart) {
         LOG.info("POST /cart " + cart);
         try {
             Cart newCart = cartDao.addCart(cart);
