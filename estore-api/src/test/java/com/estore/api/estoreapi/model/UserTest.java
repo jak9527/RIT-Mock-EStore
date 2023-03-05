@@ -18,7 +18,7 @@ public class UserTest {
     public void testCtor() {
         // Setup
         int expected_id = 99;
-        String expected_username = "Wi-Fire";
+        String expected_username = "User1";
 
         // Invoke
         User user = new User(expected_id,expected_username);
@@ -32,10 +32,10 @@ public class UserTest {
     public void testName() {
         // Setup
         int id = 99;
-        String username = "Wi-Fire";
+        String username = "User2";
         User user = new User(id,username);
 
-        String expected_name = "Galactic Agent";
+        String expected_name = "User3";
 
         // Invoke
         user.setUsername(expected_name);
@@ -48,7 +48,7 @@ public class UserTest {
     public void testToString() {
         // Setup
         int id = 99;
-        String username = "Wi-Fire";
+        String username = "User4";
         String expected_string = String.format(User.STRING_FORMAT,id,username);
         User user = new User(id,username);
 
