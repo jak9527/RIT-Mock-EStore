@@ -10,7 +10,6 @@ import com.fasterxml.jackson.annotation.JsonProperty;
  * @author SWEN Faculty
  */
 public class Cart {
-    private static final Logger LOG = Logger.getLogger(Product.class.getName());
 
     // Package private for tests
     static final String STRING_FORMAT = "Cart [id=%d, products=%s]";
