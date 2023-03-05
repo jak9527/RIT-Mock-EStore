@@ -28,10 +28,10 @@ public class Cart {
      * is not provided in the JSON object, the Java field gets the default Java
      * value, i.e. 0 for int
      */
-    public Cart(@JsonProperty("id") int id) {
-        this.id = id;
-        this.products = new HashMap<>();
-    }
+    // public Cart(@JsonProperty("id") int id) {
+    //     this.id = id;
+    //     this.products = new HashMap<>();
+    // }
 
     public Cart(@JsonProperty("id") int id, @JsonProperty("products") HashMap<Integer, Product> products) {
         this.id = id;
