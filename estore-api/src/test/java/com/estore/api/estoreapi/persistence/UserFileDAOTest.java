@@ -22,7 +22,7 @@ import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 
 /**
- * Test the Product File DAO class
+ * Test the User File DAO class
  * 
  * @author SWEN Faculty
  */
