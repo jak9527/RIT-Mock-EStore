@@ -13,7 +13,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.estore.api.estoreapi.model.Product;
-import com.estore.api.estoreapi.persistence.ProductDAO;
 import com.estore.api.estoreapi.model.Cart;
 import com.estore.api.estoreapi.persistence.CartDAO;
 
@@ -22,7 +21,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 /**
- * Handles the REST API requests for the Product resource
+ * Handles the REST API requests for the Cart resource
  * <p>
  * {@literal @}RestController Spring annotation identifies this class as a REST API
  * method handler to the Spring framework
@@ -35,26 +34,24 @@ import java.util.logging.Logger;
 public class CartController {
     private static final Logger LOG = Logger.getLogger(EstoreController.class.getName());
     private CartDAO cartDao;
-    private ProductDAO productDao;
 
     /**
      * Creates a REST API controller to reponds to requests
      * 
-     * @param productDao The {@link ProductDAO Product Data Access Object} to perform CRUD operations
+     * @param productDao The {@link CartDAO Cart Data Access Object} to perform CRUD operations
      * <br>
      * This dependency is injected by the Spring Framework
      */
-    public CartController(ProductDAO productDao, CartDAO cartDao) {
-        this.productDao = productDao;
+    public CartController(CartDAO cartDao) {
         this.cartDao= cartDao;
     }
 
     /**
-     * Responds to the GET request for a {@linkplain Product product} for the given id
+     * Responds to the GET request for a {@linkplain Cart cart} for the given id
      * 
-     * @param id The id used to locate the {@link Product product}
+     * @param id The id used to locate the {@link Cart cart}
      * 
-     * @return ResponseEntity with {@link Product product} object and HTTP status of OK if found<br>
+     * @return ResponseEntity with {@link Cart cart} object and HTTP status of OK if found<br>
      * ResponseEntity with HTTP status of NOT_FOUND if not found<br>
      * ResponseEntity with HTTP status of INTERNAL_SERVER_ERROR otherwise
      */
@@ -75,16 +72,16 @@ public class CartController {
     }
     
     /**
-     * Creates a {@linkplain Product product} with the provided item object
+     * Creates a {@linkplain Cart cart} with the provided cart object
      * 
-     * @param product - The {@link Product product} to create
+     * @param cart - The {@link Cart cart} to create
      * 
-     * @return ResponseEntity with created {@link Product item} object and HTTP status of CREATED<br>
-     * ResponseEntity with HTTP status of CONFLICT if {@link Product item} object already exists<br>
+     * @return ResponseEntity with created {@link Cart cart} object and HTTP status of CREATED<br>
+     * ResponseEntity with HTTP status of CONFLICT if {@link Cart cart} object already exists<br>
      * ResponseEntity with HTTP status of INTERNAL_SERVER_ERROR otherwise
      */
     @PostMapping("")
-    public ResponseEntity<Cart> createCart(@RequestBody Cart cart) {
+    public ResponseEntity<Cart> addCart(@RequestBody Cart cart) {
         LOG.info("POST /cart " + cart);
         try {
             Cart newCart = cartDao.addCart(cart);
@@ -101,16 +98,17 @@ public class CartController {
     }
 
     /**
-     * Updates the {@linkplain Product product} with the provided {@linkplain Product product} object, if it exists
+     * Adds the given {@link Product product} in the specified {@link Cart cart}
      * 
-     * @param product The {@link Product product} to update
+     * @param cId The id of the cart to update
+     * @param product the product to add
      * 
-     * @return ResponseEntity with updated {@link Product product} object and HTTP status of OK if updated<br>
+     * @return ResponseEntity the {@link Product product} object and HTTP status of OK if updated<br>
      * ResponseEntity with HTTP status of NOT_FOUND if not found<br>
      * ResponseEntity with HTTP status of INTERNAL_SERVER_ERROR otherwise
      */
     @PutMapping("/{cId}")
-    public ResponseEntity<Product> addProductToCart(@RequestBody Product product, @PathVariable int cId) {
+    public ResponseEntity<Product> addProductToCart(@PathVariable int cId, @RequestBody Product product) {
         LOG.info("PUT /cart " + product);
         try {
             Product addProduct = cartDao.addProduct(cId, product);
@@ -126,9 +124,11 @@ public class CartController {
     }
 
     /**
-     * Updates the {@linkplain Product product} with the provided {@linkplain Product product} object, if it exists
+     * Updates the specified {@linkplain Product product} in the provided {@linkplain Cart cart} by the given count, if it exists
      * 
-     * @param product The {@link Product product} to update
+     * @param cId The id of the cart to check in
+     * @param pId The id of the product to update
+     * @param count the amount to increment the product by
      * 
      * @return ResponseEntity with updated {@link Product product} object and HTTP status of OK if updated<br>
      * ResponseEntity with HTTP status of NOT_FOUND if not found<br>
@@ -154,9 +154,10 @@ public class CartController {
     }
 
     /**
-     * Deletes a {@linkplain Product product} with the given id
+     * Deletes a {@linkplain Product product} with the given id from the cart with the given id
      * 
-     * @param id The id of the {@link Product product} to deleted
+     * @param cId The id of the Cart to delete
+     * @param pId The id of the {@link Product product} to deleted
      * 
      * @return ResponseEntity HTTP status of OK if deleted<br>
      * ResponseEntity with HTTP status of NOT_FOUND if not found<br>

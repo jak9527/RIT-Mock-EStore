@@ -5,12 +5,11 @@ import java.util.HashMap;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 /**
- * Represents a Product entity
+ * Represents a Cart entity
  * 
  * @author SWEN Faculty
  */
 public class Cart {
-    private static final Logger LOG = Logger.getLogger(Product.class.getName());
 
     // Package private for tests
     static final String STRING_FORMAT = "Cart [id=%d, products=%s]";
@@ -20,7 +19,7 @@ public class Cart {
 
     /**
      * Create a Cart with the given id
-     * @param id The id of the product
+     * @param id The id of the cart
      * t
      * 
      * {@literal @}JsonProperty is used in serialization and deserialization
@@ -39,8 +38,8 @@ public class Cart {
     }
 
     /**
-     * Retrieves the id of the product
-     * @return The id of the product
+     * Retrieves the id of the cart
+     * @return The id of the cart
      */
     public int getId() {return id;}
 
