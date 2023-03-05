@@ -110,7 +110,7 @@ public class CartController {
      * ResponseEntity with HTTP status of INTERNAL_SERVER_ERROR otherwise
      */
     @PutMapping("/{cId}")
-    public ResponseEntity<Product> addProductToCart(@RequestBody Product product, @PathVariable int cId) {
+    public ResponseEntity<Product> addProductToCart(@PathVariable int cId, @RequestBody Product product) {
         LOG.info("PUT /cart " + product);
         try {
             Product addProduct = cartDao.addProduct(cId, product);
