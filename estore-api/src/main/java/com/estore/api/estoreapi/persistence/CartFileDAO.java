@@ -68,25 +68,10 @@ public class CartFileDAO implements CartDAO {
      * @return  The array of {@link Product product}, may be empty
      */
     private Product[] getProductsArray(int cId) {
-        return getProductsArray(null, cId);
-    }
-
-    /**
-     * Generates an array of {@linkplain Product products} from the tree map for any
-     * {@linkplain Product products} that contains the text specified by containsText
-     * <br>
-     * If containsText is null, the array contains all of the {@linkplain Product products}
-     * in the tree map
-     * 
-     * @return  The array of {@link Product products}, may be empty
-     */
-    private Product[] getProductsArray(String containsText, int cId) { // if containsText == null, no filter
         ArrayList<Product> productArrayList = new ArrayList<>();
 
         for (Product product : carts.get(cId).getProducts().values()) {
-            if (containsText == null || product.getName().contains(containsText)) {
                 productArrayList.add(product);
-            }
         }
 
         Product[] productArray = new Product[productArrayList.size()];
