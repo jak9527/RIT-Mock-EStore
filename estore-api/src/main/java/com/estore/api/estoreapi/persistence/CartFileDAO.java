@@ -139,7 +139,7 @@ public class CartFileDAO implements CartDAO {
      */
     private boolean load() throws IOException {
         carts = new TreeMap<>();
-        nextId = 1;
+        nextId = 0;
 
         // Deserializes the JSON objects from the file into an array of products
         // readValue will throw an IOException if there's an issue with the file
