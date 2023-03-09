@@ -20,7 +20,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 /**
- * Handles the REST API requests for the Hero resource
+ * Handles the REST API requests for the Product resource
  * <p>
  * {@literal @}RestController Spring annotation identifies this class as a REST API
  * method handler to the Spring framework
@@ -101,7 +101,7 @@ public class EstoreController {
      * ResponseEntity with HTTP status of INTERNAL_SERVER_ERROR otherwise
      * <p>
      * Example: Find all products that contain the text "ma"
-     * GET http://localhost:8080/heroes/?name=ma
+     * GET http://localhost:8080/inventory/?name=ma
      */
     @GetMapping("/")
     public ResponseEntity<Product[]> searchProducts(@RequestParam String name) {

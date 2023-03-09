@@ -5,7 +5,7 @@ import java.io.IOException;
 import com.estore.api.estoreapi.model.Product;
 
 /**
- * Defines the interface for Hero object persistence
+ * Defines the interface for Product object persistence
  * 
  * @author SWEN Faculty
  */
@@ -48,7 +48,7 @@ public interface ProductDAO {
      * 
      * @param product {@linkplain Product product} object to be created and saved
      * <br>
-     * The id of the hero object is ignored and a new uniqe id is assigned
+     * The id of the product object is ignored and a new uniqe id is assigned
      *
      * @return new {@link Product product} if successful, false otherwise 
      * 
@@ -69,13 +69,13 @@ public interface ProductDAO {
     Product updateProduct(Product product) throws IOException;
 
     /**
-     * Deletes a {@linkplain Product hero} with the given id
+     * Deletes a {@linkplain Product product} with the given id
      * 
-     * @param id The id of the {@link Product hero}
+     * @param id The id of the {@link Product product}
      * 
-     * @return true if the {@link Product hero} was deleted
+     * @return true if the {@link Product product} was deleted
      * <br>
-     * false if hero with the given id does not exist
+     * false if product with the given id does not exist
      * 
      * @throws IOException if underlying storage cannot be accessed
      */
