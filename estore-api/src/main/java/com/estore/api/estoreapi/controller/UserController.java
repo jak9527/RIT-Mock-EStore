@@ -52,6 +52,9 @@ public class UserController {
         LOG.info("GET /inventory");
         try{
             User user = userDao.getUser(username);
+            if( user == null ) {
+                return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+            }
             return new ResponseEntity<User>(user, HttpStatus.OK);
         }
         catch(IOException e) {
