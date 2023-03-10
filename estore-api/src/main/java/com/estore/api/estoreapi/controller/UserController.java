@@ -31,7 +31,7 @@ public class UserController {
         /**
      * Creates a REST API controller to reponds to requests
      * 
-     * @param userDao The {@link UserDAO Product Data Access Object} to perform CRUD operations
+     * @param userDao The {@link UserDAO User Data Access Object} to perform CRUD operations
      * <br>
      * This dependency is injected by the Spring Framework
      */
@@ -64,7 +64,7 @@ public class UserController {
     }
 
     /**
-     * Creates a {@linkplain User user} with the provided item object
+     * Creates a {@linkplain User user} with the provided userg object
      * 
      * @param user - The {@link User user} to create
      * 
