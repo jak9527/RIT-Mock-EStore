@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
 
 import com.estore.api.estoreapi.model.User;
 import com.estore.api.estoreapi.persistence.UserDAO;
@@ -66,7 +67,7 @@ public class UserController {
     }
 
     /**
-     * Creates a {@linkplain User user} with the provided userg object
+     * Creates a {@linkplain User user} with the provided user object
      * 
      * @param user - The {@link User user} to create
      * 
@@ -75,8 +76,8 @@ public class UserController {
      * ResponseEntity with HTTP status of INTERNAL_SERVER_ERROR otherwise
      */
     @PostMapping("")
-    public ResponseEntity<User> createUser(User user){
-        LOG.info("POST /inventory " + user);
+    public ResponseEntity<User> createUser(@RequestBody User user){
+        LOG.info("POST /users " + user);
         try {
             User newUser = userDao.createUser(user);
             if( newUser == null ) {
