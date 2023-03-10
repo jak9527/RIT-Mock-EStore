@@ -25,7 +25,7 @@ import java.util.logging.Logger;
  */
 
  @RestController
- @RequestMapping("user")
+ @RequestMapping("users")
 public class UserController {
     private static final Logger LOG = Logger.getLogger(UserController.class.getName());
     private UserDAO userDao;
