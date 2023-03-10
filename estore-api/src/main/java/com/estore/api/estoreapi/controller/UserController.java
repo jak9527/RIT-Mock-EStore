@@ -6,6 +6,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.PathVariable;
 
 import com.estore.api.estoreapi.model.User;
 import com.estore.api.estoreapi.persistence.UserDAO;
@@ -41,15 +42,16 @@ public class UserController {
 
 
     /**
-     * Responds to the GET request for all {@linkplain User users}
+     * Responds to the GET request for a {@linkplain User user} with specified username
      * 
-     * @return ResponseEntity with array of {@link User users} objects (may be empty) and
-     * HTTP status of OK<br>
+     * @return ResponseEntity with {@link User user} object and
+     * HTTP status of OK if a user with that username is found<br>
+     * ResponseEntity with HTTP status of NOT_FOUND if no user with that name is found
      * ResponseEntity with HTTP status of INTERNAL_SERVER_ERROR otherwise
      */
-    @GetMapping("/{id}")
-    public ResponseEntity<User> getUser(String username){
-        LOG.info("GET /inventory");
+    @GetMapping("/{username}")
+    public ResponseEntity<User> getUser(@PathVariable String username){
+        LOG.info("GET /users");
         try{
             User user = userDao.getUser(username);
             if( user == null ) {
