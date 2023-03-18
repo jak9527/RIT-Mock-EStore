@@ -6,6 +6,14 @@
       <label for="product-name">Product name: </label>
       <input id="product-name" [(ngModel)]="product.name" placeholder="name">
     </div>
+    <div>
+        <label for="product-price">Product price: </label>
+        <input id="product-price" [(ngModel)]="product.price" placeholder="price">
+    </div>
+    <div>
+        <label for="product-quantity">Product quantity: </label>
+        <input id="product-quantity" [(ngModel)]="product.quantity" placeholder="quantity">
+    </div>
   
   </div>
   <button type="button" (click)="goBack()">go back</button>
