@@ -46,8 +46,8 @@ public class User {
     public String getUsername() {return username;}
 
     /**
-     * Sets the name of the product - necessary for JSON object to Java object deserialization
-     * @param name The name of the product
+     * Sets the name of the user - necessary for JSON object to Java object deserialization
+     * @param name The name of the user
      */
     public void setUsername(String username) {this.username = username;}
 
