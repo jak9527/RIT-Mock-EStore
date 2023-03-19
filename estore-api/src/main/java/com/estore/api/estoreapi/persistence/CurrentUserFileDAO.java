@@ -161,6 +161,9 @@ public class CurrentUserFileDAO implements CurrentUserDAO {
     @Override
     public User deleteUser(User user) throws IOException {
         synchronized(users) {
+            if(user == null){
+                return null;
+            }
             if(!users.containsKey(user.getUsername())){
                 return null;
             }

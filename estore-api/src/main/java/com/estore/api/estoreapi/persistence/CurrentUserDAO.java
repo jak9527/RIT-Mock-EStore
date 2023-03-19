@@ -5,20 +5,19 @@ import java.io.IOException;
 import com.estore.api.estoreapi.model.User;
 
 /**
- * Defines the interface for User object persistence
+ * Defines the interface for User instancing
  * 
  * @author Jacob Karvelis jak9527
  */
 public interface CurrentUserDAO {
 
     /**
-     * Retrieves a {@linkplain User user} with the given username
+     * Retrieves the {@linkplain User user} currently logged in
      * 
-     * @param username The username of the {@link User user} to get
      * 
-     * @return a {@link User user} object with the matching username
+     * @return the {@link User user} currently logged in
      * <br>
-     * null if no {@link User user} with a matching name is found
+     * null if no {@link User user} is logged in
      * 
      * @throws IOException if an issue with underlying storage
      */
