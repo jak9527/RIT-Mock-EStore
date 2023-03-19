@@ -9,10 +9,10 @@ import com.fasterxml.jackson.annotation.JsonProperty;
  * @author SWEN Faculty
  */
 public class User {
-    private static final Logger LOG = Logger.getLogger(Product.class.getName());
+    private static final Logger LOG = Logger.getLogger(User.class.getName());
 
     // Package private for tests
-    static final String STRING_FORMAT = "Item [id=%d, username=%s]";
+    static final String STRING_FORMAT = "User [id=%d, username=%s]";
 
     @JsonProperty("id") private int id;
     @JsonProperty("username") private String username;
