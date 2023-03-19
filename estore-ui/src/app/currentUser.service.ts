@@ -63,9 +63,17 @@ export class CurrentUserService {
     /** POST: add a new user to the server */
     setCurrentUser(user: User): Observable<User> {
       return this.http.post<User>(this.usersUrl, user, this.httpOptions).pipe(
-        tap((newUser: User) => this.log(`set user w/ id=${newUser.id}`)),
+        tap((newUser: User) => this.log(`set current user w/ id=${newUser.id}`)),
         catchError(this.handleError<User>('setCurrentUser'))
       );
+    }
+
+    /** Delete current user. Will 404 if id not found */
+    deleteCurrentUser(): Observable<User> {
+        return this.http.delete<User>(this.usersUrl).pipe(
+            tap(_ => this.log(`deleted current user`)),
+            catchError(this.handleError<User>(`deleteCurrentUser`))
+        );
     }
 
 }

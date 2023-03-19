@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 
 import { User } from '../user';
 import { UserService } from '../user.service';
+import { CurrentUserService } from '../currentUser.service';
 
 @Component({
   selector: 'app-login',
@@ -11,7 +12,8 @@ import { UserService } from '../user.service';
 export class LoginComponent implements OnInit {
   user: User = null as unknown as User;
 
-  constructor(private userService: UserService) { }
+  constructor(private userService: UserService,
+    private currentUserService: CurrentUserService) { }
 
   ngOnInit(): void {
   }
@@ -32,11 +34,15 @@ export class LoginComponent implements OnInit {
         this.user = newuser;
       });
     }
+    this.currentUserService.setCurrentUser(this.user);
+
+    
     
   }
 
   logout(): void {
     this.user = null as unknown as User;
+    this.currentUserService.deleteCurrentUser().subscribe();
   }
 
 }
