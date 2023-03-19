@@ -9,7 +9,7 @@ import { UserService } from '../user.service';
   styleUrls: ['./login.component.css']
 })
 export class LoginComponent implements OnInit {
-  user: User[] = [];
+  user: User = null as unknown as User;
 
   constructor(private userService: UserService) { }
 
@@ -18,16 +18,20 @@ export class LoginComponent implements OnInit {
 
   getUser(name: string): void {
     this.userService.getUser(name)
-    .subscribe(user => this.user.push(user));
+    .subscribe(newuser => this.user = newuser);
   }
 
   add(name: string): void {
     name = name.trim();
     if (!name) { return; }
     this.userService.addUser({"id":0,"username":name} as User)
-      .subscribe(user => {
-        this.user.push(user);
+      .subscribe(newuser => {
+        this.user = newuser;
       });
+  }
+
+  logout(): void {
+    this.user = null as unknown as User;
   }
 
 }
