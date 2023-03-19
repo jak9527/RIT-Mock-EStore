@@ -7,4 +7,12 @@
     <button type="button" class="add-button" (click)="add(userName.value); userName.value=''">
       Log-in
     </button>
+    <div *ngIf="user">
+        <label for="CurrentUser">Current User: </label>
+        {{user.username | uppercase}}
+        <button type="button" class="add-button" (click)="logout()">
+            Log-out
+          </button>
+    </div>
+
   </div>
