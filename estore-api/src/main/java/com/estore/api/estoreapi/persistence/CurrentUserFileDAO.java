@@ -164,7 +164,7 @@ public class CurrentUserFileDAO implements CurrentUserDAO {
             if(!users.containsKey(user.getUsername())){
                 return null;
             }
-            User removedUser = users.remove(user);
+            User removedUser = users.remove(user.getUsername());
             save(); // may throw an IOException
             return removedUser;
         }
