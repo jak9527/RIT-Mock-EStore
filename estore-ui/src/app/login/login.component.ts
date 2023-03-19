@@ -9,25 +9,24 @@ import { UserService } from '../user.service';
   styleUrls: ['./login.component.css']
 })
 export class LoginComponent implements OnInit {
-  users: User[] = [];
+  user: User[] = [];
 
   constructor(private userService: UserService) { }
 
   ngOnInit(): void {
-    this.getUsers();
   }
 
-  getUsers(): void {
-    this.userService.getUsers()
-    .subscribe(users => this.users = users);
+  getUser(name: string): void {
+    this.userService.getUser(name)
+    .subscribe(user => this.user.push(user));
   }
 
   add(name: string): void {
     name = name.trim();
     if (!name) { return; }
-    this.userService.addUser({ name } as unknown as User)
+    this.userService.addUser({"id":0,"username":name} as User)
       .subscribe(user => {
-        this.users.push(user);
+        this.user.push(user);
       });
   }
 
