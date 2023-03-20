@@ -31,4 +31,4 @@ build/
 ### VS Code ###
 .vscode/
 
-/estore-api/src/main/resources/application.properties
+estore-api/src/main/resources/application.properties
