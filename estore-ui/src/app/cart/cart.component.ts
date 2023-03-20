@@ -1,4 +1,4 @@
-import { ChangeDetectorRef, Component, Input } from '@angular/core';
+import { ChangeDetectorRef, Component, Input, OnInit } from '@angular/core';
 import { Cart } from '../cart';
 import { ActivatedRoute } from '@angular/router';
 import { Location } from '@angular/common';
@@ -13,18 +13,16 @@ import { tick } from '@angular/core/testing';
   templateUrl: './cart.component.html',
   styleUrls: ['./cart.component.css']
 })
-export class CartComponent {
+export class CartComponent implements OnInit {
     @Input()
   cart!: Cart;
     @Input()
   products!: Map<number, Product>;
 
     constructor(
-        private route: ActivatedRoute,
         private cartService: CartService,
         private location: Location,
         private currentUserService: CurrentUserService,
-        private ref: ChangeDetectorRef
       ) {}
 
     ngOnInit(): void {

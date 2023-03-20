@@ -1,11 +1,12 @@
 import { Component, OnInit } from '@angular/core';
-
+import { Router } from '@angular/router';
 import { User } from '../user';
 import { UserService } from '../user.service';
 import { CurrentUserService } from '../currentUser.service';
 import { Cart } from '../cart';
 import { CartService } from '../cart.service';
 import { Product } from '../product';
+import { AppComponent } from '../app.component';
 
 @Component({
   selector: 'app-login',
@@ -18,7 +19,8 @@ export class LoginComponent implements OnInit {
 
   constructor(private userService: UserService,
     private currentUserService: CurrentUserService,
-    private cartService: CartService) { }
+    private cartService: CartService,
+    private router: Router ) { }
 
   ngOnInit(): void {
   }
@@ -51,12 +53,6 @@ export class LoginComponent implements OnInit {
         }
         
     });
-    
-    
-    
-    
-
-    
     
   }
 

@@ -20,8 +20,6 @@ export class CurrentUserService {
         private http: HttpClient,
         private messageService: MessageService) { }
 
-
-
     /** GET current user. Will 404 if id not found */
     getCurrentUser(): Observable<User> {
         return this.http.get<User>(this.usersUrl).pipe(
