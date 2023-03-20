@@ -106,11 +106,11 @@ public class ProductDBDAO implements ProductDAO {
         products = new TreeMap<>();
 
         // Obtains the BSON Documents from the DB into an array of products
-        Product[] productArray = productRepo.findAll()
+        List<Product> productArray = productRepo.findAll()
 
         // Add each product to the tree map and keep track of the greatest id
         for (Product product : productArray) {
-            products.put(product.getId(),product);
+            products.put(product.getId(), product);
         }
         return true;
     }

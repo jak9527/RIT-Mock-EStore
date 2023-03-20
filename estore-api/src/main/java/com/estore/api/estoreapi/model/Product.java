@@ -2,18 +2,23 @@ package com.estore.api.estoreapi.model;
 
 import java.util.logging.Logger;
 
+import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.Document;
+
 import com.fasterxml.jackson.annotation.JsonProperty;
 /**
  * Represents a Product entity
  * 
  * @author SWEN Faculty
  */
+@Document("products")
 public class Product {
     private static final Logger LOG = Logger.getLogger(Product.class.getName());
 
     // Package private for tests
     static final String STRING_FORMAT = "Item [id=%d, name=%s]";
 
+    @Id
     @JsonProperty("id") private int id;
     @JsonProperty("name") private String name;
     @JsonProperty("price") private float price;
