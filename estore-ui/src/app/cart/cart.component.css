@@ -93,3 +93,19 @@ button.add:hover {
   background-color: #525252;
   color: white;
 }
+
+button.remove {
+  position: relative;
+  left: 210px;
+  top: 5px;
+  background-color: white;
+  color:  #525252;
+  font-size: 1.1rem;
+  margin: 0;
+  padding: 1px 10px 3px 10px;
+}
+
+button.remove:hover {
+  background-color: #525252;
+  color: white;
+}

@@ -72,6 +72,7 @@ export class CartService {
 
     /** PUT: add a product to a cart on the server */
     addProductToCart(cId: number, product: Product): Observable<Cart> {
+        product.quantity=1;
         return this.http.put<Cart>(this.cartsUrl+`/${cId}`, product, this.httpOptions).pipe(
             tap(_ => this.log(`added product with id ${product.id} to cart w/ id=${cId}`)),
             catchError(this.handleError<Cart>('addProductToCart'))
