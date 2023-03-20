@@ -1,1 +1,5 @@
+<<<<<<< HEAD
 [{"id":1,"name":"Golisano Trees","price":80.0,"quantity":4},{"id":2,"name":"Ctrl Alt Deli Sign","price":100.0,"quantity":1},{"id":3,"name":"Munsons Office","price":1102901.0,"quantity":1},{"id":4,"name":"RIT Brick","price":5.0,"quantity":15710693},{"id":7,"name":"Golisano Trees","price":8.0,"quantity":4},{"id":8,"name":"Ctrl Alt Deli Sign","price":0.0,"quantity":0},{"id":9,"name":"RIT Brick","price":1.0,"quantity":15710693},{"id":10,"name":"The Sentinel","price":800000.0,"quantity":1},{"id":11,"name":"SpiRIT Statue","price":1.0E8,"quantity":1}]
+=======
+[{"id":1,"name":"The Sentinel"},{"id":2,"name":"Ctrl Alt Deli Sign"}]
+>>>>>>> main
