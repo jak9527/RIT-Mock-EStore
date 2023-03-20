@@ -27,14 +27,20 @@ export class LoginComponent implements OnInit {
     name = name.trim();
     if (!name) { return; }
     this.userService.getUser(name)
-    .subscribe(newuser => this.user = newuser);
-    if (this.user == null){
-    this.userService.addUser({"id":0,"username":name} as User)
-      .subscribe(newuser => {
-        this.user = newuser;
-      });
-    }
-    this.currentUserService.setCurrentUser(this.user);
+    .subscribe(newuser => { 
+        this.user = newuser
+        if (this.user === null){
+            this.userService.addUser({"id":0,"username":name} as User)
+              .subscribe(newuser => {
+                this.user = newuser;
+              });
+        }
+        this.currentUserService.setCurrentUser(this.user).subscribe();
+    });
+    
+    
+    
+    
 
     
     

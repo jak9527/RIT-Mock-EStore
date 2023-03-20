@@ -62,6 +62,7 @@ export class CurrentUserService {
 
     /** POST: add a new user to the server */
     setCurrentUser(user: User): Observable<User> {
+        // this.log(user.username);
       return this.http.post<User>(this.usersUrl, user, this.httpOptions).pipe(
         tap((newUser: User) => this.log(`set current user w/ id=${newUser.id}`)),
         catchError(this.handleError<User>('setCurrentUser'))
