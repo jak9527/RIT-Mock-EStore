@@ -44,13 +44,18 @@ export class CartComponent implements OnInit {
         this.location.back();
     }
 
-    remove(product: Product): void {
+    decrease(product: Product): void {
       this.cartService.updateProductCount(this.cart.id, product.id, -1).subscribe();
       this.ngOnInit();
   }
 
     add(product: Product): void {
       this.cartService.updateProductCount(this.cart.id, product.id, 1).subscribe();
+      this.ngOnInit();
+  }
+
+    remove(product: Product): void {
+      this.cartService.updateProductCount(this.cart.id, product.id, -product.quantity).subscribe();
       this.ngOnInit();
   }
 
