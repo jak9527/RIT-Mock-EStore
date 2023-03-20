@@ -28,8 +28,6 @@ public class ProductDBDAO implements ProductDAO {
     private static final Logger LOG = Logger.getLogger(ProductDBDAO.class.getName());
     Map<Integer,Product> products;   //Provides a local cache of the product objects
 
-    private static int nextId;  // The next Id to assign to a new product
-
     @Autowired
     ProductRepository productRepo;
 
@@ -43,17 +41,6 @@ public class ProductDBDAO implements ProductDAO {
      */
     public ProductFileDAO() throws IOException {
         load();  // load the products from the database
-    }
-
-    /**
-     * Generates the next id for a new {@linkplain Product product}
-     * 
-     * @return The next id
-     */
-    private synchronized static int nextId() {
-        int id = nextId;
-        ++nextId;
-        return id;
     }
 
     /**
@@ -108,31 +95,23 @@ public class ProductDBDAO implements ProductDAO {
     }
 
     /**
-     * Loads {@linkplain Product products} from the JSON file into the map
+     * Loads {@linkplain Product products} from the Database into the map
      * <br>
-     * Also sets next id to one more than the greatest id found in the file
      * 
      * @return true if the file was read successfully
      * 
      * @throws IOException when file cannot be accessed or read from
      */
-    private boolean load() throws IOException {
+    private boolean load() {
         products = new TreeMap<>();
-        nextId = 0;
 
-        // Deserializes the JSON objects from the file into an array of products
-        // readValue will throw an IOException if there's an issue with the file
-        // or reading from the file
-        Product[] productArray = objectMapper.readValue(new File(filename),Product[].class);
+        // Obtains the BSON Documents from the DB into an array of products
+        Product[] productArray = productRepo.findAll()
 
         // Add each product to the tree map and keep track of the greatest id
         for (Product product : productArray) {
             products.put(product.getId(),product);
-            if (product.getId() > nextId)
-                nextId = product.getId();
         }
-        // Make the next id one greater than the maximum from the file
-        ++nextId;
         return true;
     }
 
@@ -171,14 +150,15 @@ public class ProductDBDAO implements ProductDAO {
 
     /**
     ** {@inheritDoc}
-     */
+    */
     @Override
     public Product createProduct(Product item) throws IOException {
         synchronized(products) {
             // We create a new item object because the id field is immutable
-            // and we need to assign the next unique id
-            Product newProduct = new Product(nextId(),item.getName(), item.getPrice(), item.getQuantity());
-            products.put(newProduct.getId(),newProduct);
+            // and we need to assign the a unique id
+            int id = java.util.UUID.randomUUID();
+            Product newProduct = new Product(,item.getName(), item.getPrice(), item.getQuantity());
+            products.put(newProduct.getId(), newProduct);
             save(); // may throw an IOException
             return newProduct;
         }
