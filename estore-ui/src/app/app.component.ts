@@ -12,7 +12,7 @@ import { Subscription } from 'rxjs';
 })
 export class AppComponent implements OnInit{
     private userSubscription: Subscription;
-    private currentUser: User = null as unknown as User;
+    currentUser: User = null as unknown as User;
 
   constructor(
     private currentUserService: CurrentUserService,

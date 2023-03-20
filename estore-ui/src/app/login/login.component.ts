@@ -67,6 +67,7 @@ export class LoginComponent implements OnInit {
   logout(): void {
     this.user = null as unknown as User;
     this.currentUserService.deleteCurrentUser().subscribe();
+    this.userUpdate();
   }
 
 }
