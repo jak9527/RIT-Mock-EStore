@@ -21,9 +21,9 @@ import com.estore.api.estoreapi.persistence.CurrentUserDAO;
 
 
 /**
- * Test the User Controller class
+ * Test the Current User Controller class
  * 
- * @author Ethan Meyers epm2875
+ * @author Jacob Karvelis
  */
 public class CurrentUserControllerTest{
     private CurrentUserController currentUserController;

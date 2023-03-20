@@ -22,9 +22,9 @@ import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 
 /**
- * Test the User File DAO class
+ * Test the Current User File DAO class
  * 
- * @author SWEN Faculty
+ * @author Jacob Karvelis
  */
 @Tag("Persistence-tier")
 public class CurrentUserFileDAOTest {
