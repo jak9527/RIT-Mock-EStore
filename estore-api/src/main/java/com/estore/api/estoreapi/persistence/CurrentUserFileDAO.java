@@ -3,6 +3,7 @@ package com.estore.api.estoreapi.persistence;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.ConcurrentModificationException;
 import java.util.Map;
 import java.util.TreeMap;
 import java.util.logging.Logger;
@@ -46,20 +47,12 @@ public class CurrentUserFileDAO implements CurrentUserDAO {
         this.objectMapper = objectMapper;
         load();  // load the users from the file
         //delete all users (should only be one) from the file, making space for the new current user
-        for(User user : users.values()){
-            deleteUser(user);
+        // for(User user : users.values()){
+        //     deleteUser(user);
+        // }
+        if(users.size()!=0){
+            deleteUser(getCurrentUser());
         }
-    }
-
-    /**
-     * Generates the next id for a new {@linkplain User user}
-     * 
-     * @return The next id
-     */
-    private synchronized static int nextId() {
-        int id = nextId;
-        ++nextId;
-        return id;
     }
 
     /**
@@ -145,9 +138,8 @@ public class CurrentUserFileDAO implements CurrentUserDAO {
     public User setCurrentUser(User user) throws IOException {
         synchronized(users) {
             if(users.size() != 0){
-                for(User userM : users.values()){
-                    deleteUser(userM);
-                }
+                System.out.println("Deleting current user");
+                deleteUser(getCurrentUser());
             }
             users.put(user.getUsername(),user);
             save(); // may throw an IOException

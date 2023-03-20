@@ -37,8 +37,9 @@ public class CurrentUserController {
      * <br>
      * This dependency is injected by the Spring Framework
      */
-    public CurrentUserController(CurrentUserDAO currentUserDao) {
+    public CurrentUserController(CurrentUserDAO currentUserDao) throws IOException{
         this.currentUserDao = currentUserDao;
+        // currentUserDao.deleteUser(currentUserDao.getCurrentUser());
     }
 
 
