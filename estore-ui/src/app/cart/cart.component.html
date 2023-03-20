@@ -4,5 +4,9 @@
     <a routerLink="/detail/{{product.key}}">
       <span class="badge">{{product.key}} : </span> {{product.value.name}} : ${{product.value.price}} : {{product.value.quantity}}
     </a>
+    <button type="button" class="delete" title="decrement"
+    (click)="remove(product.value)">decrease</button>
+    <button type="button" class="add" title="add"
+    (click)="add(product.value)">increase</button>
   </li>
 </ul>
