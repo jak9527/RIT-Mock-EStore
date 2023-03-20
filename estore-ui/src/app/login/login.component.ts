@@ -29,11 +29,11 @@ export class LoginComponent implements OnInit {
   }
 
   getUser(): void {
-    this.currentUserService.getCurrentUser().subscribe(curUser => this.user = curUser)
+    this.currentUserService.getCurrentUser().subscribe(curUser => this.user = curUser);
   }
 
-  userUpdate(): void {
-    this.userUpdateService.sendUpdate(this.user);
+  userUpdate(message: string): void {
+    this.userUpdateService.sendUpdate(message);
   }
 
   add(name: string): void {
@@ -50,14 +50,13 @@ export class LoginComponent implements OnInit {
                     .subscribe(newCart => {
                     this.cart = newCart;
                 });
-                this.currentUserService.setCurrentUser(this.user).subscribe();
-                this.userUpdate();
+                this.currentUserService.setCurrentUser(this.user).subscribe(empty => {this.userUpdate("login");});
+                
               });
             
         }
         else{
-            this.currentUserService.setCurrentUser(this.user).subscribe();
-            this.userUpdate();
+            this.currentUserService.setCurrentUser(this.user).subscribe(empty => {this.userUpdate("login");});
         }
         
     });
@@ -66,8 +65,10 @@ export class LoginComponent implements OnInit {
 
   logout(): void {
     this.user = null as unknown as User;
-    this.currentUserService.deleteCurrentUser().subscribe();
-    this.userUpdate();
+    this.currentUserService.deleteCurrentUser().subscribe(empty => {
+        this.userUpdate("logout");
+    });
+    
   }
 
 }

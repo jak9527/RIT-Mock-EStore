@@ -13,13 +13,18 @@ import { Subscription } from 'rxjs';
 export class AppComponent implements OnInit{
     private userSubscription: Subscription;
     currentUser: User = null as unknown as User;
+    message: string = "";
 
   constructor(
     private currentUserService: CurrentUserService,
     private userUpdateService: UserUpdateService,
     private router: Router
   ) {
-    this.userSubscription = this.userUpdateService.getUpdate().subscribe(user => this.currentUser = user)
+    this.userSubscription = this.userUpdateService.getUpdate().subscribe(message => {
+        this.currentUserService.getCurrentUser().subscribe(curUser => this.currentUser = curUser)
+        this.message = message;
+    });
+
   }
 
   title = 'Rit Garage Sale';

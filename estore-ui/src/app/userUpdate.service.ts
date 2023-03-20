@@ -6,8 +6,8 @@ import { User } from './user';
 export class UserUpdateService {
     private subjectName = new Subject<any>(); //need to create a subject
     
-    sendUpdate(user: User) { //the component that wants to update something, calls this fn
-        this.subjectName.next({ user: user }); //next() will feed the value in Subject
+    sendUpdate(message: string) { //the component that wants to update something, calls this fn
+        this.subjectName.next({ text: message }); //next() will feed the value in Subject
     }
     
     getUpdate(): Observable<any> { //the receiver component calls this function 
