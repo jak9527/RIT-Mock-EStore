@@ -1,6 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { CurrentUserService } from './currentUser.service';
 import { Router } from '@angular/router';
+import { UserUpdateService } from './userUpdate.service'
+import { User } from './user';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-root',
@@ -8,14 +11,18 @@ import { Router } from '@angular/router';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent implements OnInit{
+    private userSubscription: Subscription;
+    private currentUser: User = null as unknown as User;
 
   constructor(
     private currentUserService: CurrentUserService,
+    private userUpdateService: UserUpdateService,
     private router: Router
-  ) {}
+  ) {
+    this.userSubscription = this.userUpdateService.getUpdate().subscribe(user => this.currentUser = user)
+  }
 
   title = 'Rit Garage Sale';
-  currentUser = this.currentUserService.getCurrentUser;
   currentUserExists = false;
 
   ngOnInit(): void {

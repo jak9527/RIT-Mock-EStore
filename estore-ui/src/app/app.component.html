@@ -1,10 +1,10 @@
 <title>RIT GARAGE SALE</title>
 <h1>{{title}}</h1>
 <nav>
+    <div *ngIf="currentUserExists">
     <a routerLink="/dashboard">Dashboard</a> 
     <a routerLink="/products">Products</a>
     <a routerLink="/login">Login</a>
-    <div *ngIf="currentUserExists">
     <a routerLink="/cart">Cart</a>
     </div>
 </nav>

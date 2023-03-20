@@ -5,6 +5,7 @@ import { UserService } from '../user.service';
 import { CurrentUserService } from '../currentUser.service';
 import { Cart } from '../cart';
 import { CartService } from '../cart.service';
+import { UserUpdateService } from '../userUpdate.service'
 import { Product } from '../product';
 import { AppComponent } from '../app.component';
 
@@ -20,14 +21,19 @@ export class LoginComponent implements OnInit {
   constructor(private userService: UserService,
     private currentUserService: CurrentUserService,
     private cartService: CartService,
+    private userUpdateService: UserUpdateService,
     private router: Router ) { }
 
   ngOnInit(): void {
+    this.getUser();
   }
 
-  getUser(name: string): void {
-    this.userService.getUser(name)
-    .subscribe(newuser => this.user = newuser);
+  getUser(): void {
+    this.currentUserService.getCurrentUser().subscribe(curUser => this.user = curUser)
+  }
+
+  userUpdate(): void {
+    this.userUpdateService.sendUpdate(this.user);
   }
 
   add(name: string): void {
@@ -45,11 +51,13 @@ export class LoginComponent implements OnInit {
                     this.cart = newCart;
                 });
                 this.currentUserService.setCurrentUser(this.user).subscribe();
+                this.userUpdate();
               });
             
         }
         else{
             this.currentUserService.setCurrentUser(this.user).subscribe();
+            this.userUpdate();
         }
         
     });
