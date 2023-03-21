@@ -49,8 +49,12 @@ export class AppComponent implements OnInit{
   updateHeader(): void {
     this.currentUserService.getCurrentUser().subscribe(curUser =>{
         this.currentUser = curUser;
-        if (this.currentUser.id == 0){
-            this.isAdmin = true;
+        if (this.currentUser) {
+            if (this.currentUser.id == 0){
+                this.isAdmin = true;
+            } else {
+                this.isAdmin = false;
+            }
         } else {
             this.isAdmin = false;
         }
