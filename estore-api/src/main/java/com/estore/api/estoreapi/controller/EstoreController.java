@@ -179,7 +179,6 @@ public class EstoreController {
     @DeleteMapping("/{id}")
     public ResponseEntity<Product> deleteProduct(@PathVariable int id) {
         LOG.info("DELETE /inventory/" + id);
-
         try {
             boolean delete = productDao.deleteProduct(id);
             if( !delete ) {
