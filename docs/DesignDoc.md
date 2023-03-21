@@ -9,20 +9,31 @@ geometry: margin=1in
 > and appear in the generated PDF in italics._
 
 ## Team Information
-* Team name: TEAMNAME
+* Team name: RIT Garage Sale
 * Team members
-  * MEMBER1
-  * MEMBER2
-  * MEMBER3
-  * MEMBER4
+  * Andrew Bush (apb2471)
+  * Jacob Karvelis (jak9527)
+  * Kelly Showers (kds1653)
+  * Zach Brown (zrb8768)
+  * Ethan Meyers (epm2875)
 
 ## Executive Summary
 
-This is a summary of the project.
+An online e-store for RIT to sell off many notable landmarks including bricks, various statues from around campus, and decorative trees from lobbies.
+Uses a database implementation and includes an auction feature for users to sell their own items on the e-store.
 
 ### Purpose
 >  _**[Sprint 2 & 4]** Provide a very brief statement about the project and the most
 > important user group and user goals._
+
+Provide an online store that allows RIT to sell their landmarks and items of interest around campus, including
+a place for them to auction off new items.
+
+Seperate authentication for users and admins
+As a user I want to be able to search for and add items to my cart so that I may buy them
+As an admin I want to be able to edit the inventory of the store so that I can sell products
+
+
 
 ### Glossary and Acronyms
 > _**[Sprint 2 & 4]** Provide a table of terms and acronyms._
@@ -43,8 +54,27 @@ This section describes the features of the application.
 ### Definition of MVP
 > _**[Sprint 2 & 4]** Provide a simple description of the Minimum Viable Product._
 
+Minimal Authentication allows for a separation between users and the owner. The owner will not have access 
+to a shopping cart and can instead edit and manage inventory.
+
+Customer functionality including customer’s ability to; see a list of products, search for a product.
+
+A shopping cart for users to add products to and remove products from. Allows users to proceed to a final checkout
+to purchase the products from the shopping cart.
+
+Inventory management allows the e-store owner to add, remove and edit the inventory.
+
+Data Persistence saves everything to files, or in this case a database, that will show previously made 
+changes including previous items added to a user’s shopping cart.
+
+A Database implementation to store data about users, carts and items.
+
+An auction feature allowing users to list certain items for auction.
+
+
 ### MVP Features
 >  _**[Sprint 4]** Provide a list of top-level Epics and/or Stories of the MVP._
+
 
 ### Enhancements
 > _**[Sprint 4]** Describe what enhancements you have implemented for the project._
