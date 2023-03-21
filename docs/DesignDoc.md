@@ -261,3 +261,4 @@ website view, but the administrator is able to view specific information or abil
 
 >_**[Sprint 2 & 4]** **Include images of your code coverage report.** If there are any anomalies, discuss
 > those._
+![Code Coverage - Sprint 2](CodeCoverageSprint2.png)
