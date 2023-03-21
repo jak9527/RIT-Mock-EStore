@@ -1,7 +1,7 @@
 import { Component, OnInit, OnChanges } from '@angular/core';
-import { CurrentUserService } from './currentUser.service';
 import { Router } from '@angular/router';
 import { UserUpdateService } from './userUpdate.service'
+import { CurrentUserService } from './currentUser.service';
 import { User } from './user';
 import { Subscription } from 'rxjs';
 

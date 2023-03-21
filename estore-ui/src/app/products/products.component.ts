@@ -5,6 +5,7 @@ import { ProductService } from '../product.service';
 import { MessageService } from '../message.service';
 import { CartService } from '../cart.service';
 import { CurrentUserService } from '../currentUser.service';
+import { User } from '../user';
 
 @Component({
   selector: 'app-products',
@@ -13,6 +14,7 @@ import { CurrentUserService } from '../currentUser.service';
 })
 export class ProductsComponent implements OnInit {
     products: Product[] = [];
+    isAdmin: boolean = false;
   
     constructor(
       private productService: ProductService,
@@ -22,6 +24,15 @@ export class ProductsComponent implements OnInit {
   
     ngOnInit(): void {
       this.getProducts();
+      var theUser: User = null as unknown as User;
+        this.currentUserService.getCurrentUser().subscribe(curUser =>{
+            theUser = curUser;
+            if (theUser.id == 0){
+                this.isAdmin = true;
+            } else {
+                this.isAdmin = false;
+            }
+        });
     }
   
     getProducts(): void {
