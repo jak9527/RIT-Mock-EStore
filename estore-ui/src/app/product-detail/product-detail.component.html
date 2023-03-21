@@ -14,7 +14,8 @@
         <label for="product-quantity">Product quantity: </label>
         <input id="product-quantity" [(ngModel)]="product.quantity" placeholder="quantity">
     </div>
-  
+    <button type="button" class="add" title="add to cart"
+    (click)="addToCart(product)">add to cart</button>
   </div>
   <button type="button" (click)="goBack()">go back</button>
   <button type="button" (click)="save()">save</button>
