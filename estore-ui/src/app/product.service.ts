@@ -98,7 +98,7 @@ export class ProductService {
     /* GET products whose name contains search term */
     searchProducts(term: string): Observable<Product[]> {
         if (!term.trim()) {
-            // if not search term, return empty hero array.
+            // if not search term, return empty product array.
             return of([]);
         }
         return this.http.get<Product[]>(`${this.productsUrl}/?name=${term}`).pipe(

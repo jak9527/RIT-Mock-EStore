@@ -6,7 +6,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 /**
  * Represents a User entity
  * 
- * @author SWEN Faculty
+ * @author Jacob Karvelis
  */
 public class User {
     private static final Logger LOG = Logger.getLogger(Product.class.getName());
@@ -46,8 +46,8 @@ public class User {
     public String getUsername() {return username;}
 
     /**
-     * Sets the name of the product - necessary for JSON object to Java object deserialization
-     * @param name The name of the product
+     * Sets the name of the users - necessary for JSON object to Java object deserialization
+     * @param name The name of the user
      */
     public void setUsername(String username) {this.username = username;}
 

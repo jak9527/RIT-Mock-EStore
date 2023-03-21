@@ -7,7 +7,7 @@ import com.estore.api.estoreapi.model.Product;
 /**
  * Defines the interface for Product object persistence
  * 
- * @author SWEN Faculty
+ * @author Zach Brown
  */
 public interface ProductDAO {
     /**

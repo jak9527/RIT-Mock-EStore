@@ -29,7 +29,7 @@ public class UserControllerTest{
 
         /**
      * Before each test, create a new ProductController object and inject
-     * a mock Product DAO
+     * a mock USer DAO
      */
     @BeforeEach
     public void setupUserController() {
