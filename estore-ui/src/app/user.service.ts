@@ -20,8 +20,6 @@ export class UserService {
         private http: HttpClient,
         private messageService: MessageService) { }
 
-
-
     /** GET product by id. Will 404 if id not found */
     getUser(username: string): Observable<User> {
         const url = `${this.usersUrl}/${username}`;

@@ -9,7 +9,7 @@
     </button>
     <div *ngIf="user">
         <label for="CurrentUser">Current User: </label>
-        {{user.username | uppercase}}
+        {{user.username}}
         <button type="button" class="add-button" (click)="logout()">
             Log-out
           </button>

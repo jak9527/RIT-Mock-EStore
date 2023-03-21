@@ -1,11 +1,13 @@
 import { Component, OnInit } from '@angular/core';
-
+import { Router } from '@angular/router';
 import { User } from '../user';
 import { UserService } from '../user.service';
 import { CurrentUserService } from '../currentUser.service';
 import { Cart } from '../cart';
 import { CartService } from '../cart.service';
+import { UserUpdateService } from '../userUpdate.service'
 import { Product } from '../product';
+import { AppComponent } from '../app.component';
 
 @Component({
   selector: 'app-login',
@@ -18,14 +20,20 @@ export class LoginComponent implements OnInit {
 
   constructor(private userService: UserService,
     private currentUserService: CurrentUserService,
-    private cartService: CartService) { }
+    private cartService: CartService,
+    private userUpdateService: UserUpdateService,
+    private router: Router ) { }
 
   ngOnInit(): void {
+    this.getUser();
   }
 
-  getUser(name: string): void {
-    this.userService.getUser(name)
-    .subscribe(newuser => this.user = newuser);
+  getUser(): void {
+    this.currentUserService.getCurrentUser().subscribe(curUser => this.user = curUser);
+  }
+
+  userUpdate(message: string): void {
+    this.userUpdateService.sendUpdate(message);
   }
 
   add(name: string): void {
@@ -42,27 +50,25 @@ export class LoginComponent implements OnInit {
                     .subscribe(newCart => {
                     this.cart = newCart;
                 });
-                this.currentUserService.setCurrentUser(this.user).subscribe();
+                this.currentUserService.setCurrentUser(this.user).subscribe(empty => {this.userUpdate("login");});
+                
               });
             
         }
         else{
-            this.currentUserService.setCurrentUser(this.user).subscribe();
+            this.currentUserService.setCurrentUser(this.user).subscribe(empty => {this.userUpdate("login");});
         }
         
     });
-    
-    
-    
-    
-
-    
     
   }
 
   logout(): void {
     this.user = null as unknown as User;
-    this.currentUserService.deleteCurrentUser().subscribe();
+    this.currentUserService.deleteCurrentUser().subscribe(empty => {
+        this.userUpdate("logout");
+    });
+    
   }
 
 }
