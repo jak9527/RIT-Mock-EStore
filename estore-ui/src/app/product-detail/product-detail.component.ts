@@ -5,6 +5,7 @@ import { Location } from '@angular/common';
 import { ProductService } from '../product.service';
 import { CurrentUserService } from '../currentUser.service';
 import { User } from '../user';
+import { CartService } from '../cart.service';
 
 @Component({
   selector: 'app-product-detail',
@@ -19,7 +20,8 @@ export class ProductDetailComponent {
         private route: ActivatedRoute,
         private productService: ProductService,
         private currentUserService: CurrentUserService,
-        private location: Location
+        private location: Location,
+        private cartService: CartService
       ) {}
 
     ngOnInit(): void {
@@ -44,6 +46,13 @@ export class ProductDetailComponent {
     goBack(): void {
         this.location.back();
     }
+
+    addToCart(product: Product): void {
+      this.currentUserService.getCurrentUser().subscribe((user) => {
+            this.cartService.addProductToCart(user.id,product).subscribe();
+            this.ngOnInit();
+      });
+  }
 
     save(): void {
         if (this.product) {

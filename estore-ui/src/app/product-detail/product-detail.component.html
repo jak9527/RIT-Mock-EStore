@@ -1,20 +1,37 @@
 <div *ngIf="product">
 
     <h2>{{product.name | uppercase}} Details</h2>
-    <div><span>id: </span>{{product.id}}</div>
-    <div>
-      <label for="product-name">Product name: </label>
-      <input id="product-name" [(ngModel)]="product.name" placeholder="name">
+    <div *ngIf="isAdmin"><span>id: </span>{{product.id}}</div>
+    <div *ngIf="!isAdmin"> 
+        <div>
+            <span>Product Name: </span>{{product.name}}
+        </div>
+        <div>
+            <span>Product Price: </span>{{product.price}}
+        </div>
+        <div>
+            <span>Number Available </span>{{product.quantity}}
+        </div>
     </div>
-    <div>
-        <label for="product-price">Product price: </label>
-        <input id="product-price" [(ngModel)]="product.price" placeholder="price">
+    <div *ngIf="isAdmin">
+        <div>
+        <label for="product-name">Product name: </label>
+        <input id="product-name" [(ngModel)]="product.name" placeholder="name">
+        </div>
+        <div>
+            <label for="product-price">Product price: </label>
+            <input id="product-price" [(ngModel)]="product.price" placeholder="price">
+        </div>
+        <div>
+            <label for="product-quantity">Product quantity: </label>
+            <input id="product-quantity" [(ngModel)]="product.quantity" placeholder="quantity">
+        </div>
     </div>
-    <div>
-        <label for="product-quantity">Product quantity: </label>
-        <input id="product-quantity" [(ngModel)]="product.quantity" placeholder="quantity">
+
+    <button *ngIf="!isAdmin" type="button" class="add" title="add to cart"
+    (click)="addToCart(product)">add to cart</button>
     </div>
-  
-  </div>
-  <button type="button" (click)="goBack()">go back</button>
-  <button *ngIf="isAdmin" type="button" (click)="save()">save</button>
+
+    <button type="button" (click)="goBack()">go back</button>
+
+    <button *ngIf="isAdmin" type="button" (click)="save()">save</button>
