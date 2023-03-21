@@ -37,6 +37,7 @@ As an admin I want to be able to edit the inventory of the store so that I can s
 > _**[Sprint 2 & 4]** Provide a table of terms and acronyms._
 
 | Term | Definition |
+MVP     Minimum Viable Product
 |------|------------|
 | SPA | Single Page |
 
@@ -83,10 +84,6 @@ An auction feature allowing users to list certain items for auction.
 This section describes the application domain.
 
 ![Domain Model](domain-model.png)
-
-> _**[Sprint 2 & 4]** Provide a high-level overview of the domain for this application. You
-> can discuss the more important domain entities and their relationship
-> to each other._
 
 The e-shop has an inventory, where all current info about products, prices and quantities are stored.
 
@@ -182,54 +179,64 @@ defines functions to get and set both of these fields for each User.
 ## OO Design Principles
 
 Controller:
-Our system implementation uses a simple Controller concept at this time. The controller concept essentially states 
-that there should be some controller object that coordinates all system actions and operations, or in more complicated cases,
-multiple controller objects that coordinate all related actions and system operations. We are currently just using the Heroes API Spike
-code as a base. This very clearly implements the Controller concept. It has an object called HeroController. This class responds to all
-user API requests through various methods, one to handle each request. Within these methods, the controller makes calls to the 
-other software layers, coordinating them to create the desired results. This shows the concept of Controller because we have one controller
+Our system implementation uses a more complex controller setup compared to the last sprint. The controller concept essentially 
+states that there should be some controller object that coordinates all system actions and operations, or in more complicated 
+cases, multiple controller objects that coordinate all related actions and system operations. We have a few separate controller 
+classes. First, we have the ProductController. This class responds to all admin API requests that relate to product management 
+through various methods, one to handle each request. Within these methods, the controller makes calls to the other software 
+layers, coordinating them to create the desired results. This shows the concept of Controller because we have one controller 
 object that is acting to coordinate the system actions for each request. The following diagram shows these relations well:
-![Controller Diagram](ControllerDiagram.PNG)
+![Controller Diagram 1](controller-diagram-1.PNG)
+
+We also have similar controllers for managing user creation and access, cart creation, access, and modification, and 
+a controller managing the current user. Each of these serves similar purposes for their respective domains. They 
+handle API requests to the particular kind of object being manipulated. Diagrams for each of those are shown below.
+![Controller Diagram 2](controller-diagram-2.PNG)
+![Controller Diagram 3](controller-diagram-3.PNG)
+![Controller Diagram 4](controller-diagram-4.PNG)
 
 Injection:
-Our system implementation also utilizes the object-oriented concept of Injection. Injection is the concept of creating an
-object needed down the line higher up in the hierarchy and injecting that down by passing it in as a parameter.
-Our system uses that in a few places, but one notable place shown in the UML diagram below is in the HeroController. 
-The heroDAO instance data of the HeroController is injected by the Spring Framework (This is underlined in red in the diagram). 
-This means that the HeroController only needs to deal with the higher level abstraction of the HeroDAO without having to 
-deal with the implementation specific HeroFileDAO. This is also good for our implementation, as we intend to eventually replace 
-the HeroFileDAO with a DatabaseDAO, and this will be easily possible by simply changing what type of thing the Spring Framework 
-instantiates. This implementation can also be improved by renaming variables to make them more relevant to our domain. 
-We will also need to replace some things to use a database instead of files.
-![Injection Diagram](injection-diagram.PNG)
+Our system implementation also utilizes the object-oriented concept of Injection. It utilized it in Sprint 1, 
+but here it has become even more important. Injection is the concept of creating an object needed down the line 
+higher up in the hierarchy and injecting that down by passing it in as a parameter.  Our system uses that in 
+quite a few places, notably, injection is used in each controller class. The respective DAO instance data of 
+each controller is injected by the Spring Framework (This is underlined in red in the diagrams below, one for 
+each controller). This means that the controllers only need to deal with the higher level abstraction of the DAOs 
+without having to deal with the implementation specific DAOs. This is also good for our implementation, as we intend 
+to eventually replace the FileDAOs we are currently using with DatabaseDAOs, and this will be easily possible by simply 
+changing what type of thing the Spring Framework instantiates.
+![Low Coupling Diagram 1](injection-diagram-1.PNG)
+![Low Coupling Diagram 2](injection-diagram-2.PNG)
+![Low Coupling Diagram 3](injection-diagram-3.PNG)
+![Low Coupling Diagram 4](injection-diagram-4.PNG)
 
-Low Coupling
+Low Coupling:
 Low coupling refers to keeping the number of relations within a program to only those that are
-necessary. This means eliminating unnecessary or possibly redundant references. In our current
-state of our project an example would be that the EstoreController file only imports the
-ProductDAO file and not both it and the ProductFileDAO as all the information that the controller
-would need from a ProductFileDAO could be obtained from the calls that it has to implement
-from the ProductDAO file. A possible future example in our project would be that instead of
-having the shopping cart and the E-store have a connection to both the inventory and the product listings
-to get each item, descriptions, and how many are left, they could only have a reference to the product 
-listings which then could access the inventory counts. This makes it so that by accessing the product 
-listings a file can by association have all the information on the listings instead of having to use multiple 
-references to gather all the information. Another example of this would be in our listings, as we will have 
-both standard listings in addition to auctions. Each of these listings would implement the listing class functions, 
-such as get price, get description, etc., which would allow the other parts of the program to only import the 
-listing class instead of both the standard listing and auction classes separately.
-![Low Coupling Diagram](injection-diagram.PNG)
+necessary. This means eliminating unnecessary or possibly redundant references. An example would be that the 
+EstoreController file only imports the ProductDAO file and not both it and the ProductFileDAO as all the 
+information that the controller would need from a ProductFileDAO could be obtained from the calls that it has to 
+implement from the ProductDAO file. Another example is that the CartController only has a CartDAO, and not a ProductDAO. 
+It is able to do everything it needs to do to manage carts without ever needing to understand what is actually in inventory. 
+It has the minimal coupling to the Product object type, because it does need to know what a product is. This coupling is 
+kept minimal by the frontend cleverly using the available information to keep the state consistent. Another example in our 
+project is that any controllers that have to do with users do not use any other DAOs besides the UserDAOs. The user controller 
+does not need to know what a product is or what a cart is at all, so there is no need to couple those objects. This is 
+because the frontend can decide the logic of creating equal numbers of carts and users, the DAOs need only keep the ids 
+consistent. A diagram illustrating the coupling between classes is included below.
+
+![Low Coupling Diagram 1](low-coupling-1)
+
+As shown in the diagram, there is very minimal coupling between classes. The only coupling occurring is that which is absolutely necessary for functionality.
 
 Open / Closed:
-The Open and Closed design principles specifically relate to appropriate use of abstract classes and interfaces 
-such that software is “extendable” without the base functions being directly modified. Our code currently 
-uses an interface “ProductDAO” (formally HeroDAO), which acts as a blueprint for all the methods that need 
-to be defined in any class that implements it. This means that multiple classes can implement it and have 
-different implementations, open for extension but closed for modification. Going forward, we can apply this design 
-in other parts of our e-store. For instance, when viewing the e-store, an administrator and a customer will have 
-different views. It could be worth making an interface or abstract class for a “viewer” which has the same basic 
-website view, but the administrator is able to view specific information or abilities to edit products. 
-![Open / Closed Diagram](open-closed-diagram.PNG)
+The Open and Closed design principles specifically relate to appropriate use of abstract classes and interfaces such 
+that software is “extendable” without the base functions being directly modified. Our code implements this in a few 
+places throughout the backend. All of the implementations are fairly similar, and relate to the various DAOs. For 
+example, the ProductDAO is an interface which any concrete implementation must implement. It acts as a blueprint for 
+all necessary methods any ProductDAO must have to be functional. Similarly, the UserDAO, CurrentUserDAO, and CartDAO 
+interfaces define what behaviors any concrete implementations of them must have. This lets them be closed to modification, 
+but open for easy extension.
+![Open / Closed Diagram 1](open-closed-diagram-1.PNG)
 
 
 > _**[Sprint 3 & 4]** OO Design Principles should span across **all tiers.**_
@@ -247,11 +254,8 @@ website view, but the administrator is able to view specific information or abil
 > and the results of the testing._
 
 ### Acceptance Testing
-> _**[Sprint 2 & 4]** Report on the number of user stories that have passed all their
-> acceptance criteria tests, the number that have some acceptance
-> criteria tests failing, and the number of user stories that
-> have not had any testing yet. Highlight the issues found during
-> acceptance testing and if there are any concerns._
+Sprint 2: 19 stories complete including stories related to the cart and user authentication in both front end and back end.
+All stories have been tested and all have passed their acceptence criteria.
 
 ### Unit Testing and Code Coverage
 > _**[Sprint 4]** Discuss your unit testing strategy. Report on the code coverage
@@ -259,6 +263,6 @@ website view, but the administrator is able to view specific information or abil
 > coverage targets, why you selected those values, and how well your
 > code coverage met your targets._
 
->_**[Sprint 2 & 4]** **Include images of your code coverage report.** If there are any anomalies, discuss
-> those._
+CartFileDAO has low branch coverage because tests were not created for one function within due to
+very low overall usage of the function.
 ![Code Coverage - Sprint 2](CodeCoverageSprint2.png)
