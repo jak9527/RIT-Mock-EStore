@@ -127,8 +127,11 @@ Both the ViewModel and Model are built using Java and Spring Framework. Details 
 This section describes the web interface flow; this is how the user views and interacts
 with the e-store application.
 
-> _Provide a summary of the application's user interface.  Describe, from
-> the user's perspective, the flow of the pages in the web application._
+The user first encounters the login page upon coming to the site, from here they cannot move on to another page until first logging in. 
+After logging in the navigation bar appears with a dashboard, product list page, a shopping cart (only if not an admin user), and login page 
+button, each which takes the user to the respective page. Then on any of the given pages with products listed, if a product item is clicked 
+the website takes the user to a details page on that product which still has the navigation bar but also contains a back button which 
+redirects the user back to the page where they clicked the product.
 
 
 ### View Tier
