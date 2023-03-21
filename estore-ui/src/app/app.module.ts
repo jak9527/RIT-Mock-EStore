@@ -11,6 +11,7 @@ import { DashboardComponent } from './dashboard/dashboard.component'; // <-- NgM
 import { HttpClientModule } from '@angular/common/http';
 import { ProductSearchComponent } from './product-search/product-search.component';
 import { LoginComponent } from './login/login.component';
+import { CartComponent } from './cart/cart.component';
 
 @NgModule({
   declarations: [
@@ -20,7 +21,8 @@ import { LoginComponent } from './login/login.component';
     MessagesComponent,
     DashboardComponent,
     ProductSearchComponent,
-    LoginComponent
+    LoginComponent,
+    CartComponent
   ],
   imports: [
     HttpClientModule,

@@ -12,20 +12,19 @@ import { catchError, map, tap } from 'rxjs/operators';
 @Injectable({
   providedIn: 'root'
 })
-export class UserService {
+export class CurrentUserService {
 
-    private usersUrl = 'http://localhost:8080/users'
+    private usersUrl = 'http://localhost:8080/currentUser'
 
     constructor(
         private http: HttpClient,
         private messageService: MessageService) { }
 
-    /** GET product by id. Will 404 if id not found */
-    getUser(username: string): Observable<User> {
-        const url = `${this.usersUrl}/${username}`;
-        return this.http.get<User>(url).pipe(
-            tap(_ => this.log(`fetched user username=${username}`)),
-            catchError(this.handleError<User>(`getUser username=${username}`))
+    /** GET current user. Will 404 if id not found */
+    getCurrentUser(): Observable<User> {
+        return this.http.get<User>(this.usersUrl).pipe(
+            tap(_ => this.log(`fetched current user`)),
+            catchError(this.handleError<User>(`getCurrentUser`))
         );
     }
 
@@ -60,11 +59,20 @@ export class UserService {
       };
 
     /** POST: add a new user to the server */
-    addUser(user: User): Observable<User> {
+    setCurrentUser(user: User): Observable<User> {
+        // this.log(user.username);
       return this.http.post<User>(this.usersUrl, user, this.httpOptions).pipe(
-        tap((newUser: User) => this.log(`added user w/ id=${newUser.id}`)),
-        catchError(this.handleError<User>('addUser'))
+        tap((newUser: User) => this.log(`set current user w/ id=${newUser.id}`)),
+        catchError(this.handleError<User>('setCurrentUser'))
       );
+    }
+
+    /** Delete current user. Will 404 if id not found */
+    deleteCurrentUser(): Observable<User> {
+        return this.http.delete<User>(this.usersUrl).pipe(
+            tap(_ => this.log(`deleted current user`)),
+            catchError(this.handleError<User>(`deleteCurrentUser`))
+        );
     }
 
 }

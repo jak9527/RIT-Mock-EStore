@@ -1,0 +1,14 @@
+<h2>My Cart</h2>
+<ul class="products">
+  <li *ngFor="let product of products | keyvalue">
+    <a routerLink="/detail/{{product.key}}">
+      <span class="badge">{{product.key}} : </span> {{product.value.name}} : ${{product.value.price}} : {{product.value.quantity}}
+    </a>
+    <button type="button" class="delete" title="decrement"
+    (click)="decrease(product.value)">decrease</button>
+    <button type="button" class="add" title="add"
+    (click)="add(product.value)">increase</button>
+    <button type="button" class="remove" title="remove"
+    (click)="remove(product.value)">remove</button>
+  </li>
+</ul>
