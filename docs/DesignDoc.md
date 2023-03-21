@@ -207,7 +207,9 @@ each controller is injected by the Spring Framework (This is underlined in red i
 each controller). This means that the controllers only need to deal with the higher level abstraction of the DAOs 
 without having to deal with the implementation specific DAOs. This is also good for our implementation, as we intend 
 to eventually replace the FileDAOs we are currently using with DatabaseDAOs, and this will be easily possible by simply 
-changing what type of thing the Spring Framework instantiates.
+changing what type of thing the Spring Framework instantiates. In our typescript files our angular components take the user 
+service files as injections in order to have them handle the backend calls for them. This shows how our other software 
+layers, like our frontend angular app, also adhere to object oriented concepts.
 ![Low Coupling Diagram 1](injection-diagram-1.PNG)
 ![Low Coupling Diagram 2](injection-diagram-2.PNG)
 ![Low Coupling Diagram 3](injection-diagram-3.PNG)
@@ -227,7 +229,7 @@ does not need to know what a product is or what a cart is at all, so there is no
 because the frontend can decide the logic of creating equal numbers of carts and users, the DAOs need only keep the ids 
 consistent. A diagram illustrating the coupling between classes is included below.
 
-![Low Coupling Diagram 1](low-coupling-1)
+![Low Coupling Diagram 1](low-coupling-1.png)
 
 As shown in the diagram, there is very minimal coupling between classes. The only coupling occurring is that which is absolutely necessary for functionality.
 
