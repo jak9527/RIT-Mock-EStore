@@ -6,7 +6,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 /**
  * Represents a User entity
  * 
- * @author SWEN Faculty
+ * @author Jacob Karvelis jak9527
  */
 public class User {
     private static final Logger LOG = Logger.getLogger(User.class.getName());

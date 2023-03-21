@@ -8,7 +8,7 @@ import com.estore.api.estoreapi.model.Cart;
 /**
  * Defines the interface for Cart object persistence
  * 
- * @author SWEN Faculty
+ * @author Jacob Karvelis jak9527
  */
 public interface CartDAO {
     /**

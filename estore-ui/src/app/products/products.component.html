@@ -1,5 +1,5 @@
 <h2>My Products</h2>
-<div>
+<div *ngIf="isAdmin">
     <label for="new-product">Product name: </label>
     <input id="new-product" #productName />
   
@@ -7,13 +7,15 @@
     <button type="button" class="add-button" (click)="add(productName.value); productName.value=''">
       Add product
     </button>
-  </div>
+</div>
 <ul class="products">
     <li *ngFor="let product of products">
       <a routerLink="/detail/{{product.id}}">
         <span class="badge">{{product.id}}</span> {{product.name}}
       </a>
-      <button type="button" class="delete" title="delete product"
+      <button *ngIf="isAdmin" type="button" class="delete" title="delete product"
   (click)="delete(product)">x</button>
+  <button *ngIf="!isAdmin" type="button" class="add" title="add to cart"
+  (click)="addToCart(product)">add to cart</button>
     </li>
   </ul>
