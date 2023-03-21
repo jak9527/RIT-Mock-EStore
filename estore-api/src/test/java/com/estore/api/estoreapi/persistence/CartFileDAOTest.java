@@ -15,7 +15,7 @@ import java.io.IOException;
 
 import com.estore.api.estoreapi.model.Product;
 import com.estore.api.estoreapi.model.Cart;
-import com.estore.api.estoreapi.persistence.ProductFileDAO;
+import com.estore.api.estoreapi.persistence.ProductDBDAO;
 import com.estore.api.estoreapi.persistence.CartFileDAO;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
@@ -32,7 +32,7 @@ import java.util.HashMap;
  */
 @Tag("Persistence-tier")
 public class CartFileDAOTest {
-    ProductFileDAO productFileDAO;
+    ProductDBDAO productFileDAO;
     CartFileDAO cartFileDAO;
     Cart[] testCart;
     ObjectMapper mockObjectMapper;

@@ -24,7 +24,7 @@ import org.springframework.stereotype.Component;
  */
 @Component
 public class CartFileDAO implements CartDAO {
-    private static final Logger LOG = Logger.getLogger(ProductFileDAO.class.getName());
+    private static final Logger LOG = Logger.getLogger(ProductDBDAO.class.getName());
     Map<Integer, Cart> carts;// Provides a local cache of cart objects
                                             // So that we don't need to read from the file
                                             // each time
