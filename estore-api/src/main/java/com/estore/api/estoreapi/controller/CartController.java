@@ -38,7 +38,7 @@ public class CartController {
     /**
      * Creates a REST API controller to reponds to requests
      * 
-     * @param productDao The {@link CartDAO Cart Data Access Object} to perform CRUD operations
+     * @param cartDao The {@link CartDAO Cart Data Access Object} to perform CRUD operations
      * <br>
      * This dependency is injected by the Spring Framework
      */

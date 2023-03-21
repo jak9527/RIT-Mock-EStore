@@ -24,7 +24,7 @@ import org.junit.jupiter.api.Test;
 /**
  * Test the Product File DAO class
  * 
- * @author SWEN Faculty
+ * @author Zach Brown
  */
 @Tag("Persistence-tier")
 public class EstoreFileDAOTest {

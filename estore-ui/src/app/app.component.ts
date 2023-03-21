@@ -29,7 +29,7 @@ export class AppComponent implements OnInit{
 
   }
 
-  title = 'Rit Garage Sale';
+  title = 'RIT Garage Sale';
   currentUserExists = false;
 
   ngOnInit(): void {

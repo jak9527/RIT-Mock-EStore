@@ -20,7 +20,7 @@ import com.estore.api.estoreapi.persistence.ProductDAO;
 /**
  * Test the Product Controller class
  * 
- * @author SWEN Faculty
+ * @author Zach Brown
  */
 @Tag("Controller-tier")
 public class EstoreControllerTest {

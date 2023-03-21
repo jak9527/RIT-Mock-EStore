@@ -38,7 +38,7 @@ public class CartFileDAO implements CartDAO {
     private String filename;    // Filename to read from and write to
 
     /**
-     * Creates a Product File Data Access Object
+     * Creates a Cart File Data Access Object
      * 
      * @param filename Filename to read from and write to
      * @param objectMapper Provides JSON Object to/from Java Object serialization and deserialization
@@ -52,7 +52,7 @@ public class CartFileDAO implements CartDAO {
     }
 
     /**
-     * Generates the next id for a new {@linkplain Product product}
+     * Generates the next id for a new {@Cart Cart cart}
      * 
      * @return The next id
      */
@@ -97,9 +97,9 @@ public class CartFileDAO implements CartDAO {
     }
 
     /**
-     * Saves the {@linkplain Product products} from the map into the file as an array of JSON objects
+     * Saves the {@linkplain Cart cart} from the map into the file as an array of JSON objects
      * 
-     * @return true if the {@link Product products} were written successfully
+     * @return true if the {@link Cart cart} were written successfully
      * 
      * @throws IOException when file cannot be accessed or written to
      */
@@ -114,7 +114,7 @@ public class CartFileDAO implements CartDAO {
     }
 
     /**
-     * Loads {@linkplain Product products} from the JSON file into the map
+     * Loads {@linkplain Cart cart} from the JSON file into the map
      * <br>
      * Also sets next id to one more than the greatest id found in the file
      * 

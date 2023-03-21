@@ -23,7 +23,7 @@ import java.util.HashMap;
 /**
  * Test the Product Controller class
  * 
- * @author SWEN Faculty
+ * @author Jacob Karvelis
  */
 @Tag("Controller-tier")
 public class CartControllerTest {
@@ -31,8 +31,8 @@ public class CartControllerTest {
     private CartDAO mockCartDAO;
 
     /**
-     * Before each test, create a new ProductController object and inject
-     * a mock Product DAO
+     * Before each test, create a new CartController object and inject
+     * a mock Cart DAO
      */
     @BeforeEach
     public void setupCartController() {
@@ -61,11 +61,11 @@ public class CartControllerTest {
     }
 
     @Test
-    public void testGetCartNotFound() throws Exception { // createProduct may throw IOException
+    public void testGetCartNotFound() throws Exception { // getCart may throw IOException
         // Setup
         int cartId = 99;
-        // When the same id is passed in, our mock Product DAO will return null, simulating
-        // no product found
+        // When the same id is passed in, our mock Cart DAO will return null, simulating
+        // no cart found
         when(mockCartDAO.getCart(cartId)).thenReturn(null);
 
         // Invoke
@@ -76,10 +76,10 @@ public class CartControllerTest {
     }
 
     @Test
-    public void testGetCartHandleException() throws Exception { // createProduct may throw IOException
+    public void testGetCartHandleException() throws Exception { // getCart may throw IOException
         // Setup
         int cartId = 99;
-        // When getProduct is called on the Mock Product DAO, throw an IOException
+        // When getCart is called on the Mock Product DAO, throw an IOException
         doThrow(new IOException()).when(mockCartDAO).getCart(cartId);
 
         // Invoke
@@ -90,19 +90,19 @@ public class CartControllerTest {
     }
 
     /*****************************************************************
-     * The following tests will fail until all ProductController methods
+     * The following tests will fail until all CartController methods
      * are implemented.
      ****************************************************************/
 
     @Test
-    public void testCreateCart() throws IOException {  // createProduct may throw IOException
+    public void testCreateCart() throws IOException {  // createCart may throw IOException
         // Setup
         Product product = new Product(1, "Golisano Trees", 10, 10);
         HashMap<Integer, Product> expected_products = new HashMap<>() {{
             put(product.getId(), product);
         }};
         Cart cart = new Cart(99, expected_products);
-        // when createProduct is called, return true simulating successful
+        // when addCart is called, return true simulating successful
         // creation and save
         when(mockCartDAO.addCart(cart)).thenReturn(cart);
 
@@ -115,14 +115,14 @@ public class CartControllerTest {
     }
 
     @Test
-    public void testCreateCartFailed() throws IOException {  // createProduct may throw IOException
+    public void testCreateCartFailed() throws IOException {  // createCart may throw IOException
         // Setup
         Product product = new Product(1, "Golisano Trees", 10, 10);
         HashMap<Integer, Product> expected_products = new HashMap<>() {{
             put(product.getId(), product);
         }};
         Cart cart = new Cart(99, expected_products);
-        // when createProduct is called, return false simulating failed
+        // when createCart is called, return false simulating failed
         // creation and save
         when(mockCartDAO.addCart(cart)).thenReturn(null);
 
@@ -134,7 +134,7 @@ public class CartControllerTest {
     }
 
     @Test
-    public void testCreateCartHandleException() throws IOException {  // createProduct may throw IOException
+    public void testCreateCartHandleException() throws IOException {  // createCart may throw IOException
         // Setup
         Product product = new Product(1, "Golisano Trees", 10, 10);
         HashMap<Integer, Product> expected_products = new HashMap<>() {{
@@ -142,7 +142,7 @@ public class CartControllerTest {
         }};
         Cart cart = new Cart(99, expected_products);
 
-        // When createProduct is called on the Mock Product DAO, throw an IOException
+        // When createCart is called on the Mock Product DAO, throw an IOException
         doThrow(new IOException()).when(mockCartDAO).addCart(cart);
 
         // Invoke
@@ -153,7 +153,7 @@ public class CartControllerTest {
     }
 
     @Test
-    public void testAddProductToCart() throws IOException { // updateProduct may throw IOException
+    public void testAddProductToCart() throws IOException { // updateCart may throw IOException
         // Setup
         Product product = new Product(1, "Golisano Trees", 10, 10);
         HashMap<Integer, Product> expected_products = new HashMap<>() {{
@@ -161,7 +161,7 @@ public class CartControllerTest {
         }};
         Cart cart = new Cart(99, expected_products);
         Product newProduct = new Product(2, "Bricks", 5, 8);
-        // when updateProduct is called, return true simulating successful
+        // when updateCart is called, return true simulating successful
         // update and save
         when(mockCartDAO.addProduct(cart.getId(), newProduct)).thenReturn(newProduct);
         ResponseEntity<Product> response = cartController.addProductToCart(cart.getId(), newProduct);
@@ -175,7 +175,7 @@ public class CartControllerTest {
     }
 
     @Test
-    public void testAddProductToCartFailed() throws IOException { // updateProduct may throw IOException
+    public void testAddProductToCartFailed() throws IOException { // updateCart may throw IOException
         // Setup
         Product product = new Product(1, "Golisano Trees", 10, 10);
         HashMap<Integer, Product> expected_products = new HashMap<>() {{
@@ -183,7 +183,7 @@ public class CartControllerTest {
         }};
         Cart cart = new Cart(99, expected_products);
         Product newProduct = new Product(2, "Bricks", 5, 8);
-        // when updateProduct is called, return true simulating successful
+        // when updateCart is called, return true simulating successful
         // update and save
         when(mockCartDAO.addProduct(cart.getId(), newProduct)).thenReturn(null);
 
@@ -195,7 +195,7 @@ public class CartControllerTest {
     }
 
     @Test
-    public void testAddProductToCartHandleException() throws IOException { // updateProduct may throw IOException
+    public void testAddProductToCartHandleException() throws IOException { // updateCart may throw IOException
         // Setup
         Product product = new Product(1, "Golisano Trees", 10, 10);
         HashMap<Integer, Product> expected_products = new HashMap<>() {{
@@ -203,7 +203,7 @@ public class CartControllerTest {
         }};
         Cart cart = new Cart(99, expected_products);
         Product newProduct = new Product(2, "Bricks", 5, 8);
-        // When updateProduct is called on the Mock Pr DAO, throw an IOException
+        // When updateCart is called on the Mock Pr DAO, throw an IOException
         doThrow(new IOException()).when(mockCartDAO).addProduct(cart.getId(), newProduct);
 
         // Invoke
@@ -214,14 +214,14 @@ public class CartControllerTest {
     }
 
     @Test
-    public void testUpdateProductCount() throws IOException { // updateProduct may throw IOException
+    public void testUpdateProductCount() throws IOException { // updateCart may throw IOException
         // Setup
         Product product = new Product(1, "Golisano Trees", 10, 10);
         HashMap<Integer, Product> expected_products = new HashMap<>() {{
             put(product.getId(), product);
         }};
         Cart cart = new Cart(99, expected_products);
-        // when updateProduct is called, return true simulating successful
+        // when updateCart is called, return true simulating successful
         // update and save
         when(mockCartDAO.updateProductCount(cart.getId(), 1, 5)).thenReturn(product);
         ResponseEntity<Product> response = cartController.updateProductCount(cart.getId(), 1, 5);
@@ -235,14 +235,14 @@ public class CartControllerTest {
     }
 
     @Test
-    public void testUpdateProductCountFailed() throws IOException { // updateProduct may throw IOException
+    public void testUpdateProductCountFailed() throws IOException { // updateCart may throw IOException
         // Setup
         Product product = new Product(1, "Golisano Trees", 10, 10);
         HashMap<Integer, Product> expected_products = new HashMap<>() {{
             put(product.getId(), product);
         }};
         Cart cart = new Cart(99, expected_products);
-        // when updateProduct is called, return true simulating successful
+        // when updateCart is called, return true simulating successful
         // update and save
         when(mockCartDAO.updateProductCount(cart.getId(), 1, 5)).thenReturn(null);
 
@@ -254,14 +254,14 @@ public class CartControllerTest {
     }
 
     @Test
-    public void testUpdateProductCountHandleException() throws IOException { // updateProduct may throw IOException
+    public void testUpdateProductCountHandleException() throws IOException { // updateCart may throw IOException
         // Setup
         Product product = new Product(1, "Golisano Trees", 10, 10);
         HashMap<Integer, Product> expected_products = new HashMap<>() {{
             put(product.getId(), product);
         }};
         Cart cart = new Cart(99, expected_products);
-        // When updateProduct is called on the Mock Pr DAO, throw an IOException
+        // When updateCart is called on the Mock Pr DAO, throw an IOException
         doThrow(new IOException()).when(mockCartDAO).updateProductCount(cart.getId(), 1, 10);
 
         // Invoke
@@ -272,11 +272,11 @@ public class CartControllerTest {
     }
 
     @Test
-    public void testRemoveProduct() throws IOException { // deleteProduct may throw IOException
+    public void testRemoveProduct() throws IOException { // deleteCart may throw IOException
         // Setup
         int cartId = 99;
         int productId = 99;
-        // when deleteProduct is called return true, simulating successful deletion
+        // when deleteCart is called return true, simulating successful deletion
         when(mockCartDAO.removeProduct(cartId, productId)).thenReturn(true);
 
         // Invoke
@@ -287,11 +287,11 @@ public class CartControllerTest {
     }
 
     @Test
-    public void testRemoveProductNotFound() throws IOException { // deleteProduct may throw IOException
+    public void testRemoveProductNotFound() throws IOException { // deleteCart may throw IOException
         // Setup
         int cartId = 99;
         int productId = 99;
-        // when deleteProduct is called return false, simulating failed deletion
+        // when deleteCart is called return false, simulating failed deletion
         when(mockCartDAO.removeProduct(cartId, productId)).thenReturn(false);
 
         // Invoke
@@ -302,11 +302,11 @@ public class CartControllerTest {
     }
 
     @Test
-    public void testRemoveProductHandleException() throws IOException { // deleteProduct may throw IOException
+    public void testRemoveProductHandleException() throws IOException { // deleteCart may throw IOException
         // Setup
         int cartId = 99;
         int productId = 99;
-        // When deleteProduct is called on the Mock Product DAO, throw an IOException
+        // When deleteCart is called on the Mock Product DAO, throw an IOException
         doThrow(new IOException()).when(mockCartDAO).removeProduct(cartId, productId);
 
         // Invoke
