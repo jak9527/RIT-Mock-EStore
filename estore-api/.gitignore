@@ -32,3 +32,5 @@ build/
 .vscode/
 
 estore-api/src/main/resources/application.properties
+
+estore-ui/.angular/
