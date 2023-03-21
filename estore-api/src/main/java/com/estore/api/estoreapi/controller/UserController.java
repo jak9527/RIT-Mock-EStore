@@ -22,6 +22,7 @@ import java.util.logging.Logger;
  * method handler to the Spring framework
  * 
  * @author Ethan Meyers epm2875
+ * @author Jacob Karvelis jak9527
  */
 
  @RestController

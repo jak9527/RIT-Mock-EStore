@@ -7,11 +7,11 @@
 		<version>2.5.6</version>
 		<relativePath /> <!-- lookup parent from repository -->
 	</parent>
-	<groupId>com.heroes.api</groupId>
-	<artifactId>heroes-api</artifactId>
+	<groupId>com.estore.api</groupId>
+	<artifactId>estore-api</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>heroes-api</name>
-	<description>API for Tour of Heroes</description>
+	<name>estore-api</name>
+	<description>API for Estore</description>
 	<properties>
 		<java.version>11</java.version>
 		<jacoco.version>0.8.7</jacoco.version>
@@ -135,7 +135,7 @@
 						<id>model</id>
 						<configuration>
 							<footer>Model Tier</footer>
-							<title>Heroes API Model Tier Test Coverage</title>
+							<title>EStore API Model Tier Test Coverage</title>
 							<outputDirectory>target/site/jacoco/model</outputDirectory>
 						</configuration>
 						<goals>
@@ -175,7 +175,7 @@
 					  <descriptors>
 						<descriptor>src/assembly/zip.xml</descriptor>
 					  </descriptors>
-					  <finalName>heroes-api</finalName>
+					  <finalName>estore-api</finalName>
 					  <appendAssemblyId>false</appendAssemblyId>
 					</configuration>
 					<goals>

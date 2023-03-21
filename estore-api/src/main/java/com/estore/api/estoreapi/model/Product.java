@@ -9,7 +9,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 /**
  * Represents a Product entity
  * 
- * @author SWEN Faculty
+ * @author Zach Brown
  */
 @Document("products")
 public class Product {

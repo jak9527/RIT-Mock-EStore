@@ -26,7 +26,7 @@ import java.util.logging.Logger;
  * {@literal @}RestController Spring annotation identifies this class as a REST API
  * method handler to the Spring framework
  * 
- * @author SWEN Faculty
+ * @author Jacob Karvelis jak9527
  */
 
 @RestController
@@ -38,7 +38,7 @@ public class CartController {
     /**
      * Creates a REST API controller to reponds to requests
      * 
-     * @param productDao The {@link CartDAO Cart Data Access Object} to perform CRUD operations
+     * @param cartDao The {@link CartDAO Cart Data Access Object} to perform CRUD operations
      * <br>
      * This dependency is injected by the Spring Framework
      */
