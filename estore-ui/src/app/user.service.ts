@@ -20,22 +20,12 @@ export class UserService {
         private http: HttpClient,
         private messageService: MessageService) { }
 
-
-    /** GET products from the server */
-    getUsers(): Observable<User[]> {
-        return this.http.get<User[]>(this.usersUrl)
-            .pipe(
-            tap(_ => this.log('fetched users')),
-            catchError(this.handleError<User[]>('getUsers', []))
-        );
-    }
-
     /** GET product by id. Will 404 if id not found */
-    getUser(id: number): Observable<User> {
-        const url = `${this.usersUrl}/${id}`;
+    getUser(username: string): Observable<User> {
+        const url = `${this.usersUrl}/${username}`;
         return this.http.get<User>(url).pipe(
-            tap(_ => this.log(`fetched user id=${id}`)),
-            catchError(this.handleError<User>(`getProduct id=${id}`))
+            tap(_ => this.log(`fetched user username=${username}`)),
+            catchError(this.handleError<User>(`getUser username=${username}`))
         );
     }
 
