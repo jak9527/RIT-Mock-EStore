@@ -1,0 +1,18 @@
+<h2>Log-in</h2>
+<div>
+    <label for="Log-in">Username: </label>
+    <input id="username" #userName />
+  
+    <!-- (click) passes input value to add() and then clears the input -->
+    <button type="button" class="add-button" (click)="add(userName.value); userName.value=''">
+      Log-in
+    </button>
+    <div *ngIf="user">
+        <label for="CurrentUser">Current User: </label>
+        {{user.username}}
+        <button type="button" class="add-button" (click)="logout()">
+            Log-out
+          </button>
+    </div>
+
+  </div>

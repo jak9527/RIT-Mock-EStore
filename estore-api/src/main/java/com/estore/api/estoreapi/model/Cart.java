@@ -7,7 +7,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 /**
  * Represents a Cart entity
  * 
- * @author Jacob Karvelis
+ * @author Jacob Karvelis jak9527
  */
 public class Cart {
 

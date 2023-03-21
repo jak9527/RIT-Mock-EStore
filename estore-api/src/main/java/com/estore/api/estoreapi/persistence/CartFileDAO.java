@@ -20,7 +20,7 @@ import org.springframework.stereotype.Component;
  * {@literal @}Component Spring annotation instantiates a single instance of this
  * class and injects the instance into other classes as needed
  * 
- * @author Jacob Karvelis
+ * @author Jacob Karvelis jak9527
  */
 @Component
 public class CartFileDAO implements CartDAO {

@@ -10,6 +10,8 @@ import { AppRoutingModule } from './app-routing.module';
 import { DashboardComponent } from './dashboard/dashboard.component'; // <-- NgModel lives here
 import { HttpClientModule } from '@angular/common/http';
 import { ProductSearchComponent } from './product-search/product-search.component';
+import { LoginComponent } from './login/login.component';
+import { CartComponent } from './cart/cart.component';
 
 @NgModule({
   declarations: [
@@ -18,7 +20,9 @@ import { ProductSearchComponent } from './product-search/product-search.componen
     ProductDetailComponent,
     MessagesComponent,
     DashboardComponent,
-    ProductSearchComponent
+    ProductSearchComponent,
+    LoginComponent,
+    CartComponent
   ],
   imports: [
     HttpClientModule,

@@ -6,13 +6,13 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 /**
  * Represents a User entity
  * 
- * @author Jacob Karvelis
+ * @author Jacob Karvelis jak9527
  */
 public class User {
-    private static final Logger LOG = Logger.getLogger(Product.class.getName());
+    private static final Logger LOG = Logger.getLogger(User.class.getName());
 
     // Package private for tests
-    static final String STRING_FORMAT = "Item [id=%d, username=%s]";
+    static final String STRING_FORMAT = "User [id=%d, username=%s]";
 
     @JsonProperty("id") private int id;
     @JsonProperty("username") private String username;
@@ -46,7 +46,7 @@ public class User {
     public String getUsername() {return username;}
 
     /**
-     * Sets the name of the users - necessary for JSON object to Java object deserialization
+     * Sets the name of the user - necessary for JSON object to Java object deserialization
      * @param name The name of the user
      */
     public void setUsername(String username) {this.username = username;}
