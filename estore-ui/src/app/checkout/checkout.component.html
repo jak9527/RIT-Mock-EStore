@@ -1,0 +1,15 @@
+<h2>Checkout</h2>
+<ul class="products">
+  <li *ngFor="let product of products | keyvalue">
+    <a routerLink="/detail/{{product.key}}">
+      <span class="badge">{{product.key}} : </span> {{product.value.name}} : ${{product.value.price}} : {{product.value.quantity}}
+    </a>
+  </li>
+  <span class="total">total: ${{cart.total}} </span>
+  <span class="inputs">
+  Address: <input id="address"/>
+  Credit Card: <input id="credit-card"/>
+</span>
+</ul>
+<button type="button" class="checkout" title="checkout">checkout</button>
+<button type="button" (click)="goBack()">go back</button>

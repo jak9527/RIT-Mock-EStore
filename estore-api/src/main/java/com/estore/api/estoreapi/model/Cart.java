@@ -15,6 +15,7 @@ public class Cart {
     static final String STRING_FORMAT = "Cart [id=%d, products=%s]";
 
     @JsonProperty("id") private int id;
+    private int total;
     @JsonProperty("products") private HashMap<Integer, Product> products; //map product id to product
 
     /**
@@ -35,6 +36,7 @@ public class Cart {
     public Cart(@JsonProperty("id") int id, @JsonProperty("products") HashMap<Integer, Product> products) {
         this.id = id;
         this.products = products;
+        this.total = getTotal();
     }
 
     /**
@@ -57,5 +59,13 @@ public class Cart {
     @Override
     public String toString() {
         return String.format(STRING_FORMAT,id,products);
+    }
+
+    public int getTotal() {
+        total = 0;
+        for( Product product : this.products.values()) {
+            total += product.getPrice() * product.getQuantity();
+        }
+        return total;
     }
 }
