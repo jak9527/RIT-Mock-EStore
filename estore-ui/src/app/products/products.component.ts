@@ -41,23 +41,6 @@ export class ProductsComponent implements OnInit {
       .subscribe(products => this.products = products);
     }
 
-    addToCart(product: Product): void {
-      this.currentUserService.getCurrentUser().subscribe((user) => {
-          this.cartService.getCart(user.id).subscribe((cart => {
-            let what: string[] = Object.keys(cart.products)
-
-            if( what.includes(product.id.toString())) {
-              this.cartService.updateProductCount(user.id, product.id, 1).subscribe();
-              this.ngOnInit();
-            }
-            else {
-              this.cartService.addProductToCart(user.id, product).subscribe();
-              this.ngOnInit(); 
-            }
-            }))
-      });
-  }
-
     add(name: string): void {
         name = name.trim();
         if (!name) { return; }

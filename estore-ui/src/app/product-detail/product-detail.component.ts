@@ -62,7 +62,14 @@ export class ProductDetailComponent {
             }
             }))
       });
-  }
+      var temp = document.getElementsByTagName("template")[0];
+      var clon = temp.content.cloneNode(true);
+      document.body.appendChild(clon);
+      setTimeout(function(){
+        var old = document.getElementById("alert");
+        document.body.removeChild(old as Node);
+      }, 3000);
+    }
 
     save(): void {
         if (this.product) {
