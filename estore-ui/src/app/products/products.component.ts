@@ -40,13 +40,6 @@ export class ProductsComponent implements OnInit {
       .subscribe(products => this.products = products);
     }
 
-    addToCart(product: Product): void {
-      this.currentUserService.getCurrentUser().subscribe((user) => {
-            this.cartService.addProductToCart(user.id,product).subscribe();
-            this.ngOnInit();
-      });
-  }
-
     add(name: string): void {
         name = name.trim();
         if (!name) { return; }
