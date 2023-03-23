@@ -6,6 +6,7 @@ import { MessageService } from '../message.service';
 import { CartService } from '../cart.service';
 import { CurrentUserService } from '../currentUser.service';
 import { User } from '../user';
+import { MapType } from '@angular/compiler';
 
 @Component({
   selector: 'app-products',
