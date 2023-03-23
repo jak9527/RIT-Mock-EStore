@@ -1,14 +1,5 @@
 <h2>Products</h2>
 <app-product-search></app-product-search>
-<div *ngIf="isAdmin">
-    <label for="new-product">Product name: </label>
-    <input id="new-product" #productName />
-  
-    <!-- (click) passes input value to add() and then clears the input -->
-    <button type="button" class="add-button" (click)="add(productName.value); productName.value=''">
-      Add product
-    </button>
-</div>
 <ul class="products">
     <li *ngFor="let product of products">
       <a routerLink="/detail/{{product.id}}">
@@ -18,3 +9,12 @@
   (click)="delete(product)">x</button>
     </li>
   </ul>
+  <div *ngIf="isAdmin">
+    <label for="new-product">Product name: </label>
+    <input id="new-product" #productName />
+  
+    <!-- (click) passes input value to add() and then clears the input -->
+    <button type="button" class="add-button" (click)="add(productName.value); productName.value=''">
+      Add product
+    </button>
+</div>
