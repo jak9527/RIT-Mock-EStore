@@ -6,6 +6,7 @@ import { MessageService } from '../message.service';
 import { CartService } from '../cart.service';
 import { CurrentUserService } from '../currentUser.service';
 import { User } from '../user';
+import { MapType } from '@angular/compiler';
 
 @Component({
   selector: 'app-products',
@@ -42,8 +43,18 @@ export class ProductsComponent implements OnInit {
 
     addToCart(product: Product): void {
       this.currentUserService.getCurrentUser().subscribe((user) => {
-            this.cartService.addProductToCart(user.id,product).subscribe();
-            this.ngOnInit();
+          this.cartService.getCart(user.id).subscribe((cart => {
+            let what: string[] = Object.keys(cart.products)
+
+            if( what.includes(product.id.toString())) {
+              this.cartService.updateProductCount(user.id, product.id, 1).subscribe();
+              this.ngOnInit();
+            }
+            else {
+              this.cartService.addProductToCart(user.id, product).subscribe();
+              this.ngOnInit(); 
+            }
+            }))
       });
   }
 
