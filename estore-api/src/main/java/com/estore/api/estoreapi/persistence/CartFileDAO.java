@@ -317,7 +317,7 @@ public class CartFileDAO implements CartDAO {
      * 
      * @throws IOException if the underlying storage could not be accessed
      */
-    public boolean updateCartHelper(int cId, Product[] products){
-        return true; //stubbed
-    }
+    // public boolean updateCartHelper(int cId, Product[] products){
+    //     return true; //stubbed
+    // }
 }
