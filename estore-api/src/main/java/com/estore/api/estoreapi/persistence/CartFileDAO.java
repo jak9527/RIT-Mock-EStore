@@ -260,12 +260,17 @@ public class CartFileDAO implements CartDAO {
      */
     @Override
     public boolean removeAllProducts(int cId){
-        carts.get(cId).getProducts().clear();
-        if(carts.get(cId).getProducts().size() == 0){
-            return true;
-        } else {
+        if(carts.containsKey(cId)){
+            carts.get(cId).getProducts().clear();
+            if(carts.get(cId).getProducts().size() == 0){
+                return true;
+            } else {
+                return false;
+            }
+        } else{
             return false;
         }
+        
     }
 
     /**
