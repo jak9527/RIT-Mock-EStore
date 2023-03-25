@@ -182,6 +182,15 @@ public class CartController {
         }
     }
 
+    /**
+     * updates the specified {@link Cart cart} with regards to the product list
+     * 
+     * @param cId The id of the cart to update
+     * 
+     * @return ResponseEntity the {@link Product product} object and HTTP status of OK if updated<br>
+     * ResponseEntity with HTTP status of NOT_FOUND if not found<br>
+     * ResponseEntity with HTTP status of INTERNAL_SERVER_ERROR otherwise
+     */
     @PutMapping(value = "/{cid}", params = "cId")
     public ResponseEntity<Product> updateProducts(@PathVariable int cId) {
         LOG.info("UPDATE /cart/" + cId);
