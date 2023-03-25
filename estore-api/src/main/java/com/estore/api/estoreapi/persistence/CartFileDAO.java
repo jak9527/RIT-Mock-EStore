@@ -251,4 +251,30 @@ public class CartFileDAO implements CartDAO {
                 return false;
         }
     }
+
+    /**
+    ** {@inheritDoc}
+     */
+    @Override
+    public boolean updateCart(int cId, Product[] products) throws IOException {
+            return true; //stubbed
+    }
+
+    /**
+     * Helper for update cart, will take an array of {@linkplain Product products} as well as a cart id}
+     * And update all products in the product array that are in the cart, removing any from the cart that
+     * are not in the product array
+     * 
+     * @param cId The id of the cart to update
+     * @param products The array of products to update from
+     * 
+     * @return true if the update was successful
+     * <br>
+     * false if it was not
+     * 
+     * @throws IOException if the underlying storage could not be accessed
+     */
+    public boolean updateCartHelper(int cId, Product[] products){
+        return true; //stubbed
+    }
 }
