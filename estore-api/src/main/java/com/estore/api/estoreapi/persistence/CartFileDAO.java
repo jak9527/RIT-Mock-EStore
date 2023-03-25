@@ -261,45 +261,51 @@ public class CartFileDAO implements CartDAO {
     @Override
     public boolean updateCart(int cId, Product[] products) throws IOException {
         synchronized(carts){
-            Cart currentCart = carts.get(cId);
-            HashMap<Integer, Product> productsInCart = currentCart.getProducts();
-            //match for all products in the store that are in the cart
-            for(Product prod : products){
-                //if this cart has a product with the id of the current product
-                if(currentCart.getProducts().containsKey(prod.getId())){
-                    Product currentProduct = currentCart.getProducts().get(prod.getId());
-                    //if the quantity in cart is greater than stock, clamp it
-                    if(currentProduct.getQuantity() > prod.getQuantity()){
-                        if(prod.getQuantity()==0){
-                            //if there are none in stock, remove it from the cart
-                            removeProduct(cId, prod.getId());
-                        } else{
-                            currentProduct.setQuantity(prod.getQuantity());
+            if(carts.containsKey(cId)){
+                Cart currentCart = carts.get(cId);
+                HashMap<Integer, Product> productsInCart = currentCart.getProducts();
+                //match for all products in the store that are in the cart
+                for(Product prod : products){
+                    //if this cart has a product with the id of the current product
+                    if(currentCart.getProducts().containsKey(prod.getId())){
+                        Product currentProduct = currentCart.getProducts().get(prod.getId());
+                        //if the quantity in cart is greater than stock, clamp it
+                        if(currentProduct.getQuantity() > prod.getQuantity()){
+                            if(prod.getQuantity()==0){
+                                //if there are none in stock, remove it from the cart
+                                removeProduct(cId, prod.getId());
+                            } else{
+                                currentProduct.setQuantity(prod.getQuantity());
+                            }
                         }
+                        //reset the price
+                        currentProduct.setPrice(prod.getPrice());
+                        //reset the name
+                        currentProduct.setName(prod.getName());
                     }
-                    //reset the price
-                    currentProduct.setPrice(prod.getPrice());
-                    //reset the name
-                    currentProduct.setName(prod.getName());
                 }
-            }
-            //find products in the cart that are not in the store anymore
-            List<Product> prodList = Arrays.asList(products);
-            int[] idsToRemove = new int[productsInCart.size()];
-            int i = 0;
-            for(Product prod : productsInCart.values()){
-                //if it is, add its id to out list of ids to remove
-                if(!prodList.contains(prod)){
-                    idsToRemove[i] = prod.getId();
-                    ++i;
+                //find products in the cart that are not in the store anymore
+                List<Product> prodList = Arrays.asList(products);
+                int[] idsToRemove = new int[productsInCart.size()];
+                int i = 0;
+                for(Product prod : productsInCart.values()){
+                    //if it is, add its id to out list of ids to remove
+                    if(!prodList.contains(prod)){
+                        idsToRemove[i] = prod.getId();
+                        ++i;
+                    }
                 }
-            }
-            //remove them
-            for(int j : idsToRemove){
-                removeProduct(cId, j);
+                //remove them
+                for(int j : idsToRemove){
+                    removeProduct(cId, j);
+                }
+                //cart existed and we updated
+                return true;
+            } else {
+                //cart doesn't exist
+                return false;
             }
         }
-        return true; //stubbed
     }
 
     /**
