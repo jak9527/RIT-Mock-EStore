@@ -286,14 +286,21 @@ public class CartFileDAO implements CartDAO {
                 }
                 //find products in the cart that are not in the store anymore
                 List<Product> prodList = Arrays.asList(products);
+                
                 int[] idsToRemove = new int[productsInCart.size()];
-                int i = 0;
+                
+                int k = 0;
                 for(Product prod : productsInCart.values()){
                     //if it is, add its id to out list of ids to remove
-                    if(!prodList.contains(prod)){
-                        idsToRemove[i] = prod.getId();
-                        ++i;
+                    for(int i = 0; i < prodList.size(); i++){
+                        if(prodList.get(i).getId() == prod.getId()){
+                            idsToRemove[k] = prod.getId();
+                        }
                     }
+                    // if(!prodList.contains(prod.getId())){
+                    //     idsToRemove[i] = prod.getId();
+                    //     ++i;
+                    // }
                 }
                 //remove them
                 for(int j : idsToRemove){
