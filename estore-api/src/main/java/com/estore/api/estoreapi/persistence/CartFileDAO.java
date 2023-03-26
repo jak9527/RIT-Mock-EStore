@@ -290,13 +290,19 @@ public class CartFileDAO implements CartDAO {
                 int[] idsToRemove = new int[productsInCart.size()];
                 
                 int k = 0;
+                boolean seen = false;
                 for(Product prod : productsInCart.values()){
                     //if it is, add its id to out list of ids to remove
                     for(int i = 0; i < prodList.size(); i++){
                         if(prodList.get(i).getId() == prod.getId()){
-                            idsToRemove[k] = prod.getId();
+                            seen = true;
                         }
                     }
+                    if(!seen){
+                        idsToRemove[k] = prod.getId();
+                        ++k;
+                    }
+                    seen = true;
                     // if(!prodList.contains(prod.getId())){
                     //     idsToRemove[i] = prod.getId();
                     //     ++i;
