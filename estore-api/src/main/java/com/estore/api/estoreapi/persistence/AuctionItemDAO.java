@@ -75,4 +75,5 @@ public interface AuctionItemDAO {
      * @throws IOException if underlying storage cannot be accessed
      */
     boolean deleteAuction(int id) throws IOException;
+
 }

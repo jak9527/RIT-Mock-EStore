@@ -22,7 +22,7 @@ public class AuctionItem {
     @JsonProperty("id") private int id;
     @JsonProperty("product") private Product product;
     @JsonProperty("endTime") private LocalDateTime endTime;
-    @JsonProperty("maxBid") private float maxBid;
+    @JsonProperty("maxBid") private Bid maxBid;
 
     /**
      * Create an auction item with the given id, product, and end time
@@ -35,7 +35,7 @@ public class AuctionItem {
      * is not provided in the JSON object, the Java field gets the default Java
      * value, i.e. 0 for int
      */
-    public AuctionItem(@JsonProperty("id") int id, @JsonProperty("product") Product product, @JsonProperty("endTime") LocalDateTime endTime, @JsonProperty("maxBid") float maxBid) {
+    public AuctionItem(@JsonProperty("id") int id, @JsonProperty("product") Product product, @JsonProperty("endTime") LocalDateTime endTime, @JsonProperty("maxBid") Bid maxBid) {
         this.id = id;
         this.endTime = endTime;
         this.product = product;
@@ -76,7 +76,7 @@ public class AuctionItem {
      * Gets the current max bid
      * @return The current max bid
      */
-    public float getMaxBid(){
+    public Bid getMaxBid(){
         return this.maxBid;
     }
 
@@ -84,7 +84,7 @@ public class AuctionItem {
      * Sets the current max bid to the given value
      * @return void
      */
-    public void setMaxBid(float maxBid){
+    public void setMaxBid(Bid maxBid){
         this.maxBid = maxBid;
     }
 
