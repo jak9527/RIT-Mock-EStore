@@ -110,7 +110,7 @@ public class CartController {
      * ResponseEntity with HTTP status of NOT_FOUND if not found<br>
      * ResponseEntity with HTTP status of INTERNAL_SERVER_ERROR otherwise
      */
-    @PutMapping(value = "/{cId}", params = {"cId", "product"})
+    @PutMapping("/{cId}")
     public ResponseEntity<Product> addProductToCart(@PathVariable int cId, @RequestBody Product product) {
         LOG.info("PUT /cart " + product);
         try {
@@ -192,9 +192,9 @@ public class CartController {
      * ResponseEntity with HTTP status of NOT_FOUND if not found<br>
      * ResponseEntity with HTTP status of INTERNAL_SERVER_ERROR otherwise
      */
-    @PutMapping(value = "/{cid}", params = "cId")
+    @PutMapping("/{cId}/{cId}")
     public ResponseEntity<Product> updateProducts(@PathVariable int cId) {
-        LOG.info("UPDATE /cart/" + cId);
+        LOG.info("UPDATE /cart/" + cId + "/" + cId);
 
         try {
             boolean updated = cartDao.updateCart(cId, productDao.getProducts());
