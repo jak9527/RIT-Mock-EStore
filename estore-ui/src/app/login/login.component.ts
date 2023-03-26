@@ -51,12 +51,14 @@ export class LoginComponent implements OnInit {
                     this.cart = newCart;
                 });
                 this.currentUserService.setCurrentUser(this.user).subscribe(empty => {this.userUpdate("login");});
-                
+                this.cartService.updateCart(this.user.id).subscribe();
               });
             
         }
         else{
             this.currentUserService.setCurrentUser(this.user).subscribe(empty => {this.userUpdate("login");});
+            this.cartService.updateCart(this.user.id).subscribe();
+            console.log(this.user.id);
         }
         
     });

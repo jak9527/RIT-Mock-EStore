@@ -8,6 +8,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.TreeMap;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.logging.Logger;
 
 import com.estore.api.estoreapi.model.Product;
@@ -285,20 +286,49 @@ public class CartFileDAO implements CartDAO {
                     }
                 }
                 //find products in the cart that are not in the store anymore
-                List<Product> prodList = Arrays.asList(products);
-                int[] idsToRemove = new int[productsInCart.size()];
-                int i = 0;
+                // List<Product> prodList = Arrays.asList(products);
+
+                HashSet<Integer> idsInStore = new HashSet<>();
+                HashSet<Integer> idsToRemoveSet = new HashSet<>();
+                for(int i = 0; i < products.length; i++){
+                    idsInStore.add(products[i].getId());
+                }
+                
                 for(Product prod : productsInCart.values()){
-                    //if it is, add its id to out list of ids to remove
-                    if(!prodList.contains(prod)){
-                        idsToRemove[i] = prod.getId();
-                        ++i;
+                    if(!idsInStore.contains(prod.getId())){
+                        idsToRemoveSet.add(prod.getId());
                     }
                 }
-                //remove them
-                for(int j : idsToRemove){
-                    removeProduct(cId, j);
+
+                for(Integer id : idsToRemoveSet){
+                    removeProduct(cId, id);
                 }
+
+                // int[] idsToRemove = new int[productsInCart.size()];
+                
+                // int k = 0;
+                // boolean seen = false;
+                // for(Product prod : productsInCart.values()){
+                //     //if it is, add its id to out list of ids to remove
+                //     for(int i = 0; i < prodList.size(); i++){
+                //         if(prodList.get(i).getId() == prod.getId()){
+                //             seen = true;
+                //         }
+                //     }
+                //     if(!seen){
+                //         idsToRemove[k] = prod.getId();
+                //         ++k;
+                //     }
+                //     seen = true;
+                //     // if(!prodList.contains(prod.getId())){
+                //     //     idsToRemove[i] = prod.getId();
+                //     //     ++i;
+                //     // }
+                // }
+                // //remove them
+                // for(int j : idsToRemove){
+                //     removeProduct(cId, j);
+                // }
                 //cart existed and we updated
                 return true;
             } else {
