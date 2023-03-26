@@ -44,8 +44,9 @@ public class CartController {
      * <br>
      * This dependency is injected by the Spring Framework
      */
-    public CartController(CartDAO cartDao) {
-        this.cartDao= cartDao;
+    public CartController(CartDAO cartDao, ProductDAO productDAO) {
+        this.cartDao = cartDao;
+        this.productDao = productDAO;
     }
 
     /**
