@@ -1,8 +1,11 @@
 package com.estore.api.estoreapi.persistence;
 
+import java.time.LocalDateTime;
+
 import java.io.IOException;
 
 import com.estore.api.estoreapi.model.Product;
+import com.estore.api.estoreapi.model.AuctionItem;
 
 /**
  * Defines the interface for Auction Item object persistence
@@ -23,40 +26,53 @@ public interface AuctionItemDAO {
     Product getProduct() throws IOException;
 
     /**
-     * Creates and saves a {@linkplain Product product}
+     * Retrieves the {@linkplain AuctionItem auction} currently running
      * 
-     * @param product {@linkplain Product product} object to be created and saved
+     * @return a {@link AuctionItem auction} representing the currently running auction
      * <br>
-     * The id of the product object is ignored and a new uniqe id is assigned
-     *
-     * @return new {@link Product product} if successful, false otherwise 
+     * null if no {@link AuctionItem auction} is currently running
      * 
      * @throws IOException if an issue with underlying storage
      */
-    Product createProduct(Product product) throws IOException;
+    AuctionItem getAuction() throws IOException;
 
     /**
-     * Updates and saves a {@linkplain Product product}
+     * Creates and saves a {@linkplain AuctionItem auction}
      * 
-     * @param {@link Product product} object to be updated and saved
+     * @param product {@linkplain Product product} object to be auctioned
+     * @param endTime the time the auction will close
+     * <br>
+     *
+     * @return new {@link AuctionItem auction} if successful, false otherwise 
      * 
-     * @return updated {@link Product product} if successful, null if
+     * @throws IOException if an issue with underlying storage
+     */
+    AuctionItem createAuction(Product product, LocalDateTime endTime) throws IOException;
+
+    /**
+     * Updates and saves a {@linkplain AuctionItem auction}
+     * 
+     * @param aId the id of the auction to update
+     * @param product {@linkplain Product product} object to replace the current one
+     * @param endTime the new time the auction will close
+     * 
+     * @return updated {@link AuctionItem auction} if successful, null if
      * {@link Product product} could not be found
      * 
      * @throws IOException if underlying storage cannot be accessed
      */
-    Product updateProduct(Product product) throws IOException;
+    Product updateAuction(int aId, Product product, LocalDateTime endTime) throws IOException;
 
     /**
-     * Deletes a {@linkplain Product product} with the given id
+     * Deletes a {@linkplain AuctionItem auction} with the given id
      * 
-     * @param id The id of the {@link Product product}
+     * @param id The id of the {@link AuctionItem auction}
      * 
-     * @return true if the {@link Product product} was deleted
+     * @return true if the {@link AuctionItem auction} was deleted
      * <br>
-     * false if product with the given id does not exist
+     * false if auction with the given id does not exist
      * 
      * @throws IOException if underlying storage cannot be accessed
      */
-    boolean deleteProduct(int id) throws IOException;
+    boolean deleteAuction(int id) throws IOException;
 }
