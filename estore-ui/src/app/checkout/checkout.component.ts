@@ -45,14 +45,8 @@ export class CheckoutComponent implements OnInit {
     }
 
     checkout(): void {
-        for (let count of this.products.keys()) {
-            /* this doesnt work */
-            var curProduct: Product = this.products.get(count) as Product;
-            curProduct.quantity = curProduct.quantity - count;
-            this.productService.updateProduct(curProduct).subscribe();
-
-        }
-        /* delete all cart items goes here */ 
+        this.cartService.checkoutProduct(this.cart.id).subscribe();
+        this.ngOnInit();
     }
 }
 

@@ -44,8 +44,9 @@ public class CartController {
      * <br>
      * This dependency is injected by the Spring Framework
      */
-    public CartController(CartDAO cartDao) {
+    public CartController(CartDAO cartDao, ProductDAO productDAO) {
         this.cartDao= cartDao;
+        this.productDao = productDAO;
     }
 
     /**
@@ -197,7 +198,11 @@ public class CartController {
         LOG.info("DELETE /cart/" +cId);
 
         try {
+            for( Product prod: cartDao.getCart(cId).getProducts().values()) {
+                productDao.checkoutProduct(prod.getId(), prod.getQuantity());
+            }
             boolean delete = cartDao.removeAllProducts(cId);
+
             if( !delete ) {
                 return new ResponseEntity<>(HttpStatus.NOT_FOUND);
             }
