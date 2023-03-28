@@ -1,7 +1,7 @@
 package com.estore.api.estoreapi.persistence;
 
 import java.io.IOException;
-import java.util.Optional;
+import java.util.UUID;
 
 import com.estore.api.estoreapi.model.Product;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -44,12 +44,7 @@ public class ProductDBDAO implements ProductDAO {
      */
     @Override
     public Product getProduct(int id) {
-        Optional<Product> opt = productRepo.findById(Integer.toString(id));
-        if(opt.isPresent()) { // Check if there was a value returned
-            return opt.get();
-        } else {
-            return null;
-        }
+        return productRepo.findById(id);
     }
 
     /**
@@ -57,6 +52,7 @@ public class ProductDBDAO implements ProductDAO {
     */
     @Override
     public Product createProduct(Product item) throws IOException {
+        item.setId(Math.abs(UUID.randomUUID().hashCode()));
         return productRepo.insert(item);
     }
 
@@ -78,8 +74,8 @@ public class ProductDBDAO implements ProductDAO {
      */
     @Override
     public boolean deleteProduct(int id) throws IOException {
-        if (productRepo.existsById(Integer.toString(id))) {
-            productRepo.deleteById(Integer.toString(id));
+        if (getProduct(id) != null) {
+            productRepo.delete(id);
             return true;
         } else {
             return false;

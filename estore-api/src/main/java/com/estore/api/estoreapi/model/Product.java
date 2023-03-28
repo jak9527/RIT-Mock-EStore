@@ -20,6 +20,7 @@ public class Product {
 
     @Id
     @JsonProperty("id") private int id;
+    
     @JsonProperty("name") private String name;
     @JsonProperty("price") private float price;
     @JsonProperty("quantity") private int quantity;
@@ -40,6 +41,12 @@ public class Product {
         this.quantity = quantity;
         this.price = price;
     }
+
+        /**
+     * Sets the id of the hero
+     * @return The id to set to the hero
+     */
+    public void setId(int id) {this.id = id;}
 
     /**
      * Retrieves the id of the product
