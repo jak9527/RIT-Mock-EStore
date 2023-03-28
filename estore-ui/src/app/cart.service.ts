@@ -87,6 +87,17 @@ export class CartService {
           );
     }
 
+
+    /** DELETE: checkout the cart from the server */
+    checkoutProduct(cId: number): Observable<Cart> {
+      const url = `${this.cartsUrl}/${cId}`;
+      console.log(url);
+
+      return this.http.delete<Cart>(url, this.httpOptions).pipe(
+      tap(_ => this.log(`checkout cart id=${cId}`)),
+      catchError(this.handleError<Cart>('checkoutProduct'))
+      );
+
     /** PUT: update a cart on the server */
     updateCart(cId: number): Observable<Cart> {
       return this.http.put<Cart>(this.cartsUrl+`/${cId}/${cId}`, null, this.httpOptions).pipe(

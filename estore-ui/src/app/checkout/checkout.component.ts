@@ -4,6 +4,7 @@ import { CartService } from '../cart.service';
 import { CurrentUserService } from '../currentUser.service';
 import { Product } from '../product';
 import { Location } from '@angular/common';
+import { ProductService } from '../product.service';
 
 @Component({
   selector: 'app-checkout',
@@ -21,6 +22,7 @@ export class CheckoutComponent implements OnInit {
     constructor(
         private cartService: CartService,
         private location: Location,
+        private productService: ProductService,
         private currentUserService: CurrentUserService
       ) {}
 
@@ -41,5 +43,11 @@ export class CheckoutComponent implements OnInit {
     goBack(): void {
         this.location.back();
     }
+
+    checkout(): void {
+        this.cartService.checkoutProduct(this.cart.id).subscribe();
+        this.ngOnInit();
+    }
+
 }
 
