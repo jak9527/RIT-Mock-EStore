@@ -264,9 +264,7 @@ public class CartFileDAO implements CartDAO {
     public boolean removeAllProducts(int cId) throws IOException{
         synchronized(carts){
             if(carts.containsKey(cId)){
-                for( Product prod: carts.get(cId).getProducts().values()) {
-                    removeProduct(cId, prod.getId());
-                }
+                carts.get(cId).getProducts().clear();
                 if(carts.get(cId).getProducts().size() == 0){
                     return true;
                 } else {
