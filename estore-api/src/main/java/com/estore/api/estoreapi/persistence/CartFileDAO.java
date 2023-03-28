@@ -308,8 +308,7 @@ public class CartFileDAO implements CartDAO {
                     }
                 }
                 //find products in the cart that are not in the store anymore
-                // List<Product> prodList = Arrays.asList(products);
-
+                
                 HashSet<Integer> idsInStore = new HashSet<>();
                 HashSet<Integer> idsToRemoveSet = new HashSet<>();
                 for(int i = 0; i < products.length; i++){
@@ -325,32 +324,7 @@ public class CartFileDAO implements CartDAO {
                 for(Integer id : idsToRemoveSet){
                     removeProduct(cId, id);
                 }
-
-                // int[] idsToRemove = new int[productsInCart.size()];
                 
-                // int k = 0;
-                // boolean seen = false;
-                // for(Product prod : productsInCart.values()){
-                //     //if it is, add its id to out list of ids to remove
-                //     for(int i = 0; i < prodList.size(); i++){
-                //         if(prodList.get(i).getId() == prod.getId()){
-                //             seen = true;
-                //         }
-                //     }
-                //     if(!seen){
-                //         idsToRemove[k] = prod.getId();
-                //         ++k;
-                //     }
-                //     seen = true;
-                //     // if(!prodList.contains(prod.getId())){
-                //     //     idsToRemove[i] = prod.getId();
-                //     //     ++i;
-                //     // }
-                // }
-                // //remove them
-                // for(int j : idsToRemove){
-                //     removeProduct(cId, j);
-                // }
                 //cart existed and we updated
                 return true;
             } else {
@@ -359,23 +333,4 @@ public class CartFileDAO implements CartDAO {
             }
         }
     }
-
-    /**
-     * MIGHT NOT NEED THIS, IN FACT PROBBY WONT
-     * Helper for update cart, will take an array of {@linkplain Product products} as well as a cart id}
-     * And update all products in the product array that are in the cart, removing any from the cart that
-     * are not in the product array
-     * 
-     * @param cId The id of the cart to update
-     * @param products The array of products to update from
-     * 
-     * @return true if the update was successful
-     * <br>
-     * false if it was not
-     * 
-     * @throws IOException if the underlying storage could not be accessed
-     */
-    // public boolean updateCartHelper(int cId, Product[] products){
-    //     return true; //stubbed
-    // }
 }
