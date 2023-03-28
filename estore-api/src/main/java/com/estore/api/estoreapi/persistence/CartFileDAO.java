@@ -260,6 +260,25 @@ public class CartFileDAO implements CartDAO {
     ** {@inheritDoc}
      */
     @Override
+    public boolean removeAllProducts(int cId){
+        synchronized(carts){
+            if(carts.containsKey(cId)){
+                carts.get(cId).getProducts().clear();
+                if(carts.get(cId).getProducts().size() == 0){
+                    return true;
+                } else {
+                    return false;
+                }
+            } else{
+                return false;
+            }
+        }
+    }
+
+    /**
+    ** {@inheritDoc}
+     */
+    @Override
     public boolean updateCart(int cId, Product[] products) throws IOException {
         synchronized(carts){
             if(carts.containsKey(cId)){
