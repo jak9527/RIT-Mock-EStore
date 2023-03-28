@@ -48,5 +48,6 @@ export class CheckoutComponent implements OnInit {
         this.cartService.checkoutProduct(this.cart.id).subscribe();
         this.ngOnInit();
     }
+
 }
 

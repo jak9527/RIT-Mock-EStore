@@ -45,7 +45,8 @@ public class CartController {
      * This dependency is injected by the Spring Framework
      */
     public CartController(CartDAO cartDao, ProductDAO productDAO) {
-        this.cartDao= cartDao;
+
+        this.cartDao = cartDao;
         this.productDao = productDAO;
     }
 
@@ -110,7 +111,7 @@ public class CartController {
      * ResponseEntity with HTTP status of NOT_FOUND if not found<br>
      * ResponseEntity with HTTP status of INTERNAL_SERVER_ERROR otherwise
      */
-    @PutMapping(value = "/{cId}", params = {"cId", "product"})
+    @PutMapping("/{cId}")
     public ResponseEntity<Product> addProductToCart(@PathVariable int cId, @RequestBody Product product) {
         LOG.info("PUT /cart " + product);
         try {
@@ -182,7 +183,6 @@ public class CartController {
             return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
-
     /**
      * Removes all {@linkplain Product products} from the cart with the given id
      * Simulates checking out
@@ -214,9 +214,18 @@ public class CartController {
         }
     }
 
-    @PutMapping(value = "/{cid}", params = "cId")
+    /**
+     * updates the specified {@link Cart cart} with regards to the product list
+     * 
+     * @param cId The id of the cart to update
+     * 
+     * @return ResponseEntity the {@link Product product} object and HTTP status of OK if updated<br>
+     * ResponseEntity with HTTP status of NOT_FOUND if not found<br>
+     * ResponseEntity with HTTP status of INTERNAL_SERVER_ERROR otherwise
+     */
+    @PutMapping("/{cId}/{cId}")
     public ResponseEntity<Product> updateProducts(@PathVariable int cId) {
-        LOG.info("UPDATE /cart/" + cId);
+        LOG.info("UPDATE /cart/" + cId + "/" + cId);
 
         try {
             boolean updated = cartDao.updateCart(cId, productDao.getProducts());
