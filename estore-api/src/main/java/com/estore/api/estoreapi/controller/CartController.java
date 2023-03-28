@@ -182,6 +182,32 @@ public class CartController {
             return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
+    /**
+     * Removes all {@linkplain Product products} from the cart with the given id
+     * Simulates checking out
+     * 
+     * @param cId The id of the Cart to checkout
+     * 
+     * @return ResponseEntity HTTP status of OK if all products removed<br>
+     * ResponseEntity with HTTP status of NOT_FOUND if not found or failed to remove all products<br>
+     * ResponseEntity with HTTP status of INTERNAL_SERVER_ERROR otherwise
+     */
+    @DeleteMapping("/{cId}")
+    public ResponseEntity<Product> checkout(@PathVariable int cId) {
+        LOG.info("DELETE /cart/" +cId);
+
+        try {
+            boolean delete = cartDao.removeAllProducts(cId);
+            if( !delete ) {
+                return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+            }
+            return new ResponseEntity<>(HttpStatus.OK);
+        }
+        catch(IOException e) {
+            LOG.log(Level.SEVERE,e.getLocalizedMessage());
+            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
 
     /**
      * updates the specified {@link Cart cart} with regards to the product list
