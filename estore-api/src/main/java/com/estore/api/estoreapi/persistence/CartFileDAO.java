@@ -3,8 +3,11 @@ package com.estore.api.estoreapi.persistence;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 import java.util.Map;
 import java.util.TreeMap;
+import java.util.HashMap;
 import java.util.logging.Logger;
 
 import com.estore.api.estoreapi.model.Product;
@@ -251,4 +254,89 @@ public class CartFileDAO implements CartDAO {
                 return false;
         }
     }
+
+    /**
+    ** {@inheritDoc}
+     */
+    @Override
+    public boolean removeAllProducts(int cId){
+        synchronized(carts){
+            if(carts.containsKey(cId)){
+                carts.get(cId).getProducts().clear();
+                if(carts.get(cId).getProducts().size() == 0){
+                    return true;
+                } else {
+                    return false;
+                }
+            } else{
+                return false;
+            }
+        }
+    }
+
+    /**
+    ** {@inheritDoc}
+     */
+    @Override
+    public boolean updateCart(int cId, Product[] products) throws IOException {
+        synchronized(carts){
+            Cart currentCart = carts.get(cId);
+            HashMap<Integer, Product> productsInCart = currentCart.getProducts();
+            //match for all products in the store that are in the cart
+            for(Product prod : products){
+                //if this cart has a product with the id of the current product
+                if(currentCart.getProducts().containsKey(prod.getId())){
+                    Product currentProduct = currentCart.getProducts().get(prod.getId());
+                    //if the quantity in cart is greater than stock, clamp it
+                    if(currentProduct.getQuantity() > prod.getQuantity()){
+                        if(prod.getQuantity()==0){
+                            //if there are none in stock, remove it from the cart
+                            removeProduct(cId, prod.getId());
+                        } else{
+                            currentProduct.setQuantity(prod.getQuantity());
+                        }
+                    }
+                    //reset the price
+                    currentProduct.setPrice(prod.getPrice());
+                    //reset the name
+                    currentProduct.setName(prod.getName());
+                }
+            }
+            //find products in the cart that are not in the store anymore
+            List<Product> prodList = Arrays.asList(products);
+            int[] idsToRemove = new int[productsInCart.size()];
+            int i = 0;
+            for(Product prod : productsInCart.values()){
+                //if it is, add its id to out list of ids to remove
+                if(!prodList.contains(prod)){
+                    idsToRemove[i] = prod.getId();
+                    ++i;
+                }
+            }
+            //remove them
+            for(int j : idsToRemove){
+                removeProduct(cId, j);
+            }
+        }
+        return true; //stubbed
+    }
+
+    /**
+     * MIGHT NOT NEED THIS, IN FACT PROBBY WONT
+     * Helper for update cart, will take an array of {@linkplain Product products} as well as a cart id}
+     * And update all products in the product array that are in the cart, removing any from the cart that
+     * are not in the product array
+     * 
+     * @param cId The id of the cart to update
+     * @param products The array of products to update from
+     * 
+     * @return true if the update was successful
+     * <br>
+     * false if it was not
+     * 
+     * @throws IOException if the underlying storage could not be accessed
+     */
+    // public boolean updateCartHelper(int cId, Product[] products){
+    //     return true; //stubbed
+    // }
 }
