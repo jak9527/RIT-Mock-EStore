@@ -43,7 +43,7 @@ public class CartTest {
             put(product.getId(), product);
         }};
         String expected_string = String.format(Cart.STRING_FORMAT,id, expected_products);
-        Cart cart = new Cart(id,expected_products);
+        Cart cart = new Cart(id, expected_products);
 
         // Invoke
         String actual_string = cart.toString();
