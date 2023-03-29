@@ -1,9 +1,20 @@
 /* MessagesComponent's private CSS styles */
 h2 {
     color: #A80000;
+    font-size: xx-large;
     font-family: Arial, Helvetica, sans-serif;
     font-weight: lighter;
+    text-align: center;
+    filter: drop-shadow(.2px .2px .2px #000);
+    text-decoration:underline;
   }
+
+div {
+    margin: auto;
+    width: 50%;
+    padding: 10px;
+    text-align: center;
+}
   
   .clear {
     color: #333;

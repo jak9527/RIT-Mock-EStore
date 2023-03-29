@@ -45,6 +45,7 @@ public class CartController {
      * This dependency is injected by the Spring Framework
      */
     public CartController(CartDAO cartDao, ProductDAO productDAO) {
+
         this.cartDao = cartDao;
         this.productDao = productDAO;
     }
@@ -172,6 +173,36 @@ public class CartController {
 
         try {
             boolean delete = cartDao.removeProduct(cId, pId);
+            if( !delete ) {
+                return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+            }
+            return new ResponseEntity<>(HttpStatus.OK);
+        }
+        catch(IOException e) {
+            LOG.log(Level.SEVERE,e.getLocalizedMessage());
+            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+    /**
+     * Removes all {@linkplain Product products} from the cart with the given id
+     * Simulates checking out
+     * 
+     * @param cId The id of the Cart to checkout
+     * 
+     * @return ResponseEntity HTTP status of OK if all products removed<br>
+     * ResponseEntity with HTTP status of NOT_FOUND if not found or failed to remove all products<br>
+     * ResponseEntity with HTTP status of INTERNAL_SERVER_ERROR otherwise
+     */
+    @DeleteMapping("/{cId}")
+    public ResponseEntity<Product> checkout(@PathVariable int cId) {
+        LOG.info("DELETE /cart/" +cId);
+
+        try {
+            for( Product prod: cartDao.getCart(cId).getProducts().values()) {
+                productDao.checkoutProduct(prod.getId(), prod.getQuantity());
+            }
+            boolean delete = cartDao.removeAllProducts(cId);
+
             if( !delete ) {
                 return new ResponseEntity<>(HttpStatus.NOT_FOUND);
             }
