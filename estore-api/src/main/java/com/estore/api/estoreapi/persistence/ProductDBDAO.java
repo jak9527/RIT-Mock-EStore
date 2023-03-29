@@ -81,4 +81,10 @@ public class ProductDBDAO implements ProductDAO {
             return false;
         }
     }
+
+    @Override
+    public boolean checkoutProduct(int id, int quantity) throws IOException {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'checkoutProduct'");
+    }
 }
