@@ -1,5 +1,6 @@
 package com.estore.api.estoreapi.persistence;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 import org.springframework.boot.autoconfigure.couchbase.CouchbaseProperties.Io;
@@ -52,6 +53,14 @@ public interface AuctionItemDAO {
     AuctionItem getAuction(int aId) throws IOException;
 
     /**
+     * Get the ID of the currently running auction
+     * 
+     * @return The id of the currently running auction
+     * @throws IOException
+     */
+    int getAuctionID() throws IOException;
+
+    /**
      * Creates and saves a {@linkplain AuctionItem auction}
      * 
      * @param product {@linkplain Product product} object to be auctioned
@@ -94,6 +103,7 @@ public interface AuctionItemDAO {
     /**
      * Place a bid on the auction with the given aId
      * 
+     * @param aId The auction to place a bid on
      * @param user The user that placed this bid
      * @param bid The price they wanted to bid
      * @return true if the bid was placed
@@ -101,5 +111,24 @@ public interface AuctionItemDAO {
      * false if the bid was not placed due to being lower than the max bid
      * @throws IOException if underlying storage cannot be accessed
      */
-    boolean placeBid(User user, float bid) throws IOException;
+    boolean placeBid(int aId, User user, float bid) throws IOException;
+
+    /**
+     * Get the end time of the currently running Auction
+     * 
+     * @return The end time of the currently running auction or Null if
+     * there is no currently running auction.
+     * @throws IOException if underlying storage cannot be accessed
+     */
+    LocalDateTime getAuctionEnd() throws IOException;
+
+    /**
+     * Get the end time of the Auction with the given id
+     * 
+     * @param aId The id of the Auction to get the end of
+     * @return The end time of the auction with the given ID or
+     * null if no Auction with that ID can be found
+     * @throws IOException if underlying storage cannot be accessed
+     */
+    LocalDateTime getAuctionEnd(int aId) throws IOException;
 }
