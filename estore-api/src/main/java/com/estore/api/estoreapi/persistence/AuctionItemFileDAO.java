@@ -166,7 +166,17 @@ public class AuctionItemFileDAO implements AuctionItemDAO {
     @Override
     public boolean deleteAuction() throws IOException {
         // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'deleteAuction'");
+        synchronized(auctions){
+            if(auctions.size() == 0){
+                //no current auction
+                return false;
+            } else {
+                auctions.clear();
+                save();
+                return true;
+            }
+        }
+        // throw new UnsupportedOperationException("Unimplemented method 'deleteAuction'");
     }
 
     @Override
