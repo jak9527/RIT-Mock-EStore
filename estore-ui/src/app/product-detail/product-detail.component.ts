@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { Product } from '../product';
 import { ActivatedRoute } from '@angular/router';
 import { Location } from '@angular/common';
@@ -6,22 +6,25 @@ import { ProductService } from '../product.service';
 import { CurrentUserService } from '../currentUser.service';
 import { User } from '../user';
 import { CartService } from '../cart.service';
+import { CartComponent } from '../cart/cart.component';
+import { forkJoin, map, switchMap } from 'rxjs';
 
 @Component({
   selector: 'app-product-detail',
   templateUrl: './product-detail.component.html',
   styleUrls: ['./product-detail.component.css']
 })
-export class ProductDetailComponent {
-    @Input() product?: Product;
+export class ProductDetailComponent implements OnInit {
+    @Input() product!: Product;
     isAdmin: boolean = false;
+    disabledButton: boolean = false;
 
     constructor(
         private route: ActivatedRoute,
         private productService: ProductService,
         private currentUserService: CurrentUserService,
         private location: Location,
-        private cartService: CartService
+        private cartService: CartService,
       ) {}
 
     ngOnInit(): void {
@@ -34,6 +37,14 @@ export class ProductDetailComponent {
             } else {
                 this.isAdmin = false;
             }
+            this.cartService.getCart(curUser.id).subscribe(curCart => {
+              for( var value of Object.values(curCart.products)) {
+                this.disabledButton = false;
+                if( this.product.id == value.id && value.quantity == this.product.quantity) {
+                  this.disabledButton = true;
+                }
+              }
+            })
         });
     }
       
