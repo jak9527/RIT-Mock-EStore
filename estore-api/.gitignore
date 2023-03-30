@@ -33,4 +33,4 @@ build/
 
 estore-api/src/main/resources/application.properties
 
-estore-ui/.angular/
+estore-ui/.angular/**
