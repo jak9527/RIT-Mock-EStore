@@ -38,8 +38,8 @@ export class ProductDetailComponent implements OnInit {
                 this.isAdmin = false;
             }
             this.cartService.getCart(curUser.id).subscribe(curCart => {
+              this.disabledButton = false;
               for( var value of Object.values(curCart.products)) {
-                this.disabledButton = false;
                 if( this.product.id == value.id && value.quantity == this.product.quantity) {
                   this.disabledButton = true;
                 }
