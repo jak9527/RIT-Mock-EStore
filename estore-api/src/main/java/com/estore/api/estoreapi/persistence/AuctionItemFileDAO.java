@@ -117,8 +117,14 @@ public class AuctionItemFileDAO implements AuctionItemDAO {
 
     @Override
     public AuctionItem getAuction() throws IOException {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'getAuction'");
+        synchronized(auctions){
+            if(auctions.size()==1){
+                return (AuctionItem) auctions.values().toArray()[0];
+            } else {
+                return null;
+            }
+        }
+        // throw new UnsupportedOperationException("Unimplemented method 'getAuction'");
     }
 
     @Override
