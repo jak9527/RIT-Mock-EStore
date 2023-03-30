@@ -99,4 +99,26 @@ public interface CartDAO {
      * @throws IOException if underlying storage cannot be accessed
      */
     boolean removeProduct(int cId, int pId) throws IOException;
+
+    /**
+     * Removes all {@linkplain Product products} in the {@linkplain Cart cart} with the given id
+     * @param cId ID of cart to remove all products from 
+     * @return true if all products were removed, false otherwise
+     * @throws IOException
+     */
+    boolean removeAllProducts(int cId) throws IOException;
+
+    /**
+     * Updates a {@linkplain Cart cart} with regards to all given {@linkplain Product products}
+     * 
+     * @param cID The id of the Cart to update
+     * @param products The array of products to update against
+     * 
+     * @return true if the cart was successfully updated
+     * <br>
+     * false if there were no products to update
+     * 
+     * @throws IOException if underlying storage cannot be accessed
+     */
+    boolean updateCart(int cId, Product[] products) throws IOException;
 }

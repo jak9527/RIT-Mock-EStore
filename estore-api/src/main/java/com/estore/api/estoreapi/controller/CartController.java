@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.estore.api.estoreapi.model.Product;
 import com.estore.api.estoreapi.model.Cart;
 import com.estore.api.estoreapi.persistence.CartDAO;
+import com.estore.api.estoreapi.persistence.ProductDAO;
 
 import java.io.IOException;
 import java.util.logging.Level;
@@ -34,6 +35,7 @@ import java.util.logging.Logger;
 public class CartController {
     private static final Logger LOG = Logger.getLogger(EstoreController.class.getName());
     private CartDAO cartDao;
+    private ProductDAO productDao;
 
     /**
      * Creates a REST API controller to reponds to requests
@@ -42,8 +44,10 @@ public class CartController {
      * <br>
      * This dependency is injected by the Spring Framework
      */
-    public CartController(CartDAO cartDao) {
-        this.cartDao= cartDao;
+    public CartController(CartDAO cartDao, ProductDAO productDAO) {
+
+        this.cartDao = cartDao;
+        this.productDao = productDAO;
     }
 
     /**
@@ -170,6 +174,62 @@ public class CartController {
         try {
             boolean delete = cartDao.removeProduct(cId, pId);
             if( !delete ) {
+                return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+            }
+            return new ResponseEntity<>(HttpStatus.OK);
+        }
+        catch(IOException e) {
+            LOG.log(Level.SEVERE,e.getLocalizedMessage());
+            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+    /**
+     * Removes all {@linkplain Product products} from the cart with the given id
+     * Simulates checking out
+     * 
+     * @param cId The id of the Cart to checkout
+     * 
+     * @return ResponseEntity HTTP status of OK if all products removed<br>
+     * ResponseEntity with HTTP status of NOT_FOUND if not found or failed to remove all products<br>
+     * ResponseEntity with HTTP status of INTERNAL_SERVER_ERROR otherwise
+     */
+    @DeleteMapping("/{cId}")
+    public ResponseEntity<Product> checkout(@PathVariable int cId) {
+        LOG.info("DELETE /cart/" +cId);
+
+        try {
+            for( Product prod: cartDao.getCart(cId).getProducts().values()) {
+                productDao.checkoutProduct(prod.getId(), prod.getQuantity());
+            }
+            boolean delete = cartDao.removeAllProducts(cId);
+
+            if( !delete ) {
+                return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+            }
+            return new ResponseEntity<>(HttpStatus.OK);
+        }
+        catch(IOException e) {
+            LOG.log(Level.SEVERE,e.getLocalizedMessage());
+            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+
+    /**
+     * updates the specified {@link Cart cart} with regards to the product list
+     * 
+     * @param cId The id of the cart to update
+     * 
+     * @return ResponseEntity the {@link Product product} object and HTTP status of OK if updated<br>
+     * ResponseEntity with HTTP status of NOT_FOUND if not found<br>
+     * ResponseEntity with HTTP status of INTERNAL_SERVER_ERROR otherwise
+     */
+    @PutMapping("/{cId}/{cId}")
+    public ResponseEntity<Product> updateProducts(@PathVariable int cId) {
+        LOG.info("UPDATE /cart/" + cId + "/" + cId);
+
+        try {
+            boolean updated = cartDao.updateCart(cId, productDao.getProducts());
+            if( !updated ) {
                 return new ResponseEntity<>(HttpStatus.NOT_FOUND);
             }
             return new ResponseEntity<>(HttpStatus.OK);

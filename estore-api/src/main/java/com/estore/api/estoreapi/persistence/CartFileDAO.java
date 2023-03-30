@@ -3,8 +3,12 @@ package com.estore.api.estoreapi.persistence;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 import java.util.Map;
 import java.util.TreeMap;
+import java.util.HashMap;
+import java.util.HashSet;
 import java.util.logging.Logger;
 
 import com.estore.api.estoreapi.model.Product;
@@ -249,6 +253,82 @@ public class CartFileDAO implements CartDAO {
             }
             else
                 return false;
+        }
+    }
+
+    /**
+    ** {@inheritDoc}
+     * @throws IOException
+     */
+    @Override
+    public boolean removeAllProducts(int cId) throws IOException{
+        synchronized(carts){
+            if(carts.containsKey(cId)){
+                carts.get(cId).getProducts().clear();
+                if(carts.get(cId).getProducts().size() == 0){
+                    return true;
+                } else {
+                    return false;
+                }
+            } else{
+                return false;
+            }
+        }
+    }
+
+    /**
+    ** {@inheritDoc}
+     */
+    @Override
+    public boolean updateCart(int cId, Product[] products) throws IOException {
+        synchronized(carts){
+            if(carts.containsKey(cId)){
+                Cart currentCart = carts.get(cId);
+                HashMap<Integer, Product> productsInCart = currentCart.getProducts();
+                //match for all products in the store that are in the cart
+                for(Product prod : products){
+                    //if this cart has a product with the id of the current product
+                    if(currentCart.getProducts().containsKey(prod.getId())){
+                        Product currentProduct = currentCart.getProducts().get(prod.getId());
+                        //if the quantity in cart is greater than stock, clamp it
+                        if(currentProduct.getQuantity() > prod.getQuantity()){
+                            if(prod.getQuantity()==0){
+                                //if there are none in stock, remove it from the cart
+                                removeProduct(cId, prod.getId());
+                            } else{
+                                currentProduct.setQuantity(prod.getQuantity());
+                            }
+                        }
+                        //reset the price
+                        currentProduct.setPrice(prod.getPrice());
+                        //reset the name
+                        currentProduct.setName(prod.getName());
+                    }
+                }
+                //find products in the cart that are not in the store anymore
+                
+                HashSet<Integer> idsInStore = new HashSet<>();
+                HashSet<Integer> idsToRemoveSet = new HashSet<>();
+                for(int i = 0; i < products.length; i++){
+                    idsInStore.add(products[i].getId());
+                }
+                
+                for(Product prod : productsInCart.values()){
+                    if(!idsInStore.contains(prod.getId())){
+                        idsToRemoveSet.add(prod.getId());
+                    }
+                }
+
+                for(Integer id : idsToRemoveSet){
+                    removeProduct(cId, id);
+                }
+                
+                //cart existed and we updated
+                return true;
+            } else {
+                //cart doesn't exist
+                return false;
+            }
         }
     }
 }

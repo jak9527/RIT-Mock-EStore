@@ -213,4 +213,20 @@ public class ProductFileDAO implements ProductDAO {
                 return false;
         }
     }
+
+    /**
+    ** {@inheritDoc}
+    */
+    @Override
+    public boolean checkoutProduct(int id, int quantity) throws IOException {
+        synchronized(products) {
+            if (products.containsKey(id)) {
+                Product curProduct = products.get(id);
+                curProduct.setQuantity(curProduct.getQuantity() - quantity);
+                return save();
+            }
+            else
+                return false;
+        }
+    }
 }

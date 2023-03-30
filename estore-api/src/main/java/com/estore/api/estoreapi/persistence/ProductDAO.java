@@ -80,4 +80,18 @@ public interface ProductDAO {
      * @throws IOException if underlying storage cannot be accessed
      */
     boolean deleteProduct(int id) throws IOException;
+
+    /**
+     * checkouts a {@linkplain Product product} with the given quantity
+     * 
+     * @param id The id of the {@link Product product}
+     * @param quantity The # of the {@link Product product} being removed
+     * 
+     * @return true if the {@link Product product} was updated
+     * <br>
+     * 
+     * 
+     * @throws IOException if underlying storage cannot be accessed
+     */
+    boolean checkoutProduct(int id, int quantity) throws IOException;
 }

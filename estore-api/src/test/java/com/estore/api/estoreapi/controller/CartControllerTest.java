@@ -16,6 +16,7 @@ import org.springframework.http.ResponseEntity;
 import com.estore.api.estoreapi.controller.CartController;
 import com.estore.api.estoreapi.model.Cart;
 import com.estore.api.estoreapi.persistence.CartDAO;
+import com.estore.api.estoreapi.persistence.ProductDAO;
 import com.estore.api.estoreapi.model.Product;
 
 import java.util.HashMap;
@@ -29,6 +30,7 @@ import java.util.HashMap;
 public class CartControllerTest {
     private CartController cartController;
     private CartDAO mockCartDAO;
+    private ProductDAO mockProductDAO;
 
     /**
      * Before each test, create a new CartController object and inject
@@ -37,7 +39,8 @@ public class CartControllerTest {
     @BeforeEach
     public void setupCartController() {
         mockCartDAO = mock(CartDAO.class);
-        cartController = new CartController(mockCartDAO);
+        mockProductDAO = mock(ProductDAO.class);
+        cartController = new CartController(mockCartDAO, mockProductDAO);
 
     }
 
