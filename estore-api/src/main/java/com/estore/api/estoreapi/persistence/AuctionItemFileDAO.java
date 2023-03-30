@@ -8,6 +8,7 @@ import java.util.ConcurrentModificationException;
 import java.util.Map;
 import java.util.TreeMap;
 import java.util.logging.Logger;
+import java.time.LocalDateTime;
 
 import com.estore.api.estoreapi.model.AuctionItem;
 import com.estore.api.estoreapi.model.Bid;
@@ -182,13 +183,31 @@ public class AuctionItemFileDAO implements AuctionItemDAO {
     @Override
     public boolean placeBid(User user, float bid) throws IOException {
         // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'placeBid'");
+        synchronized(auctions){
+            if(auctions.size() == 0){
+                return false;
+            } else {
+                AuctionItem currentAuction = getAuction();
+                if(currentAuction.getMaxBid().getBidPrice() <= bid){
+                    return false;
+                } else {
+                    currentAuction.setMaxBid(new Bid(bid, user));
+                    auctions.put(currentAuction.getId(), currentAuction);
+                    save();
+                    return true;
+                }
+            }
+        }
+        // throw new UnsupportedOperationException("Unimplemented method 'placeBid'");
     }
 
     @Override
     public boolean auctionOver() throws IOException {
         // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'auctionOver'");
+        synchronized(auctions){
+            return getAuction().getEndTime().isBefore(LocalDateTime.now());
+        }
+        // throw new UnsupportedOperationException("Unimplemented method 'auctionOver'");
     }
 
 }
