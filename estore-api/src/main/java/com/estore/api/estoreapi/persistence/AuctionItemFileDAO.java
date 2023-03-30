@@ -19,7 +19,7 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
 /**
- * Implements the functionality for JSON file-based peristance for Users
+ * Implements the functionality for JSON file-based peristance for Auctions
  * 
  * {@literal @}Component Spring annotation instantiates a single instance of this
  * class and injects the instance into other classes as needed
@@ -28,18 +28,18 @@ import org.springframework.stereotype.Component;
  */
 @Component
 public class AuctionItemFileDAO implements AuctionItemDAO {
-    private static final Logger LOG = Logger.getLogger(UserFileDAO.class.getName());
-    Map<String,User> users;    // Provides a local cache of the User objects
+    private static final Logger LOG = Logger.getLogger(AuctionItemFileDAO.class.getName());
+    Map<Integer,AuctionItem> auctions;    // Provides a local cache of the Auction objects
                                 // so that we don't need to read from the file
                                 // each time
-    private ObjectMapper objectMapper;  // Provides conversion between Product
+    private ObjectMapper objectMapper;  // Provides conversion between Auction
                                         // objects and JSON text format written
                                         // to the file
-    private static int nextId;  // The next Id to assign to a new user
+    private static int nextId;  // The next Id to assign to a new auction
     private String filename;    // Filename to read from and write to
 
     /**
-     * Creates a User File Data Access Object
+     * Creates a Auction File Data Access Object
      * 
      * @param filename Filename to read from and write to
      * @param objectMapper Provides JSON Object to/from Java Object serialization and deserialization
@@ -49,52 +49,45 @@ public class AuctionItemFileDAO implements AuctionItemDAO {
     public AuctionItemFileDAO(@Value("${currentAuction.file}") String filename,ObjectMapper objectMapper) throws IOException {
         this.filename = filename;
         this.objectMapper = objectMapper;
-        load();  // load the users from the file
-        //delete all users (should only be one) from the file, making space for the new current user
-        // for(User user : users.values()){
-        //     deleteUser(user);
-        // }
-        if(users.size()!=0){
-            
-        }
+        load();  // load the auctions from the file
     }
 
     /**
-     * Generates an array of {@linkplain User users} from the tree map 
+     * Generates an array of {@linkplain AuctionItem auctions} from the tree map 
      * 
-     * @return  The array of {@link User users}, may be empty
+     * @return  The array of {@link AuctionItem auctions}, may be empty
      */
-    private User[] getUserArray() { // if containsText == null, no filter
-        ArrayList<User> userArrayList = new ArrayList<>();
+    private AuctionItem[] getAuctionArray() {
+        ArrayList<AuctionItem> auctionArrayList = new ArrayList<>();
 
-        for (User user : users.values()) {
-            userArrayList.add(user);
+        for (AuctionItem auction : auctions.values()) {
+            auctionArrayList.add(auction);
         }
 
-        User[] userArray = new User[userArrayList.size()];
-        userArrayList.toArray(userArray);
-        return userArray;
+        AuctionItem[] auctionArray = new AuctionItem[auctionArrayList.size()];
+        auctionArrayList.toArray(auctionArray);
+        return auctionArray;
     }
 
     /**
-     * Saves the {@linkplain User users} from the map into the file as an array of JSON objects
+     * Saves the {@linkplain AuctionItem auctions} from the map into the file as an array of JSON objects
      * 
-     * @return true if the {@link User users} were written successfully
+     * @return true if the {@link AuctionItem auctions} were written successfully
      * 
      * @throws IOException when file cannot be accessed or written to
      */
     private boolean save() throws IOException {
-        User[] userArray = getUserArray();
+        AuctionItem[] auctionArray = getAuctionArray();
 
         // Serializes the Java Objects to JSON objects into the file
         // writeValue will thrown an IOException if there is an issue
         // with the file or reading from the file
-        objectMapper.writeValue(new File(filename),userArray);
+        objectMapper.writeValue(new File(filename), auctionArray);
         return true;
     }
 
     /**
-     * Loads {@linkplain User users} from the JSON file into the map
+     * Loads {@linkplain AuctionItem auctions} from the JSON file into the map
      * <br>
      * Also sets next id to one more than the greatest id found in the file
      * 
@@ -103,19 +96,19 @@ public class AuctionItemFileDAO implements AuctionItemDAO {
      * @throws IOException when file cannot be accessed or read from
      */
     private boolean load() throws IOException {
-        users = new TreeMap<>();
+        auctions = new TreeMap<>();
         nextId = -1;
 
-        // Deserializes the JSON objects from the file into an array of products
+        // Deserializes the JSON objects from the file into an array of auctions
         // readValue will throw an IOException if there's an issue with the file
         // or reading from the file
-        User[] userArray = objectMapper.readValue(new File(filename),User[].class);
+        AuctionItem[] auctionArray = objectMapper.readValue(new File(filename),AuctionItem[].class);
 
-        // Add each product to the tree map and keep track of the greatest id
-        for (User user : userArray) {
-            users.put(user.getUsername(),user);
-            if (user.getId() > nextId)
-                nextId = user.getId();
+        // Add each auction to the tree map and keep track of the greatest id
+        for (AuctionItem auction : auctionArray) {
+            auctions.put(auction.getId(),auction);
+            if (auction.getId() > nextId)
+                nextId = auction.getId();
         }
         // Make the next id one greater than the maximum from the file
         ++nextId;
