@@ -130,7 +130,16 @@ public class AuctionItemFileDAO implements AuctionItemDAO {
     @Override
     public AuctionItem createAuction(int aId, Product product, LocalDateTime endTime, Bid maxBid) throws IOException {
         // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'createAuction'");
+        synchronized(auctions){
+            if(auctions.size() != 0){
+                deleteAuction();
+            }
+            AuctionItem newAuction = new AuctionItem(aId, product, endTime, maxBid);
+            auctions.put(aId, newAuction);
+            save();
+            return newAuction;
+        }
+        // throw new UnsupportedOperationException("Unimplemented method 'createAuction'");
     }
 
     @Override
