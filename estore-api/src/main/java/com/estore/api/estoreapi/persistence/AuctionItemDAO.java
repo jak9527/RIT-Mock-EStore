@@ -52,11 +52,11 @@ public interface AuctionItemDAO {
      * @param maxBid the new max bid
      * 
      * @return updated {@link AuctionItem auction} if successful, null if
-     * {@link Product product} could not be found
+     * {@link AuctionItem auction} is not currently running
      * 
      * @throws IOException if underlying storage cannot be accessed
      */
-    Product updateAuction(Product product, LocalDateTime endTime, Bid maxBid) throws IOException;
+    AuctionItem updateAuction(Product product, LocalDateTime endTime, Bid maxBid) throws IOException;
 
     /**
      * Deletes the currently running {@linkplain AuctionItem auction}
