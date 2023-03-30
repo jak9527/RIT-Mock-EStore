@@ -20,17 +20,6 @@ import com.estore.api.estoreapi.model.Bid;
 public interface AuctionItemDAO {
 
     /**
-     * Retrieves the {@linkplain Product product} from the currently running auction
-     * 
-     * @return a {@link Product product} object from the current auction
-     * <br>
-     * null if no {@link AuctionItem auction} is currently running
-     * 
-     * @throws IOException if an issue with underlying storage
-     */
-    Product getProduct() throws IOException;
-
-    /**
      * Retrieves the {@linkplain AuctionItem auction} currently running
      * 
      * @return a {@link AuctionItem auction} representing the currently running auction
@@ -42,68 +31,47 @@ public interface AuctionItemDAO {
     AuctionItem getAuction() throws IOException;
 
     /**
-     * Retrieves the {@linkplain AuctionItem auction} with the given aId
-     * 
-     * @return a {@link AuctionItem auction} with the given aId
-     * <br>
-     * null if no {@link AuctionItem auction} exists with that aId
-     * 
-     * @throws IOException if an issue with underlying storage
-     */
-    AuctionItem getAuction(int aId) throws IOException;
-
-    /**
-     * Get the ID of the currently running auction
-     * 
-     * @return The id of the currently running auction
-     * @throws IOException
-     */
-    int getAuctionID() throws IOException;
-
-    /**
      * Creates and saves a {@linkplain AuctionItem auction}
      * 
+     * @param aId the id for the auction to be created
      * @param product {@linkplain Product product} object to be auctioned
      * @param endTime the time the auction will close
-     * <br>
+     * @param maxBid the {@linkplain Bid bid} that is the max for this auction
      *
      * @return new {@link AuctionItem auction} if successful, false otherwise 
      * 
      * @throws IOException if an issue with underlying storage
      */
-    AuctionItem createAuction(Product product, LocalDateTime endTime) throws IOException;
+    AuctionItem createAuction(int aId, Product product, LocalDateTime endTime, Bid maxBid) throws IOException;
 
     /**
-     * Updates and saves a {@linkplain AuctionItem auction}
+     * Updates and saves the currently running {@linkplain AuctionItem auction}
      * 
-     * @param aId the id of the auction to update
      * @param product {@linkplain Product product} object to replace the current one
      * @param endTime the new time the auction will close
+     * @param maxBid the new max bid
      * 
      * @return updated {@link AuctionItem auction} if successful, null if
      * {@link Product product} could not be found
      * 
      * @throws IOException if underlying storage cannot be accessed
      */
-    Product updateAuction(int aId, Product product, LocalDateTime endTime) throws IOException;
+    Product updateAuction(Product product, LocalDateTime endTime, Bid maxBid) throws IOException;
 
     /**
-     * Deletes a {@linkplain AuctionItem auction} with the given id
-     * 
-     * @param id The id of the {@link AuctionItem auction}
+     * Deletes the currently running {@linkplain AuctionItem auction}
      * 
      * @return true if the {@link AuctionItem auction} was deleted
      * <br>
-     * false if auction with the given id does not exist
+     * false if no auction is currently runnning
      * 
      * @throws IOException if underlying storage cannot be accessed
      */
-    boolean deleteAuction(int id) throws IOException;
+    boolean deleteAuction() throws IOException;
 
     /**
-     * Place a bid on the auction with the given aId
+     * Place a bid on the currently running auction
      * 
-     * @param aId The auction to place a bid on
      * @param user The user that placed this bid
      * @param bid The price they wanted to bid
      * @return true if the bid was placed
@@ -111,24 +79,18 @@ public interface AuctionItemDAO {
      * false if the bid was not placed due to being lower than the max bid
      * @throws IOException if underlying storage cannot be accessed
      */
-    boolean placeBid(int aId, User user, float bid) throws IOException;
+    boolean placeBid(User user, float bid) throws IOException;
 
     /**
-     * Get the end time of the currently running Auction
+     * Check if the currently running {@linkplain Aution auction}
+     * is past its end time.
      * 
-     * @return The end time of the currently running auction or Null if
-     * there is no currently running auction.
-     * @throws IOException if underlying storage cannot be accessed
+     * @return true if the auction is past its end time
+     * <br>
+     * false if it is not past the current auctions end or there 
+     * is no current auction
+     * @throws IOException
      */
-    LocalDateTime getAuctionEnd() throws IOException;
+    boolean auctionOver() throws IOException;
 
-    /**
-     * Get the end time of the Auction with the given id
-     * 
-     * @param aId The id of the Auction to get the end of
-     * @return The end time of the auction with the given ID or
-     * null if no Auction with that ID can be found
-     * @throws IOException if underlying storage cannot be accessed
-     */
-    LocalDateTime getAuctionEnd(int aId) throws IOException;
 }
