@@ -5,6 +5,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -85,7 +86,7 @@ public class AuctionController {
      * ResponseEntity with HTTP status of CONFLICT if {@link AuctionItem auction} conflict occurs<br>
      * ResponseEntity with HTTP status of INTERNAL_SERVER_ERROR otherwise
      */
-    @PostMapping("")
+    @PostMapping("/{aId}/{username}/{bid}/{endDateTime}")
     public ResponseEntity<AuctionItem> createAuction(@RequestBody Product product, @PathVariable int aId, 
     @PathVariable String username, @PathVariable String bid, @PathVariable String endDateTime){
         LOG.info("POST /auction/" + aId + "/" + username + "/" + bid + "/" + endDateTime + " " + product );
@@ -97,6 +98,29 @@ public class AuctionController {
             Bid maxBid = new Bid(bidPrice, username);
 
             AuctionItem newAuction = auctionDao.createAuction(aId, product, endDate, maxBid);
+            if( newAuction == null ) {
+                return new ResponseEntity<>(HttpStatus.CONFLICT);
+            }
+            return new ResponseEntity<AuctionItem>(newAuction,HttpStatus.CREATED);
+        }
+        catch(IOException e) {
+            LOG.log(Level.SEVERE,e.getLocalizedMessage());
+            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+
+    @PutMapping("/{username}/{bid}/{endDateTime}")
+    public ResponseEntity<AuctionItem> updateAuction(@RequestBody Product product,
+    @PathVariable String username, @PathVariable String bid, @PathVariable String endDateTime){
+        LOG.info("PUT /auction/" + username + "/" + bid + "/" + endDateTime + " " + product );
+        try {
+            DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy-MM-dd hh:mm:ss");
+            LocalDateTime endDate = LocalDateTime.parse(endDateTime, dtf);
+
+            float bidPrice = Float.parseFloat(bid);
+            Bid maxBid = new Bid(bidPrice, username);
+
+            AuctionItem newAuction = auctionDao.updateAuction(product, endDate, maxBid);
             if( newAuction == null ) {
                 return new ResponseEntity<>(HttpStatus.CONFLICT);
             }
