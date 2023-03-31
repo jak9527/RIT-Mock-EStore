@@ -72,14 +72,14 @@ public interface AuctionItemDAO {
     /**
      * Place a bid on the currently running auction
      * 
-     * @param user The user that placed this bid
+     * @param username The username of the user that placed this bid
      * @param bid The price they wanted to bid
      * @return true if the bid was placed
      * <br>
      * false if the bid was not placed due to being lower than the max bid
      * @throws IOException if underlying storage cannot be accessed
      */
-    boolean placeBid(User user, float bid) throws IOException;
+    boolean placeBid(String username, float bid) throws IOException;
 
     /**
      * Check if the currently running {@linkplain Aution auction}

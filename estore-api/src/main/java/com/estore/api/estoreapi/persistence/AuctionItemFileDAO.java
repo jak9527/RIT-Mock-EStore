@@ -181,7 +181,7 @@ public class AuctionItemFileDAO implements AuctionItemDAO {
     }
 
     @Override
-    public boolean placeBid(User user, float bid) throws IOException {
+    public boolean placeBid(String username, float bid) throws IOException {
         // TODO Auto-generated method stub
         synchronized(auctions){
             if(auctions.size() == 0){
@@ -191,7 +191,7 @@ public class AuctionItemFileDAO implements AuctionItemDAO {
                 if(currentAuction.getMaxBid().getBidPrice() <= bid){
                     return false;
                 } else {
-                    currentAuction.setMaxBid(new Bid(bid, user));
+                    currentAuction.setMaxBid(new Bid(bid, username));
                     auctions.put(currentAuction.getId(), currentAuction);
                     save();
                     return true;
