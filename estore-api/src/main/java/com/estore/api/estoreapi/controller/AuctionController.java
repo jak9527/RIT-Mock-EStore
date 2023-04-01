@@ -15,6 +15,7 @@ import com.estore.api.estoreapi.model.AuctionItem;
 import com.estore.api.estoreapi.model.Bid;
 import com.estore.api.estoreapi.model.Product;
 import com.estore.api.estoreapi.persistence.AuctionItemDAO;
+import com.fasterxml.jackson.databind.util.ArrayBuilders.BooleanBuilder;
 
 import java.io.IOException;
 import java.time.LocalDateTime;
@@ -88,14 +89,13 @@ public class AuctionController {
      */
     @PostMapping("/{aId}/{username}/{bid}/{endDateTime}")
     public ResponseEntity<AuctionItem> createAuction(@RequestBody Product product, @PathVariable int aId, 
-    @PathVariable String username, @PathVariable String bid, @PathVariable String endDateTime){
+    @PathVariable String username, @PathVariable float bid, @PathVariable String endDateTime){
         LOG.info("POST /auction/" + aId + "/" + username + "/" + bid + "/" + endDateTime + " " + product );
         try {
             DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy-MM-dd hh:mm:ss");
             LocalDateTime endDate = LocalDateTime.parse(endDateTime, dtf);
 
-            float bidPrice = Float.parseFloat(bid);
-            Bid maxBid = new Bid(bidPrice, username);
+            Bid maxBid = new Bid(bid, username);
 
             AuctionItem newAuction = auctionDao.createAuction(aId, product, endDate, maxBid);
             if( newAuction == null ) {
@@ -115,7 +115,7 @@ public class AuctionController {
      * @param product The product to replace the current product with
      * @param username The username of the user to replace the current max bid with
      * <br> this will likely be either the current one, or admin if they are resetting it
-     * @param bid The price of the current max bid. Either the current max, or whatever
+     * @param bid The price of the updated max bid. Either the current max, or whatever
      * <br> the desired minimum bid is for a new auction if the admin is making one
      * @param endDateTime The new end time in yyyy-MM-dd hh:mm:ss format
      * 
@@ -125,14 +125,13 @@ public class AuctionController {
      */
     @PutMapping("/{username}/{bid}/{endDateTime}")
     public ResponseEntity<AuctionItem> updateAuction(@RequestBody Product product,
-    @PathVariable String username, @PathVariable String bid, @PathVariable String endDateTime){
+    @PathVariable String username, @PathVariable float bid, @PathVariable String endDateTime){
         LOG.info("PUT /auction/" + username + "/" + bid + "/" + endDateTime + " " + product );
         try {
             DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy-MM-dd hh:mm:ss");
             LocalDateTime endDate = LocalDateTime.parse(endDateTime, dtf);
 
-            float bidPrice = Float.parseFloat(bid);
-            Bid maxBid = new Bid(bidPrice, username);
+            Bid maxBid = new Bid(bid, username);
 
             AuctionItem newAuction = auctionDao.updateAuction(product, endDate, maxBid);
             if( newAuction == null ) {
@@ -163,6 +162,33 @@ public class AuctionController {
                 return new ResponseEntity<>(HttpStatus.NOT_FOUND);
             }
             return new ResponseEntity<>(HttpStatus.OK);
+        }
+        catch(IOException e) {
+            LOG.log(Level.SEVERE,e.getLocalizedMessage());
+            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+
+    /**
+     * Attempts to place a new {@linkplain Bid bid} on the currently running
+     * {@linkplain AuctionItem auction} 
+     * 
+     * @param username The username of the user placing the auction
+     * @param bid The dollar amount of the bid
+     * @return ResponseEntity HTTP status of OK if the bid was placed<br>
+     * ResponseEntity with HTTP status of CONFLICT if the bid was too low<br>
+     * ResponseEntity with HTTP status of INTERNAL_SERVER_ERROR otherwise
+     */
+    @PutMapping("/{username}/{bid}")
+    public ResponseEntity<Bid> placeBid(@PathVariable String username, @PathVariable float bid){
+        LOG.info("PUT /auction/" + username + "/" + bid );
+        try {
+
+            boolean bidPlaced = auctionDao.placeBid(username, bid);
+            if( !bidPlaced ) {
+                return new ResponseEntity<>(HttpStatus.CONFLICT);
+            }
+            return new ResponseEntity<Bid>(new Bid(bid, username),HttpStatus.OK);
         }
         catch(IOException e) {
             LOG.log(Level.SEVERE,e.getLocalizedMessage());
