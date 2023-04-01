@@ -109,6 +109,20 @@ public class AuctionController {
         }
     }
 
+    /**
+     * Updates the currently running {@linkplain AuctionItem auction}
+     * 
+     * @param product The product to replace the current product with
+     * @param username The username of the user to replace the current max bid with
+     * <br> this will likely be either the current one, or admin if they are resetting it
+     * @param bid The price of the current max bid. Either the current max, or whatever
+     * <br> the desired minimum bid is for a new auction if the admin is making one
+     * @param endDateTime The new end time in yyyy-MM-dd hh:mm:ss format
+     * 
+     * @return ResponseEntity with updated {@link AuctionItem auction} object and HTTP status of CREATED<br>
+     * ResponseEntity with HTTP status of CONFLICT if {@link AuctionItem auction} conflict occurs<br>
+     * ResponseEntity with HTTP status of INTERNAL_SERVER_ERROR otherwise
+     */
     @PutMapping("/{username}/{bid}/{endDateTime}")
     public ResponseEntity<AuctionItem> updateAuction(@RequestBody Product product,
     @PathVariable String username, @PathVariable String bid, @PathVariable String endDateTime){
