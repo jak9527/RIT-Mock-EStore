@@ -81,7 +81,7 @@ public class AuctionController {
      * @param username The userName to set as the max bid
      * @param bid The max bid cost value as a string
      * @param endDateTime the end datetime as a string in the format
-     * yyyy-MM-dd hh:mm:ss
+     * yyyy-MM-dd-HH:mm:ss
      * 
      * @return ResponseEntity with created {@link AuctionItem auction} object and HTTP status of CREATED<br>
      * ResponseEntity with HTTP status of CONFLICT if {@link AuctionItem auction} conflict occurs<br>
@@ -92,7 +92,7 @@ public class AuctionController {
     @PathVariable String username, @PathVariable float bid, @PathVariable String endDateTime){
         LOG.info("POST /auction/" + aId + "/" + username + "/" + bid + "/" + endDateTime + " " + product );
         try {
-            DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy-MM-dd hh:mm:ss");
+            DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy-MM-dd-HH:mm:ss");
             LocalDateTime endDate = LocalDateTime.parse(endDateTime, dtf);
 
             Bid maxBid = new Bid(bid, username);
@@ -117,7 +117,7 @@ public class AuctionController {
      * <br> this will likely be either the current one, or admin if they are resetting it
      * @param bid The price of the updated max bid. Either the current max, or whatever
      * <br> the desired minimum bid is for a new auction if the admin is making one
-     * @param endDateTime The new end time in yyyy-MM-dd hh:mm:ss format
+     * @param endDateTime The new end time in yyyy-MM-dd-HH:mm:ss format
      * 
      * @return ResponseEntity with updated {@link AuctionItem auction} object and HTTP status of CREATED<br>
      * ResponseEntity with HTTP status of CONFLICT if {@link AuctionItem auction} conflict occurs<br>
@@ -128,7 +128,7 @@ public class AuctionController {
     @PathVariable String username, @PathVariable float bid, @PathVariable String endDateTime){
         LOG.info("PUT /auction/" + username + "/" + bid + "/" + endDateTime + " " + product );
         try {
-            DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy-MM-dd hh:mm:ss");
+            DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy-MM-dd-HH:mm:ss");
             LocalDateTime endDate = LocalDateTime.parse(endDateTime, dtf);
 
             Bid maxBid = new Bid(bid, username);

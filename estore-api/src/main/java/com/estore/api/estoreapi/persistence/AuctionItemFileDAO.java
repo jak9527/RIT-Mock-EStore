@@ -188,7 +188,7 @@ public class AuctionItemFileDAO implements AuctionItemDAO {
                 return false;
             } else {
                 AuctionItem currentAuction = getAuction();
-                if(currentAuction.getMaxBid().getBidPrice() <= bid){
+                if(currentAuction.getMaxBid().getBid() >= bid){
                     return false;
                 } else {
                     currentAuction.setMaxBid(new Bid(bid, username));

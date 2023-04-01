@@ -17,7 +17,7 @@ public class AuctionItem {
     private static final Logger LOG = Logger.getLogger(Product.class.getName());
 
     // Package private for tests
-    static final String STRING_FORMAT = "Auction Item [id=%d, product=%s, end time=%s]";
+    static final String STRING_FORMAT = "Auction Item [id=%d, product=%s, end time=%s, bid=%s]";
 
     @JsonProperty("id") private int id;
     @JsonProperty("product") private Product product;
@@ -39,6 +39,7 @@ public class AuctionItem {
         this.id = id;
         this.endTime = endTime;
         this.product = product;
+        System.out.println(maxBid);
         this.maxBid = maxBid;
     }
 
@@ -94,6 +95,6 @@ public class AuctionItem {
     @Override
     public String toString() {
         DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm:ss");
-        return String.format(STRING_FORMAT,id,product,dtf.format(endTime));
+        return String.format(STRING_FORMAT,id,product,dtf.format(endTime),maxBid);
     }
 }
