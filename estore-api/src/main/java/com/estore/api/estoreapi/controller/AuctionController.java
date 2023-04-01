@@ -196,4 +196,25 @@ public class AuctionController {
         }
     }
 
+    /**
+     * Returns a boolean representing if the currently running
+     *  {@linkplain AuctionItem auction} is past its end date
+     * 
+     * @return ResponseEntity with boolean result and
+     * HTTP status of OK if all is well<br>
+     * ResponseEntity with HTTP status of INTERNAL_SERVER_ERROR otherwise
+     */
+    @GetMapping("/{dummy}")
+    public ResponseEntity<Boolean> auctionOver(@PathVariable int dummy){
+        LOG.info("GET /auction/" + dummy);
+        try{
+            boolean auctionOver = auctionDao.auctionOver();
+            return new ResponseEntity<Boolean>(auctionOver, HttpStatus.OK);
+        }
+        catch(IOException e) {
+            LOG.log(Level.SEVERE,e.getLocalizedMessage());
+            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+
 }   

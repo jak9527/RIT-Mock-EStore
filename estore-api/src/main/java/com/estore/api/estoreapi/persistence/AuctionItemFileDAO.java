@@ -205,6 +205,9 @@ public class AuctionItemFileDAO implements AuctionItemDAO {
     public boolean auctionOver() throws IOException {
         // TODO Auto-generated method stub
         synchronized(auctions){
+            if(getAuction() == null){
+                return false;
+            }
             return getAuction().getEndTime().isBefore(LocalDateTime.now());
         }
         // throw new UnsupportedOperationException("Unimplemented method 'auctionOver'");
