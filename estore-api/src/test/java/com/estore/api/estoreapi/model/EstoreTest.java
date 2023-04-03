@@ -21,7 +21,7 @@ public class EstoreTest {
         String expected_name = "Wi-Fire";
 
         // Invoke
-        Product product = new Product(expected_id,expected_name, 10, 10);
+        Product product = new Product(expected_id,expected_name, 10, 10, "");
 
         // Analyze
         assertEquals(expected_id,product.getId());
@@ -33,7 +33,7 @@ public class EstoreTest {
         // Setup
         int id = 99;
         String name = "Wi-Fire";
-        Product product = new Product(id,name, 10, 10);
+        Product product = new Product(id,name, 10, 10, "");
 
         String expected_name = "Galactic Agent";
 
@@ -50,7 +50,7 @@ public class EstoreTest {
         int id = 99;
         String name = "Wi-Fire";
         String expected_string = String.format(Product.STRING_FORMAT,id,name);
-        Product product = new Product(id,name, 10, 10);
+        Product product = new Product(id,name, 10, 10, "");
 
         // Invoke
         String actual_string = product.toString();

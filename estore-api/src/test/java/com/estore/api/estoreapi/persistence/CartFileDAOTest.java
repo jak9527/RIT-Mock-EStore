@@ -47,19 +47,19 @@ public class CartFileDAOTest {
         mockObjectMapper = mock(ObjectMapper.class);
         testCart = new Cart[3];
 
-        Product product1 = new Product(1, "Golisano Trees", 10, 10);
+        Product product1 = new Product(1, "Golisano Trees", 10, 10, "");
         HashMap<Integer, Product> map1 = new HashMap<>() {{
             put(product1.getId(), product1);
         }};
         testCart[0] = new Cart(1, map1 );
 
-        Product product2 = new Product(2, "The Sentinel", 100000, 1);
+        Product product2 = new Product(2, "The Sentinel", 100000, 1, "");
         HashMap<Integer, Product> map2 = new HashMap<>() {{
             put(product2.getId(), product2);
         }};
         testCart[1] = new Cart(2, map2);
 
-        Product product3 = new Product(3, "RIT Bricks", 5, 8700000);
+        Product product3 = new Product(3, "RIT Bricks", 5, 8700000, "");
         HashMap<Integer, Product> map3 = new HashMap<>() {{
             put(product3.getId(), product3);
         }};
@@ -88,7 +88,7 @@ public class CartFileDAOTest {
             .when(mockObjectMapper)
                 .writeValue(any(File.class),any(Cart[].class));
 
-        Product product1 = new Product(1, "Test", 1, 1);
+        Product product1 = new Product(1, "Test", 1, 1, "");
         HashMap<Integer, Product> map1 = new HashMap<>() {{
             put(product1.getId(), product1);
         }};
@@ -129,7 +129,7 @@ public class CartFileDAOTest {
     @Test
     public void testAddProduct() {
         // Setup
-        Product item = new Product(102,"Wonder-Brick", 4, 4);
+        Product item = new Product(102,"Wonder-Brick", 4, 4, "");
 
         // Invoke
         Product result = assertDoesNotThrow(() -> cartFileDAO.addProduct(1, item),
@@ -145,7 +145,7 @@ public class CartFileDAOTest {
     @Test
     public void testAddCart(){
         // Setup
-        Product product = new Product(50, "Bricks", 10, 10);
+        Product product = new Product(50, "Bricks", 10, 10, "");
         HashMap<Integer, Product> map = new HashMap<>() {{
             put(product.getId(), product);
         }};

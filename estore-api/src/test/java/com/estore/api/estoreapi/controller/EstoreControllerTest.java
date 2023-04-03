@@ -40,7 +40,7 @@ public class EstoreControllerTest {
     @Test
     public void testGetProduct() throws IOException {  // getProduct may throw IOException
         // Setup
-        Product product = new Product(99,"Galactic Agent", 1, 1);
+        Product product = new Product(99,"Galactic Agent", 1, 1, "");
         // When the same id is passed in, our mock Product DAO will return the Product object
         when(mockProductDAO.getProduct(product.getId())).thenReturn(product);
 
@@ -89,7 +89,7 @@ public class EstoreControllerTest {
     @Test
     public void testCreateProduct() throws IOException {  // createProduct may throw IOException
         // Setup
-        Product product = new Product(99,"Wi-Fire", 2, 2);
+        Product product = new Product(99,"Wi-Fire", 2, 2, "");
         // when createProduct is called, return true simulating successful
         // creation and save
         when(mockProductDAO.createProduct(product)).thenReturn(product);
@@ -105,7 +105,7 @@ public class EstoreControllerTest {
     @Test
     public void testCreateProductFailed() throws IOException {  // createProduct may throw IOException
         // Setup
-        Product product = new Product(99,"Bolt", 3, 3);
+        Product product = new Product(99,"Bolt", 3, 3, "");
         // when createProduct is called, return false simulating failed
         // creation and save
         when(mockProductDAO.createProduct(product)).thenReturn(null);
@@ -120,7 +120,7 @@ public class EstoreControllerTest {
     @Test
     public void testCreateProductHandleException() throws IOException {  // createProduct may throw IOException
         // Setup
-        Product product = new Product(99,"Ice Gladiator", 4, 4);
+        Product product = new Product(99,"Ice Gladiator", 4, 4, "");
 
         // When createProduct is called on the Mock Product DAO, throw an IOException
         doThrow(new IOException()).when(mockProductDAO).createProduct(product);
@@ -135,7 +135,7 @@ public class EstoreControllerTest {
     @Test
     public void testUpdateProduct() throws IOException { // updateProduct may throw IOException
         // Setup
-        Product product = new Product(99,"Wi-Fire", 5, 5);
+        Product product = new Product(99,"Wi-Fire", 5, 5, "");
         // when updateProduct is called, return true simulating successful
         // update and save
         when(mockProductDAO.updateProduct(product)).thenReturn(product);
@@ -153,7 +153,7 @@ public class EstoreControllerTest {
     @Test
     public void testUpdateProductFailed() throws IOException { // updateProduct may throw IOException
         // Setup
-        Product product = new Product(99,"Galactic Agent", 6, 6);
+        Product product = new Product(99,"Galactic Agent", 6, 6, "");
         // when updateProduct is called, return true simulating successful
         // update and save
         when(mockProductDAO.updateProduct(product)).thenReturn(null);
@@ -168,7 +168,7 @@ public class EstoreControllerTest {
     @Test
     public void testUpdateProductHandleException() throws IOException { // updateProduct may throw IOException
         // Setup
-        Product product = new Product(99,"Galactic Agent", 7, 7);
+        Product product = new Product(99,"Galactic Agent", 7, 7, "");
         // When updateProduct is called on the Mock Pr DAO, throw an IOException
         doThrow(new IOException()).when(mockProductDAO).updateProduct(product);
 
@@ -183,8 +183,8 @@ public class EstoreControllerTest {
     public void testGetProducts() throws IOException { // getProducts may throw IOException
         // Setup
         Product[] products = new Product[2];
-        products[0] = new Product(99,"Bolt", 8, 8);
-        products[1] = new Product(100,"The Great Iguana", 9, 9);
+        products[0] = new Product(99,"Bolt", 8, 8, "");
+        products[1] = new Product(100,"The Great Iguana", 9, 9, "");
         // When getProducts is called return the products created above
         when(mockProductDAO.getProducts()).thenReturn(products);
 
@@ -214,8 +214,8 @@ public class EstoreControllerTest {
         // Setup
         String searchString = "la";
         Product[] products = new Product[2];
-        products[0] = new Product(99,"Galactic Agent", 10, 10);
-        products[1] = new Product(100,"Ice Gladiator", 10, 10);
+        products[0] = new Product(99,"Galactic Agent", 10, 10, "");
+        products[1] = new Product(100,"Ice Gladiator", 10, 10, "");
         // When findProducts is called with the search string, return the two
         /// products above
         when(mockProductDAO.findProducts(searchString)).thenReturn(products);

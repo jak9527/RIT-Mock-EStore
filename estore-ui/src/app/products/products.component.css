@@ -181,13 +181,16 @@ body {
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
-  padding: 15px 30px;
+  padding: 15px 15px;
   height: 245px;
 }
 
 .shop_section .box .img-box img {
-  max-width: 100%;
-  max-height: 145px;
+  max-width: 110%;
+  max-height: 235px;
+  border-style:solid;
+  border-radius: 30px;
+  border-color: #fa6400;
 }
 
 .shop_section .box .detail-box {
@@ -200,7 +203,7 @@ body {
 }
 
 .shop_section .box .detail-box h6 span {
-  color: #db4f66;
+  color: #fa6400;
 }
 
 .shop_section .box .new {
@@ -347,87 +350,6 @@ body {
   height: auto;
   fill: #320b57;
 }
-
-.gift_section {
-  padding-left: 45px;
-  padding-right: 45px;
-}
-
-.gift_section .box {
-  background-color: #6929a5;
-  border-radius: 15px;
-  color: #ffffff;
-}
-
-.gift_section .row {
-  -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
-}
-
-.gift_section .img-box {
-  padding: 60px 0 60px 25px;
-}
-
-.gift_section .img-box img {
-  width: 100%;
-}
-
-.gift_section .detail-box {
-  padding: 0 25px;
-}
-
-.gift_section .detail-box p {
-  margin-top: 5px;
-}
-
-.gift_section .detail-box .btn-box {
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -ms-flex-wrap: wrap;
-      flex-wrap: wrap;
-  margin: 35px -5px 0;
-}
-
-.gift_section .detail-box .btn-box a {
-  width: 165px;
-  text-align: center;
-  margin: 5px;
-}
-
-.gift_section .detail-box .btn-box .btn1 {
-  display: inline-block;
-  padding: 10px 0;
-  background-color: #ffffff;
-  color: #000000;
-  border: 1px solid #ffffff;
-  border-radius: 0;
-  -webkit-transition: all .3s;
-  transition: all .3s;
-}
-
-.gift_section .detail-box .btn-box .btn1:hover {
-  background-color: transparent;
-  color: #ffffff;
-}
-
-.gift_section .detail-box .btn-box .btn2 {
-  display: inline-block;
-  padding: 10px 0;
-  background-color: #9242dd;
-  color: #ffffff;
-  border: 1px solid #9242dd;
-  border-radius: 0;
-  -webkit-transition: all .3s;
-  transition: all .3s;
-}
-
-.gift_section .detail-box .btn-box .btn2:hover {
-  background-color: transparent;
-  color: #9242dd;
-}
-
 .contact_section {
   position: relative;
 }

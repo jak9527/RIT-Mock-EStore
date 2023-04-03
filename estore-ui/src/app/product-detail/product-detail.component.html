@@ -26,6 +26,10 @@
             <label for="product-quantity">Product quantity: </label>
             <input id="product-quantity" [(ngModel)]="product.quantity" placeholder="quantity">
         </div>
+        <div>
+            <label for="product-image">Product image (web link only): </label>
+            <input id="product-image" [(ngModel)]="product.image" placeholder="image">
+        </div>
     </div>
 
     <button *ngIf="!isAdmin" [disabled]="disabledButton" type="button" class="add" title="add to cart"

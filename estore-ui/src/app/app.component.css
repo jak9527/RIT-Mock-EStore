@@ -1,15 +1,21 @@
 /* AppComponent's private CSS styles */
 h1 {
-  display: block;
-  font-family: system-ui,-apple-system,system-ui,"Helvetica Neue",Helvetica,Arial,sans-serif;
-  font-size: xxx-large;
   background: linear-gradient(0deg, #231C1C 0%, #404040 100%);
-  margin-bottom: 0;
+  margin-bottom: 5px;
   color: #F76902;
   filter: drop-shadow(1px 1px 1px #000);
-  text-decoration: underline wavy #FFFFFF;
   transform: skew(-14deg, 0deg);
+}
+.text {
+  font-family: Georgia, 'Times New Roman', Times, serif;
+  font-size: 70px;
+  padding: 10px;
+  line-height: 100px;
   text-align: center;
+}
+h1 img {
+  max-height: 100px;
+  filter: drop-shadow(1px 1px 1px #000);
 }
 nav a {
     align-items:center;
