@@ -44,6 +44,9 @@ export class ProductDetailComponent implements OnInit {
                   this.disabledButton = true;
                 }
               }
+              if( this.product.quantity == 0 ) {
+                this.disabledButton = true;
+              }
             })
         });
     }
