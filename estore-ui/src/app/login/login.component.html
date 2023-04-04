@@ -1,18 +1,25 @@
-<h2>Account</h2>
-<div>
-    <label for="Log-in">Username: </label>
-    <input id="username" #userName />
-  
-    <!-- (click) passes input value to add() and then clears the input -->
-    <button type="button" class="add-button" (click)="add(userName.value); userName.value=''">
-      Log-in
-    </button>
-    <div *ngIf="user">
-        <label for="CurrentUser">Current User: </label>
-        {{user.username}}
-        <button type="button" class="add-button" (click)="logout()">
-            Log-out
-          </button>
+<form action="action_page.php" method="post">
+
+  <div class="container">
+
+    <div class="imgcontainer">
+      <img src="https://cdn.discordapp.com/attachments/953448026800799865/1092854047440121957/Untitled-removebg-preview.png" alt="Avatar" class="avatar">
     </div>
 
+    <div *ngIf="!user">
+      <label for="Log-in">Username: </label>
+      <input type="text" placeholder="Enter Username" name="uname" required id="username" #userName >
+
+      <button type="button" (click)="add(userName.value); userName.value=''">Login</button>
+    </div>
   </div>
+
+  <div *ngIf="user">
+    <label for="Log-in">Username: </label>
+    <label>{{user.username}}</label>
+    <button type="button" (click)="logout()">
+      Log-out
+    </button>  
+  </div>
+
+</form>

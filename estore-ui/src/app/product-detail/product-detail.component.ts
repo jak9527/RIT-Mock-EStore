@@ -76,11 +76,12 @@ export class ProductDetailComponent implements OnInit {
             }))
       });
       var temp = document.getElementsByTagName("template")[0];
+      var temp2 = document.getElementsByTagName("section")[0];
       var clon = temp.content.cloneNode(true);
-      document.body.appendChild(clon);
+      temp2.appendChild(clon);
       setTimeout(function(){
         var old = document.getElementById("alert");
-        document.body.removeChild(old as Node);
+        temp2.removeChild(old as Node);
       }, 3000);
     }
 
