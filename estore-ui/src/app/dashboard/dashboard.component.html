@@ -1,9 +1,38 @@
-<h2>Top Products</h2>
-<div class="products-menu">
-  <a *ngFor="let product of products"
-    routerLink="/detail/{{product.id}}">
-    {{product.name}}
-  </a>
+<h2>Auction</h2>
+<div *ngIf="isAdmin">
+    <div>
+        <label for="product-name">Product name: </label>
+        <input id="product-name" [(ngModel)]="auction.product.name" placeholder="name">
+        </div>
+        <div>
+            <label for="product-quantity">Number Included: </label>
+            <input id="product-quantity" [(ngModel)]="auction.quantity" placeholder="quantity">
+        </div>
+        <div>
+            <label for="current-bid">Current Bid: </label>
+            <input id="current-bid" [(ngModel)]="auction.bid" placeholder="currentBid">
+        </div>
+        <div>
+            <label for="expiration-time">Expiration Time: </label>
+            <input id="expiration-time" [(ngModel)]="auction.endTime" placeholder="endTime">
+        </div>
 </div>
-
-<app-product-search></app-product-search>
+<div *ngIf="!isAdmin">
+    <div *ngIf="auction">
+        <div>
+            <span>Product Name: </span>{{auction.product.name}}
+        </div>
+        <div>
+            <span>Number Included: </span>{{auction.quantity}}
+        </div>
+        <div>
+            <span>Current Bid: </span>{{auction.bid}}
+        </div>
+        <div>
+            <span>Expiration Time: </span>{{auction.endTime}}
+        </div>
+    </div>
+    <div *ngIf="!auction">
+        There is no auction at this time
+    </div>
+</div>

@@ -1,6 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { Product } from '../product';
-import { ProductService } from '../product.service';
+import { Auction } from '../auction';
+import { AuctionService } from '../auction.service';
+import { CurrentUserService } from '../currentUser.service';
+import { User } from '../user';
 
 @Component({
   selector: 'app-dashboard',
@@ -8,16 +11,29 @@ import { ProductService } from '../product.service';
   styleUrls: [ './dashboard.component.css' ]
 })
 export class DashboardComponent implements OnInit {
-  products: Product[] = [];
+  auction: Auction = null as unknown as Auction;
+  isAdmin: boolean = false;
 
-  constructor(private productService: ProductService) { }
+  constructor(
+    private auctionService: AuctionService,
+    private currentUserService: CurrentUserService
+    ) { }
 
   ngOnInit(): void {
-    this.getProducts();
+    this.getAuction();
+    var theUser: User = null as unknown as User;
+        this.currentUserService.getCurrentUser().subscribe(curUser =>{
+            theUser = curUser;
+            if (theUser.id == 0){
+                this.isAdmin = true;
+            } else {
+                this.isAdmin = false;
+            }
+        });
   }
 
-  getProducts(): void {
-    this.productService.getProducts()
-      .subscribe(products => this.products = products.slice(1, 5));
+  getAuction(): void {
+    this.auctionService.getAuction()
+      .subscribe(auction => this.auction = auction);
   }
 }
