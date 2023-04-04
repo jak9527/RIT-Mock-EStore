@@ -1,12 +1,14 @@
 /* ProductsComponent's private CSS styles */
+
+h2 {
+text-align: center;
+}
+
 .products {
-    margin: 0 0 2em 0;
-    list-style-type: none;
+    list-style:inside;
     padding: 0;
-    width: 15em;
-    align-content: right;
-    align-items: right;
-    align-self: right;
+    margin: auto;
+    width: 50%;
   }
   
   .products li {
@@ -17,18 +19,7 @@
   .products li:hover {
     left: .1em;
   }
-  
-  .products a {
-    color: #333;
-    text-decoration: none;
-    background-color: #EEE;
-    margin: .5em;
-    padding: .3em 0;
-    height: 1.6em;
-    border-radius: 4px;
-    display: block;
-    width: 100%;
-  }
+
   
   .products a:hover {
     color: #2c3a41;
@@ -40,29 +31,18 @@
     color: #fafafa;
   }
   
-  .products .badge {
-    display: inline-block;
-    font-size: small;
-    color: white;
-    padding: 0.8em 0.7em 0 0.7em;
-    background-color: #405061;
-    line-height: 1em;
-    position: relative;
-    left: -1px;
-    top: -4px;
-    height: 1.8em;
-    min-width: 16px;
-    text-align: right;
-    margin-right: .8em;
-    border-radius: 4px 0 0 4px;
+  .products .a {
+    font-size: large;
+    color: black;
   }
 
    .total {
     display: block;
     font-size: medium;
     color: white;
+    margin-top: 10px;
     padding: 0.8em 0.7em 0 0.7em;
-    background-color: #405061;
+    background-color: black;
     line-height: 1em;
     position: relative;
     left: -1px;

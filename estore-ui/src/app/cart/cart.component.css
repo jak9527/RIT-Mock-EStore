@@ -178,8 +178,13 @@ input:focus {
   }
 }
 
+.btns {
+  padding-left: 190px;
+}
+
 
 .button {
   padding: 25px;
+  width: 33%;
   background-color: #fa6400;
 }
