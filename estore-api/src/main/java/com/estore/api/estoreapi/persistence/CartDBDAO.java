@@ -162,14 +162,14 @@ public class CartDBDAO implements CartDAO{
      */
     @Override
     public boolean updateCart(int cId, Product[] products) throws IOException {
-        Cart c = getCart(cId);
+        Cart c = getCart(cId); // Read the Cart object from the DB
         if (c == null) {
             return false;
         }
         HashMap<Integer, Product> productsHM =  c.getProducts();
 
         //match for all products in the store that are in the cart
-        for(Product prod : products) {
+        for(Product prod : products) {;
             int pId = prod.getId();
             //if this cart has a product with the id of the current product
             if (productsHM.containsKey(pId)) {
@@ -177,8 +177,8 @@ public class CartDBDAO implements CartDAO{
                 //if the quantity in cart is greater than stock, clamp it
                 if(currentProduct.getQuantity() > prod.getQuantity()) {
                     if(prod.getQuantity() == 0) {
-                        //if there are none in stock, remove it from the cart
-                        removeProduct(cId, pId);
+                        //if there are none in stock, remove it from the product list
+                        productsHM.remove(pId);
                     } else{
                         currentProduct.setQuantity(prod.getQuantity());
                     }
@@ -187,8 +187,13 @@ public class CartDBDAO implements CartDAO{
                 currentProduct.setPrice(prod.getPrice());
                 //reset the name
                 currentProduct.setName(prod.getName());
+                productsHM.replace(pId, currentProduct);
             }
         }
+        // Write the Cart object with the updated productHM Map in the DB
+        cartRepo.delete(cId);
+        cartRepo.insert(c);
+
         //find products in the cart that are not in the store anymore
         
         HashSet<Integer> idsInStore = new HashSet<>();
