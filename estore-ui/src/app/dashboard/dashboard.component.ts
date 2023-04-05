@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { Product } from '../product';
 import { Auction } from '../auction';
 import { AuctionService } from '../auction.service';
@@ -11,7 +11,7 @@ import { User } from '../user';
   styleUrls: [ './dashboard.component.css' ]
 })
 export class DashboardComponent implements OnInit {
-  auction: Auction = null as unknown as Auction;
+    @Input() auction?: Auction;
   isAdmin: boolean = false;
 
   constructor(
@@ -35,5 +35,12 @@ export class DashboardComponent implements OnInit {
   getAuction(): void {
     this.auctionService.getAuction()
       .subscribe(auction => this.auction = auction);
+  }
+
+  save(): void {
+    if (this.auction) {
+      this.auctionService.addAuction(1, "", this.auction.bid, this.auction.endTime, this.auction.product)
+        .subscribe();
+    }
   }
 }
