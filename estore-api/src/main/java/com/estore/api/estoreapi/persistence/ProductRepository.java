@@ -1,5 +1,7 @@
 package com.estore.api.estoreapi.persistence;
 
+import java.util.List;
+
 import org.springframework.data.mongodb.repository.MongoRepository;
 import org.springframework.data.mongodb.repository.Query;
 
@@ -15,4 +17,6 @@ public interface ProductRepository extends MongoRepository<Product, String>{
 
     @Query(value="{'_id' : ?0}", delete = true)
     public void delete(int id);
+
+    public List<Product> findByOrderByIdDesc();
 }

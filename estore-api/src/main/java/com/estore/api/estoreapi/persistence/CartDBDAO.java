@@ -3,6 +3,7 @@ package com.estore.api.estoreapi.persistence;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.HashSet;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -29,17 +30,15 @@ public class CartDBDAO implements CartDAO{
     @Autowired
     ProductRepository productRepo;
 
-    private static int nextId = 0;  // The next Id to assign to a new cart
-
     /**
      * Generates the next id for a new {@Cart Cart cart}
      * 
      * @return The next id
      */
-    private synchronized static int nextId() {
-        int id = nextId;
-        ++nextId;
-        return id;
+    private synchronized int nextId() {
+        List<Cart> cList = cartRepo.findByOrderByIdDesc();
+        int max = cList.get(0).getId();
+        return max + 1;
     }
 
     /**
