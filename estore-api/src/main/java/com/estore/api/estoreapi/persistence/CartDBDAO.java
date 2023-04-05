@@ -37,6 +37,9 @@ public class CartDBDAO implements CartDAO{
      */
     private synchronized int nextId() {
         List<Cart> cList = cartRepo.findByOrderByIdDesc();
+        if (cList == null) {
+            return 0;
+        }
         int max = cList.get(0).getId();
         return max + 1;
     }

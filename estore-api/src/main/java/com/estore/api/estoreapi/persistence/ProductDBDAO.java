@@ -29,6 +29,9 @@ public class ProductDBDAO implements ProductDAO {
      */
     private synchronized int nextId() {
         List<Product> pList = productRepo.findByOrderByIdDesc();
+        if (pList == null) {
+            return 0;
+        }
         int max = pList.get(0).getId();
         return max + 1;
     }
