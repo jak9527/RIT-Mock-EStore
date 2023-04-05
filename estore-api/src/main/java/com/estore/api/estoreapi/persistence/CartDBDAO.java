@@ -146,8 +146,15 @@ public class CartDBDAO implements CartDAO{
      */
     @Override
     public boolean removeAllProducts(int cId) throws IOException {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'removeAllProducts'");
+        Cart c = getCart(cId);
+        if (c == null) {
+            return false;
+        }
+        HashMap<Integer, Product> productsHM =  c.getProducts();
+        productsHM.clear();
+        cartRepo.delete(cId);
+        cartRepo.insert(c);
+        return true;
     }
 
     /**
