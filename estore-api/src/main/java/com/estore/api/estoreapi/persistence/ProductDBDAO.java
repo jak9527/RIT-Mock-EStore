@@ -1,7 +1,6 @@
 package com.estore.api.estoreapi.persistence;
 
 import java.io.IOException;
-import java.util.UUID;
 
 import com.estore.api.estoreapi.model.Product;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,6 +20,19 @@ public class ProductDBDAO implements ProductDAO {
     
     @Autowired
     ProductRepository productRepo;
+
+    private static int nextId = 0;  // The next Id to assign to a new product
+
+    /**
+     * Generates the next id for a new {@Product Product product}
+     * 
+     * @return The next id
+     */
+    private synchronized static int nextId() {
+        int id = nextId;
+        ++nextId;
+        return id;
+    }
 
     /**
     ** {@inheritDoc}
@@ -51,7 +63,7 @@ public class ProductDBDAO implements ProductDAO {
     */
     @Override
     public Product createProduct(Product item) throws IOException {
-        item.setId(Math.abs(UUID.randomUUID().hashCode()));
+        item.setId(nextId());
         return productRepo.insert(item);
     }
 
