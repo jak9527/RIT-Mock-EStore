@@ -8,12 +8,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 /**
- * Implements the functionality for Database persistence for Products through MongoDB
+ * Implements the functionality for Database persistence for Products through MongoDB.
  * 
  * {@literal @}Component Spring annotation instantiates a single instance of this
  * class and injects the instance into other classes as needed
  * 
- * @author SWEN Faculty
  * @author Andrew Bush (apb2471@rit.edu)
  */
 

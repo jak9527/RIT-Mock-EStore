@@ -51,11 +51,21 @@ public class Cart {
     public int getId() {return id;}
 
     /**
+     * Sets the id of the cart
+     * @return The id to set to the cart
+     */
+    public void setId(int id) {this.id = id;}
+
+    /**
      * Retrieves the map of products
      * @return the map of products
      */
     public HashMap<Integer, Product> getProducts(){
         return products;
+    }
+
+    public void addProduct(Product p) {
+        products.put(p.getId(), p);
     }
 
     /**

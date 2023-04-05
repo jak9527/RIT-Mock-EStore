@@ -42,9 +42,9 @@ public class Product {
         this.price = price;
     }
 
-        /**
-     * Sets the id of the hero
-     * @return The id to set to the hero
+    /**
+     * Sets the id of the product
+     * @return The id to set to the product
      */
     public void setId(int id) {this.id = id;}
 

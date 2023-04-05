@@ -55,7 +55,7 @@ public interface CartDAO {
      * @param product {@linkplain Product product} object to be created and saved
      * @param cId the id of the cart to add a product to
      *
-     * @return new {@link Product product} if successful, false otherwise 
+     * @return new {@link Product product} if successful, null otherwise 
      * 
      * @throws IOException if an issue with underlying storage
      */
