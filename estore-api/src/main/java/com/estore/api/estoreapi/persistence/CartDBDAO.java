@@ -2,7 +2,7 @@ package com.estore.api.estoreapi.persistence;
 
 import java.io.IOException;
 import java.util.HashMap;
-import java.util.UUID;
+import java.util.HashSet;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -162,8 +162,53 @@ public class CartDBDAO implements CartDAO{
      */
     @Override
     public boolean updateCart(int cId, Product[] products) throws IOException {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'updateCart'");
+        Cart c = getCart(cId);
+        if (c == null) {
+            return false;
+        }
+        HashMap<Integer, Product> productsHM =  c.getProducts();
+
+        //match for all products in the store that are in the cart
+        for(Product prod : products) {
+            int pId = prod.getId();
+            //if this cart has a product with the id of the current product
+            if (productsHM.containsKey(pId)) {
+                Product currentProduct = productsHM.get(pId);
+                //if the quantity in cart is greater than stock, clamp it
+                if(currentProduct.getQuantity() > prod.getQuantity()) {
+                    if(prod.getQuantity() == 0) {
+                        //if there are none in stock, remove it from the cart
+                        removeProduct(cId, pId);
+                    } else{
+                        currentProduct.setQuantity(prod.getQuantity());
+                    }
+                }
+                //reset the price
+                currentProduct.setPrice(prod.getPrice());
+                //reset the name
+                currentProduct.setName(prod.getName());
+            }
+        }
+        //find products in the cart that are not in the store anymore
+        
+        HashSet<Integer> idsInStore = new HashSet<>();
+        HashSet<Integer> idsToRemoveSet = new HashSet<>();
+        for(int i = 0; i < products.length; i++){
+            idsInStore.add(products[i].getId());
+        }
+        
+        for(Product prod : productsHM.values()){
+            if(!idsInStore.contains(prod.getId())){
+                idsToRemoveSet.add(prod.getId());
+            }
+        }
+
+        for(Integer id : idsToRemoveSet){
+            removeProduct(cId, id);
+        }
+        
+
+        return true;
     }
     
 }
