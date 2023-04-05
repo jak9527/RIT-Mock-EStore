@@ -22,6 +22,8 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
+import org.springframework.test.context.TestPropertySource;
+
 import java.util.HashMap;
 
 /**
@@ -220,5 +222,41 @@ public class CartFileDAOTest {
         assertThrows(IOException.class,
                         () -> new CartFileDAO("doesnt_matter.txt",mockObjectMapper),
                         "IOException not thrown");
+    }
+
+    @Test
+    public void testRemoveAllProducts() {
+        // Setup
+        int initialCount = testCart[0].getProducts().size();
+
+        // Invoke
+        boolean result = assertDoesNotThrow(() -> cartFileDAO.removeAllProducts(1),
+                            "Unexpected exception thrown");
+
+        // Analzye
+        assertEquals(result,true);
+        assertEquals(cartFileDAO.carts.get(1).getProducts().size(), initialCount - initialCount);
+    }
+    
+    @Test
+    public void testUpdateCart() {
+        // Setup
+        Product item1 = new Product(102,"Wonder-Brick", 4, 4);
+        Product item2 = new Product(108, "Suspicious-Brick", 100, 1);
+        Product[] list = {item1, item2};
+        testCart = new Cart[1];
+        assertDoesNotThrow(() ->cartFileDAO.addProduct(2, item1));
+        assertDoesNotThrow(() ->cartFileDAO.addProduct(2, item2));
+
+        
+        // Invoke
+        boolean result = assertDoesNotThrow(() -> cartFileDAO.updateCart(1, list),
+                                "Unexpected exception thrown");
+
+        // Analyze
+        Product[] actual = cartFileDAO.getCartProducts(1);
+        
+        assertEquals(result, true);
+        assertEquals(actual, cartFileDAO.getCartProducts(2));
     }
 }
