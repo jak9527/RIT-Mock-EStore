@@ -10,6 +10,7 @@
       <div class="heading_container heading_center">
         <h2>
           Latest Products
+          <app-product-search></app-product-search>
         </h2>
       </div>
 
@@ -27,8 +28,11 @@
         <div class="col-sm-6 col-md-4 col-lg-3" *ngFor="let product of products">
           <div class="box">
             <a href="/detail/{{product.id}}">
-              <div class="img-box">
+              <div *ngIf="product.quantity != 0" class="img-box">
                 <img src="{{product.image}}" alt="test">
+              </div>
+              <div *ngIf="product.quantity == 0" class="img-box">
+                <img src="https://wisdmlabs.com/site/wp-content/uploads/2014/09/woocommerce-out-of-stock-label.png" alt="test">
               </div>
               <div class="detail-box">
                 <h6>

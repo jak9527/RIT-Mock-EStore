@@ -1,7 +1,7 @@
 <h2>Checkout</h2>
 <ul class="products">
   <li *ngFor="let product of products | keyvalue">
-      <span class="a">{{product.value.name}} : ${{product.value.price}} x ${{product.value.quantity}} </span>
+      <span class="a">{{product.value.name}} : ${{product.value.price}} x {{product.value.quantity}} </span>
   </li>
 <span class="total">total: ${{cart.total}} </span>
 </ul>
