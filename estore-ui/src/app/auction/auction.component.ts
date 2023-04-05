@@ -6,11 +6,11 @@ import { CurrentUserService } from '../currentUser.service';
 import { User } from '../user';
 
 @Component({
-  selector: 'app-dashboard',
-  templateUrl: './dashboard.component.html',
-  styleUrls: [ './dashboard.component.css' ]
+  selector: 'app-auction',
+  templateUrl: './auction.component.html',
+  styleUrls: [ './auction.component.css' ]
 })
-export class DashboardComponent implements OnInit {
+export class AuctionComponent implements OnInit {
   auction: Auction = null as unknown as Auction;
   isAdmin: boolean = false;
 
