@@ -32,6 +32,15 @@ export class AuctionComponent implements OnInit {
         });
   }
 
+  add(name: string): void {
+    name = name.trim();
+    if (!name) { return; }
+    this.auctionService.addAuction(1, "", 0, "none", { name } as Product)
+      .subscribe(auction => {
+        this.auction = auction;
+      });
+  }
+
   getAuction(): void {
     this.auctionService.getAuction()
       .subscribe(auction => this.auction = auction);

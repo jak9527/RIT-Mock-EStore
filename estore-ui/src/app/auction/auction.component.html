@@ -1,6 +1,16 @@
 <h2>Auction</h2>
 <div *ngIf="isAdmin">
-    <div>
+    <div *ngIf="!auction">
+        <label for="new-product">Product name: </label>
+        <input id="new-product" #productName />
+  
+        <!-- (click) passes input value to add() and then clears the input -->
+        <button type="button" class="add-button" (click)="add(productName.value); productName.value=''">
+            New Auction
+        </button>
+    </div>
+    <div *ngIf="auction">
+        <div>
         <label for="product-name">Product name: </label>
         <input id="product-name" [(ngModel)]="auction.product.name" placeholder="name">
         </div>
@@ -16,6 +26,7 @@
             <label for="expiration-time">Expiration Time: </label>
             <input id="expiration-time" [(ngModel)]="auction.endTime" placeholder="endTime">
         </div>
+    </div>
 </div>
 <div *ngIf="!isAdmin">
     <div *ngIf="auction">
@@ -37,4 +48,4 @@
     </div>
 </div>
 
-<button *ngIf="isAdmin" type="button" (click)="save()">save</button>
+<button *ngIf="isAdmin&&auction"  type="button" (click)="save()">save</button>
