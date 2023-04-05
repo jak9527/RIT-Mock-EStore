@@ -22,7 +22,7 @@
         </div>
 
         <div class="quantity">
-          <button class="plus-btn" type="button" name="button" (click)="add(product.value)"></button>
+          <button class="plus-btn" type="button" name="button" [disabled]="disabledButtons[product.key]" (click)="add(product.value)"></button>
             <span class="q-input">{{product.value.quantity}}</span>
           <button class="minus-btn" type="button" name="button" (click)="decrease(product.value)"></button>
         </div>

@@ -92,4 +92,8 @@ export class ProductDetailComponent implements OnInit {
         }
       }
 
+      delete(product: Product): void {
+        this.productService.deleteProduct(product.id).subscribe();
+    }
+
 }
