@@ -16,11 +16,11 @@
         </div>
         <div>
             <label for="product-quantity">Number Included: </label>
-            <input id="product-quantity" [(ngModel)]="auction.quantity" placeholder="quantity">
+            <input id="product-quantity" [(ngModel)]="auction.product.quantity" placeholder="quantity">
         </div>
         <div>
             <label for="current-bid">Current Bid: </label>
-            <input id="current-bid" [(ngModel)]="auction.bid" placeholder="currentBid">
+            <input id="current-bid" [(ngModel)]="auction.maxBid.bid" placeholder="currentBid">
         </div>
         <div>
             <label for="expiration-time">Expiration Time: </label>
@@ -37,7 +37,7 @@
             <span>Number Included: </span>{{auction.quantity}}
         </div>
         <div>
-            <span>Current Bid: </span>{{auction.bid}}
+            <span>Current Bid: </span>{{auction.maxBid}}
         </div>
         <div>
             <span>Expiration Time: </span>{{auction.endTime}}

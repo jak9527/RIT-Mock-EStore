@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 
 import { Auction } from './auction';
+import { Bid } from './bid';
 
 import { Observable, of } from 'rxjs';
 
@@ -59,8 +60,8 @@ export class AuctionService {
 
     /** PUT: update the auction on the server */
     updateAuction(username: string, bid: number, endDate: string, product: Product): Observable<any> {
-        const url = `${this.auctionUrl}/${username}/${bid}/${endDate} ${product}`;
-        return this.http.put(this.auctionUrl, product, this.httpOptions).pipe(
+        const url = `${this.auctionUrl}/${username}/${bid}/${endDate}`;
+        return this.http.put(url, product, this.httpOptions).pipe(
         tap(_ => this.log(`updated auction`)),
         catchError(this.handleError<any>('updateAuction'))
         );
@@ -72,8 +73,8 @@ export class AuctionService {
 
     /** POST: add a new auction to the server */
     addAuction(id: number, username: string, bid: number, endDate: string, product: Product): Observable<Auction> {
-        const url = `${this.auctionUrl}/${id}/${username}/${bid}/${endDate} ${product}`;
-        return this.http.post<Auction>(this.auctionUrl, product, this.httpOptions).pipe(
+        const url = `${this.auctionUrl}/${id}/${username}/${bid}/${endDate}`;
+        return this.http.post<Auction>(url, product, this.httpOptions).pipe(
         tap((newAuction: Auction) => this.log(`added auction w/ id=${newAuction.id}`)),
         catchError(this.handleError<Auction>('addAuction'))
         );

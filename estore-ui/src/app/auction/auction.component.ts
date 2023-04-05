@@ -1,6 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { Product } from '../product';
 import { Auction } from '../auction';
+import { Bid } from '../bid';
 import { AuctionService } from '../auction.service';
 import { CurrentUserService } from '../currentUser.service';
 import { User } from '../user';
@@ -35,9 +36,11 @@ export class AuctionComponent implements OnInit {
   add(name: string): void {
     name = name.trim();
     if (!name) { return; }
-    this.auctionService.addAuction(1, "", 0, "none", { name } as Product)
+    this.auctionService.addAuction(1, "admin", 3.0, "2023-04-05-06:25:00", { name } as Product)
       .subscribe(auction => {
         this.auction = auction;
+        console.log(auction);
+        console.log(this.auction.maxBid);
       });
   }
 
@@ -48,7 +51,8 @@ export class AuctionComponent implements OnInit {
 
   save(): void {
     if (this.auction) {
-      this.auctionService.addAuction(1, "", this.auction.bid, this.auction.endTime, this.auction.product)
+        console.log(this.auction.maxBid);
+      this.auctionService.addAuction(1, this.auction.maxBid.user, this.auction.maxBid.bid, "2023-04-05-06:25:00", this.auction.product)
         .subscribe();
     }
   }
