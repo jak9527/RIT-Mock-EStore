@@ -243,20 +243,24 @@ public class CartFileDAOTest {
         // Setup
         Product item1 = new Product(102,"Wonder-Brick", 4, 4);
         Product item2 = new Product(108, "Suspicious-Brick", 100, 1);
-        Product[] list = {item1, item2};
-        testCart = new Cart[1];
-        assertDoesNotThrow(() ->cartFileDAO.addProduct(2, item1));
-        assertDoesNotThrow(() ->cartFileDAO.addProduct(2, item2));
-
+        Product item3 = new Product(105, "Stupendous Brick", 50, 1);
+        Product item4 = new Product(1, "Golisano Trees", 10, 4);
+        Product[] list = {item1, item2, item3,item4};
         
+
+        Cart testCart = cartFileDAO.getCart(1);
+        assertDoesNotThrow(() -> cartFileDAO.addProduct(1, new Product(106,"Wonder-Brick", 4, 4)), 
+        "Unexpected exception thrown");
+
         // Invoke
         boolean result = assertDoesNotThrow(() -> cartFileDAO.updateCart(1, list),
                                 "Unexpected exception thrown");
 
+        boolean no_result = assertDoesNotThrow(() -> cartFileDAO.updateCart(40, list),
+                                "Unexpected exception thrown");
         // Analyze
-        Product[] actual = cartFileDAO.getCartProducts(1);
         
         assertEquals(result, true);
-        assertEquals(actual, cartFileDAO.getCartProducts(2));
+        assertEquals(no_result, false);
     }
 }
