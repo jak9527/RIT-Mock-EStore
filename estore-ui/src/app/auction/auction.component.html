@@ -40,7 +40,7 @@
             <span>Current Bid: </span>{{auction.maxBid.bid}}
         </div>
         <div>
-            <span>Expiration Time: </span>{{auction.endTime}}
+            <span>Expiration Time: </span>{{parseTime(auction.endTime)}}
         </div>
         <div>
             <input type="number" id="bidAmount" step="0.01" placeholder="Place your bid" #bidAmount />
