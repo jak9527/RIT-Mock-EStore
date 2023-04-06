@@ -85,6 +85,17 @@ public class CartFileDAOTest {
     }
 
     @Test
+    public void testGetProductNotFound() {
+        // Invoke
+        Product product = cartFileDAO.getProduct(29, 5);
+        Product Noproduct = cartFileDAO.getProduct(1, 5);
+
+        // Analzye
+        assertNull(product);
+        assertNull(Noproduct);
+    }
+
+    @Test
     public void testSaveException() throws IOException{
         doThrow(new IOException())
             .when(mockObjectMapper)
@@ -137,8 +148,11 @@ public class CartFileDAOTest {
         Product result = assertDoesNotThrow(() -> cartFileDAO.addProduct(1, item),
                                 "Unexpected exception thrown");
 
+        Product no_result = assertDoesNotThrow(() -> cartFileDAO.addProduct(5, item),
+                                "Unexpected exception thrown");
         // Analyze
         assertNotNull(result);
+        assertNull(no_result);
         Product actual = cartFileDAO.getProduct(1, item.getId());
         assertEquals(actual.getId(),item.getId());
         assertEquals(actual.getName(),item.getName());
@@ -232,9 +246,13 @@ public class CartFileDAOTest {
         // Invoke
         boolean result = assertDoesNotThrow(() -> cartFileDAO.removeAllProducts(1),
                             "Unexpected exception thrown");
+        
+        boolean no_result = assertDoesNotThrow(() -> cartFileDAO.removeAllProducts(29),
+                            "Unexpected exception thrown");
 
         // Analzye
         assertEquals(result,true);
+        assertEquals(no_result, false);
         assertEquals(cartFileDAO.carts.get(1).getProducts().size(), initialCount - initialCount);
     }
     
@@ -263,4 +281,5 @@ public class CartFileDAOTest {
         assertEquals(result, true);
         assertEquals(no_result, false);
     }
+
 }
