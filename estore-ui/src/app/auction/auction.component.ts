@@ -16,6 +16,14 @@ export class AuctionComponent implements OnInit {
   isAdmin: boolean = false;
   isOver: Boolean = false;
 
+  targetYear!: number;
+  targetMonth!: number;
+  targetDay!: number;
+  targetHours!: number;
+  targetMinutes!: number;
+  targetSeconds: number = 0;
+
+
   constructor(
     private auctionService: AuctionService,
     private currentUserService: CurrentUserService
@@ -51,7 +59,7 @@ export class AuctionComponent implements OnInit {
 
   getAuction(): void {
     this.auctionService.getAuction()
-      .subscribe(auction => this.auction = auction);
+      .subscribe(auction => {this.auction = auction; this.parseTime(auction.endTime);});
   }
 
   getIsRunning(): void {
@@ -76,16 +84,21 @@ export class AuctionComponent implements OnInit {
   }
 
   placeBid(amount: number): void {
+    this.getIsRunning();
+    if( !this.isOver ) {
+      console.log(this.isOver)
     var theUser: User = null as unknown as User;
         this.currentUserService.getCurrentUser().subscribe(curUser =>{
             theUser = curUser;
             this.getAuction();
-            // console.log(this.auction?.maxBid);
-            //Resolve with team. placeBid in controller should return old bid if new bid cannot be placed
             this.auctionService.newBid(theUser.username, amount)
                 .subscribe(newBid => {
                      this.auction!.maxBid = newBid});
         }); 
+    }
+    else {
+      return;
+    }
   }
 
   parseTime(time: string): string {
@@ -95,6 +108,7 @@ export class AuctionComponent implements OnInit {
     var result = "";
 
     result += split[0]; //year
+    this.targetYear = split[0] as unknown as number;
     result += "-";
     if(split[1].length == 1){ //month
         result += "0"+split[1];
@@ -102,6 +116,7 @@ export class AuctionComponent implements OnInit {
     else{
         result += split[1];
     }
+    this.targetMonth = split[1] as unknown as number;
     result += "-";
     if(split[2].length == 1){ //day
         result += "0"+split[2];
@@ -109,6 +124,7 @@ export class AuctionComponent implements OnInit {
     else{
         result += split[2];
     }
+    this.targetDay = split[2] as unknown as number;
     result += "-";
     if(split[3].length == 1){ //hour
         result += "0"+split[3];
@@ -116,6 +132,7 @@ export class AuctionComponent implements OnInit {
     else{
         result += split[3];
     }
+    this.targetHours = split[3] as unknown as number;
     result += ":";
     if(split[4].length == 1){ //minute
         result+= "0"+split[4];
@@ -123,6 +140,7 @@ export class AuctionComponent implements OnInit {
     else{
         result += split[4];
     }
+    this.targetMinutes = split[4] as unknown as number;
     result += ":";
     if(split.length == 6){
         if(split[5].length == 1){
@@ -131,6 +149,7 @@ export class AuctionComponent implements OnInit {
         else{
             result += split[5];
         }
+        this.targetSeconds = split[5] as unknown as number;
     }
     else{
         result += "00";

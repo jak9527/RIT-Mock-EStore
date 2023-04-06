@@ -57,7 +57,8 @@
             <span>Current Leading Bidder: </span>{{auction.maxBid.user}}
         </div>
         <div>
-            <span>Expiration Time: </span>{{parseTime(auction.endTime)}}
+            <span>Expiration Time: </span><app-countdown-timer [targetYear]="targetYear" [targetMonth]="targetMonth" [targetDay]="targetDay" [targetHours]="targetHours" [targetMinutes]="targetMinutes" [targetSeconds]="targetSeconds"></app-countdown-timer>
+
         </div>
     </div>
 </div>
@@ -76,7 +77,7 @@
             <span>Current Leading Bidder: </span>{{auction.maxBid.user}}
         </div>
         <div>
-            <span>Expiration Time: </span>{{parseTime(auction.endTime)}}
+            <span>Expiration Time: </span><app-countdown-timer [targetYear]="targetYear" [targetMonth]="targetMonth" [targetDay]="targetDay" [targetHours]="targetHours" [targetMinutes]="targetMinutes" [targetSeconds]="targetSeconds"></app-countdown-timer>
         </div>
         <div *ngIf="!isOver">
             <div>
@@ -85,7 +86,7 @@
             <div>
                 <input id="email" placeholder="Enter your email for alerts!" #bidAmount />
             </div>
-            <button type="button" class="place bid" title="place bid"
+            <button type="button" class="place bid" title="place bid" [disabled]="isOver"
             (click)="placeBid(bidAmount.valueAsNumber);">Place Bid</button>
         </div>
     </div>
