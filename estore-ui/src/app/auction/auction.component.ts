@@ -52,8 +52,8 @@ export class AuctionComponent implements OnInit {
   save(): void {
     if (this.auction) {
         console.log(this.auction.maxBid);
-      this.auctionService.addAuction(1, this.auction.maxBid.user, this.auction.maxBid.bid, this.parseTime(this.auction.endTime), this.auction.product)
-        .subscribe();
+        this.auctionService.addAuction(1, this.auction.maxBid.user, this.auction.maxBid.bid, this.parseTime(this.auction.endTime), this.auction.product)
+            .subscribe();
     }
   }
 
