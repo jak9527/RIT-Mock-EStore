@@ -47,7 +47,7 @@ public class CartControllerTest {
     @Test
     public void testGetCart() throws IOException {  // getProduct may throw IOException
         // Setup
-        Product product = new Product(1, "Golisano Trees", 10, 10);
+        Product product = new Product(1, "Golisano Trees", 10, 10, "");
         HashMap<Integer, Product> expected_products = new HashMap<>() {{
             put(product.getId(), product);
         }};
@@ -100,7 +100,7 @@ public class CartControllerTest {
     @Test
     public void testCreateCart() throws IOException {  // createCart may throw IOException
         // Setup
-        Product product = new Product(1, "Golisano Trees", 10, 10);
+        Product product = new Product(1, "Golisano Trees", 10, 10, "");
         HashMap<Integer, Product> expected_products = new HashMap<>() {{
             put(product.getId(), product);
         }};
@@ -120,7 +120,7 @@ public class CartControllerTest {
     @Test
     public void testCreateCartFailed() throws IOException {  // createCart may throw IOException
         // Setup
-        Product product = new Product(1, "Golisano Trees", 10, 10);
+        Product product = new Product(1, "Golisano Trees", 10, 10, "");
         HashMap<Integer, Product> expected_products = new HashMap<>() {{
             put(product.getId(), product);
         }};
@@ -139,7 +139,7 @@ public class CartControllerTest {
     @Test
     public void testCreateCartHandleException() throws IOException {  // createCart may throw IOException
         // Setup
-        Product product = new Product(1, "Golisano Trees", 10, 10);
+        Product product = new Product(1, "Golisano Trees", 10, 10, "");
         HashMap<Integer, Product> expected_products = new HashMap<>() {{
             put(product.getId(), product);
         }};
@@ -158,12 +158,12 @@ public class CartControllerTest {
     @Test
     public void testAddProductToCart() throws IOException { // updateCart may throw IOException
         // Setup
-        Product product = new Product(1, "Golisano Trees", 10, 10);
+        Product product = new Product(1, "Golisano Trees", 10, 10, "");
         HashMap<Integer, Product> expected_products = new HashMap<>() {{
             put(product.getId(), product);
         }};
         Cart cart = new Cart(99, expected_products);
-        Product newProduct = new Product(2, "Bricks", 5, 8);
+        Product newProduct = new Product(2, "Bricks", 5, 8, "");
         // when updateCart is called, return true simulating successful
         // update and save
         when(mockCartDAO.addProduct(cart.getId(), newProduct)).thenReturn(newProduct);
@@ -180,12 +180,12 @@ public class CartControllerTest {
     @Test
     public void testAddProductToCartFailed() throws IOException { // updateCart may throw IOException
         // Setup
-        Product product = new Product(1, "Golisano Trees", 10, 10);
+        Product product = new Product(1, "Golisano Trees", 10, 10, "");
         HashMap<Integer, Product> expected_products = new HashMap<>() {{
             put(product.getId(), product);
         }};
         Cart cart = new Cart(99, expected_products);
-        Product newProduct = new Product(2, "Bricks", 5, 8);
+        Product newProduct = new Product(2, "Bricks", 5, 8, "");
         // when updateCart is called, return true simulating successful
         // update and save
         when(mockCartDAO.addProduct(cart.getId(), newProduct)).thenReturn(null);
@@ -200,12 +200,12 @@ public class CartControllerTest {
     @Test
     public void testAddProductToCartHandleException() throws IOException { // updateCart may throw IOException
         // Setup
-        Product product = new Product(1, "Golisano Trees", 10, 10);
+        Product product = new Product(1, "Golisano Trees", 10, 10, "");
         HashMap<Integer, Product> expected_products = new HashMap<>() {{
             put(product.getId(), product);
         }};
         Cart cart = new Cart(99, expected_products);
-        Product newProduct = new Product(2, "Bricks", 5, 8);
+        Product newProduct = new Product(2, "Bricks", 5, 8, "");
         // When updateCart is called on the Mock Pr DAO, throw an IOException
         doThrow(new IOException()).when(mockCartDAO).addProduct(cart.getId(), newProduct);
 
@@ -219,7 +219,7 @@ public class CartControllerTest {
     @Test
     public void testUpdateProductCount() throws IOException { // updateCart may throw IOException
         // Setup
-        Product product = new Product(1, "Golisano Trees", 10, 10);
+        Product product = new Product(1, "Golisano Trees", 10, 10, "");
         HashMap<Integer, Product> expected_products = new HashMap<>() {{
             put(product.getId(), product);
         }};
@@ -240,7 +240,7 @@ public class CartControllerTest {
     @Test
     public void testUpdateProductCountFailed() throws IOException { // updateCart may throw IOException
         // Setup
-        Product product = new Product(1, "Golisano Trees", 10, 10);
+        Product product = new Product(1, "Golisano Trees", 10, 10, "");
         HashMap<Integer, Product> expected_products = new HashMap<>() {{
             put(product.getId(), product);
         }};
@@ -259,7 +259,7 @@ public class CartControllerTest {
     @Test
     public void testUpdateProductCountHandleException() throws IOException { // updateCart may throw IOException
         // Setup
-        Product product = new Product(1, "Golisano Trees", 10, 10);
+        Product product = new Product(1, "Golisano Trees", 10, 10, "");
         HashMap<Integer, Product> expected_products = new HashMap<>() {{
             put(product.getId(), product);
         }};

@@ -14,6 +14,7 @@ import { LoginComponent } from './login/login.component';
 import { CartComponent } from './cart/cart.component';
 import { CheckoutComponent } from './checkout/checkout.component';
 import { CountdownTimerComponent } from './countdown-timer/countdown-timer.component';
+import { CheckoutConfirmComponent } from './checkout-confirm/checkout-confirm.component';
 
 @NgModule({
   declarations: [
@@ -26,7 +27,8 @@ import { CountdownTimerComponent } from './countdown-timer/countdown-timer.compo
     LoginComponent,
     CartComponent,
     CheckoutComponent,
-    CountdownTimerComponent
+    CountdownTimerComponent,
+    CheckoutConfirmComponent
   ],
   imports: [
     HttpClientModule,

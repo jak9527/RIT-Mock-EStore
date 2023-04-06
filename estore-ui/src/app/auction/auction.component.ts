@@ -32,7 +32,6 @@ export class AuctionComponent implements OnInit {
   ngOnInit(): void {
     this.getAuction();
     this.getIsRunning();
-    console.log(this.isOver);
     var theUser: User = null as unknown as User;
         this.currentUserService.getCurrentUser().subscribe(curUser =>{
             theUser = curUser;
@@ -42,14 +41,15 @@ export class AuctionComponent implements OnInit {
                 this.isAdmin = false;
             }
         });
+  
     // console.log(this.isRunning);
     // this.auctionService.getAuctionStatus().subscribe(running => this.isRunning = running);
   }
 
-  add(name: string, quantity: number, start: number, endTime: string): void {
+  add(name: string, image: string, quantity: number, start: number, endTime: string): void {
     name = name.trim();
     if (!name) { return; }
-    this.auctionService.addAuction(1, "no bidders yet!", start, this.parseTime(endTime), { name, quantity } as Product)
+    this.auctionService.addAuction(1, "no bidders yet!", start, this.parseTime(endTime), { name, quantity, image } as Product)
       .subscribe(auction => {
         this.auction = auction;
         console.log(auction);
@@ -84,21 +84,20 @@ export class AuctionComponent implements OnInit {
   }
 
   placeBid(amount: number): void {
-    this.getIsRunning();
-    if( !this.isOver ) {
-      console.log(this.isOver)
-    var theUser: User = null as unknown as User;
-        this.currentUserService.getCurrentUser().subscribe(curUser =>{
+    this.ngOnInit();
+    this.auctionService.getAuctionStatus()
+      .subscribe(running => {
+        if( !running ) {
+          var theUser: User = null as unknown as User;
+          this.currentUserService.getCurrentUser().subscribe(curUser =>{
             theUser = curUser;
             this.getAuction();
             this.auctionService.newBid(theUser.username, amount)
                 .subscribe(newBid => {
                      this.auction!.maxBid = newBid});
-        }); 
-    }
-    else {
-      return;
-    }
+        });  }
+      });
+      this.ngOnInit();
   }
 
   parseTime(time: string): string {

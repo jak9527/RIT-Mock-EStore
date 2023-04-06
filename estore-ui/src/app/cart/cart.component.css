@@ -1,132 +1,190 @@
-/* ProductsComponent's private CSS styles */
-.products {
-  margin: 0 0 2em 0;
-  list-style-type: none;
-  padding: 0;
-  width: 15em;
-}
+@import url(https://fonts.googleapis.com/css?family=Roboto:300,400,500);
 
-input {
-  display: block;
-  width: 100%;
-  padding: .5rem;
-  margin: 1rem 0;
+* {
   box-sizing: border-box;
 }
 
-.products li {
-  position: relative;
-  cursor: pointer;
+html,
+body {
+  padding: 10px;
+  margin: 7px;
+  margin-top: auto;
+  border-radius: 100px;
+  background-color: lightgrey;
+  background-image: url(https://claws.rit.edu/photos/getphotoid.php?Client=Marketing&UN=dcmpro&HASH=2d1e0df4206abecb34f0037b1ac8cfaf24cf3161&T=1680706852);
+  background-repeat:no-repeat;
+  background-position: center;
+  background-position-y: -150px;
+  font-family: 'Roboto', sans-serif;
 }
 
-.products li:hover {
-  left: .1em;
-}
-
-.products a {
-  color: #333;
-  text-decoration: none;
-  background-color: #EEE;
-  margin: .5em;
-  padding: .3em 0;
-  height: 1.6em;
-  border-radius: 4px;
+.shopping-cart {
   display: block;
-  width: 100%;
+  margin-left: auto;
+  margin-right: auto;
+  text-align: center;
+  width: auto;
+  height: auto;
+  margin: 80px auto;
+  background: #FFFFFF;
+  box-shadow: 1px 2px 3px 0px rgba(0,0,0,0.10);
+  border-radius: 6px;
+
+  display: flex;
+  flex-direction: column;
 }
 
-.products a:hover {
-  color: #2c3a41;
-  background-color: #e6e6e6;
+.title {
+  height: 60px;
+  border-bottom: 1px solid #E1E8EE;
+  padding: 20px 30px;
+  color: #5E6977;
+  font-size: 18px;
+  font-weight: 400;
 }
 
-.products a:active {
-  background-color: #525252;
-  color: #fafafa;
+.item {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  padding: 20px 30px;
+  height: 120px;
+  display: flex;
 }
 
-.products .badge {
+/* Buttons -  Delete and Like */
+.buttons {
+  position: relative;
+  padding-top: 30px;
+  margin-right: 30px;
+}
+
+.plus-btn {
   display: inline-block;
-  font-size: small;
-  color: white;
-  padding: 0.8em 0.7em 0 0.7em;
-  background-color: #405061;
-  line-height: 1em;
-  position: relative;
-  left: -1px;
-  top: -4px;
-  height: 1.8em;
-  min-width: 16px;
-  text-align: right;
-  margin-right: .8em;
-  border-radius: 4px 0 0 4px;
+  cursor: pointer;
+  width: 18px;
+  height: 17px;
+  background: url("plus.svg") no-repeat center;
+  margin-right: 20px;
+  padding-bottom: 10px;
 }
 
-.checkout {
+.minus-btn {
   display: inline-block;
-  font-size: small;
-  color: white;
-  padding: 0.8em 0.7em 0 0.7em;
-  background-color: #405061;
-  line-height: 1em;
-  position: relative;
-  left: -1px;
-  top: -4px;
-  height: 1.8em;
-  min-width: 16px;
-  text-align: right;
-  margin-right: .8em;
-  border-radius: 4px 0 0 4px;
-}
-.checkout:hover {
-  background-color: #525252;
-  color: white;
+  cursor: pointer;
+  width: 18px;
+  height: 17px;
+  background: url("minus.svg") no-repeat center;
+  margin-right: 20px;
+  padding-bottom: 7px;
 }
 
-button.delete {
-  position: relative;
-  left: 210px;
-  top: 5px;
-  background-color: white;
-  color:  #525252;
-  font-size: 1.1rem;
-  margin: 0;
-  padding: 1px 10px 3px 10px;
+
+.delete-btn {
+  display: inline-block;
+  cursor: pointer;
+  width: 18px;
+  height: 17px;
+  background: url("delete-icn.svg") no-repeat center;
 }
 
-button.delete:hover {
-  background-color: #525252;
-  color: white;
+.is-active {
+  animation-name: animate;
+  animation-duration: .8s;
+  animation-iteration-count: 1;
+  animation-timing-function: steps(28);
+  animation-fill-mode: forwards;
 }
 
-button.add {
-  position: relative;
-  left: 210px;
-  top: 5px;
-  background-color: white;
-  color:  #525252;
-  font-size: 1.1rem;
-  margin: 0;
-  padding: 1px 10px 3px 10px;
+@keyframes animate {
+  0%   { background-position: left;  }
+  50%  { background-position: right; }
+  100% { background-position: right; }
 }
 
-button.add:hover {
-  background-color: #525252;
-  color: white;
+/* Product Image */
+.prodImage {
+  width: 100px;
+  height: 95px;
+  margin-left: 0px;
+  margin-right: 30px;
+  border-radius: 15px;
 }
 
-button.remove {
-  position: relative;
-  left: 210px;
-  top: 5px;
-  background-color: white;
-  color:  #525252;
-  font-size: 1.1rem;
-  margin: 0;
-  padding: 1px 10px 3px 10px;
+/* Product Description */
+.description {
+  padding-top: 10px;
+  margin-right: 60px;
+  width: 115px;
 }
 
-button.remove:hover {
-  background-color: #525252;
-  color: white;
+.description span {
+  display: block;
+  font-size: 21px;
+  color: #43484D;
+  font-weight: 400;
+  padding-top: 15px;
+}
+
+/* Product Quantity */
+.quantity {
+  padding-top: 20px;
+  margin-right: 60px;
+  text-align: center;
+}
+.quantity .q-input {
+  -webkit-appearance: none;
+  border: none;
+  text-align: center;
+  font-size: 18px;
+  color: #43484D;
+  font-weight: 300;
+  margin-right: 15px;
+}
+
+button:focus,
+input:focus {
+  outline:0;
+}
+
+/* Total Price */
+.total-price {
+  width: 83px;
+  padding-top: 39px;
+  text-align: center;
+  font-size: 18px;
+  color: #43484D;
+  font-weight: 300;
+}
+
+/* Responsive */
+@media (max-width: 800px) {
+  .shopping-cart {
+    width: 100%;
+    height: auto;
+    overflow: hidden;
+  }
+  .item {
+    height: auto;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+  .image,
+  .quantity,
+  .description {
+    width: 100%;
+    text-align: center;
+    margin: 6px 0;
+  }
+}
+
+.btns {
+  padding-left: 190px;
+}
+
+
+.button {
+  padding: 25px;
+  width: 33%;
+  background-color: #fa6400;
 }

@@ -1,17 +1,14 @@
 /* ProductsComponent's private CSS styles */
+
+h2 {
+text-align: center;
+}
+
 .products {
-    margin: 0 0 2em 0;
-    list-style-type: none;
+    list-style:inside;
     padding: 0;
-    width: 15em;
-  }
-  
-  input {
-    display: block;
-    width: 100%;
-    padding: .5rem;
-    margin: 1rem 0;
-    box-sizing: border-box;
+    margin: auto;
+    width: 50%;
   }
   
   .products li {
@@ -19,29 +16,10 @@
     cursor: pointer;
   }
 
-  .input {
-    padding: .5rem;
-    width: 100%;
-    max-width: 600px;
-    box-sizing: border-box;
-    display: block;
-  }
-  
   .products li:hover {
     left: .1em;
   }
-  
-  .products a {
-    color: #333;
-    text-decoration: none;
-    background-color: #EEE;
-    margin: .5em;
-    padding: .3em 0;
-    height: 1.6em;
-    border-radius: 4px;
-    display: block;
-    width: 100%;
-  }
+
   
   .products a:hover {
     color: #2c3a41;
@@ -53,29 +31,18 @@
     color: #fafafa;
   }
   
-  .products .badge {
-    display: inline-block;
-    font-size: small;
-    color: white;
-    padding: 0.8em 0.7em 0 0.7em;
-    background-color: #405061;
-    line-height: 1em;
-    position: relative;
-    left: -1px;
-    top: -4px;
-    height: 1.8em;
-    min-width: 16px;
-    text-align: right;
-    margin-right: .8em;
-    border-radius: 4px 0 0 4px;
+  .products .a {
+    font-size: large;
+    color:#525252;
   }
 
    .total {
     display: block;
     font-size: medium;
     color: white;
+    margin-top: 10px;
     padding: 0.8em 0.7em 0 0.7em;
-    background-color: #405061;
+    background-color: #525252;
     line-height: 1em;
     position: relative;
     left: -1px;
@@ -84,7 +51,7 @@
     min-width: 16px;
     text-align: center;
     margin-right: .8em;
-    border-radius: 8px 0 0 8px;
+    border-radius: 8px;
   }
   
   button.delete {
@@ -134,3 +101,119 @@
     background-color: #525252;
     color: white;
   }
+
+@import url(https://fonts.googleapis.com/css?family=Roboto:400,900,700,500);
+
+body {
+  padding: 60px 0;
+  background-color: rgba(178,209,229,0.7);
+  margin: 0 auto;
+  width: 600px;
+}
+.body-text {
+  padding: 0 20px 30px 20px;
+  font-family: "Roboto";
+  font-size: 1em;
+  color: #333;
+  text-align: center;
+  line-height: 1.2em;
+}
+.form-container {
+  flex-direction: column;
+  justify-content:right;
+  align-items: right;
+}
+.personal-information {
+  background-color:#fa6400;
+  color: #fff;
+  padding: 1px 0;
+  text-align: center;
+}
+h1 {
+    color: #fff;
+  font-size: 1.3em;
+  font-family: "Roboto"
+}
+input {
+  margin: 1px 0;
+  padding-left: 3%;
+  font-size: 14px;
+}
+input[type="text"]{
+  display: block;
+  height: 50px;
+  width: 97%;
+  border: none;
+}
+input[type="email"]{
+  display: block;
+  height: 50px;
+  width: 97%;
+  border: none;
+}
+input[type="submit"]{
+  height: 60px;
+  display:block;
+  margin-left: auto;
+  margin-right: auto;
+  width: 50%;
+  border: none;
+  background-color: #fa6400;
+  color: #fff;
+  margin-top: 2px;
+  font-size: 25px;
+  text-transform: uppercase;
+  font-weight: bold;
+  cursor: pointer;
+}
+input[type="submit"]:hover{
+  background-color: #6FB7E9;
+  transition: 0.3s ease;
+}
+#column-left {
+  width: 46.5%;
+  float: left;
+  margin-bottom: 2px;
+}
+#column-right {
+  width: 46.5%;
+  float: right;
+}
+
+@media only screen and (max-width: 480px){
+  body {
+    width: 100%;
+    margin: 0 auto;
+  }
+  .form-container {
+    margin: 0 2%;
+  }
+  input {
+    font-size: 1em;
+  }
+  #input-button {
+    width: 100%;
+  }
+  #input-field {
+    width: 96.5%;
+  }
+  h1 {
+    font-size: 1.2em;
+  }
+  input {
+    margin: 2px 0;
+  }
+  input[type="submit"]{
+    height: 50px;
+  }
+  #column-left {
+    width: 96.5%;
+    display: block;
+    float: none;
+  }
+  #column-right {
+    width: 96.5%;
+    display: block;
+    float: none;
+  }
+}

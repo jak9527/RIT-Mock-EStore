@@ -41,9 +41,9 @@ public class EstoreFileDAOTest {
     public void setupProductFileDAO() throws IOException {
         mockObjectMapper = mock(ObjectMapper.class);
         testProduct = new Product[3];
-        testProduct[0] = new Product(99,"Wi-Fire", 1, 1);
-        testProduct[1] = new Product(100,"Galactic Agent", 2, 2);
-        testProduct[2] = new Product(101,"Ice Gladiator", 3, 3);
+        testProduct[0] = new Product(99,"Wi-Fire", 1, 1, "");
+        testProduct[1] = new Product(100,"Galactic Agent", 2, 2, "");
+        testProduct[2] = new Product(101,"Ice Gladiator", 3, 3, "");
 
         // When the object mapper is supposed to read from the file
         // the mock object mapper will return the product array above
@@ -102,7 +102,7 @@ public class EstoreFileDAOTest {
     @Test
     public void testCreateProduct() {
         // Setup
-        Product item = new Product(102,"Wonder-Person", 4, 4);
+        Product item = new Product(102,"Wonder-Person", 4, 4, "");
 
         // Invoke
         Product result = assertDoesNotThrow(() -> productFileDAO.createProduct(item),
@@ -118,7 +118,7 @@ public class EstoreFileDAOTest {
     @Test
     public void testUpdateProduct() {
         // Setup
-        Product product = new Product(99,"Galactic Agent", 5, 5);
+        Product product = new Product(99,"Galactic Agent", 5, 5, "");
 
         // Invoke
         Product result = assertDoesNotThrow(() -> productFileDAO.updateProduct(product),
@@ -136,7 +136,7 @@ public class EstoreFileDAOTest {
             .when(mockObjectMapper)
                 .writeValue(any(File.class),any(Product[].class));
 
-        Product item = new Product(102,"Wi-Fire", 6, 6);
+        Product item = new Product(102,"Wi-Fire", 6, 6, "");
 
         assertThrows(IOException.class,
                         () -> productFileDAO.createProduct(item),
@@ -166,7 +166,7 @@ public class EstoreFileDAOTest {
     @Test
     public void testUpdateProductNotFound() {
         // Setup
-        Product product = new Product(98,"Bolt", 10, 10);
+        Product product = new Product(98,"Bolt", 10, 10, "");
 
         // Invoke
         Product result = assertDoesNotThrow(() -> productFileDAO.updateProduct(product),
