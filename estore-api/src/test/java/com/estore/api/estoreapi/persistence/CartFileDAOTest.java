@@ -282,4 +282,20 @@ public class CartFileDAOTest {
         assertEquals(no_result, false);
     }
 
+    @Test
+    public void testGetCartProducts() {
+
+        // 
+        Product product1 = new Product(1, "Golisano Trees", 10, 10);
+        Product[] list = {product1};
+
+
+        // Invoke
+        Product[] result = assertDoesNotThrow(() -> cartFileDAO.getCartProducts(1),
+                                                "Unexpected exception thrown");
+
+        // Analyze
+        assertEquals(result[0].getId(), list[0].getId());
+
+    }
 }
