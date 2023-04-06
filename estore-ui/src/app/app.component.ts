@@ -21,7 +21,6 @@ export class AppComponent implements OnInit{
     private userUpdateService: UserUpdateService,
     private router: Router
   ) {
-    this.updateHeader;
     this.userSubscription = this.userUpdateService.getUpdate().subscribe(message => {
             this.updateHeader();
             this.message = message;

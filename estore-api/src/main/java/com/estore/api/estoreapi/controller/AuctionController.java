@@ -123,27 +123,27 @@ public class AuctionController {
      * ResponseEntity with HTTP status of CONFLICT if {@link AuctionItem auction} conflict occurs<br>
      * ResponseEntity with HTTP status of INTERNAL_SERVER_ERROR otherwise
      */
-    @PutMapping("/{username}/{bid}/{endDateTime}")
-    public ResponseEntity<AuctionItem> updateAuction(@RequestBody Product product,
-    @PathVariable String username, @PathVariable float bid, @PathVariable String endDateTime){
-        LOG.info("PUT /auction/" + username + "/" + bid + "/" + endDateTime + " " + product );
-        try {
-            DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy-MM-dd-HH:mm:ss");
-            LocalDateTime endDate = LocalDateTime.parse(endDateTime, dtf);
+    // @PutMapping("/{username}/{bid}/{endDateTime}")
+    // public ResponseEntity<AuctionItem> updateAuction(@RequestBody Product product,
+    // @PathVariable String username, @PathVariable float bid, @PathVariable String endDateTime){
+    //     LOG.info("PUT /auction/" + username + "/" + bid + "/" + endDateTime + " " + product );
+    //     try {
+    //         DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy-MM-dd-HH:mm:ss");
+    //         LocalDateTime endDate = LocalDateTime.parse(endDateTime, dtf);
 
-            Bid maxBid = new Bid(bid, username);
+    //         Bid maxBid = new Bid(bid, username);
 
-            AuctionItem newAuction = auctionDao.updateAuction(product, endDate, maxBid);
-            if( newAuction == null ) {
-                return new ResponseEntity<>(HttpStatus.CONFLICT);
-            }
-            return new ResponseEntity<AuctionItem>(newAuction,HttpStatus.CREATED);
-        }
-        catch(IOException e) {
-            LOG.log(Level.SEVERE,e.getLocalizedMessage());
-            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
-        }
-    }
+    //         AuctionItem newAuction = auctionDao.updateAuction(product, endDate, maxBid);
+    //         if( newAuction == null ) {
+    //             return new ResponseEntity<>(HttpStatus.CONFLICT);
+    //         }
+    //         return new ResponseEntity<AuctionItem>(newAuction,HttpStatus.CREATED);
+    //     }
+    //     catch(IOException e) {
+    //         LOG.log(Level.SEVERE,e.getLocalizedMessage());
+    //         return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+    //     }
+    // }
 
     /**
      * Deletes the currently running {@linkplain AuctionItem auction}

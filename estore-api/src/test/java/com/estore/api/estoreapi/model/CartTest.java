@@ -51,4 +51,22 @@ public class CartTest {
         // Analyze
         assertEquals(expected_string,actual_string);
     }
+
+    @Test
+    public void testGetTotal() {
+        // Setup
+        int expected_id = 1;
+        Product product = new Product(1, "Golisano Trees", 10, 10);
+        HashMap<Integer, Product> expected_products = new HashMap<>() {{
+            put(product.getId(), product);
+        }};
+
+
+        // Invoke
+        Cart cart = new Cart(expected_id, expected_products);
+
+
+        // Analyze
+        assertEquals(cart.getTotal(), product.getPrice() * product.getQuantity() );
+    }
 }
