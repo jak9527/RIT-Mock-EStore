@@ -1,9 +1,1 @@
-[
-    {"id":1,"products":
-        {
-            "1":{"id":1,"name":"Golisano Trees","price":80.0,"quantity":4},
-            "2":{"id":2,"name":"Ctrl Alt Deli Sign","price":100.0,"quantity":3}
-        }
-    },
-    {"id":2,"products":{}}
-]
+[{"id":1,"products":{"1":{"id":1,"name":"Golisano Trees","price":80.0,"quantity":2}},"total":160},{"id":2,"products":{"4":{"id":4,"name":"The Sentinel","price":800000.0,"quantity":1}},"total":800000},{"id":3,"products":{"1":{"id":1,"name":"Golisano Trees","price":80.0,"quantity":1}},"total":80},{"id":4,"products":{},"total":0}]
