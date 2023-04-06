@@ -57,6 +57,13 @@ export class AuctionComponent implements OnInit {
     }
   }
 
+  delete(): void {
+    if (this.auction) {
+      this.auctionService.deleteAuction().subscribe();
+    }
+    this.getAuction()
+  }
+
   placeBid(amount: number): void {
     var theUser: User = null as unknown as User;
         this.currentUserService.getCurrentUser().subscribe(curUser =>{
