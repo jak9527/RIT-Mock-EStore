@@ -100,3 +100,49 @@ button[disabled]{
   flex: 1;
 
   }
+
+  /* The alert message box */
+  .alert {
+    padding: 20px;
+    background-color: green;
+    color: white;
+    margin-bottom: 15px;
+    -webkit-animation-duration: 1s;
+    animation-duration: 1s;
+    -webkit-animation-fill-mode: both;
+    animation-fill-mode: both;
+    opacity: 0;
+    animation: alert 2.5s linear forwards;
+    -webkit-animation: alert 2.5s linear forwards;
+  }
+  
+  @-webkit-keyframes alert {
+    50% {opacity: 1;}
+  }
+  
+  
+  @keyframes alert {
+    50% {opacity: 1;}
+  } 
+  
+  .alert {
+    -webkit-animation-name: alert;
+    animation-name: alert;
+  }
+  
+  /* The close button */
+  .closebtn {
+    margin-left: 15px;
+    color: white;
+    font-weight: bold;
+    float: right;
+    font-size: 22px;
+    line-height: 20px;
+    cursor: pointer;
+    transition: 0.3s;
+  }
+  
+  /* When moving the mouse over the close button */
+  .closebtn:hover {
+    color: black;
+  }
