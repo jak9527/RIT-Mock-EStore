@@ -40,6 +40,8 @@ export class ProductDetailComponent implements OnInit {
             this.cartService.getCart(curUser.id).subscribe(curCart => {
               this.disabledButton = false;
               for( var value of Object.values(curCart.products)) {
+                console.log(value);
+                console.log(this.product);
                 if( this.product.id == value.id && value.quantity == this.product.quantity) {
                   this.disabledButton = true;
                 }

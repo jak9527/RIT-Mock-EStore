@@ -2,19 +2,25 @@ package com.estore.api.estoreapi.model;
 
 import java.util.logging.Logger;
 
+import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.Document;
+
 import com.fasterxml.jackson.annotation.JsonProperty;
 /**
  * Represents a Product entity
  * 
  * @author Zach Brown
  */
+@Document("products")
 public class Product {
     private static final Logger LOG = Logger.getLogger(Product.class.getName());
 
     // Package private for tests
     static final String STRING_FORMAT = "Item [id=%d, name=%s]";
 
+    @Id
     @JsonProperty("id") private int id;
+    
     @JsonProperty("name") private String name;
     @JsonProperty("price") private float price;
     @JsonProperty("quantity") private int quantity;
@@ -37,6 +43,12 @@ public class Product {
         this.price = price;
         this.image = image;
     }
+
+    /**
+     * Sets the id of the product
+     * @return The id to set to the product
+     */
+    public void setId(int id) {this.id = id;}
 
     /**
      * Retrieves the id of the product

@@ -41,6 +41,7 @@ export class CartComponent implements OnInit {
         switchMap((cart) => {
           this.cart = cart;
           this.products = this.cart.products;
+          console.log(this.cart);
           const productObservables = Object.values(this.products).map((value) => 
             this.productService.getProduct(value.id).pipe(
               map((product2) => {

@@ -1,6 +1,8 @@
 package com.estore.api.estoreapi.model;
 
-import java.util.logging.Logger;
+import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.Document;
+
 import java.util.HashMap;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -9,12 +11,15 @@ import com.fasterxml.jackson.annotation.JsonProperty;
  * 
  * @author Jacob Karvelis jak9527
  */
+@Document("carts")
 public class Cart {
 
     // Package private for tests
     static final String STRING_FORMAT = "Cart [id=%d, products=%s]";
 
+    @Id
     @JsonProperty("id") private int id;
+    
     private int total;
     @JsonProperty("products") private HashMap<Integer, Product> products; //map product id to product
 
@@ -44,6 +49,12 @@ public class Cart {
      * @return The id of the cart
      */
     public int getId() {return id;}
+
+    /**
+     * Sets the id of the cart
+     * @return The id to set to the cart
+     */
+    public void setId(int id) {this.id = id;}
 
     /**
      * Retrieves the map of products

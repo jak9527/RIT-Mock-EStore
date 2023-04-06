@@ -2,19 +2,25 @@ package com.estore.api.estoreapi.model;
 
 import java.util.logging.Logger;
 
+import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.Document;
+
 import com.fasterxml.jackson.annotation.JsonProperty;
 /**
  * Represents a User entity
  * 
  * @author Jacob Karvelis jak9527
  */
+@Document("users")
 public class User {
     private static final Logger LOG = Logger.getLogger(User.class.getName());
 
     // Package private for tests
     static final String STRING_FORMAT = "User [id=%d, username=%s]";
 
+    @Id
     @JsonProperty("id") private int id;
+    
     @JsonProperty("username") private String username;
     
 
@@ -32,6 +38,12 @@ public class User {
         this.id = id;
         this.username = username;
     }
+
+    /**
+     * Sets the id of the user
+     * @return The id to set to the product
+     */
+    public void setId(int id) {this.id = id;}
 
     /**
      * Retrieves the id of the user

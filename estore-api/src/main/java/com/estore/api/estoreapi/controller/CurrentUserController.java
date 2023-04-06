@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.bind.annotation.RequestBody;
 
+import com.estore.api.estoreapi.model.CurrentUser;
 import com.estore.api.estoreapi.model.User;
 import com.estore.api.estoreapi.persistence.CurrentUserDAO;
 
@@ -55,10 +56,11 @@ public class CurrentUserController {
     public ResponseEntity<User> getCurrentUser(){
         LOG.info("GET /currentUser");
         try{
-            User user = currentUserDao.getCurrentUser();
-            if( user == null ) {
+            CurrentUser cUser = currentUserDao.getCurrentUser();
+            if( cUser == null ) {
                 return new ResponseEntity<>(HttpStatus.NOT_FOUND);
             }
+            User user = new User(cUser.getId(), cUser.getUsername());
             return new ResponseEntity<User>(user, HttpStatus.OK);
         }
         catch(IOException e) {
@@ -80,11 +82,13 @@ public class CurrentUserController {
     public ResponseEntity<User> setCurrentUser(@RequestBody User user){
         LOG.info("POST /currentUser " + user);
         try {
-            User newUser = currentUserDao.setCurrentUser(user);
-            if( newUser == null ) {
+            CurrentUser cUser = new CurrentUser(user.getId(), user.getUsername());
+            CurrentUser newCUser = currentUserDao.setCurrentUser(cUser);
+            if( newCUser == null ) {
                 return new ResponseEntity<>(HttpStatus.CONFLICT);
             }
-            return new ResponseEntity<User>(newUser,HttpStatus.CREATED);
+
+            return new ResponseEntity<User>(user, HttpStatus.CREATED);
         }
         catch(IOException e) {
             LOG.log(Level.SEVERE,e.getLocalizedMessage());
@@ -105,7 +109,7 @@ public class CurrentUserController {
         LOG.info("DELETE /currentUser/");
 
         try {
-            User delete = currentUserDao.deleteUser(currentUserDao.getCurrentUser());
+            CurrentUser delete = currentUserDao.deleteUser(currentUserDao.getCurrentUser());
             if( delete == null) {
                 return new ResponseEntity<>(HttpStatus.NOT_FOUND);
             }
