@@ -97,7 +97,12 @@ public class ProductDBDAO implements ProductDAO {
 
     @Override
     public boolean checkoutProduct(int id, int quantity) throws IOException {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'checkoutProduct'");
+        Product p = getProduct(id);
+        if (p == null) {
+            return false;
+        }
+        p.setQuantity(p.getQuantity() - quantity);
+        updateProduct(p);
+        return true;
     }
 }

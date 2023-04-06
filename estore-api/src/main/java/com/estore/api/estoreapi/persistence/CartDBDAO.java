@@ -121,13 +121,13 @@ public class CartDBDAO implements CartDAO{
         if (c == null) {
             return null; // cart does not exist
         }
-        Product p = getProduct(cId, pId);
-        
+
+        Product p = c.getProducts().get(pId);
         if (p == null) {
             return null; //product not in cart
         }
+
         p.setQuantity(p.getQuantity() + count);
-        
         c.getProducts().replace(pId, p);
         cartRepo.delete(cId);
         cartRepo.insert(c);
@@ -158,9 +158,13 @@ public class CartDBDAO implements CartDAO{
             return false;
         }
         c.getProducts().clear();
-        cartRepo.delete(cId);
-        cartRepo.insert(c);
-        return true;
+        if(c.getProducts().size() == 0) {
+            cartRepo.delete(cId);
+            cartRepo.insert(c);
+            return true;
+        } else {
+            return false;
+        }
     }
 
     /**
