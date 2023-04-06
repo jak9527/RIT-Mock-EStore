@@ -34,13 +34,13 @@
             <span>Product Name: </span>{{auction.product.name}}
         </div>
         <div>
-            <span>Number Included: </span>{{auction.quantity}}
+            <span>Number Included: </span>{{auction.product.quantity}}
         </div>
         <div>
             <span>Current Bid: </span>{{auction.maxBid.bid}}
         </div>
         <div>
-            <span>Expiration Time: </span>{{auction.endTime}}
+            <span>Expiration Time: </span>{{parseTime(auction.endTime)}}
         </div>
         <div>
             <input type="number" id="bidAmount" step="0.01" placeholder="Place your bid" #bidAmount />
