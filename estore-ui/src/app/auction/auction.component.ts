@@ -33,10 +33,10 @@ export class AuctionComponent implements OnInit {
         });
   }
 
-  add(name: string): void {
+  add(name: string, start: number, endTime: string): void {
     name = name.trim();
     if (!name) { return; }
-    this.auctionService.addAuction(1, "admin", 0.0, "1970-01-01-00:00:00", { name } as Product)
+    this.auctionService.addAuction(1, "admin", start, endTime, { name } as Product)
       .subscribe(auction => {
         this.auction = auction;
         console.log(auction);

@@ -1,11 +1,16 @@
 <h2>Auction</h2>
 <div *ngIf="isAdmin">
     <div *ngIf="!auction">
-        <label for="new-product">Product name: </label>
-        <input id="new-product" #productName />
+        <label for="new-product">Product Name: </label>
+        <input id="new-product" placeholder="Enter the product to auction" #productName />
+        <label for="starting-bid">Starting Bid: </label>
+        <input type="number" id="starting-bid" step="0.01" placeholder="Set the starting bid" #startingBid />
+        <label for="end-time">End Time: </label>
+        <input id="end-time" placeholder="YYYY,MM,DD,HH,mm,ss" #endTime />
+
   
         <!-- (click) passes input value to add() and then clears the input -->
-        <button type="button" class="add-button" (click)="add(productName.value); productName.value=''">
+        <button type="button" class="add-button" (click)="add(productName.value, startingBid.valueAsNumber, endTime.value); productName.value=''">
             New Auction
         </button>
     </div>
