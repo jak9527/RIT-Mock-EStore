@@ -32,7 +32,10 @@
         </div>
         <div>
             <label for="product-image">Product image (web link only): </label>
-            <input id="product-image" [(ngModel)]="product.image" placeholder="image">
+            <input id="product-image" [(ngModel)]="product.image" placeholder="image" #image>
+            <div image>
+                <img src="{{image.value}}">
+            </div>
         </div>
     </div>
 
