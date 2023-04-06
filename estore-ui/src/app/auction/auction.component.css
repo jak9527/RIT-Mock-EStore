@@ -52,3 +52,113 @@ h2 {
   a:hover {
     background-color: black;
   }
+
+  @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700&display=swap');
+
+* {
+  box-sizing: border-box;
+  font-family: 'Roboto', sans-serif;
+}
+
+body {
+  background-color: #f5f5f5;
+}
+
+.product-container {
+  display: flex;
+  max-width: 800px;
+  margin: 50px auto;
+  border-radius: 10px;
+  background-color: #fff;
+  padding: 30px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s;
+}
+
+.product-container:hover {
+  box-shadow: 0 8px 12px rgba(0, 0, 0, 0.15);
+  transform: translateY(-5px);
+}
+
+.product-image {
+  flex: 1;
+  margin-right: 20px;
+
+}
+
+.product-image .img {
+  max-width: 100%;
+  border-radius: 10px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+h1 {
+  font-size: 32px;
+  font-weight: 700;
+  color: #333;
+  margin-bottom: 15px;
+}
+
+p {
+  font-size: 16px;
+  font-weight: 300;
+  color: #666;
+  margin-bottom: 20px;
+}
+
+.winner {
+  font-size: 18px;
+  font-weight: 700;
+  color: #333;
+  margin-bottom: 15px;
+  text-align: center;
+}
+.message {
+  font-size: 18px;
+  font-weight: 700;
+  color: #333;
+  margin-bottom: 15px;
+  text-align: center;
+  margin: auto;
+  width: 50%;
+}
+
+.price {
+  font-weight: 700;
+  font-size: 22px;
+  color: #2ecc71;
+}
+
+button {
+  font-size: 16px;
+  font-weight: 400;
+  color: #fff;
+  background-color: #fa6400;
+  border: none;
+  border-radius: 5px;
+  padding: 12px 25px;
+  cursor: pointer;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s;
+}
+
+button:hover {
+  color: white;
+  background-color: #42545C;
+}
+button:active {
+  background-color: black;
+}
+
+button:disabled,
+button[disabled]{
+  border: 1px solid #999999;
+  background-color: #cccccc;
+  color: #666666;
+  cursor:not-allowed
+}
+
+.product-info {
+  flex: 1;
+
+  }

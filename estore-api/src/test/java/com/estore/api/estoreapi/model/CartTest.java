@@ -19,7 +19,7 @@ public class CartTest {
     public void testCtor() {
         // Setup
         int expected_id = 1;
-        Product product = new Product(1, "Golisano Trees", 10, 10);
+        Product product = new Product(1, "Golisano Trees", 10, 10, "");
         HashMap<Integer, Product> expected_products = new HashMap<>() {{
             put(product.getId(), product);
         }};
@@ -38,7 +38,7 @@ public class CartTest {
     public void testToString() {
         // Setup
         int id = 1;
-        Product product = new Product(1, "Golisano Trees", 10, 10);
+        Product product = new Product(1, "Golisano Trees", 10, 10, "");
                 HashMap<Integer, Product> expected_products = new HashMap<>() {{
             put(product.getId(), product);
         }};
@@ -56,7 +56,7 @@ public class CartTest {
     public void testGetTotal() {
         // Setup
         int expected_id = 1;
-        Product product = new Product(1, "Golisano Trees", 10, 10);
+        Product product = new Product(1, "Golisano Trees", 10, 10, null);
         HashMap<Integer, Product> expected_products = new HashMap<>() {{
             put(product.getId(), product);
         }};

@@ -24,6 +24,7 @@ public class Product {
     @JsonProperty("name") private String name;
     @JsonProperty("price") private float price;
     @JsonProperty("quantity") private int quantity;
+    @JsonProperty("image") private String image;
 
     /**
      * Create a product with the given id and name
@@ -35,11 +36,12 @@ public class Product {
      * is not provided in the JSON object, the Java field gets the default Java
      * value, i.e. 0 for int
      */
-    public Product(@JsonProperty("id") int id, @JsonProperty("name") String name, @JsonProperty("price") float price, @JsonProperty("quantity") int quantity) {
+    public Product(@JsonProperty("id") int id, @JsonProperty("name") String name, @JsonProperty("price") float price, @JsonProperty("quantity") int quantity, @JsonProperty("image") String image) {
         this.id = id;
         this.name = name;
         this.quantity = quantity;
         this.price = price;
+        this.image = image;
     }
 
     /**

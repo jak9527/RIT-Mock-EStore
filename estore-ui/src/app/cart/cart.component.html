@@ -1,18 +1,40 @@
-<h2>My Cart</h2>
-<ul class="products">
-  <li *ngFor="let product of products | keyvalue">
-    <a routerLink="/detail/{{product.key}}">
-      <span class="badge">{{product.key}} : </span> {{product.value.name}} : ${{product.value.price}} : {{product.value.quantity}}
-    </a>
-    <button type="button" id="remove{{product.key}}" class="delete" title="decrement"
-    (click)="decrease(product.value)">decrease</button>
-    <button type="button" [disabled]="disabledButtons[product.key]" id="add{{product.key}}" class="add" title="add"
-    (click)="add(product.value)">increase</button>
-    <button type="button" class="remove" title="remove"
-    (click)="remove(product.value)">remove</button>
-  </li>
-</ul>
-<button type="button" (click)="goBack()">go back</button>
-<a routerLink="/checkout">
-  <span class="checkout">Proceed to Checkout </span>
-</a>
+<!DOCTYPE html>
+<html>
+  <body>
+    <div class="shopping-cart" >
+      <!-- Title -->
+      <div class="title">
+        Shopping Bag
+      </div>
+      
+      <div class="item" *ngFor="let product of products | keyvalue">
+
+        <div class="buttons">
+          <span class="delete-btn" (click)="remove(product.value)" ></span>
+        </div>
+
+        <img class="prodImage" src="{{product.value.image}}" alt="" />
+
+        <div class="description">
+          <a routerLink="/detail/{{product.key}}">
+            <span class="badge">{{product.value.name}}</span>
+          </a>
+        </div>
+
+        <div class="quantity">
+          <button class="plus-btn" type="button" name="button" [disabled]="disabledButtons[product.key]" (click)="add(product.value)"></button>
+            <span class="q-input">{{product.value.quantity}}</span>
+          <button class="minus-btn" type="button" name="button" (click)="decrease(product.value)"></button>
+        </div>
+
+        <div class="total-price">${{product.value.price}}</div>
+      </div>
+
+    </div>
+  </body>
+
+  <div class="btns">
+    <button class="button" (click)="goBack()">go back</button>
+    <button class="button" routerLink="/checkout">Proceed to Checkout</button>
+  </div>
+</html>

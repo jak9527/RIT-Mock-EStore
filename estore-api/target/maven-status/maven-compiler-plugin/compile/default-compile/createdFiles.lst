@@ -1,0 +1,3 @@
+com\estore\api\estoreapi\persistence\ProductFileDAO.class
+com\estore\api\estoreapi\persistence\CurrentUserDAO.class
+com\estore\api\estoreapi\persistence\CartFileDAO.class

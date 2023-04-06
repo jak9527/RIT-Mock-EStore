@@ -1,71 +1,148 @@
-/* ProductDetailComponent's private CSS styles */
-label {
-    color: #435960;
-    font-weight: bold;
-  }
-  input {
-    font-size: 1em;
-    padding: .5rem;
-  }
-  button {
-    margin-top: 20px;
-    margin-right: .5rem;
-    background-color: #eee;
-    padding: 1rem;
-    border-radius: 4px;
-    font-size: 1rem;
-  }
-  button:hover {
-    background-color: #cfd8dc;
-  }
-  button:disabled {
-    background-color: #eee;
-    color: #ccc;
-    cursor: auto;
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700&display=swap');
+
+* {
+  box-sizing: border-box;
+  font-family: 'Roboto', sans-serif;
+}
+
+body {
+  background-color: #f5f5f5;
+}
+
+.product-container {
+  display: flex;
+  max-width: 800px;
+  margin: 50px auto;
+  border-radius: 10px;
+  background-color: #fff;
+  padding: 30px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s;
+}
+
+.product-container:hover {
+  box-shadow: 0 8px 12px rgba(0, 0, 0, 0.15);
+  transform: translateY(-5px);
+}
+
+img {
+  max-width: 600px;
+}
+
+.image {
+  max-width: 100%;
+  border-radius: 10px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.product-image {
+  flex: 1;
+  margin-right: 20px;
+
+}
+
+.product-image .img {
+  max-width: 100%;
+  border-radius: 10px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+h1 {
+  font-size: 32px;
+  font-weight: 700;
+  color: #333;
+  margin-bottom: 15px;
+}
+
+p {
+  font-size: 16px;
+  font-weight: 300;
+  color: #666;
+  margin-bottom: 20px;
+}
+
+.price {
+  font-weight: 700;
+  font-size: 22px;
+  color: #2ecc71;
+}
+
+button {
+  font-size: 16px;
+  font-weight: 400;
+  color: #fff;
+  background-color: #fa6400;
+  border: none;
+  border-radius: 5px;
+  padding: 12px 25px;
+  cursor: pointer;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s;
+}
+
+button:hover {
+  color: white;
+  background-color: #42545C;
+}
+button:active {
+  background-color: black;
+}
+
+button:disabled,
+button[disabled]{
+  border: 1px solid #999999;
+  background-color: #cccccc;
+  color: #666666;
+  cursor:not-allowed
+}
+
+.product-info {
+  flex: 1;
+
   }
 
   /* The alert message box */
-.alert {
-  padding: 20px;
-  background-color: green;
-  color: white;
-  margin-bottom: 15px;
-  -webkit-animation-duration: 1s;
-  animation-duration: 1s;
-  -webkit-animation-fill-mode: both;
-  animation-fill-mode: both;
-  opacity: 0;
-  animation: alert 2.5s linear forwards;
-  -webkit-animation: alert 2.5s linear forwards;
-}
-
-@-webkit-keyframes alert {
-  50% {opacity: 1;}
-}
-
-
-@keyframes alert {
-  50% {opacity: 1;}
-} 
-
-.alert {
-  -webkit-animation-name: alert;
-  animation-name: alert;
-}
-
-/* The close button */
-.closebtn {
-  margin-left: 15px;
-  color: white;
-  font-weight: bold;
-  float: right;
-  font-size: 22px;
-  line-height: 20px;
-  cursor: pointer;
-  transition: 0.3s;
-}
-
-/* When moving the mouse over the close button */
-.closebtn:hover {
-  color: black;
-}
+  .alert {
+    padding: 20px;
+    background-color: green;
+    color: white;
+    margin-bottom: 15px;
+    -webkit-animation-duration: 1s;
+    animation-duration: 1s;
+    -webkit-animation-fill-mode: both;
+    animation-fill-mode: both;
+    opacity: 0;
+    animation: alert 2.5s linear forwards;
+    -webkit-animation: alert 2.5s linear forwards;
+  }
+  
+  @-webkit-keyframes alert {
+    50% {opacity: 1;}
+  }
+  
+  
+  @keyframes alert {
+    50% {opacity: 1;}
+  } 
+  
+  .alert {
+    -webkit-animation-name: alert;
+    animation-name: alert;
+  }
+  
+  /* The close button */
+  .closebtn {
+    margin-left: 15px;
+    color: white;
+    font-weight: bold;
+    float: right;
+    font-size: 22px;
+    line-height: 20px;
+    cursor: pointer;
+    transition: 0.3s;
+  }
+  
+  /* When moving the mouse over the close button */
+  .closebtn:hover {
+    color: black;
+  }
