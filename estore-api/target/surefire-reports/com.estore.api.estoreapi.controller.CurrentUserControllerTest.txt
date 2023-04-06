@@ -1,0 +1,16 @@
+-------------------------------------------------------------------------------
+Test set: com.estore.api.estoreapi.controller.CurrentUserControllerTest
+-------------------------------------------------------------------------------
+Tests run: 9, Failures: 3, Errors: 0, Skipped: 0, Time elapsed: 0.047 s <<< FAILURE! - in com.estore.api.estoreapi.controller.CurrentUserControllerTest
+testSetCurrentUserHandleException  Time elapsed: 0 s  <<< FAILURE!
+org.opentest4j.AssertionFailedError: expected: <500 INTERNAL_SERVER_ERROR> but was: <409 CONFLICT>
+	at com.estore.api.estoreapi.controller.CurrentUserControllerTest.testSetCurrentUserHandleException(CurrentUserControllerTest.java:94)
+
+testGetCurrentUser  Time elapsed: 0 s  <<< FAILURE!
+org.opentest4j.AssertionFailedError: expected: com.estore.api.estoreapi.model.CurrentUser@bb6869a<User [id=9, username=User22]> but was: com.estore.api.estoreapi.model.User@506b083<User [id=9, username=User22]>
+	at com.estore.api.estoreapi.controller.CurrentUserControllerTest.testGetCurrentUser(CurrentUserControllerTest.java:50)
+
+TestSetCurrentUser  Time elapsed: 0 s  <<< FAILURE!
+org.opentest4j.AssertionFailedError: expected: <201 CREATED> but was: <409 CONFLICT>
+	at com.estore.api.estoreapi.controller.CurrentUserControllerTest.TestSetCurrentUser(CurrentUserControllerTest.java:75)
+
