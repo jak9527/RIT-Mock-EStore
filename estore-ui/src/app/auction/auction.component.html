@@ -10,6 +10,10 @@
             <input type="number" id="product-qty" step="1" min="0" placeholder="Enter the product count" #productCount />
         </div>
         <div>
+            <label for="image-product">Product Image (web urls only): </label>
+            <input id="image-product" placeholder="Enter the image URL from Web to auction" #productImage />
+        </div>
+        <div>
             <label for="starting-bid">Starting Bid: </label>
             <input type="number" id="starting-bid" step="0.01" placeholder="Set the starting bid" #startingBid />
         </div>
@@ -21,7 +25,7 @@
 
   
         <!-- (click) passes input value to add() and then clears the input -->
-        <button type="button" class="add-button" (click)="add(productName.value, productCount.valueAsNumber, startingBid.valueAsNumber, endTime.value); productName.value=''">
+        <button type="button" class="add-button" (click)="add(productName.value, productImage.value, productCount.valueAsNumber, startingBid.valueAsNumber, endTime.value); productName.value=''">
             New Auction
         </button>
     </div>
@@ -54,6 +58,9 @@
             <span>Current Bid: </span>{{auction.maxBid.bid}}
         </div>
         <div>
+            <span> <img src="{{auction.product.image}}"> </span>
+        </div>
+        <div>
             <span>Current Leading Bidder: </span>{{auction.maxBid.user}}
         </div>
         <div>
@@ -66,6 +73,9 @@
     <div *ngIf="auction">
         <div>
             <span>Product Name: </span>{{auction.product.name}}
+        </div>
+        <div>
+            <span> <img src="{{auction.product.image}}"> </span>
         </div>
         <div>
             <span>Number Included: </span>{{auction.product.quantity}}

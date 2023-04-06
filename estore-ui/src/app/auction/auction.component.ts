@@ -46,10 +46,10 @@ export class AuctionComponent implements OnInit {
     // this.auctionService.getAuctionStatus().subscribe(running => this.isRunning = running);
   }
 
-  add(name: string, quantity: number, start: number, endTime: string): void {
+  add(name: string, image: string, quantity: number, start: number, endTime: string): void {
     name = name.trim();
     if (!name) { return; }
-    this.auctionService.addAuction(1, "no bidders yet!", start, this.parseTime(endTime), { name, quantity } as Product)
+    this.auctionService.addAuction(1, "no bidders yet!", start, this.parseTime(endTime), { name, quantity, image } as Product)
       .subscribe(auction => {
         this.auction = auction;
         console.log(auction);
