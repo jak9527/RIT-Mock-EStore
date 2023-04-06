@@ -41,6 +41,7 @@ export class CartComponent implements OnInit {
         switchMap((cart) => {
           this.cart = cart;
           this.products = this.cart.products;
+          console.log(this.cart);
           const productObservables = Object.values(this.products).map((value) => 
             this.productService.getProduct(value.id).pipe(
               map((product2) => {
@@ -66,18 +67,18 @@ export class CartComponent implements OnInit {
 
     decrease(product: Product): void {
       this.cartService.updateProductCount(this.cart.id, product.id, -1).subscribe();
-      this.ngOnInit();
+      location.reload();
   }
 
 
     add(product: Product): void {
       this.cartService.updateProductCount(this.cart.id, product.id, 1).subscribe();
-      this.ngOnInit();
+      location.reload();
   }
 
     remove(product: Product): void {
       this.cartService.updateProductCount(this.cart.id, product.id, -product.quantity).subscribe();
-      this.ngOnInit();
+      location.reload();
   }
 
   
