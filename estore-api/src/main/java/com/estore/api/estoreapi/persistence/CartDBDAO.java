@@ -158,7 +158,7 @@ public class CartDBDAO implements CartDAO {
             return false;
         }
         c.getProducts().clear();
-        if(c.getProducts().size() == 0) {
+        if (c.getProducts().size() == 0) {
             cartRepo.delete(cId);
             cartRepo.insert(c);
             return true;
