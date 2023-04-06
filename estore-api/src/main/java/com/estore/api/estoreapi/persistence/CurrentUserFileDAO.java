@@ -138,7 +138,7 @@ public class CurrentUserFileDAO implements CurrentUserDAO {
     public User setCurrentUser(User user) throws IOException {
         synchronized(users) {
             if(users.size() != 0){
-                System.out.println("Deleting current user");
+                // System.out.println("Deleting current user");
                 deleteUser(getCurrentUser());
             }
             users.put(user.getUsername(),user);
