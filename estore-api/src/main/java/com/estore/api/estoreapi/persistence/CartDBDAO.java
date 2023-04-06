@@ -37,7 +37,7 @@ public class CartDBDAO implements CartDAO{
      */
     private synchronized int nextId() {
         List<Cart> cList = cartRepo.findByOrderByIdDesc();
-        if (cList == null) {
+        if (cList.isEmpty()) {
             return 0;
         }
         int max = cList.get(0).getId();
@@ -95,8 +95,9 @@ public class CartDBDAO implements CartDAO{
         if (c == null) {
             return null;
         }
+
+        c.getProducts().put(product.getId(), product);
         cartRepo.delete(cId);
-        c.addProduct(product);
         cartRepo.insert(c);
         return product;
     }
@@ -116,12 +117,17 @@ public class CartDBDAO implements CartDAO{
      */
     @Override
     public Product updateProductCount(int cId, int pId, int count) throws IOException {
-        Product p = productRepo.findById(pId);
-        if (p == null) {
-            return null;
-        }
-        p.setQuantity(p.getQuantity() + 1);
         Cart c = getCart(cId);
+        if (c == null) {
+            return null; // cart does not exist
+        }
+        Product p = getProduct(cId, pId);
+        
+        if (p == null) {
+            return null; //product not in cart
+        }
+        p.setQuantity(p.getQuantity() + count);
+        
         c.getProducts().replace(pId, p);
         cartRepo.delete(cId);
         cartRepo.insert(c);
@@ -134,8 +140,7 @@ public class CartDBDAO implements CartDAO{
     @Override
     public boolean removeProduct(int cId, int pId) throws IOException {
         Cart c = getCart(cId);
-        HashMap<Integer, Product> productsHM =  c.getProducts();
-        if(productsHM.remove(pId) == null) {
+        if(c.getProducts().remove(pId) == null) {
             return false;
         }
         cartRepo.delete(cId);
@@ -152,8 +157,7 @@ public class CartDBDAO implements CartDAO{
         if (c == null) {
             return false;
         }
-        HashMap<Integer, Product> productsHM =  c.getProducts();
-        productsHM.clear();
+        c.getProducts().clear();
         cartRepo.delete(cId);
         cartRepo.insert(c);
         return true;
@@ -168,19 +172,18 @@ public class CartDBDAO implements CartDAO{
         if (c == null) {
             return false;
         }
-        HashMap<Integer, Product> productsHM =  c.getProducts();
 
         //match for all products in the store that are in the cart
         for(Product prod : products) {;
             int pId = prod.getId();
             //if this cart has a product with the id of the current product
-            if (productsHM.containsKey(pId)) {
-                Product currentProduct = productsHM.get(pId);
+            if (c.getProducts().containsKey(pId)) {
+                Product currentProduct = c.getProducts().get(pId);
                 //if the quantity in cart is greater than stock, clamp it
                 if(currentProduct.getQuantity() > prod.getQuantity()) {
                     if(prod.getQuantity() == 0) {
                         //if there are none in stock, remove it from the product list
-                        productsHM.remove(pId);
+                        c.getProducts().remove(pId);
                     } else{
                         currentProduct.setQuantity(prod.getQuantity());
                     }
@@ -189,7 +192,7 @@ public class CartDBDAO implements CartDAO{
                 currentProduct.setPrice(prod.getPrice());
                 //reset the name
                 currentProduct.setName(prod.getName());
-                productsHM.replace(pId, currentProduct);
+                c.getProducts().replace(pId, currentProduct);
             }
         }
         // Write the Cart object with the updated productHM Map in the DB
@@ -204,7 +207,7 @@ public class CartDBDAO implements CartDAO{
             idsInStore.add(products[i].getId());
         }
         
-        for(Product prod : productsHM.values()){
+        for(Product prod : c.getProducts().values()){
             if(!idsInStore.contains(prod.getId())){
                 idsToRemoveSet.add(prod.getId());
             }

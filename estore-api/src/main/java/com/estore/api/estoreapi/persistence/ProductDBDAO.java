@@ -29,7 +29,7 @@ public class ProductDBDAO implements ProductDAO {
      */
     private synchronized int nextId() {
         List<Product> pList = productRepo.findByOrderByIdDesc();
-        if (pList == null) {
+        if (pList.isEmpty()) {
             return 0;
         }
         int max = pList.get(0).getId();

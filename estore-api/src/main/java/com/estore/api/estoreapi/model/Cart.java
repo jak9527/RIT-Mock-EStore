@@ -64,10 +64,6 @@ public class Cart {
         return products;
     }
 
-    public void addProduct(Product p) {
-        products.put(p.getId(), p);
-    }
-
     /**
      * {@inheritDoc}
      */
