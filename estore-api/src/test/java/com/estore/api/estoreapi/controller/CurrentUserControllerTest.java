@@ -17,11 +17,12 @@ import org.springframework.http.ResponseEntity;
 
 import com.estore.api.estoreapi.controller.CurrentUserController;
 import com.estore.api.estoreapi.model.User;
+import com.estore.api.estoreapi.model.CurrentUser;
 import com.estore.api.estoreapi.persistence.CurrentUserDAO;
 
 
 /**
- * Test the Current User Controller class
+ * Test the Current CurrentUser Controller class
  * 
  * @author Jacob Karvelis
  */
@@ -42,7 +43,7 @@ public class CurrentUserControllerTest{
 
     @Test
     public void testGetCurrentUser() throws IOException{
-        User user = new User(9, "User22");
+        CurrentUser user = new CurrentUser(9, "User22");
         when(mockCurrentUserDAO.getCurrentUser()).thenReturn(user);
         ResponseEntity<User> response = currentUserController.getCurrentUser();
         assertEquals(HttpStatus.OK,response.getStatusCode());
@@ -67,32 +68,35 @@ public class CurrentUserControllerTest{
 
     @Test
     public void TestSetCurrentUser() throws IOException {
-        User user = new User(9, "User22");
+        CurrentUser user = new CurrentUser(9, "User22");
         when(mockCurrentUserDAO.setCurrentUser(user)).thenReturn(user);
-        ResponseEntity<User> response = currentUserController.setCurrentUser(user);
+        User u = new User(user.getId(), user.getUsername());
+        ResponseEntity<User> response = currentUserController.setCurrentUser(u);
         assertEquals(HttpStatus.CREATED,response.getStatusCode());
         assertEquals(user,response.getBody());
     }
 
     @Test
     public void testSetCurrentUserFailed() throws IOException{
-        User user = new User(9, "User22");
+        CurrentUser user = new CurrentUser(9, "User22");
         when(mockCurrentUserDAO.setCurrentUser(user)).thenReturn(null);
-        ResponseEntity<User> response = currentUserController.setCurrentUser(user);
+        User u = new User(user.getId(), user.getUsername());
+        ResponseEntity<User> response = currentUserController.setCurrentUser(u);
         assertEquals(HttpStatus.CONFLICT,response.getStatusCode());
     }
 
     @Test
     public void testSetCurrentUserHandleException() throws IOException{
-        User user = new User(9, "User22");
+        CurrentUser user = new CurrentUser(9, "User22");
         doThrow(new IOException()).when(mockCurrentUserDAO).setCurrentUser(user);
-        ResponseEntity<User> response = currentUserController.setCurrentUser(user);
+        User u = new User(user.getId(), user.getUsername());
+        ResponseEntity<User> response = currentUserController.setCurrentUser(u);
         assertEquals(HttpStatus.INTERNAL_SERVER_ERROR, response.getStatusCode());
     }
 
     @Test
     public void TestDeleteUser() throws IOException {
-        User user = new User(9, "User22");
+        CurrentUser user = new CurrentUser(9, "User22");
         when(mockCurrentUserDAO.deleteUser(user)).thenReturn(user);
         when(mockCurrentUserDAO.getCurrentUser()).thenReturn(user);
         ResponseEntity<User> response = currentUserController.deleteUser();
@@ -101,7 +105,7 @@ public class CurrentUserControllerTest{
 
     @Test
     public void testDeleteUserNotFound() throws IOException{
-        User user = new User(9, "User22");
+        CurrentUser user = new CurrentUser(9, "User22");
         when(mockCurrentUserDAO.deleteUser(user)).thenReturn(null);
         ResponseEntity<User> response = currentUserController.deleteUser();
         assertEquals(HttpStatus.NOT_FOUND,response.getStatusCode());
@@ -109,7 +113,7 @@ public class CurrentUserControllerTest{
 
     @Test
     public void testDeleteUserHandleException() throws IOException{
-        User user = new User(9, "User22");
+        CurrentUser user = new CurrentUser(9, "User22");
         when(mockCurrentUserDAO.getCurrentUser()).thenReturn(user);
         doThrow(new IOException()).when(mockCurrentUserDAO).deleteUser(user);
         ResponseEntity<User> response = currentUserController.deleteUser();

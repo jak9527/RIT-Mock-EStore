@@ -2,50 +2,50 @@ package com.estore.api.estoreapi.persistence;
 
 import java.io.IOException;
 
-import com.estore.api.estoreapi.model.User;
+import com.estore.api.estoreapi.model.CurrentUser;
 
 /**
- * Defines the interface for User instancing
+ * Defines the interface for CurrentUser instancing
  * 
  * @author Jacob Karvelis jak9527
  */
 public interface CurrentUserDAO {
 
     /**
-     * Retrieves the {@linkplain User user} currently logged in
+     * Retrieves the {@linkplain CurrentUser user} currently logged in
      * 
      * 
-     * @return the {@link User user} currently logged in
+     * @return the {@link CurrentUser user} currently logged in
      * <br>
-     * null if no {@link User user} is logged in
+     * null if no {@link CurrentUser user} is logged in
      * 
      * @throws IOException if an issue with underlying storage
      */
-    User getCurrentUser() throws IOException;
+    CurrentUser getCurrentUser() throws IOException;
 
     /**
-     * Sets the current {@linkplain User user} and saves it
+     * Sets the current {@linkplain CurrentUser user} and saves it
      * 
-     * @param user {@linkplain User user} object to set
+     * @param user {@linkplain CurrentUser user} object to set
      * <br>
      *
-     * @return new {@link User user} if successful, null otherwise 
+     * @return new {@link CurrentUser user} if successful, null otherwise 
      * 
      * @throws IOException if an issue with underlying storage
      */
-    User setCurrentUser(User user) throws IOException;
+    CurrentUser setCurrentUser(CurrentUser user) throws IOException;
 
     /**
-     * Deletes a {@linkplain User user}
+     * Deletes a {@linkplain CurrentUser user}
      * 
-     * @param user {@linkplain User user} object to be created and saved
+     * @param user {@linkplain CurrentUser user} object to be created and saved
      * <br>
-     * The id of the User object is ignored and a new uniqe id is assigned
+     * The id of the CurrentUser object is ignored and a new uniqe id is assigned
      *
-     * @return new {@link User user} if successful, null otherwise 
+     * @return new {@link CurrentUser user} if successful, null otherwise 
      * 
      * @throws IOException if an issue with underlying storage
      */
-    User deleteUser(User user) throws IOException;
+    CurrentUser deleteUser(CurrentUser user) throws IOException;
 
 }

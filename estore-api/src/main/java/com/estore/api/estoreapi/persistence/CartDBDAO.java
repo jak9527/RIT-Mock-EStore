@@ -22,7 +22,7 @@ import com.estore.api.estoreapi.model.Product;
  */
 
 @Component
-public class CartDBDAO implements CartDAO{
+public class CartDBDAO implements CartDAO {
 
     @Autowired
     CartRepository cartRepo;
@@ -177,8 +177,10 @@ public class CartDBDAO implements CartDAO{
             return false;
         }
 
+        HashMap<Integer, Product> productsInCart = c.getProducts();
         //match for all products in the store that are in the cart
-        for(Product prod : products) {;
+        
+        for(Product prod : products) {
             int pId = prod.getId();
             //if this cart has a product with the id of the current product
             if (c.getProducts().containsKey(pId)) {
@@ -211,7 +213,7 @@ public class CartDBDAO implements CartDAO{
             idsInStore.add(products[i].getId());
         }
         
-        for(Product prod : c.getProducts().values()){
+        for(Product prod : productsInCart.values()){
             if(!idsInStore.contains(prod.getId())){
                 idsToRemoveSet.add(prod.getId());
             }

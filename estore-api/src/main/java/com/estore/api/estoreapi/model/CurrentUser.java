@@ -9,10 +9,10 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 /**
  * Represents a User entity
  * 
- * @author Jacob Karvelis jak9527
+ * @author Andrew Bush (apb2471@rit.edu)
  */
-@Document("users")
-public class User {
+@Document("currentusers")
+public class CurrentUser {
     private static final Logger LOG = Logger.getLogger(User.class.getName());
 
     // Package private for tests
@@ -34,7 +34,7 @@ public class User {
      * is not provided in the JSON object, the Java field gets the default Java
      * value, i.e. 0 for int
      */
-    public User(@JsonProperty("id") int id, @JsonProperty("username") String username) {
+    public CurrentUser(@JsonProperty("id") int id, @JsonProperty("username") String username) {
         this.id = id;
         this.username = username;
     }
