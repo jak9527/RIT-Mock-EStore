@@ -14,6 +14,7 @@ import { User } from '../user';
 export class AuctionComponent implements OnInit {
   @Input() auction?: Auction;
   isAdmin: boolean = false;
+  isOver: Boolean = false;
 
   constructor(
     private auctionService: AuctionService,
@@ -22,6 +23,8 @@ export class AuctionComponent implements OnInit {
 
   ngOnInit(): void {
     this.getAuction();
+    this.getIsRunning();
+    console.log(this.isOver);
     var theUser: User = null as unknown as User;
         this.currentUserService.getCurrentUser().subscribe(curUser =>{
             theUser = curUser;
@@ -31,12 +34,14 @@ export class AuctionComponent implements OnInit {
                 this.isAdmin = false;
             }
         });
+    // console.log(this.isRunning);
+    // this.auctionService.getAuctionStatus().subscribe(running => this.isRunning = running);
   }
 
-  add(name: string, start: number, endTime: string): void {
+  add(name: string, quantity: number, start: number, endTime: string): void {
     name = name.trim();
     if (!name) { return; }
-    this.auctionService.addAuction(1, "admin", start, endTime, { name } as Product)
+    this.auctionService.addAuction(1, "no bidders yet!", start, this.parseTime(endTime), { name, quantity } as Product)
       .subscribe(auction => {
         this.auction = auction;
         console.log(auction);
@@ -49,6 +54,11 @@ export class AuctionComponent implements OnInit {
       .subscribe(auction => this.auction = auction);
   }
 
+  getIsRunning(): void {
+    this.auctionService.getAuctionStatus()
+      .subscribe(running => {this.isOver = running;});
+  }
+
   save(): void {
     if (this.auction) {
         console.log(this.auction.maxBid);
@@ -59,9 +69,10 @@ export class AuctionComponent implements OnInit {
 
   delete(): void {
     if (this.auction) {
-      this.auctionService.deleteAuction().subscribe();
+      this.auctionService.deleteAuction().subscribe(()=>
+        this.getAuction());
     }
-    this.getAuction()
+    
   }
 
   placeBid(amount: number): void {
@@ -74,10 +85,7 @@ export class AuctionComponent implements OnInit {
             this.auctionService.newBid(theUser.username, amount)
                 .subscribe(newBid => {
                      this.auction!.maxBid = newBid});
-        });
-    
-
-    
+        }); 
   }
 
   parseTime(time: string): string {
