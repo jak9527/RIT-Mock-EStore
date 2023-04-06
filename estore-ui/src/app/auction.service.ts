@@ -100,6 +100,7 @@ export class AuctionService {
     /* GET boolean for if auction is over */
     getAuctionStatus(): Observable<Boolean> {
         const url = `${this.auctionUrl}/1`;
+        // console.log("bing");
         return this.http.get<Boolean>(url).pipe(
             tap(_ => this.log(`fetched auction status`)),
             catchError(this.handleError<Boolean>(`getCurrentAuctionStatus`))

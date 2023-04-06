@@ -13,6 +13,7 @@ import { ProductSearchComponent } from './product-search/product-search.componen
 import { LoginComponent } from './login/login.component';
 import { CartComponent } from './cart/cart.component';
 import { CheckoutComponent } from './checkout/checkout.component';
+import { CountdownTimerComponent } from './countdown-timer/countdown-timer.component';
 
 @NgModule({
   declarations: [
@@ -24,7 +25,8 @@ import { CheckoutComponent } from './checkout/checkout.component';
     ProductSearchComponent,
     LoginComponent,
     CartComponent,
-    CheckoutComponent
+    CheckoutComponent,
+    CountdownTimerComponent
   ],
   imports: [
     HttpClientModule,
