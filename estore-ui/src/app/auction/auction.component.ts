@@ -57,6 +57,22 @@ export class AuctionComponent implements OnInit {
     }
   }
 
+  placeBid(amount: number): void {
+    var theUser: User = null as unknown as User;
+        this.currentUserService.getCurrentUser().subscribe(curUser =>{
+            theUser = curUser;
+            this.getAuction();
+            // console.log(this.auction?.maxBid);
+            //Resolve with team. placeBid in controller should return old bid if new bid cannot be placed
+            this.auctionService.newBid(theUser.username, amount)
+                .subscribe(newBid => {
+                     this.auction!.maxBid = newBid});
+        });
+    
+
+    
+  }
+
   parseTime(time: string): string {
     time = time + "";
     // let split: string[] = time.split(",", 6);

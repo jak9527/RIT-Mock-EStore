@@ -91,7 +91,7 @@ export class AuctionService {
     /** PUT: update the auction on the server */
     newBid(username: string, bid: number): Observable<any> {
         const url = `${this.auctionUrl}/${username}/${bid}`;
-        return this.http.put(this.auctionUrl, null, this.httpOptions).pipe(
+        return this.http.put(url, null, this.httpOptions).pipe(
         tap(_ => this.log(`updated bid`)),
         catchError(this.handleError<any>('newBid'))
         );

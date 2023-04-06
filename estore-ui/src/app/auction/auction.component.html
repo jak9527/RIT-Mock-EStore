@@ -42,6 +42,11 @@
         <div>
             <span>Expiration Time: </span>{{auction.endTime}}
         </div>
+        <div>
+            <input type="number" id="bidAmount" step="0.01" placeholder="Place your bid" #bidAmount />
+            <button type="button" class="place bid" title="place bid"
+            (click)="placeBid(bidAmount.valueAsNumber)">Place Bid</button>
+        </div>
     </div>
     <div *ngIf="!auction">
         There is no auction at this time
