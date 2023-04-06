@@ -259,15 +259,15 @@ public class CartFileDAOTest {
     @Test
     public void testUpdateCart() {
         // Setup
-        Product item1 = new Product(102,"Wonder-Brick", 4, 4);
-        Product item2 = new Product(108, "Suspicious-Brick", 100, 1);
-        Product item3 = new Product(105, "Stupendous Brick", 50, 1);
-        Product item4 = new Product(1, "Golisano Trees", 10, 4);
+        Product item1 = new Product(102,"Wonder-Brick", 4, 4, null);
+        Product item2 = new Product(108, "Suspicious-Brick", 100, 1, null);
+        Product item3 = new Product(105, "Stupendous Brick", 50, 1, null);
+        Product item4 = new Product(1, "Golisano Trees", 10, 4, null);
         Product[] list = {item1, item2, item3,item4};
         
 
         Cart testCart = cartFileDAO.getCart(1);
-        assertDoesNotThrow(() -> cartFileDAO.addProduct(1, new Product(106,"Wonder-Brick", 4, 4)), 
+        assertDoesNotThrow(() -> cartFileDAO.addProduct(1, new Product(106,"Wonder-Brick", 4, 4, null)), 
         "Unexpected exception thrown");
 
         // Invoke
@@ -286,7 +286,7 @@ public class CartFileDAOTest {
     public void testGetCartProducts() {
 
         // 
-        Product product1 = new Product(1, "Golisano Trees", 10, 10);
+        Product product1 = new Product(1, "Golisano Trees", 10, 10, null);
         Product[] list = {product1};
 
 
