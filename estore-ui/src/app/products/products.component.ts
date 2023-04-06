@@ -16,6 +16,7 @@ import { MapType } from '@angular/compiler';
 export class ProductsComponent implements OnInit {
     products: Product[] = [];
     isAdmin: boolean = false;
+    isEmpty: boolean = false;
   
     constructor(
       private productService: ProductService,
@@ -38,9 +39,14 @@ export class ProductsComponent implements OnInit {
   
     getProducts(): void {
       this.productService.getProducts()
-      .subscribe(products => this.products = products);
+      .subscribe(products => {
+        this.products = products;
+        if(this.products.length == 0) {
+          this.isEmpty = true;
+        }
+      });
     }
-
+    
     add(name: string): void {
         name = name.trim();
         if (!name) { return; }
@@ -50,8 +56,4 @@ export class ProductsComponent implements OnInit {
           });
       }
 
-    delete(product: Product): void {
-        this.products = this.products.filter(h => h !== product);
-        this.productService.deleteProduct(product.id).subscribe();
-    }
   }

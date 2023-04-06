@@ -48,7 +48,7 @@ public class AuctionFileDAOTest {
         testAuction = new AuctionItem[1];
         int expected_id = 1;
         String expected_username = "admin";
-        Product expected_product = new Product(0, "testProduct", 2, 5);
+        Product expected_product = new Product(0, "testProduct", 2, 5, null);
         DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy-MM-dd-HH:mm:ss");
         LocalDateTime expected_endTime = LocalDateTime.parse("2023-04-06-12:30:00", dtf);
         Bid old_bid = new Bid((float)5.0, expected_username);
@@ -103,7 +103,7 @@ public class AuctionFileDAOTest {
         // Setup
         int expected_id = 1;
         String expected_username = "admin";
-        Product expected_product = new Product(0, "testProduct", 2, 5);
+        Product expected_product = new Product(0, "testProduct", 2, 5, null);
         DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy-MM-dd-HH:mm:ss");
         LocalDateTime expected_endTime = LocalDateTime.parse("2023-04-06-12:30:00", dtf);
         Bid old_bid = new Bid((float)5.0, expected_username);
