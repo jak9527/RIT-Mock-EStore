@@ -36,7 +36,7 @@ export class AuctionComponent implements OnInit {
   add(name: string): void {
     name = name.trim();
     if (!name) { return; }
-    this.auctionService.addAuction(1, "admin", 3.0, "2023-04-05-06:25:00", { name } as Product)
+    this.auctionService.addAuction(1, "admin", 0.0, "1970-01-01-00:00:00", { name } as Product)
       .subscribe(auction => {
         this.auction = auction;
         console.log(auction);
@@ -52,8 +52,59 @@ export class AuctionComponent implements OnInit {
   save(): void {
     if (this.auction) {
         console.log(this.auction.maxBid);
-      this.auctionService.addAuction(1, this.auction.maxBid.user, this.auction.maxBid.bid, "2023-04-05-06:25:00", this.auction.product)
+      this.auctionService.addAuction(1, this.auction.maxBid.user, this.auction.maxBid.bid, this.parseTime(this.auction.endTime), this.auction.product)
         .subscribe();
     }
+  }
+
+  parseTime(time: string): string {
+    time = time + "";
+    // let split: string[] = time.split(",", 6);
+    var split = time.split(",", 6);
+    var result = "";
+
+    result += split[0]; //year
+    result += "-";
+    if(split[1].length == 1){ //month
+        result += "0"+split[1];
+    }
+    else{
+        result += split[1];
+    }
+    result += "-";
+    if(split[2].length == 1){ //day
+        result += "0"+split[2];
+    }
+    else{
+        result += split[2];
+    }
+    result += "-";
+    if(split[3].length == 1){ //hour
+        result += "0"+split[3];
+    }
+    else{
+        result += split[3];
+    }
+    result += ":";
+    if(split[4].length == 1){ //minute
+        result+= "0"+split[4];
+    }
+    else{
+        result += split[4];
+    }
+    result += ":";
+    if(split.length == 6){
+        if(split[5].length == 1){
+            result += "0" + split[5];
+        }
+        else{
+            result += split[5];
+        }
+    }
+    else{
+        result += "00";
+    }
+
+    return result;
   }
 }
