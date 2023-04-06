@@ -19,7 +19,6 @@ import com.estore.api.estoreapi.model.AuctionItem;
 import com.estore.api.estoreapi.model.Bid;
 import com.estore.api.estoreapi.model.Product;
 import com.estore.api.estoreapi.model.User;
-import com.estore.api.estoreapi.persistence.CurrentUserFileDAO;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import org.junit.jupiter.api.BeforeEach;
