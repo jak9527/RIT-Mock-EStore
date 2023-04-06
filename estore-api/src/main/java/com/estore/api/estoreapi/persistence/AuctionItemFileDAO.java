@@ -143,26 +143,26 @@ public class AuctionItemFileDAO implements AuctionItemDAO {
         // throw new UnsupportedOperationException("Unimplemented method 'createAuction'");
     }
 
-    @Override
-    public AuctionItem updateAuction(Product product, LocalDateTime endTime, Bid maxBid) throws IOException {
-        // TODO Auto-generated method stub
-        synchronized(auctions){
-            if(auctions.size() == 0){
-                //no current auction
-                return null;
-            } else {
-                AuctionItem[] auctionArray = getAuctionArray();
-                auctionArray[0].setProduct(product); //update product
-                auctionArray[0].setEndTime(endTime); //update end time
-                auctionArray[0].setMaxBid(maxBid); //update max big
-                //Actually change the array
-                auctions.put(auctionArray[0].getId(), auctionArray[0]);
-                save();
-                return auctionArray[0];
-            }
-        }
-        // throw new UnsupportedOperationException("Unimplemented method 'updateAuction'");
-    }
+    // @Override
+    // public AuctionItem updateAuction(Product product, LocalDateTime endTime, Bid maxBid) throws IOException {
+    //     // TODO Auto-generated method stub
+    //     synchronized(auctions){
+    //         if(auctions.size() == 0){
+    //             //no current auction
+    //             return null;
+    //         } else {
+    //             AuctionItem[] auctionArray = getAuctionArray();
+    //             auctionArray[0].setProduct(product); //update product
+    //             auctionArray[0].setEndTime(endTime); //update end time
+    //             auctionArray[0].setMaxBid(maxBid); //update max big
+    //             //Actually change the array
+    //             auctions.put(auctionArray[0].getId(), auctionArray[0]);
+    //             save();
+    //             return auctionArray[0];
+    //         }
+    //     }
+    //     // throw new UnsupportedOperationException("Unimplemented method 'updateAuction'");
+    // }
 
     @Override
     public boolean deleteAuction() throws IOException {

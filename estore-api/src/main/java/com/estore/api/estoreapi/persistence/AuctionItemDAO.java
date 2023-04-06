@@ -44,19 +44,19 @@ public interface AuctionItemDAO {
      */
     AuctionItem createAuction(int aId, Product product, LocalDateTime endTime, Bid maxBid) throws IOException;
 
-    /**
-     * Updates and saves the currently running {@linkplain AuctionItem auction}
-     * 
-     * @param product {@linkplain Product product} object to replace the current one
-     * @param endTime the new time the auction will close
-     * @param maxBid the new max bid
-     * 
-     * @return updated {@link AuctionItem auction} if successful, null if
-     * {@link AuctionItem auction} is not currently running
-     * 
-     * @throws IOException if underlying storage cannot be accessed
-     */
-    AuctionItem updateAuction(Product product, LocalDateTime endTime, Bid maxBid) throws IOException;
+    // /**
+    //  * Updates and saves the currently running {@linkplain AuctionItem auction}
+    //  * 
+    //  * @param product {@linkplain Product product} object to replace the current one
+    //  * @param endTime the new time the auction will close
+    //  * @param maxBid the new max bid
+    //  * 
+    //  * @return updated {@link AuctionItem auction} if successful, null if
+    //  * {@link AuctionItem auction} is not currently running
+    //  * 
+    //  * @throws IOException if underlying storage cannot be accessed
+    //  */
+    // AuctionItem updateAuction(Product product, LocalDateTime endTime, Bid maxBid) throws IOException;
 
     /**
      * Deletes the currently running {@linkplain AuctionItem auction}
