@@ -39,9 +39,8 @@
                   {{product.name}}
                 </h6>
                 <h6>
-                  Price
                   <span>
-                    ${{product.price}} x {{product.quantity}}
+                    {{product.price | currency}} x {{product.quantity}}
                   </span>
                 </h6>
               </div>

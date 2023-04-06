@@ -4,15 +4,18 @@
     <h2>{{product.name | uppercase}} Details</h2>
     <div *ngIf="isAdmin"><span>id: </span>{{product.id}}</div>
     <div *ngIf="!isAdmin"> 
-        <div>
-            <span>Product Name: </span>{{product.name}}
-        </div>
-        <div>
-            <span>Product Price: </span>{{product.price}}
-        </div>
-        <div>
-            <span>Number Available </span>{{product.quantity}}
-        </div>
+        <div class="product-container">
+            <div class="product-image">
+              <img [src]="product.image" alt="{{ product.name }}">
+            </div>
+            <div class="product-info">
+              <h1>{{ product.name }}</h1>
+              <p class="price">Price: {{ product.price | currency }}</p>
+              <p class="quantity">Quantity: {{ product.quantity}}</p>
+              <button *ngIf="!isAdmin" [disabled]="disabledButton" type="button" class="add" title="add to cart"
+              (click)="addToCart(product)">add to cart</button>
+              </div>            </div>
+          </div>
     </div>
     <div *ngIf="isAdmin">
         <div>
@@ -31,10 +34,6 @@
             <label for="product-image">Product image (web link only): </label>
             <input id="product-image" [(ngModel)]="product.image" placeholder="image">
         </div>
-    </div>
-
-    <button *ngIf="!isAdmin" [disabled]="disabledButton" type="button" class="add" title="add to cart"
-    (click)="addToCart(product)">add to cart</button>
     </div>
 
     <button type="button" (click)="goBack()">go back</button>

@@ -32,7 +32,6 @@ export class AuctionComponent implements OnInit {
   ngOnInit(): void {
     this.getAuction();
     this.getIsRunning();
-    console.log(this.isOver);
     var theUser: User = null as unknown as User;
         this.currentUserService.getCurrentUser().subscribe(curUser =>{
             theUser = curUser;
@@ -42,6 +41,7 @@ export class AuctionComponent implements OnInit {
                 this.isAdmin = false;
             }
         });
+  
     // console.log(this.isRunning);
     // this.auctionService.getAuctionStatus().subscribe(running => this.isRunning = running);
   }
@@ -84,21 +84,20 @@ export class AuctionComponent implements OnInit {
   }
 
   placeBid(amount: number): void {
-    this.getIsRunning();
-    if( !this.isOver ) {
-      console.log(this.isOver)
-    var theUser: User = null as unknown as User;
-        this.currentUserService.getCurrentUser().subscribe(curUser =>{
+    this.ngOnInit();
+    this.auctionService.getAuctionStatus()
+      .subscribe(running => {
+        if( !running ) {
+          var theUser: User = null as unknown as User;
+          this.currentUserService.getCurrentUser().subscribe(curUser =>{
             theUser = curUser;
             this.getAuction();
             this.auctionService.newBid(theUser.username, amount)
                 .subscribe(newBid => {
                      this.auction!.maxBid = newBid});
-        }); 
-    }
-    else {
-      return;
-    }
+        });  }
+      });
+      this.ngOnInit();
   }
 
   parseTime(time: string): string {
