@@ -74,9 +74,39 @@ An auction feature allowing users to list certain items for auction.
 
 ### MVP Features
 >  _**[Sprint 4]** Provide a list of top-level Epics and/or Stories of the MVP._
+Epic: Shopping Cart
+Epic: Purchase Product
+Epic: Basic Frontend
+User Authentication
+Admin Authentication
+Epic: Inventory Management
+Product List
+User Checkout
 
 ### Enhancements
 > _**[Sprint 4]** Describe what enhancements you have implemented for the project._
+Our two enhancements were the use of a database, and the inclusion of an auction house.
+
+# Auction House
+The auction house lists one product that is up for auction. The admin can decide the product to list, the starting 
+bid, and the date and time at which the auction should end. After the auction is saved, it immediately begins. The
+admin cannot change any attributes of an auction after it begins to ensure fairness to end users. If the admin could
+suddenly just remove a bid from the item, or change the end time, that would be very unfair. The admin can delete
+an auction.
+Users can see the item for auction, an image of it, the current top bid and top bidder, as well as a countdown to 
+the end time of the auction. Users can place bids, and if their bid is higher than the current leading bid, their
+bid will become the leading bid, and they will be the leading bidder. Otherwise, their bid will not be placed.
+After the defined end date and time has passed, no more bids can be placed. Upon viewing a completed auction, a user
+will see the top bidder listed as the user. If a user stays on the page from before it ended, the page will not 
+allow them to place a bid, and upon trying to, the page will update.
+
+# Mongo Database
+Our project used a database to store some of the necessary data. At the moment, it currently stores all user data.
+It is hosted on MongoDB Atlas, a cloud based implementation of MongoDB. It is accessed using a DBDao, which conforms
+to the UserDao. Previously, the project used a File based implementation of the UserDao, but the use of an interface
+made the switch as painless as possible.
+The use of a database abstracts away some of the storage, and allows parts of the site to operate without the need to
+store information locally on the client machine.
 
 
 ## Application Domain
