@@ -326,4 +326,4 @@ All stories have been tested and all have passed their acceptence criteria.
 
 CartFileDAO has low branch coverage because tests were not created for one function within due to
 very low overall usage of the function.
-![Code Coverage - Sprint 2](CodeCoverageSprint2.png)
+![Code Coverage - Sprint 2](CodeCoverage.png)
