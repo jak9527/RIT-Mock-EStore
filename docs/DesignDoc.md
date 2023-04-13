@@ -37,9 +37,14 @@ As an admin I want to be able to edit the inventory of the store so that I can s
 > _**[Sprint 2 & 4]** Provide a table of terms and acronyms._
 
 | Term | Definition |
-MVP     Minimum Viable Product
-|------|------------|
+| MVP | Minimum Viable Product |
+| RIT | Rochester Institute of Technology |
 | SPA | Single Page |
+| API | Application Programming Interface |
+| DAO | Data Access Object |
+| OO | Object Orientated |
+| HTML | HyperText Markup Language |
+| CSS | Cascading Style Sheets |
 
 
 ## Requirements
