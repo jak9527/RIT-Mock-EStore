@@ -73,26 +73,29 @@ An auction feature allowing users to list certain items for auction.
 
 
 ### MVP Features
->  _**[Sprint 4]** Provide a list of top-level Epics and/or Stories of the MVP._
-Epic: Shopping Cart
-Epic: Purchase Product
-Epic: Basic Frontend
-User Authentication
-Admin Authentication
-Epic: Inventory Management
-Product List
-User Checkout
+>  _**[Sprint 4]** Provide a list of top-level Epics and/or 
+
+* Stories of the MVP.
+* Epic: Shopping Cart
+* Epic: Purchase Product
+* Epic: Basic Frontend
+* User Authentication
+* Admin Authentication
+* Epic: Inventory Management
+* Product List
+* User Checkout
 
 ### Enhancements
 > _**[Sprint 4]** Describe what enhancements you have implemented for the project._
+
 Our two enhancements were the use of a database, and the inclusion of an auction house.
 
-# Auction House
+### __Auction House__
 The auction house lists one product that is up for auction. The admin can decide the product to list, the starting 
 bid, and the date and time at which the auction should end. After the auction is saved, it immediately begins. The
 admin cannot change any attributes of an auction after it begins to ensure fairness to end users. If the admin could
 suddenly just remove a bid from the item, or change the end time, that would be very unfair. The admin can delete
-an auction.
+an auction.\
 Users can see the item for auction, an image of it, the current top bid and top bidder, as well as a countdown to 
 the end time of the auction. Users can place bids, and if their bid is higher than the current leading bid, their
 bid will become the leading bid, and they will be the leading bidder. Otherwise, their bid will not be placed.
@@ -100,11 +103,11 @@ After the defined end date and time has passed, no more bids can be placed. Upon
 will see the top bidder listed as the user. If a user stays on the page from before it ended, the page will not 
 allow them to place a bid, and upon trying to, the page will update.
 
-# Mongo Database
+### __Mongo Database__
 Our project used a database to store some of the necessary data. At the moment, it currently stores all user data.
 It is hosted on MongoDB Atlas, a cloud based implementation of MongoDB. It is accessed using a DBDao, which conforms
 to the UserDao. Previously, the project used a File based implementation of the UserDao, but the use of an interface
-made the switch as painless as possible.
+made the switch as painless as possible.\
 The use of a database abstracts away some of the storage, and allows parts of the site to operate without the need to
 store information locally on the client machine.
 
@@ -190,6 +193,18 @@ redirects the user back to the page where they clicked the product.
 > _At appropriate places as part of this narrative provide **one** or more updated and **properly labeled**
 > static models (UML class diagrams) with some details such as critical attributes and methods._
 > 
+
+The ViewModel tier in our project contains both RestAPI controllers, and angular services. We will explain them in two parts.
+
+__Rest API Controllers__
+
+To uphold maintainability and expandability as much as possible, the Rest API Controller portion of the ViewModel tier was split down into many controllers, rather than just one. Each controller corresponds to a different part of functionality for the site. This allows for easy extensions and easily adding more functionality. There are controllers to handle requests for: Auctions, Carts, CurrentUsers, Users, and Products. Each handles specifically their own kinds of objects, and no others. Some do need to have access to the model tier for pieces unrelated to themselves. For example, the Cart Controller has a DAO for carts, but also for Products, to allow for updating products in carts to match the storefront. More information on this and these choices can be found in the section for Adherence to Object Oriented Design Principles. Below we have included a list of all controllers, and their functionalities.
+
+#TODO write that list.
+
+__Services__
+#TODO write this section 
+
 ![Replace with your ViewModel Tier class diagram 1, etc.](model-placeholder.png)
 
 ### Model Tier
@@ -201,8 +216,14 @@ Product.java: Provides a template for the Product resource. A product contains a
 Within Product.java, the getter functions for this info is defined, along with functions to set the name, price
 and quantity of each product.
 
-User.java: Provides a template for the User resourse. A user contains an ID and a username, and User.java
+User.java: Provides a template for the User resource. A user contains an ID and a username, and User.java
 defines functions to get and set both of these fields for each User.
+
+CurrentUser.java: Provides a template for a current user resource. This was necessary for database implementation due to some limitations of MongoDB.
+
+Bid.java: Provides a template for bid items, storing a username and a bid amount. This was not strictly necessary but allowed for cleaner and more readable code. Easily maintainable and modifiable if bids ever need to hold more information.
+
+AuctionItem.java: Provides a template for Auctions. It holds all necessary info including the end time, the product for auction, the current max bid, and the id of the auction. IDs were only included for potential future extensions to allow multiple auctions. The class also provides all necessary setters and getters.
 
 > _At appropriate places as part of this narrative provide **one** or more updated and **properly labeled**
 > static models (UML class diagrams) with some details such as critical attributes and methods._
