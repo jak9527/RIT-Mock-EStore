@@ -317,6 +317,9 @@ but open for easy extension.
 
 
 > _**[Sprint 4]** Discuss **future** refactoring and other design improvements your team would explore if the team had additional time._
+> If we had more time an extension to the functionality of the database would be the next step to ensure everything is kept the same across all systems running the store.
+> Adding functionality to check the user entered data to make sure it conforms to the required format in addition to also storing this info on the user's account.
+> Making setting the end time for the auction house easier to use for the admin.
 
 ## Testing
 > _This section will provide information about the testing performed
