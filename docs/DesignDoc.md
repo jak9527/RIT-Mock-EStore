@@ -263,10 +263,16 @@ Sprint 2: 19 stories complete including stories related to the cart and user aut
 All stories have been tested and all have passed their acceptence criteria.
 
 ### Unit Testing and Code Coverage
-> _**[Sprint 4]** Discuss your unit testing strategy. Report on the code coverage
-> achieved from unit testing of the code base. Discuss the team's
-> coverage targets, why you selected those values, and how well your
-> code coverage met your targets._
+Our unit testing strategy was to improve code coverage as much as possible to ensure that our functions were correctly
+implemented, this included getting as many files as possible in the code base to 85-95% to achieve a goal of 90% overall
+code coverage. This was chosen due to being the right balance of attainable with the given time limits of a sprint while
+still properly testing enough of our systems to be reliable. Unfortunately our code coverage came well short of our 
+90% target depsite our best efforts to ensure that we tested as much as possible. The api currently sits at 77% overall 
+due primarily to the Auction class that was implemented late in sprint 3. If the Auction class was able to be 
+tested more I believe our overall code coverage could have been much higher. There was also a set of tests that never
+got merged into the final release for sprint 4, further dropping our code coverage score.
+![Code Coverage - Sprint 4](Coverage-Sprint4.png)
+
 
 CartFileDAO has low branch coverage because tests were not created for one function within due to
 very low overall usage of the function.
