@@ -246,14 +246,15 @@ classes. First, we have the ProductController. This class responds to all admin 
 through various methods, one to handle each request. Within these methods, the controller makes calls to the other software 
 layers, coordinating them to create the desired results. This shows the concept of Controller because we have one controller 
 object that is acting to coordinate the system actions for each request. The following diagram shows these relations well:
-![Controller Diagram 1](controller-diagram-1.PNG)
+![Controller Diagram 1](ProductController.PNG)
 
-We also have similar controllers for managing user creation and access, cart creation, access, and modification, and 
+We also have similar controllers for managing user creation and access, cart creation, access, and modification, a controller for managing and creating auctions, and 
 a controller managing the current user. Each of these serves similar purposes for their respective domains. They 
 handle API requests to the particular kind of object being manipulated. Diagrams for each of those are shown below.
-![Controller Diagram 2](controller-diagram-2.PNG)
-![Controller Diagram 3](controller-diagram-3.PNG)
-![Controller Diagram 4](controller-diagram-4.PNG)
+![Cart Controller](CartController.PNG)
+![User Controller](UserController.PNG)
+![Current User Controller](CurrentUserController.PNG)
+![Auction Controller](AuctionController.PNG)
 
 Injection:
 Our system implementation also utilizes the object-oriented concept of Injection. It utilized it in Sprint 1, 
@@ -269,26 +270,24 @@ service files as injections in order to have them handle the backend calls for t
 layers, like our frontend angular app, also adhere to object oriented concepts.
 ![Low Coupling Diagram 1](injection-diagram-1.PNG)
 ![Low Coupling Diagram 2](injection-diagram-2.PNG)
-![Low Coupling Diagram 3](injection-diagram-3.PNG)
+![Low Coupling Cart](CartControllerInjection.PNG)
 ![Low Coupling Diagram 4](injection-diagram-4.PNG)
+![Low Coupling Auction](AuctionControllerInjection.PNG)
 
 Low Coupling:
 Low coupling refers to keeping the number of relations within a program to only those that are
 necessary. This means eliminating unnecessary or possibly redundant references. An example would be that the 
 EstoreController file only imports the ProductDAO file and not both it and the ProductFileDAO as all the 
 information that the controller would need from a ProductFileDAO could be obtained from the calls that it has to 
-implement from the ProductDAO file. Another example is that the CartController only has a CartDAO, and not a ProductDAO. 
-It is able to do everything it needs to do to manage carts without ever needing to understand what is actually in inventory. 
+implement from the ProductDAO file. Another example is that the CartController has a CartDAO, and a ProductDAO. 
+Although this is coupling, this coupling is necessary for keeping the program bug free. The CartDAO needs to be able to update the carts with regards to the inventory so that there is never any bug there. This still shows minimal coupling because it is the absolute minimal coupling necessary for keeping the product bug free.
 It has the minimal coupling to the Product object type, because it does need to know what a product is. This coupling is 
 kept minimal by the frontend cleverly using the available information to keep the state consistent. Another example in our 
-project is that any controllers that have to do with users do not use any other DAOs besides the UserDAOs. The user controller 
-does not need to know what a product is or what a cart is at all, so there is no need to couple those objects. This is 
-because the frontend can decide the logic of creating equal numbers of carts and users, the DAOs need only keep the ids 
-consistent. A diagram illustrating the coupling between classes is included below.
+project is that any controllers that have to do with users do not use any other DAOs besides the UserDAOs. The user controller does not need to know what a product is or what a cart is at all, so there is no need to couple those objects. This is because the frontend can decide the logic of creating equal numbers of carts and users, the DAOs need only keep the ids consistent. A diagram illustrating the coupling between classes is included below.
 
-![Low Coupling Diagram 1](low-coupling-1.png)
+![Low Coupling Diagram 1](Coupling.png)
 
-As shown in the diagram, there is very minimal coupling between classes. The only coupling occurring is that which is absolutely necessary for functionality.
+As shown in the diagram, there is very minimal coupling between classes. The only coupling occurring is that which is absolutely necessary for functionality. Please Zoom in for more detail. You can also refer to the controller class diagrams above, which also show all coupling. As you can see, there is minimal coupling.
 
 Open / Closed:
 The Open and Closed design principles specifically relate to appropriate use of abstract classes and interfaces such 
