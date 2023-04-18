@@ -308,8 +308,19 @@ but open for easy extension.
 > **Identify 3-4** areas within your code that have been flagged by the Static Code 
 > Analysis Tool (SonarQube) and provide your analysis and recommendations.  
 > Include any relevant screenshot(s) with each area._
+> ![image](https://user-images.githubusercontent.com/98605521/232361858-61007838-089e-47f8-bb26-e702a7e9fc11.png)
+> ![image](https://user-images.githubusercontent.com/98605521/232361936-a8f4dd07-1d2b-4878-9a48-b9e9cb53c7c9.png)
+> ![image](https://user-images.githubusercontent.com/98605521/232361984-c2e766cd-9b28-471d-9faa-8fd13b66680c.png)
+> ![image](https://user-images.githubusercontent.com/98605521/232362175-4cdb2167-6bdf-4393-8975-62887126f8aa.png)
+
+
+
+
 
 > _**[Sprint 4]** Discuss **future** refactoring and other design improvements your team would explore if the team had additional time._
+> If we had more time an extension to the functionality of the database would be the next step to ensure everything is kept the same across all systems running the store.
+> Adding functionality to check the user entered data to make sure it conforms to the required format in addition to also storing this info on the user's account.
+> Making setting the end time for the auction house easier to use for the admin.
 
 ## Testing
 > _This section will provide information about the testing performed
