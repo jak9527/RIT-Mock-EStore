@@ -36,7 +36,8 @@ As an admin I want to be able to edit the inventory of the store so that I can s
 ### Glossary and Acronyms
 > _**[Sprint 2 & 4]** Provide a table of terms and acronyms._
 
-| Term | Definition |  
+| Term | Definition | 
+|------|------------| 
 | MVP | Minimum Viable Product |  
 | RIT | Rochester Institute of Technology |  
 | SPA | Single Page |  
