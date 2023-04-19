@@ -204,9 +204,41 @@ The ViewModel tier in our project contains both RestAPI controllers, and angular
 
 __Rest API Controllers__
 
-To uphold maintainability and expandability as much as possible, the Rest API Controller portion of the ViewModel tier was split down into many controllers, rather than just one. Each controller corresponds to a different part of functionality for the site. This allows for easy extensions and easily adding more functionality. There are controllers to handle requests for: Auctions, Carts, CurrentUsers, Users, and Products. Each handles specifically their own kinds of objects, and no others. Some do need to have access to the model tier for pieces unrelated to themselves. For example, the Cart Controller has a DAO for carts, but also for Products, to allow for updating products in carts to match the storefront. More information on this and these choices can be found in the section for Adherence to Object Oriented Design Principles. Below we have included a list of all controllers, and their functionalities.
+To uphold maintainability and expandability as much as possible, the Rest API Controller portion of the ViewModel tier was split down into many controllers, rather than just one. Each controller corresponds to a different part of functionality for the site. This allows for easy extensions and easily adding more functionality. There are controllers to handle requests for: Auctions, Carts, CurrentUsers, Users, and Products. Each handles specifically their own kinds of objects, and no others. Some do need to have access to the model tier for pieces unrelated to themselves. For example, the Cart Controller has a DAO for carts, but also for Products, to allow for updating products in carts to match the storefront. More information on this and these choices can be found in the section for Adherence to Object Oriented Design Principles. Below we have included a list of all controllers, and their functionalities. Images and class diagrams for these can be found in the section for Adherence to Object Oriented Design Principles.
 
-#TODO write that list.
+__EStoreController__: Handles API requests for products. Has methods to handle Get all products, get a particular product, get products with a name containing a specific string (search), creating new products, updating a product, and deleting a product.
+
+This controller needs only a ProductDAO to function.
+
+![EStore Controller](EStoreControllerMVVM.png)
+
+__UserController__: Handles API requests for users. This has methods for getting a User by name, and creating a user with a particular name. 
+
+This controller needs only a userDAO to function
+
+![User Controller](UserControllerMVVM.png)
+
+__CurrentUserController__: Handles API requests to handle session management. Has methods for setting the current user, getting the current user, and removing the current user.
+
+This controller needs only a currentUserDAO to function.
+
+This controller serves to handle sessions. These are stored in the backend as a workaround to some issues we had in supporting it through the frontend. It also allows for maintaining the session through a page refresh, despite the single page nature of Angular.
+
+![Current User Controller](CurrentUserControllerMVVM.png)
+
+__CartController__: Handles API requests to handle cart mangement. This has methods for getting a cart, creating a new cart, adding a product to a cart, updating the count of a product in the cart, removing a product from the cart, checking out (removing all products from the cart), and updating the products with regard to those in the inventory in order to maintain consistency.
+
+This requires both a CartDAO and a ProductDAO. The CartDAO goes without saying, and the ProductDAO is needed specifically for the updateProducts method. It is required so that the cart controller can know about the products in inventory in order to know what it is updating against.
+
+![Cart Controller](CartControllerMVVM.png)
+
+__AuctionController__: Handles API requests to handle auctions. This has methods for getting the currently running auction, creating an auction, deleting an auction, placing a bid, and checking if the auction is over.
+
+This controller needs only an AuctionDAO.
+
+![Auction Controller](AuctionControllerMVVM.png)
+
+These controllers frequently make use of path variables for ease of use in the frontend, and to reduce the need to create objects in typescript. We found that handling objects and working with them in the frontend could be very cumbersome, so we chose to reduce the amount of requestBodies that our API requests use. This did result in some strange design quirks though. Some methods, such as auctionOver, needed a dummy path variable. This was because it needed to be differentiated from the getAuction request, as both of these requests are gets with no specific information.
 
 __Services__
 #TODO write this section 
@@ -216,20 +248,30 @@ __Services__
 ### Model Tier
 
 Cart.java: Provides a template for the Cart resource. A cart contains an ID and products, and Cart.java
-defines getter functions to get these two pieces of information, as well as a toString() function.
+defines getter functions to get these two pieces of information, as well as a toString() function. It also contains a "total" value, which is just the sum of all the values of the products in the cart.
 
 Product.java: Provides a template for the Product resource. A product contains an ID, name, price and quantity.
 Within Product.java, the getter functions for this info is defined, along with functions to set the name, price
 and quantity of each product.
 
+![Product](Product.png)
+
 User.java: Provides a template for the User resource. A user contains an ID and a username, and User.java
 defines functions to get and set both of these fields for each User.
 
+![User](User.png)
+
 CurrentUser.java: Provides a template for a current user resource. This was necessary for database implementation due to some limitations of MongoDB.
+
+![Current User](CurrentUser.png)
 
 Bid.java: Provides a template for bid items, storing a username and a bid amount. This was not strictly necessary but allowed for cleaner and more readable code. Easily maintainable and modifiable if bids ever need to hold more information.
 
+![Bid](Bid.png)
+
 AuctionItem.java: Provides a template for Auctions. It holds all necessary info including the end time, the product for auction, the current max bid, and the id of the auction. IDs were only included for potential future extensions to allow multiple auctions. The class also provides all necessary setters and getters.
+
+![AuctionItem](AuctionItem.png)
 
 > _At appropriate places as part of this narrative provide **one** or more updated and **properly labeled**
 > static models (UML class diagrams) with some details such as critical attributes and methods._
@@ -300,7 +342,6 @@ but open for easy extension.
 ![Open / Closed Diagram 1](open-closed-diagram-1.PNG)
 
 
-> _**[Sprint 3 & 4]** OO Design Principles should span across **all tiers.**_
 
 ## Static Code Analysis/Future Design Improvements
 > _**[Sprint 4]** With the results from the Static Code Analysis exercise, 
@@ -317,9 +358,11 @@ but open for easy extension.
 
 
 > _**[Sprint 4]** Discuss **future** refactoring and other design improvements your team would explore if the team had additional time._
-> If we had more time an extension to the functionality of the database would be the next step to ensure everything is kept the same across all systems running the store.
-> Adding functionality to check the user entered data to make sure it conforms to the required format in addition to also storing this info on the user's account.
-> Making setting the end time for the auction house easier to use for the admin.
+If we had more time an extension to the functionality of the database would be the next step to ensure everything is kept the same across all systems running the store.
+
+Adding functionality to check the user entered data to make sure it conforms to the required format in addition to also storing this info on the user's account.
+
+Making setting the end time for the auction house easier to use for the admin.
 
 ## Testing
 > _This section will provide information about the testing performed
