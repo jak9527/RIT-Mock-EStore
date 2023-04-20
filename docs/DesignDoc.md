@@ -34,7 +34,6 @@ As an admin I want to be able to edit the inventory of the store so that I can s
 
 
 ### Glossary and Acronyms
-> _**[Sprint 2 & 4]** Provide a table of terms and acronyms._
 
 | Term | Definition | 
 |------|------------| 
@@ -52,9 +51,6 @@ As an admin I want to be able to edit the inventory of the store so that I can s
 
 This section describes the features of the application.
 
-> _In this section you do not need to be exhaustive and list every
-> story.  Focus on top-level features from the Vision document and
-> maybe Epics and critical Stories._
 
 ### Definition of MVP
 
@@ -79,9 +75,6 @@ An auction feature allowing users to list certain items for auction.
 
 
 ### MVP Features
->  _**[Sprint 4]** Provide a list of top-level Epics and/or 
-
-* Stories of the MVP.
 * Epic: Shopping Cart
 * Epic: Purchase Product
 * Epic: Basic Frontend
@@ -92,7 +85,6 @@ An auction feature allowing users to list certain items for auction.
 * User Checkout
 
 ### Enhancements
-> _**[Sprint 4]** Describe what enhancements you have implemented for the project._
 
 Our two enhancements were the use of a database, and the inclusion of an auction house.
 
@@ -131,9 +123,7 @@ and create new item listings.
 
 Products can go up for auction, where they can be bid on by customers.
 
-Customers have a unique username used for authentication and differentiation from admins. Customers
-can store up to 2 addresses and store their payment methods to pay for items on the e-store that are stored
-in their shopping cart.
+Customers have a unique username used for authentication and differentiation from admins.
 
 The shopping cart contains items that customers wish to purchase. Admins do not have access to a shopping cart.
 The cart contains a check out button, allowing customers to move to the checkout to make their final purchase.
@@ -192,13 +182,6 @@ redirects the user back to the page where they clicked the product.
  >* _Include other details such as attributes and method signatures that you think are needed to support the level of detail in your discussion._
 
 ### ViewModel Tier
-> _**[Sprint 4]** Provide a summary of this tier of your architecture. This
-> section will follow the same instructions that are given for the View
-> Tier above._
-
-> _At appropriate places as part of this narrative provide **one** or more updated and **properly labeled**
-> static models (UML class diagrams) with some details such as critical attributes and methods._
-> 
 
 The ViewModel tier in our project contains both RestAPI controllers, and angular services. We will explain them in two parts.
 
@@ -342,29 +325,28 @@ but open for easy extension.
 > **Identify 3-4** areas within your code that have been flagged by the Static Code 
 > Analysis Tool (SonarQube) and provide your analysis and recommendations.  
 > Include any relevant screenshot(s) with each area._
-> ![image](https://user-images.githubusercontent.com/98605521/232361858-61007838-089e-47f8-bb26-e702a7e9fc11.png)
-> ![image](https://user-images.githubusercontent.com/98605521/232361936-a8f4dd07-1d2b-4878-9a48-b9e9cb53c7c9.png)
-> ![image](https://user-images.githubusercontent.com/98605521/232361984-c2e766cd-9b28-471d-9faa-8fd13b66680c.png)
-> ![image](https://user-images.githubusercontent.com/98605521/232362175-4cdb2167-6bdf-4393-8975-62887126f8aa.png)
+
+![image](https://user-images.githubusercontent.com/98605521/232361858-61007838-089e-47f8-bb26-e702a7e9fc11.png)
+![image](https://user-images.githubusercontent.com/98605521/232361936-a8f4dd07-1d2b-4878-9a48-b9e9cb53c7c9.png)
+![image](https://user-images.githubusercontent.com/98605521/232361984-c2e766cd-9b28-471d-9faa-8fd13b66680c.png)
+![image](https://user-images.githubusercontent.com/98605521/232362175-4cdb2167-6bdf-4393-8975-62887126f8aa.png)
 
 
 
 
-
-> _**[Sprint 4]** Discuss **future** refactoring and other design improvements your team would explore if the team had additional time._
+__Future Improvements__\
 If we had more time an extension to the functionality of the database would be the next step to ensure everything is kept the same across all systems running the store.
 
-Adding functionality to check the user entered data to make sure it conforms to the required format in addition to also storing this info on the user's account.
+We would also add functionality to check the user entered data on the checkout page to make sure it conforms to the required format. We would also like to store this info on the user's account for ease of checkout.
 
-Making setting the end time for the auction house easier to use for the admin.
+Another thing we would have liked to have done is made it easier for the admin to set the end time on the auction house. At the moment it is slightly unintuitive, and we would like to make it easier to use.
 
 ## Testing
-> _This section will provide information about the testing performed
-> and the results of the testing._
 
 ### Acceptance Testing
 Sprint 2: 19 stories complete including stories related to the cart and user authentication in both front end and back end.
 All stories have been tested and all have passed their acceptence criteria.
+Sprint 3: 12 stories completed, including major bug-fixes and major rewrites to the code. 64 story points. All completed stories passed their acceptance criteria.
 
 ### Unit Testing and Code Coverage
 Our unit testing strategy was to improve code coverage as much as possible to ensure that our functions were correctly
