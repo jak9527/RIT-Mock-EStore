@@ -264,10 +264,10 @@ object that is acting to coordinate the system actions for each request. The fol
 We also have similar controllers for managing user creation and access, cart creation, access, and modification, a controller for managing and creating auctions, and 
 a controller managing the current user. Each of these serves similar purposes for their respective domains. They 
 handle API requests to the particular kind of object being manipulated. Diagrams for each of those are shown below.
-![Cart Controller](CartController.PNG)
-![User Controller](UserController.PNG)
-![Current User Controller](CurrentUserController.PNG)
-![Auction Controller](AuctionController.PNG)
+![Cart Controller](CartController.png)
+![User Controller](UserController.png)
+![Current User Controller](CurrentUserController.png)
+![Auction Controller](AuctionController.png)
 
 Injection:
 Our system implementation also utilizes the object-oriented concept of Injection. It utilized it in Sprint 1, 
@@ -283,9 +283,9 @@ service files as injections in order to have them handle the backend calls for t
 layers, like our frontend angular app, also adhere to object oriented concepts.
 ![Low Coupling Diagram 1](injection-diagram-1.PNG)
 ![Low Coupling Diagram 2](injection-diagram-2.PNG)
-![Low Coupling Cart](CartControllerInjection.PNG)
+![Low Coupling Cart](CartControllerInjection.png)
 ![Low Coupling Diagram 4](injection-diagram-4.PNG)
-![Low Coupling Auction](AuctionControllerInjection.PNG)
+![Low Coupling Auction](AuctionControllerInjection.png)
 
 Low Coupling:
 Low coupling refers to keeping the number of relations within a program to only those that are
