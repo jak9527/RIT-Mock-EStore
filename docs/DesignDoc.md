@@ -224,7 +224,6 @@ This controller needs only an AuctionDAO.
 These controllers frequently make use of path variables for ease of use in the frontend, and to reduce the need to create objects in typescript. We found that handling objects and working with them in the frontend could be very cumbersome, so we chose to reduce the amount of requestBodies that our API requests use. This did result in some strange design quirks though. Some methods, such as auctionOver, needed a dummy path variable. This was because it needed to be differentiated from the getAuction request, as both of these requests are gets with no specific information.
 
 __Services__
-#TODO write this section 
 For the services in our project, they allowed us to use function calls to request data, send, or update data in the backend through processes in the frontend components. Each of our services were made specifically for a controller aside from our message service which was used for debugging purposes. The first of these was the product service which allowed the frontend to be able to manage the products and their information in the store. The next was the user service which let the frontend add new users and see if a user was already made. The current user service let the frontend know which user was currently logged in and also allowed it to set that user. The cart service let the frontend store a users cart, get their previous cart, or checkout. Finally the auction service let the frontend add or remove an auction, update the bidder on the current auction, or check the ending time of the auction. Overall these services let the frontend make requests or push data to the back end and have the back end respond accordingly all without either knowing the format of the other.
 
 ### Model Tier
@@ -327,10 +326,16 @@ but open for easy extension.
 > Include any relevant screenshot(s) with each area._
 
 ![image](https://user-images.githubusercontent.com/98605521/232361858-61007838-089e-47f8-bb26-e702a7e9fc11.png)
-![image](https://user-images.githubusercontent.com/98605521/232361936-a8f4dd07-1d2b-4878-9a48-b9e9cb53c7c9.png)
-![image](https://user-images.githubusercontent.com/98605521/232361984-c2e766cd-9b28-471d-9faa-8fd13b66680c.png)
-![image](https://user-images.githubusercontent.com/98605521/232362175-4cdb2167-6bdf-4393-8975-62887126f8aa.png)
+This error came from our testing being rushed and is simply an incomplete test this would be fixed if given more time and the test would simply get implemented.
 
+![image](https://user-images.githubusercontent.com/98605521/232361936-a8f4dd07-1d2b-4878-9a48-b9e9cb53c7c9.png)
+The issues here were mostly lacking the understanding of how the interaction here works in order know whether or not these could be static on creation and when we saw these could be changed, we had much more pressing work and ran out of time.
+
+![image](https://user-images.githubusercontent.com/98605521/232361984-c2e766cd-9b28-471d-9faa-8fd13b66680c.png)
+Did not know what the default constructor was and so given our limited time were not able to look into this.
+
+![image](https://user-images.githubusercontent.com/98605521/232362175-4cdb2167-6bdf-4393-8975-62887126f8aa.png)
+This was an issue due to our test cases being rushed and therefore functionality was prioritized over proper usage and again did not have the time to go back and change this.
 
 
 
