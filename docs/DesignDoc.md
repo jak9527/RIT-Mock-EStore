@@ -191,6 +191,12 @@ For the services in our project, they allowed us to use function calls to reques
 
 Here are the sequence diagrams displaying some of the functionality from the view tier. 
 
+
+![Sequence Diagram 1](sequence-diagram-1.png)
+
+
+![Sequence Diagram 2](sequence-diagram-2.png)
+
 ### ViewModel Tier
 
 The ViewModel tier in our project contains the RestAPI controllers.
