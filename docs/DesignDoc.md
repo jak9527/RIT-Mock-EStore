@@ -320,10 +320,6 @@ but open for easy extension.
 
 
 ## Static Code Analysis/Future Design Improvements
-> _**[Sprint 4]** With the results from the Static Code Analysis exercise, 
-> **Identify 3-4** areas within your code that have been flagged by the Static Code 
-> Analysis Tool (SonarQube) and provide your analysis and recommendations.  
-> Include any relevant screenshot(s) with each area._
 
 ![image](https://user-images.githubusercontent.com/98605521/232361858-61007838-089e-47f8-bb26-e702a7e9fc11.png)
 This error came from our testing being rushed and is simply an incomplete test this would be fixed if given more time and the test would simply get implemented.
