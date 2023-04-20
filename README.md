@@ -1,7 +1,7 @@
-# E-Store:  _____ _replace with your particular store type_ _____
+# E-Store:  RIT Garage Sale
 # Modify this document to expand any and all sections that are applicable for a better understanding from your users/testers/collaborators (remove this comment and other instructions areas for your FINAL release)
 
-An online E-store system built in Java 11=> and ___ _replace with other platform requirements_ ___
+An online E-store system built in Java 18 with Angular and Spring Boot that uses MongoDB Atlas for storage.
   
 ## Team
 
@@ -16,18 +16,22 @@ An online E-store system built in Java 11=> and ___ _replace with other platform
 
 - Java 8=>11 (Make sure to have correct JAVA_HOME setup in your environment)
 - Maven
--  _add any other tech stack requirements_
+- Credentials for MongoDB Atlas stored in the application.properties file
 
-
-## How to run it
-
-1. Clone the repository and go to the root directory.
-2. Execute `mvn compile exec:java`
-3. Open in your browser `http://localhost:8080/`
-4.  _add any other steps required or examples of how to use/run_
+## How to setup/run/test program 
+1. Tester, first obtain the Acceptance Test plan
+2. Go to estore-api folder in the project
+3. Execute command: mvn compile exec:java
+4. Go to estore-ui folder in the project
+5. Execute command: ng serve --open
+6. E-store website should open automatically in browser for running/testing
+Website URL should be by default: 'http://localhost:8080/'
 
 ## Known bugs and disclaimers
-(It may be the case that your implementation is not perfect.)
+
+There are consistency issues with the storage of the current user in MongoDB and the user IDs associated with 
+shopping carts that are stored in the carts.json file in the GitHub repostiory. 
+This will break the shopping cart functionality for certain users.
 
 Document any known bug or nuisance.
 If any shortcomings, make clear what these are and where they are located.
@@ -63,13 +67,6 @@ To run tests on all the tiers in isolation do this:
 2. Execute `mvn exec:exec@docs`
 3. The generated PDF will be in `PROJECT_DOCS_HOME/` directory
 
-
-## How to setup/run/test program 
-1. Tester, first obtain the Acceptance Test plan
-2. IP address of target machine running the app
-3. Execute ________
-4. ...
-5. ...
 
 ## License
 
