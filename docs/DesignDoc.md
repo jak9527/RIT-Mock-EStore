@@ -173,11 +173,13 @@ __Services__
 
 For the services in our project, they allowed us to use function calls to request data, send, or update data in the backend through processes in the frontend components. Each of our services were made specifically for a controller aside from our message service which was used for debugging purposes. The first of these was the product service which allowed the frontend to be able to manage the products and their information in the store. The next was the user service which let the frontend add new users and see if a user was already made. The current user service let the frontend know which user was currently logged in and also allowed it to set that user. The cart service let the frontend store a users cart, get their previous cart, or checkout. Finally the auction service let the frontend add or remove an auction, update the bidder on the current auction, or check the ending time of the auction. Overall these services let the frontend make requests or push data to the back end and have the back end respond accordingly all without either knowing the format of the other.
 
-Here are the sequence diagrams displaying some of the functionality from the view tier. 
+Below are sequence diagrams displaying some of the functionality from the view tier:
 
+Diagram of a user (customer) adding a product to their cart.
 
 ![Sequence Diagram 1](sequence-diagram-1.png)
 
+Diagram of an admin user removing a product from the store inventory.
 
 ![Sequence Diagram 2](sequence-diagram-2.png)
 
