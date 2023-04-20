@@ -183,6 +183,8 @@ redirects the user back to the page where they clicked the product.
 
 __Components__
 
+Our components in the project allowed for us to separate out the different diplay elements for the website and therefore if changes happened only the affected elements would need to be refreshed. Of these components the one that were key to our website included the auction, cart, checkout, login, product-detail, product-search, products, and the main app component. The auction component holds a pontential auction and manages its creation and destruction as well as user bids. The cart displays the current user's cart and lets the user modify the quanities. The checkout page requires the user to enter their information and removes the bought items from the inventory. Login component manages the current user and the process of logining in and out. The product detail component diplays the information on a product and allows admins to edit this info. Product search gives users the option to search the listings of products to find what they are looking for. The products component diplays the list of products. Finally the main app component provides the base page on which all other components are displayed on. 
+
 
 
 __Services__
