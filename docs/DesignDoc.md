@@ -181,9 +181,17 @@ redirects the user back to the page where they clicked the product.
  >* _Correct labeling of relationships with proper notation for the relationship type, multiplicities, and navigation information will be important._
  >* _Include other details such as attributes and method signatures that you think are needed to support the level of detail in your discussion._
 
+__Components__
+
+
+
+__Services__
+
+For the services in our project, they allowed us to use function calls to request data, send, or update data in the backend through processes in the frontend components. Each of our services were made specifically for a controller aside from our message service which was used for debugging purposes. The first of these was the product service which allowed the frontend to be able to manage the products and their information in the store. The next was the user service which let the frontend add new users and see if a user was already made. The current user service let the frontend know which user was currently logged in and also allowed it to set that user. The cart service let the frontend store a users cart, get their previous cart, or checkout. Finally the auction service let the frontend add or remove an auction, update the bidder on the current auction, or check the ending time of the auction. Overall these services let the frontend make requests or push data to the back end and have the back end respond accordingly all without either knowing the format of the other.
+
 ### ViewModel Tier
 
-The ViewModel tier in our project contains both RestAPI controllers, and angular services. We will explain them in two parts.
+The ViewModel tier in our project contains the RestAPI controllers.
 
 __Rest API Controllers__
 
@@ -223,8 +231,7 @@ This controller needs only an AuctionDAO.
 
 These controllers frequently make use of path variables for ease of use in the frontend, and to reduce the need to create objects in typescript. We found that handling objects and working with them in the frontend could be very cumbersome, so we chose to reduce the amount of requestBodies that our API requests use. This did result in some strange design quirks though. Some methods, such as auctionOver, needed a dummy path variable. This was because it needed to be differentiated from the getAuction request, as both of these requests are gets with no specific information.
 
-__Services__
-For the services in our project, they allowed us to use function calls to request data, send, or update data in the backend through processes in the frontend components. Each of our services were made specifically for a controller aside from our message service which was used for debugging purposes. The first of these was the product service which allowed the frontend to be able to manage the products and their information in the store. The next was the user service which let the frontend add new users and see if a user was already made. The current user service let the frontend know which user was currently logged in and also allowed it to set that user. The cart service let the frontend store a users cart, get their previous cart, or checkout. Finally the auction service let the frontend add or remove an auction, update the bidder on the current auction, or check the ending time of the auction. Overall these services let the frontend make requests or push data to the back end and have the back end respond accordingly all without either knowing the format of the other.
+
 
 ### Model Tier
 
