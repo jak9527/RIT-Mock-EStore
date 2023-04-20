@@ -1,5 +1,4 @@
 # E-Store:  RIT Garage Sale
-# Modify this document to expand any and all sections that are applicable for a better understanding from your users/testers/collaborators (remove this comment and other instructions areas for your FINAL release)
 
 An online E-store system built in Java 18 with Angular and Spring Boot that uses MongoDB Atlas for storage.
   
@@ -18,6 +17,7 @@ An online E-store system built in Java 18 with Angular and Spring Boot that uses
 - Maven
 - Credentials for MongoDB Atlas stored in the application.properties file
 
+
 ## How to setup/run/test program 
 1. Tester, first obtain the Acceptance Test plan
 2. Go to estore-api folder in the project
@@ -27,14 +27,13 @@ An online E-store system built in Java 18 with Angular and Spring Boot that uses
 6. E-store website should open automatically in browser for running/testing
 Website URL should be by default: 'http://localhost:8080/'
 
+
 ## Known bugs and disclaimers
 
 There are consistency issues with the storage of the current user in MongoDB and the user IDs associated with 
 shopping carts that are stored in the carts.json file in the GitHub repostiory. 
 This will break the shopping cart functionality for certain users.
 
-Document any known bug or nuisance.
-If any shortcomings, make clear what these are and where they are located.
 
 ## How to test it
 
@@ -57,8 +56,6 @@ To run tests on all the tiers in isolation do this:
 2. To view the Controller tier tests open in your browser the file at `PROJECT_API_HOME/target/site/jacoco/model/index.html`
 3. To view the Model tier tests open in your browser the file at `PROJECT_API_HOME/target/site/jacoco/model/index.html`
 4. To view the Persistence tier tests open in your browser the file at `PROJECT_API_HOME/target/site/jacoco/model/index.html`
-
-*(Consider using `mvn clean verify` to attest you have reached the target threshold for coverage)
   
   
 ## How to generate the Design documentation PDF
