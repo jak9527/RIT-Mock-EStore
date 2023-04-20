@@ -3,10 +3,6 @@ geometry: margin=1in
 ---
 # PROJECT Design Documentation
 
-> _The following template provides the headings for your Design
-> Documentation.  As you edit each section make sure you remove these
-> commentary 'blockquotes'; the lines that start with a > character
-> and appear in the generated PDF in italics._
 
 ## Team Information
 * Team name: RIT Garage Sale
@@ -164,22 +160,6 @@ redirects the user back to the page where they clicked the product.
 
 
 ### View Tier
-> _**[Sprint 4]** Provide a summary of the View Tier UI of your architecture.
-> Describe the types of components in the tier and describe their
-> responsibilities.  This should be a narrative description, i.e. it has
-> a flow or "story line" that the reader can follow._
-
-> _**[Sprint 4]** You must  provide at least **2 sequence diagrams** as is relevant to a particular aspects 
-> of the design that you are describing.  For example, in e-store you might create a 
-> sequence diagram of a customer searching for an item and adding to their cart. 
-> As these can span multiple tiers, be sure to include an relevant HTTP requests from the client-side to the server-side 
-> to help illustrate the end-to-end flow._
-
-> _**[Sprint 4]** To adequately show your system, you will need to present the **class diagrams** where relevant in your design. Some additional tips:_
- >* _Class diagrams only apply to the **ViewModel** and **Model** Tier_
->* _A single class diagram of the entire system will not be effective. You may start with one, but will be need to break it down into smaller sections to account for requirements of each of the Tier static models below._
- >* _Correct labeling of relationships with proper notation for the relationship type, multiplicities, and navigation information will be important._
- >* _Include other details such as attributes and method signatures that you think are needed to support the level of detail in your discussion._
 
 __Components__
 
@@ -279,7 +259,7 @@ classes. First, we have the ProductController. This class responds to all admin 
 through various methods, one to handle each request. Within these methods, the controller makes calls to the other software 
 layers, coordinating them to create the desired results. This shows the concept of Controller because we have one controller 
 object that is acting to coordinate the system actions for each request. The following diagram shows these relations well:
-![Controller Diagram 1](ProductController.PNG)
+![Controller Diagram 1](ProductController.png)
 
 We also have similar controllers for managing user creation and access, cart creation, access, and modification, a controller for managing and creating auctions, and 
 a controller managing the current user. Each of these serves similar purposes for their respective domains. They 
