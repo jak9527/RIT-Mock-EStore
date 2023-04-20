@@ -185,11 +185,11 @@ __Components__
 
 Our components in the project allowed for us to separate out the different diplay elements for the website and therefore if changes happened only the affected elements would need to be refreshed. Of these components the one that were key to our website included the auction, cart, checkout, login, product-detail, product-search, products, and the main app component. The auction component holds a pontential auction and manages its creation and destruction as well as user bids. The cart displays the current user's cart and lets the user modify the quanities. The checkout page requires the user to enter their information and removes the bought items from the inventory. Login component manages the current user and the process of logining in and out. The product detail component diplays the information on a product and allows admins to edit this info. Product search gives users the option to search the listings of products to find what they are looking for. The products component diplays the list of products. Finally the main app component provides the base page on which all other components are displayed on. 
 
-
-
 __Services__
 
 For the services in our project, they allowed us to use function calls to request data, send, or update data in the backend through processes in the frontend components. Each of our services were made specifically for a controller aside from our message service which was used for debugging purposes. The first of these was the product service which allowed the frontend to be able to manage the products and their information in the store. The next was the user service which let the frontend add new users and see if a user was already made. The current user service let the frontend know which user was currently logged in and also allowed it to set that user. The cart service let the frontend store a users cart, get their previous cart, or checkout. Finally the auction service let the frontend add or remove an auction, update the bidder on the current auction, or check the ending time of the auction. Overall these services let the frontend make requests or push data to the back end and have the back end respond accordingly all without either knowing the format of the other.
+
+Here are the sequence diagrams displaying some of the functionality from the view tier. 
 
 ### ViewModel Tier
 
