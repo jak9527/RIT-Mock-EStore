@@ -354,9 +354,9 @@ implemented, this included getting as many files as possible in the code base to
 code coverage. This was chosen due to being the right balance of attainable with the given time limits of a sprint while
 still properly testing enough of our systems to be reliable. Unfortunately our code coverage came well short of our 
 90% target depsite our best efforts to ensure that we tested as much as possible. The api currently sits at 77% overall 
-due primarily to the Auction class that was implemented late in sprint 3. If the Auction class was able to be 
-tested more I believe our overall code coverage could have been much higher. There was also a set of tests that never
-got merged into the final release for sprint 4, further dropping our code coverage score.
+due primarily to the Auction and Database classes. We were unable to figure out how to properly test our database access,
+and the Auction class was implemented too late in the sprint to ensure proper tests could be written. There was also a set 
+of tests that never got merged into the final release for sprint 4, further dropping our code coverage score.
 ![Code Coverage - Sprint 4](Coverage-Sprint4.png)
 
 
