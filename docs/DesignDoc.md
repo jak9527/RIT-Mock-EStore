@@ -16,7 +16,7 @@ geometry: margin=1in
 ## Executive Summary
 
 An online e-store for RIT to sell off many notable landmarks including bricks, various statues from around campus, and decorative trees from lobbies.
-Uses a database implementation and includes an auction feature for users to sell their own items on the e-store.
+Uses a MongoDB Atlas implementation and includes an auction feature for users to sell their own items on the e-store.
 
 ### Purpose
 
@@ -62,10 +62,10 @@ to purchase the products from the shopping cart.
 
 Inventory management allows the e-store owner to add, remove and edit the inventory.
 
-Data Persistence saves everything to files, or in this case a database, that will show previously made 
-changes including previous items added to a user’s shopping cart.
+Data Persistence saves everything to files and the database, that will store user information and
+show previously made changes including previous items added to a user’s shopping cart.
 
-A Database implementation to store data about users, carts and items.
+A MongoDB implementation to store data aboutthe users who have logged in and the current user.
 
 An auction feature allowing users to list certain items for auction.
 
