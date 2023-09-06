@@ -1,3 +1,6 @@
+#WARNING! Database is currently down, so the project will not work just by pulling it. For the foreseeable future, this will remain the case.
+##For a demonstration of the project, view the following video: INSERT HERE
+
 # E-Store:  RIT Garage Sale
 
 An online E-store system built in Java 18 with Angular and Spring Boot that uses MongoDB Atlas for storage.
