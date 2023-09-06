@@ -1,5 +1,5 @@
 # WARNING! Database is currently down, so the project will not work just by pulling it. For the foreseeable future, this will remain the case.
-## For a demonstration of the project, view the following video: [INSERT HERE](https://youtu.be/BgKEAKItUEk)
+## For a demonstration of the project, view the following video: [CLICK HERE](https://youtu.be/BgKEAKItUEk)
 
 # E-Store:  RIT Garage Sale
 
